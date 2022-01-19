@@ -1,0 +1,4 @@
+[Bb]in/
+obj/
+node_modules/
+Dockerfile
