@@ -41,6 +41,10 @@ html,body {
     border: solid white 1.5px;
 }
 
+.login-container-form a {
+    text-decoration: none;
+}
+
 .login-container-form form {
     width: 100%;
     font-size: 15px;

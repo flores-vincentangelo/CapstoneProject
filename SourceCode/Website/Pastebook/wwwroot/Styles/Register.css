@@ -1,0 +1,98 @@
+html,body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+    background-color: #e9ebee;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.register-container {
+    margin: 5% auto;
+}
+
+.register-container-form {
+    background-color: white;
+    height: auto;
+    margin: auto;
+    width: 25%;
+    padding: 20px;
+    border-radius: 5px;
+    border: solid white 1.5px;
+}
+
+.register-container-form h1 {
+    margin: 0px auto;
+}
+
+.register-container-form p {
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.register-container-form hr {
+    margin:auto;
+    border: solid 1px #e9ebee;
+    background-color: #e9ebee;
+}
+
+
+.register-container-form-field {
+    width: 100%;
+    margin: 10px auto;
+}
+
+.register-container-form-field-fullname {
+    display: flex;
+}
+
+.register-container-form-field-fullname #first-name,
+.register-container-form-field-fullname #last-name {
+    width: 100%;
+}
+
+.register-container-form-field-fullname #first-name {
+    margin-right: 4px;
+}
+
+.register-container-form form {   
+    font-size: 15px;
+    color: #1c1e21;
+    align-content: center;
+}
+
+.register-container-form-field label {
+    font-size: 12px;
+    color: #888888;
+}
+
+.register-container-form-field input, select {
+    padding: 10px;
+    border-radius: 5px;
+    border: solid #e9ebee 1.5px;
+    width: 93%;
+}
+
+.register-container-form-field #date {
+    margin-top: 3px;
+}
+
+.register-container-form-field select {
+    width: 100%;
+    margin-top: 3px;
+}
+
+.register-container-form .signup-button {
+    width: 60%;
+    padding: 10px;
+    border-radius: 5px;
+    border: solid #36a420 1.5px;
+    background-color: #36a420;
+    color: white;
+    text-align: center;
+    margin: auto 20%;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 5px;
+}
