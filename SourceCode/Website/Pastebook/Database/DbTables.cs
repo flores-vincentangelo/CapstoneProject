@@ -17,18 +17,19 @@ public class DbTables
             db.Open();
             using(var command = db.CreateCommand())
             {
-                command.CommandText=  command.CommandText= @"IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Users' and xtype='U')
+                command.CommandText = @"IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Users' and xtype='U')
                 CREATE TABLE Users (
                     UserId INTEGER NOT NULL IDENTITY (1,1) PRIMARY KEY,
-                    Password VARCHAR (255),
                     FirstName VARCHAR (255),
                     LastName VARCHAR (255),
                     EmailAddress VARCHAR (255),
+                    MobileNumber VARCHAR (255),
+                    Password VARCHAR (255),
                     Birthday BIGINT,
                     Gender VARCHAR (255),
-                    MobileNumber VARCHAR (255)
                     );";
                 command.ExecuteNonQuery();
+                Console.WriteLine("Users Table created successfully!");
              }
         }
     }
@@ -42,6 +43,7 @@ public class DbTables
             {
                 command.CommandText = "DROP TABLE IF EXISTS Users";
                 command.ExecuteNonQuery();
+                Console.WriteLine("Users Table deleted successfully!");
             }
         }
     }
@@ -53,13 +55,14 @@ public class DbTables
             db.Open();
             using(var command = db.CreateCommand())
             {
-                command.CommandText=  command.CommandText= @"IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Sessions' and xtype='U')
+                command.CommandText = @"IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Sessions' and xtype='U')
                 CREATE TABLE Sessions (
                     Id VARCHAR(255) NOT NULL PRIMARY KEY,
                     EmailAddress VARCHAR (255),
                     LastLogin BIGINT
                     );";
                 command.ExecuteNonQuery();
+                Console.WriteLine("Sessions Table created successfully!");
              }
         }
     }
@@ -73,6 +76,7 @@ public class DbTables
             {
                 command.CommandText = "DROP TABLE IF EXISTS Sessions";
                 command.ExecuteNonQuery();
+                Console.WriteLine("Sessions Table deleted successfully!");
             }
         }
     }
