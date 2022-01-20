@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1"/>
+    <title>Pastebook</title>
+    <link rel="stylesheet" href="./Styles/Home/Home.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body class="home">
+    <div class="home-header">
+        <div class="home-header-left">
+            <button>logo</button>
+            <form action="/">
+                <input type="text" placeholder="Search Pastebook"/>
+            </form>
+        </div>
+        <div class="home-header-middle">
+            <button>Home</button>
+        </div>
+        <div class="home-header-right">
+            <button>Profile</button>
+            <button>messages</button>
+            <button>notifications</button>
+        </div>
+    </div>
+
+    <div class="home-body">
+        <div class="home-body-leftsidepanel">
+            <button>Profile</button>
+            <button>Friends</button>
+        </div>
+
+        <div class="home-body-timeline">
+            @{
+                for(var i = 0; i < 3; i++)
+                {
+                    await Html.RenderPartialAsync("_Post.cshtml");
+                }
+                
+            }
+            @await Html.PartialAsync("_Post.cshtml")
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis congue porta. Suspendisse vel lectus at risus sagittis blandit. Mauris interdum bibendum ipsum. Donec vitae eros justo. Sed et mauris vel erat dignissim rutrum. Phasellus elit nisi, bibendum vel tincidunt non, consequat vel urna. Integer at imperdiet turpis, ut scelerisque turpis. Etiam facilisis finibus efficitur. Phasellus pulvinar, mi fermentum viverra ullamcorper, ante eros gravida velit, in pulvinar eros diam a ex.
+
+            Praesent mattis ut felis eget congue. Aenean mattis tincidunt erat, eget maximus lacus hendrerit quis. Cras sit amet suscipit purus. Quisque id justo a ligula tristique porta. Pellentesque blandit facilisis odio, non consectetur augue. Nulla at massa cursus, dapibus felis vitae, volutpat felis. Suspendisse ultrices velit quis justo hendrerit, ac bibendum ex eleifend. Fusce aliquet, mauris id convallis tristique, odio libero suscipit tellus, a scelerisque nisi eros vitae urna. Mauris interdum ornare ex. Nulla facilisi. In et volutpat purus. Praesent eleifend sed mi dapibus rhoncus.
+
+            Integer pharetra metus ut quam vulputate accumsan. Integer sed ornare augue, sed posuere ipsum. Etiam euismod, ante porta laoreet congue, enim felis euismod velit, nec porta massa velit hendrerit quam. Aliquam nec feugiat elit, a blandit leo. Nam condimentum, velit in volutpat scelerisque, quam tellus tincidunt enim, quis pellentesque orci ante ac sem. Aliquam non nisi blandit, ullamcorper erat sit amet, facilisis ligula. Nam tristique dignissim finibus. Nam dui purus, mattis vel lorem eu, fermentum vulputate turpis. Ut rhoncus leo eget leo ornare placerat.
+
+            Maecenas feugiat mollis imperdiet. Curabitur ullamcorper ante nec odio varius maximus. Aenean vel sodales nibh. Vivamus lectus ex, ullamcorper sed bibendum at, bibendum ut mauris. Vestibulum venenatis urna quis purus fermentum, venenatis auctor nulla tincidunt. Duis at cursus est, sit amet feugiat magna. Maecenas faucibus tellus mauris, non luctus erat egestas nec. Nunc tincidunt malesuada urna, sit amet auctor est facilisis a. Fusce ullamcorper enim sapien, eget dignissim nulla vehicula a. Nulla consequat scelerisque ligula, sit amet pellentesque leo pretium pulvinar. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed vulputate ultrices turpis, id pellentesque augue.
+
+            Sed leo enim, semper vel placerat nec, rutrum sed dolor. Vestibulum egestas eu odio et feugiat. Proin fringilla velit a ex vulputate consectetur. Etiam rhoncus ligula eget libero tempor rhoncus. Quisque sodales nisi feugiat erat efficitur, eget consequat ligula mollis. Aliquam tortor ligula, euismod at lectus a, placerat semper eros. Integer vitae diam egestas, varius ex id, efficitur risus. Nulla luctus eget diam vel consequat. Nulla luctus nunc purus, sed porttitor enim malesuada non. Pellentesque commodo tellus nec sollicitudin rhoncus. Duis suscipit sapien ac venenatis facilisis. Cras tempus efficitur massa in finibus. Nulla eleifend convallis tristique.</p>
+
+            
+        </div>
+
+        <div class="home-body-rightsidepanel">
+            placeholder
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis congue porta. Suspendisse vel lectus at risus sagittis blandit. Mauris interdum bibendum ipsum. Donec vitae eros justo. Sed et mauris vel erat dignissim rutrum. Phasellus elit nisi, bibendum vel tincidunt non, consequat vel urna. Integer at imperdiet turpis, ut scelerisque turpis. Etiam facilisis finibus efficitur. Phasellus pulvinar, mi fermentum viverra ullamcorper, ante eros gravida velit, in pulvinar eros diam a ex.
+
+                Praesent mattis ut felis eget congue. Aenean mattis tincidunt erat, eget maximus lacus hendrerit quis. Cras sit amet suscipit purus. Quisque id justo a ligula tristique porta. Pellentesque blandit facilisis odio, non consectetur augue. Nulla at massa cursus, dapibus felis vitae, volutpat felis. Suspendisse ultrices velit quis justo hendrerit, ac bibendum ex eleifend. Fusce aliquet, mauris id convallis tristique, odio libero suscipit tellus, a scelerisque nisi eros vitae urna. Mauris interdum ornare ex. Nulla facilisi. In et volutpat purus. Praesent eleifend sed mi dapibus rhoncus.
+
+                Integer pharetra metus ut quam vulputate accumsan. Integer sed ornare augue, sed posuere ipsum. Etiam euismod, ante porta laoreet congue, enim felis euismod velit, nec porta massa velit hendrerit quam. Aliquam nec feugiat elit, a blandit leo. Nam condimentum, velit in volutpat scelerisque, quam tellus tincidunt enim, quis pellentesque orci ante ac sem. Aliquam non nisi blandit, ullamcorper erat sit amet, facilisis ligula. Nam tristique dignissim finibus. Nam dui purus, mattis vel lorem eu, fermentum vulputate turpis. Ut rhoncus leo eget leo ornare placerat.
+
+                Maecenas feugiat mollis imperdiet. Curabitur ullamcorper ante nec odio varius maximus. Aenean vel sodales nibh. Vivamus lectus ex, ullamcorper sed bibendum at, bibendum ut mauris. Vestibulum venenatis urna quis purus fermentum, venenatis auctor nulla tincidunt. Duis at cursus est, sit amet feugiat magna. Maecenas faucibus tellus mauris, non luctus erat egestas nec. Nunc tincidunt malesuada urna, sit amet auctor est facilisis a. Fusce ullamcorper enim sapien, eget dignissim nulla vehicula a. Nulla consequat scelerisque ligula, sit amet pellentesque leo pretium pulvinar. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed vulputate ultrices turpis, id pellentesque augue.
+
+                Sed leo enim, semper vel placerat nec, rutrum sed dolor. Vestibulum egestas eu odio et feugiat. Proin fringilla velit a ex vulputate consectetur. Etiam rhoncus ligula eget libero tempor rhoncus. Quisque sodales nisi feugiat erat efficitur, eget consequat ligula mollis. Aliquam tortor ligula, euismod at lectus a, placerat semper eros. Integer vitae diam egestas, varius ex id, efficitur risus. Nulla luctus eget diam vel consequat. Nulla luctus nunc purus, sed porttitor enim malesuada non. Pellentesque commodo tellus nec sollicitudin rhoncus. Duis suscipit sapien ac venenatis facilisis. Cras tempus efficitur massa in finibus. Nulla eleifend convallis tristique.</p>
+        </div>
+    </div>
+
+    
+
+
+</body>

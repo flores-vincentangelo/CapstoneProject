@@ -1,0 +1,75 @@
+.home {
+  background-color: #e9ebee;
+}
+.home-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: auto;
+  height: 70px;
+  z-index: 1;
+  padding: 5px;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.home-header-left {
+  display: flex;
+  flex-direction: row;
+}
+.home-body {
+  position: relative;
+  top: 75px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.home-body-leftsidepanel {
+  position: fixed;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  height: 100vh;
+}
+.home-body-timeline {
+  position: relative;
+  left: 25%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.home-body-timeline-post {
+  width: 90%;
+  background-color: white;
+  border-radius: 10px;
+  margin: 10px 0 10px 0;
+  border: 1px solid grey;
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.home-body-timeline-post > div {
+  width: auto;
+}
+.home-body-timeline-post-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.home-body-timeline-post-buttons button {
+  width: 50%;
+}
+.home-body-rightsidepanel {
+  position: fixed;
+  right: 0;
+  width: 25%;
+  overflow: auto;
+  height: 100vh;
+}
+
+/*# sourceMappingURL=Home.css.map */
