@@ -11,6 +11,13 @@ public class RegisterController : Controller
         return View("/Views/Register.cshtml");
     }
 
+    public bool SendEmail(UserModel user) {
+        string to = user.EmailAddress;
+        string from = "pastebooktest@gmail.com";
+        MailMessage message = new MailMessage(from,to);
+        var name = user.FirstName;
+    }
+
     [HttpPost]
     [Route("/register")]
     public IActionResult doPostRegistration()
