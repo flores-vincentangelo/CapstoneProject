@@ -1,23 +1,22 @@
 namespace Controllers;
 using Microsoft.AspNetCore.Mvc;
+using Database;
+using Models;
 
-public class MainController: Controller
+public class ConfigureController: Controller
 {
     [Route("/configure")]
     public IActionResult Configure(
-        [FromBody] ConfigureActionModel param, 
-        [FromHeader (Name = "X-Apikey")] string apiKey) {
+        [FromBody] ConfigureActionModel param) {
         var config = param.Action;
-        var correctApiKey = new string (Environment.GetEnvironmentVariable("ADMIN_API_KEY"));
-        if (apiKey != correctApiKey) {
-            return Unauthorized();
-        }
         if(config == "CreateTables") {
-            DbMain.CreateTables();
+            DbTables.CreateUsersTable();
+            DbTables.CreateSessionsTable();
             return Ok("All Tables are Created!");
         }
         else if (config == "DropTables") {
-            DbMain.DropTables();
+            DbTables.DropUsersTable();
+            DbTables.DropSessionsTable();
             return Ok("All Tables are Dropped");
         }
         else {

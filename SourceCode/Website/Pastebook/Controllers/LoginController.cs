@@ -1,11 +1,11 @@
 namespace Controllers;
 using Microsoft.AspNetCore.Mvc;
+using System.Data.SqlClient;
 
-public class LoginController : Controller
+public class LoginController: Controller
 {
-    [HttpGet]
-    [Route("/")]
-    public IActionResult GetLoginAction() {
+    [Route("/login")]
+    public IActionResult doLoginAction() {
         return View("/Views/Login.cshtml");
     }
 }
