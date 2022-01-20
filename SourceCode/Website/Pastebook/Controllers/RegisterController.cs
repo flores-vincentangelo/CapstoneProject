@@ -1,4 +1,6 @@
 namespace Controllers;
+using Database;
+using Models;
 using Microsoft.AspNetCore.Mvc;
 
 public class RegisterController : Controller
@@ -15,7 +17,7 @@ public class RegisterController : Controller
     {
         var firstName = HttpContext.Request.Form["FirstName"];
         var lastName = HttpContext.Request.Form["LastName"];
-        var email = HttpContext.Request.Form["Email"];
+        var emailAddress = HttpContext.Request.Form["EmailAddress"];
         var mobileNumber = HttpContext.Request.Form["MobileNumber"];
         var password = HttpContext.Request.Form["Password"];
         var birthday = HttpContext.Request.Form["Birthday"];
@@ -26,12 +28,12 @@ public class RegisterController : Controller
         var model = new UserModel();
         model.FirstName = firstName;
         model.LastName = lastName;
-        model.Email = email;
+        model.EmailAddress = emailAddress;
         model.MobileNumber = mobileNumber;
         model.Password = password;
         model.Birthday = dateOfBirth;
         model.Gender = gender;
-        Database.DbUsers.InsertUser(model);
+        DbUsers.InsertUser(model);
         return View("Views/RegisteredSuccess.cshtml");
     }
 }

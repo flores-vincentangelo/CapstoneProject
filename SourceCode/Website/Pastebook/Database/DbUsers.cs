@@ -1,4 +1,5 @@
 namespace Database;
+using Models;
 using System.Data.SqlClient;
 
 public class DbUsers
@@ -18,11 +19,11 @@ public class DbUsers
             using (var cmd = db.CreateCommand())
             {
                 cmd.CommandText =
-                    @"INSERT INTO Users (FirstName, LastName, Email, MobileNumber, Password, Birthday, Gender) 
-                    VALUES (@FirstName, @LastName, @Email, @MobileNumber, @Password, @Birthday, @Gender);";
+                    @"INSERT INTO Users (FirstName, LastName, EmailAddress, MobileNumber, Password, Birthday, Gender) 
+                    VALUES (@FirstName, @LastName, @EmailAddress, @MobileNumber, @Password, @Birthday, @Gender);";
                 cmd.Parameters.AddWithValue("@FirstName", user.FirstName);
                 cmd.Parameters.AddWithValue("@LastName", user.LastName);
-                cmd.Parameters.AddWithValue("@Email", user.Email);
+                cmd.Parameters.AddWithValue("@EmailAddress", user.EmailAddress);
                 cmd.Parameters.AddWithValue("@MobileNumber", user.MobileNumber);
                 cmd.Parameters.AddWithValue("@Password", BCrypt.Net.BCrypt.HashPassword(user.Password));
                 cmd.Parameters.AddWithValue("@Birthday", user.Birthday);
