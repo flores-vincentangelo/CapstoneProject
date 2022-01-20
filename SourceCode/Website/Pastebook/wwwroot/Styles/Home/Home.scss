@@ -1,8 +1,9 @@
 $grey: #e9ebee;
 $blue: #1877f2;
 
-$header-height:50px;
-
+$header-height: 70px;
+$padding: 5px;
+$header-total-height: $padding + $header-height;
 
 .home{
 
@@ -11,16 +12,22 @@ $header-height:50px;
     &-header{
         position: fixed;
         top: 0;
+        left: 0;
         width: 100%;
         min-height: auto;
+        
         height: $header-height;
         z-index: 1;
+        
+        padding: $padding;
 
         background-color: white;
 
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+
+        
 
         &-left{
             display: flex;
@@ -30,21 +37,31 @@ $header-height:50px;
 
     &-body{
         position: relative;
-        top: $header-height;
+        top: $header-total-height;
 
         display: flex;
         flex-direction: row;
 
         width: 100%;
 
+        $leftsidepanel-width: 25%;
+        $rightsidepanel-wdith: 25%;
+        
+
         &-leftsidepanel{
-            width: 25%;
+            position: fixed;
+            width: $leftsidepanel-width;
 
             display: flex;
             flex-direction: column;
+
+            overflow: auto;
+            height: 100vh;
         }
 
         &-timeline{
+            position: relative;
+            left: $leftsidepanel-width;
             width: 50%;
             display: flex;
             flex-direction: column;
@@ -54,12 +71,38 @@ $header-height:50px;
             &-post{
                 width: 90%;
                 background-color: white;
+
                 border-radius: 10px;
+                $margin-top-bottom: 10px;
+                margin: $margin-top-bottom 0 $margin-top-bottom 0;
+                border: 1px solid grey;
+                padding-top: 20px;
+                $padding-left-right: 10px;
+                padding-left: $padding-left-right;
+                padding-right: $padding-left-right;
+
+                & > div{
+                    width: auto;
+                }
+
+                &-buttons{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+
+                    & button{
+                        width: 50%;
+                    }
+                }
             }
         }
 
         &-rightsidepanel{
-            width: 25%;
+            position: fixed;
+            right: 0;
+            width: $rightsidepanel-wdith;
+            overflow: auto;
+            height: 100vh;
         }
     }
 
