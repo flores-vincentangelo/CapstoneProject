@@ -3,6 +3,7 @@ $blue: #1877f2;
 
 $header-height:50px;
 
+
 .home{
 
     background-color: $grey;
@@ -36,7 +37,7 @@ $header-height:50px;
 
         width: 100%;
 
-        &-rightsidepanel{
+        &-leftsidepanel{
             width: 25%;
 
             display: flex;
@@ -47,7 +48,7 @@ $header-height:50px;
             width: 50%;
         }
 
-        &-leftsidepanel{
+        &-rightsidepanel{
             width: 25%;
         }
     }
