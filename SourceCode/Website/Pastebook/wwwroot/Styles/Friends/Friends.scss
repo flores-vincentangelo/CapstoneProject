@@ -1,0 +1,16 @@
+@import '../Shared/colors';
+@import '../Shared/header';
+
+.friends{
+    position: relative;
+    top: $header-total-height;
+
+    display: flex;
+    flex-direction: row;
+
+    width: 100%;
+
+    &-sidepanel{
+        
+    }
+}

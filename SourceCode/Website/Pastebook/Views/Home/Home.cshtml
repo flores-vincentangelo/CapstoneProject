@@ -1,43 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+@{Layout = "/Views/_Layout.cshtml";}
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="initial-scale=1,maximum-scale=1"/>
-    <title>Pastebook</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="./Styles/Home/Home.css">
     <script src="Scripts/Home.js"></script>
-
-    
 </head>
-
-<body class="home">
-    <div class="home-header">
-        <div class="home-header-left">
-            <a href="/">logo</a>
-            <form action="/" class="home-header-left-searchform">
-                <input type="text" placeholder="Search Pastebook" class="home-header-left-searchform-input"/>
-            </form>
-            <div class="home-header-left-searchpanel">
-                <div  class="home-header-left-searchpanel-recent">Recent Searches</div>
-                <div class="home-header-left-searchpanel-searchresults"></div>
-            </div>
-        </div>
-        <div class="home-header-middle">
-            <button>Home</button>
-        </div>
-        <div class="home-header-right">
-            <button>Profile</button>
-            <button>messages</button>
-            <button>notifications</button>
-        </div>
-    </div>
 
     <div class="home-body">
         <div class="home-body-leftsidepanel">
             <button>Profile</button>
-            <button>Friends</button>
+            <a href="/friends">Friends</a>
         </div>
 
         <div class="home-body-timeline">
@@ -81,4 +52,4 @@
     
 
 
-</body>
+@* </body> *@

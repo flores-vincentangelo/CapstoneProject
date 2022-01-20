@@ -1,0 +1,60 @@
+@import '../Shared/colors';
+@import '../Shared/header';
+
+// $grey: #e9ebee;
+// $blue: #1877f2;
+
+// $header-height: 70px;
+// $padding: 5px;
+// $header-total-height: $padding + $header-height;
+
+.layout{
+
+    background-color: $grey;
+
+    &-header{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        min-height: auto;
+        
+        height: $header-height;
+        z-index: 1;
+        
+        padding: $padding;
+
+        background-color: white;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        
+
+        &-left{
+            display: flex;
+            flex-direction: row;
+
+            &-searchform{
+                z-index: 2;
+                &-input{
+                    background-color: red;
+                    
+                }
+            }
+
+            &-searchpanel{
+                display: none;
+                position: fixed;
+                background-color: white;
+                z-index: 1;
+                padding-top: 30px;
+                height: 400px;
+                width: 300px;
+
+            }
+        }
+    }
+}

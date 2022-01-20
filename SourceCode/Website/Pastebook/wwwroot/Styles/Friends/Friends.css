@@ -1,0 +1,9 @@
+.friends {
+  position: relative;
+  top: 75px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+/*# sourceMappingURL=Friends.css.map */
