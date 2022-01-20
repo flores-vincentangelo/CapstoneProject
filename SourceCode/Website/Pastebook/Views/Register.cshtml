@@ -10,35 +10,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="./Styles/Register.css">
+    <link rel="stylesheet" type="text/css" href="./Styles/Register/Register.css">
 </head>
 
 <body>
     <div class="register-container">
         <div class="register-container-form">
-            <form>
+            <form method="POST" action="/register">
                 <h1>Sign Up</h1>
                 <p>It's quick and easy.</p>
                 <hr>
                 <div class="register-container-form-field">
                     <div class="register-container-form-field-fullname">
-                        <input id="first-name" type="text" placeholder="First name">
-                        <input id="last-name" type="text" placeholder="Last name">
+                        <input id="first-name" type="text" placeholder="First name" name="FirstName" required onkeyup="lettersInput(this)">
+                        <input id="last-name" type="text" placeholder="Last name" name="LastName" required onkeyup="lettersInput(this)">
                     </div>
                 </div>
                 <div class="register-container-form-field">
-                    <input type="text" placeholder="Mobile number or email">
+                    <input type="text" placeholder="Email address" name="EmailAddress" required>
                 </div>
                 <div class="register-container-form-field">
-                    <input type="password" placeholder="New Password">
+                    <input type="text" placeholder="Mobile Number" name="MobileNumber" onkeyup="numbersInput(this)">
+                </div>
+                <div class="register-container-form-field">
+                    <input type="password" placeholder="New Password" name="Password" required>
                 </div>
                 <div class="register-container-form-field">
                     <label>Birthday</label>
-                    <input type="date" id="date">
+                    <input type="date" id="date" name="Birthday" required>
                 </div>
                 <div class="register-container-form-field">
                     <label>Gender</label>
-                    <select>
+                    <select name="Gender" required>
                         <option>Female</option>
                         <option>Male</option>
                     </select>
@@ -47,6 +50,7 @@
             </form>
         </div>
     </div>
+    <script src="./Scripts/Register.js"></script>
 </body>
 
 </html>
