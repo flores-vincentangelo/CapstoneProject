@@ -28,6 +28,10 @@ html,body {
     height: 15%;
 }
 
+.registered-success-container a {
+    text-decoration: none;
+}
+
 .registered-success-container button {
     margin-top: 5%;
     margin-bottom: 2%;
