@@ -2,6 +2,10 @@ namespace Controllers;
 using Database;
 using Models;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;  
+using System.Net;
+using System.Text;  
+using System.Net.Mail; 
 
 public class RegisterController : Controller
 {
@@ -11,11 +15,29 @@ public class RegisterController : Controller
         return View("/Views/Register.cshtml");
     }
 
-    public bool SendEmail(UserModel user) {
-        string to = user.EmailAddress;
+    public bool SendVerificationEmail(UserModel user) {
+        string? to = user.EmailAddress;
         string from = "pastebooktest@gmail.com";
-        MailMessage message = new MailMessage(from,to);
-        var name = user.FirstName;
+        MailMessage message = new MailMessage(from, to);
+        var firstName = user.FirstName;
+
+        string mailBody = $@"Welcome {firstName} to Pastebook!";
+        message.Subject = "Registration successful!";
+        message.Body = mailBody;
+        message.BodyEncoding = Encoding.UTF8;
+        message.IsBodyHtml = true;
+        SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+        System.Net.NetworkCredential basicCredential1 = new System.Net.NetworkCredential("pastebooktest", "pasteb00kt3st");
+        client.EnableSsl = true;
+        client.UseDefaultCredentials = false;
+        client.Credentials = basicCredential1;
+        try {
+            client.Send(message);
+            return true;
+        }
+        catch (Exception e) {
+            throw e;
+        }
     }
 
     [HttpPost]
@@ -41,6 +63,7 @@ public class RegisterController : Controller
         model.Birthday = dateOfBirth;
         model.Gender = gender;
         DbUsers.InsertUser(model);
+        SendVerificationEmail(model);
         return View("Views/RegisteredSuccess.cshtml");
     }
 }
