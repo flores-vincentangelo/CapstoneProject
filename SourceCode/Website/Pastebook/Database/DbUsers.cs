@@ -1,11 +1,11 @@
 namespace Database;
 using System.Data.SqlClient;
 
-public class DBRegister
+public class DbUsers
 {
     private static string? DB_CONNECTION_STRING;
 
-    static DBRegister()
+    static DbUsers()
     {
         DB_CONNECTION_STRING = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
     }
