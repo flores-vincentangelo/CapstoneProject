@@ -7,6 +7,7 @@ public class HomeController: Controller
     [Route("/")]
     public IActionResult GetHome()
     {
+        System.Console.WriteLine("hi");
         return Ok("Hello World");
     }
 }
