@@ -21,13 +21,13 @@ public class DbSessions
                 command.CommandText=@"INSERT INTO Sessions (Id, EmailAddress, LastLogin) VALUES (@Id, @EmailAddress, @LastLogin);";
                 command.Parameters.AddWithValue("@Id", session.Id);
                 command.Parameters.AddWithValue("@EmailAddress", session.EmailAddress);
-                command.Parameters.AddWithValue("@EmailAddress", session.LastLogin);
+                command.Parameters.AddWithValue("@LastLogin", session.LastLogin);
                 command.ExecuteNonQuery();
             }
         }
     }    
 
-    public static SessionsModel AddSessionsForUser(string? EmailAddress)
+    public static SessionsModel AddSessionsForUser(string EmailAddress)
     {
         SessionsModel session = new SessionsModel();
         using (var db = new SqlConnection(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")))
@@ -35,6 +35,7 @@ public class DbSessions
             db.Open();
             session.Id = Guid.NewGuid().ToString();
             session.EmailAddress = EmailAddress;
+            session.LastLogin = LastLogin;
             AddSessions(session);  
         }
         return session;
@@ -79,6 +80,7 @@ public class DbSessions
                 {
                     session.Id = reader.GetString(0);
                     session.EmailAddress = reader.GetString(1);
+                    session.LastLogin = reader.GetInt64(2);
                 }
             }
         }
