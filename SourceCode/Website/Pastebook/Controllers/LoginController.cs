@@ -1,6 +1,5 @@
 namespace Controllers;
 using Microsoft.AspNetCore.Mvc;
-using System.Data.SqlClient;
 
 public class LoginController: Controller
 {

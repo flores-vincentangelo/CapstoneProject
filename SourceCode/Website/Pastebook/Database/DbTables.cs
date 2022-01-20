@@ -1,5 +1,4 @@
 namespace Database;
-using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
 
 public class DbTables
