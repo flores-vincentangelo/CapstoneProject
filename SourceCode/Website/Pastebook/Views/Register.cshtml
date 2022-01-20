@@ -16,29 +16,29 @@
 <body>
     <div class="register-container">
         <div class="register-container-form">
-            <form>
+            <form method="POST" action="/register">
                 <h1>Sign Up</h1>
                 <p>It's quick and easy.</p>
                 <hr>
                 <div class="register-container-form-field">
                     <div class="register-container-form-field-fullname">
-                        <input id="first-name" type="text" placeholder="First name">
-                        <input id="last-name" type="text" placeholder="Last name">
+                        <input id="first-name" type="text" placeholder="First name" name="FirstName">
+                        <input id="last-name" type="text" placeholder="Last name" name="LastName">
                     </div>
                 </div>
                 <div class="register-container-form-field">
-                    <input type="text" placeholder="Mobile number or email">
+                    <input type="text" placeholder="Email" name="Email">
                 </div>
                 <div class="register-container-form-field">
-                    <input type="password" placeholder="New Password">
+                    <input type="password" placeholder="New Password" name="Password">
                 </div>
                 <div class="register-container-form-field">
                     <label>Birthday</label>
-                    <input type="date" id="date">
+                    <input type="date" id="date" name="Birthday">
                 </div>
                 <div class="register-container-form-field">
                     <label>Gender</label>
-                    <select>
+                    <select name="Gender">
                         <option>Female</option>
                         <option>Male</option>
                     </select>

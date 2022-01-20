@@ -8,4 +8,10 @@ public class RegisterController : Controller
     public IActionResult GetRegisterAction() {
         return View("/Views/Register.cshtml");
     }
+
+    // [HttpPost]
+    // [Route("/users")]
+    // public IActionResult PostRegisterAction() {
+    //     return View("/Views/RegisterSuccess.cshtml");
+    // }
 }
