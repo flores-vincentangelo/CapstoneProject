@@ -10,7 +10,110 @@
 
     width: 100%;
 
+    $sidepanel-width: 30%;
+
     &-sidepanel{
-        
+        background-color: white;
+        position: fixed;
+        width: $sidepanel-width;
+
+        display: flex;
+        flex-direction: column;
+
+        overflow: auto;
+        height: 100vh;
+    }
+
+    &-main{
+        background-color: $grey;
+        position: relative;
+        left: $sidepanel-width;
+        right: 0;
+
+        width: 100% - $sidepanel-width;
+        padding: 20px;
+
+        &-title{
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        &-friendcardcontainer{
+            display:grid;
+            grid-template-columns: auto auto auto auto;
+            grid-gap: 20px 20px;
+            // text-align: center;
+            
+
+            &-friendcard{
+                background-color: white;
+                border-radius: 20px;
+                // padding: 10px;
+                height: 350px;
+
+                &-picture{ 
+                    height: 50%;
+                    width: 100%;
+
+                    & img{
+                        height: 100%;
+                        width: 100%;
+                        object-fit: cover;
+                        border-radius: 20px 20px 0 0;
+                    }
+                }
+
+                &-content{
+                    height: 50%;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    
+                    $padding-left-right:20px;
+                    padding: 0 $padding-left-right 0 $padding-left-right;
+
+                    &-name{
+                        font-weight: bold;
+                    }
+    
+                    $button-height:50px;
+                    $button-width:80%;
+
+                    &-confirm, &-delete{
+                        display: flex;
+                        flex-direction: column;
+
+                        &-button{
+                            border-radius: 10px;
+                            border:none;
+                            font-weight: bold;
+                        }
+                    }
+    
+                    &-confirm{
+                        width: 100%;
+                        &-button{
+                            width: 100%;
+                            background-color: $blue;
+                            color: white;
+                            width: $button-width;
+                            height: $button-height;
+                        }
+                    }
+    
+                    &-delete{
+                        width: 100%;
+                        &-button{
+                            width: 100%;
+                            color: black;
+                            width: $button-width;
+                            height: $button-height;
+                            background-color: $grey;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

@@ -5,5 +5,86 @@
   flex-direction: row;
   width: 100%;
 }
+.friends-sidepanel {
+  background-color: white;
+  position: fixed;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  height: 100vh;
+}
+.friends-main {
+  background-color: #e9ebee;
+  position: relative;
+  left: 30%;
+  right: 0;
+  width: 70%;
+  padding: 20px;
+}
+.friends-main-title {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.friends-main-friendcardcontainer {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 20px 20px;
+}
+.friends-main-friendcardcontainer-friendcard {
+  background-color: white;
+  border-radius: 20px;
+  height: 350px;
+}
+.friends-main-friendcardcontainer-friendcard-picture {
+  height: 50%;
+  width: 100%;
+}
+.friends-main-friendcardcontainer-friendcard-picture img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 20px 20px 0 0;
+}
+.friends-main-friendcardcontainer-friendcard-content {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 0 20px 0 20px;
+}
+.friends-main-friendcardcontainer-friendcard-content-name {
+  font-weight: bold;
+}
+.friends-main-friendcardcontainer-friendcard-content-confirm, .friends-main-friendcardcontainer-friendcard-content-delete {
+  display: flex;
+  flex-direction: column;
+}
+.friends-main-friendcardcontainer-friendcard-content-confirm-button, .friends-main-friendcardcontainer-friendcard-content-delete-button {
+  border-radius: 10px;
+  border: none;
+  font-weight: bold;
+}
+.friends-main-friendcardcontainer-friendcard-content-confirm {
+  width: 100%;
+}
+.friends-main-friendcardcontainer-friendcard-content-confirm-button {
+  width: 100%;
+  background-color: #1877f2;
+  color: white;
+  width: 80%;
+  height: 50px;
+}
+.friends-main-friendcardcontainer-friendcard-content-delete {
+  width: 100%;
+}
+.friends-main-friendcardcontainer-friendcard-content-delete-button {
+  width: 100%;
+  color: black;
+  width: 80%;
+  height: 50px;
+  background-color: #e9ebee;
+}
 
 /*# sourceMappingURL=Friends.css.map */

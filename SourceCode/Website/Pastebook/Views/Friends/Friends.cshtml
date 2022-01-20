@@ -6,14 +6,23 @@
 
 <div class="friends">
     <div class="friends-sidepanel">
-        <a href="/">Home</a>
-        <a href="/">Friend Requests</a>
-        <a href="/">Suggestions</a>
-        <a href="/">All Friends</a>
-        <a href="/">Birthdays</a>
-        <a href="/">Cukstom Lists</a>
-    <div>
+        <a href="/friends">Home</a>
+        <a href="/friends">Friend Requests</a>
+        <a href="/friends">Suggestions</a>
+        <a href="/friends">All Friends</a>
+        <a href="/friends">Birthdays</a>
+        <a href="/friends">Cukstom Lists</a>
+    </div>
     <div class="friends-main">
-
+        <div class="friends-main-title">Friend Requests</div>
+        <div class="friends-main-friendcardcontainer">
+            @{
+                for(var i = 1; i <= 8; i++)
+                {
+                    await Html.RenderPartialAsync("_FriendCard.cshtml");
+                }
+            }
+            @* @await Html.PartialAsync("_FriendCard.cshtml") *@
+        </div>
     </div>
 </div>

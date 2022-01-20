@@ -1,16 +1,10 @@
 @import '../Shared/colors';
 @import '../Shared/header';
 
-// $grey: #e9ebee;
-// $blue: #1877f2;
-
-// $header-height: 70px;
-// $padding: 5px;
-// $header-total-height: $padding + $header-height;
-
 .layout{
 
     background-color: $grey;
+    font-family: Arial, Helvetica, sans-serif;
 
     &-header{
         position: fixed;
