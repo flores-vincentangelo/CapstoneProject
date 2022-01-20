@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 public class LoginController : Controller
 {
     [HttpGet]
-    [Route("/")]
+    // [Route("/")]
     public IActionResult GetLoginAction() {
         return View("/Views/Login.cshtml");
     }
