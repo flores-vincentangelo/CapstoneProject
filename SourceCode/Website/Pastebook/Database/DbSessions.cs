@@ -18,27 +18,32 @@ public class DbSessions
             db.Open();
             using(var command = db.CreateCommand())
             {       
-                command.CommandText=@"INSERT INTO Sessions (Id, EmailAddress) VALUES (@Id, @EmailAddress);";
+                command.CommandText=@"INSERT INTO Sessions (Id, EmailAddress, LastLogin) VALUES (@Id, @EmailAddress, @LastLogin);";
                 command.Parameters.AddWithValue("@Id", session.Id);
                 command.Parameters.AddWithValue("@EmailAddress", session.EmailAddress);
+                command.Parameters.AddWithValue("@EmailAddress", session.LastLogin);
                 command.ExecuteNonQuery();
             }
         }
     }    
 
-    public static SessionsModel AddSessionsForUser(string EmailAddress)
+    public static SessionsModel AddSessionsForUser(string? EmailAddress)
     {
         SessionsModel session = new SessionsModel();
-        session.Id = Guid.NewGuid().ToString();
-        session.EmailAddress = EmailAddress;
-        AddSessions(session);
+        using (var db = new SqlConnection(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")))
+        {
+            db.Open();
+            session.Id = Guid.NewGuid().ToString();
+            session.EmailAddress = EmailAddress;
+            AddSessions(session);  
+        }
         return session;
     }
 
     public static SessionsModel AddSessionWithCredentials(string EmailAddress, string Password)
     {
-        SessionsModel session = new SessionsModel();
         var result = false;
+        SessionsModel session = new SessionsModel();
         using(var db = new SqlConnection(DB_CONNECTION_STRING))
         {
             db.Open();
@@ -51,11 +56,11 @@ public class DbSessions
                     result = BCrypt.Net.BCrypt.Verify(Password, reader.GetString(1));
                 }
             } 
-            if (result)
-            {
-                session = AddSessionsForUser(EmailAddress);
-                return session;
-            }
+        }
+        if (result)
+        {
+            session = AddSessionsForUser(EmailAddress);
+            return session;
         }
        return null;
     }
@@ -68,8 +73,7 @@ public class DbSessions
             db.Open();
             using(var command = db.CreateCommand())
             {
-                command.CommandText = "SELECT * FROM Sessions WHERE Id = @Id;";
-                command.Parameters.AddWithValue("@Id",Id);
+                command.CommandText = $"SELECT * FROM Sessions WHERE Id = '{Id}';";
                 var reader = command.ExecuteReader();
                 while(reader.Read())
                 {
@@ -83,14 +87,12 @@ public class DbSessions
 
     public static void DeleteSession(string Id)
     {
-        SessionsModel session = new SessionsModel();
         using(var db = new SqlConnection(DB_CONNECTION_STRING))
         {
             db.Open();
             using(var command = db.CreateCommand())
             {
-                command.CommandText = "DELETE FROM Sessions WHERE Id = @Id;";
-                command.Parameters.AddWithValue("@Id",Id);
+                command.CommandText = $"DELETE FROM Sessions WHERE Id = '{Id}';";
                 command.ExecuteNonQuery(); 
             }
         }

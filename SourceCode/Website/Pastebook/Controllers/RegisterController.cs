@@ -13,7 +13,7 @@ public class RegisterController : Controller
 
     [HttpPost]
     [Route("/register")]
-    public IActionResult PostRegistration()
+    public IActionResult doPostRegistration()
     {
         var firstName = HttpContext.Request.Form["FirstName"];
         var lastName = HttpContext.Request.Form["LastName"];
