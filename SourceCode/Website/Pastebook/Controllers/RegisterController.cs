@@ -31,7 +31,7 @@ public class RegisterController : Controller
         model.Password = password;
         model.Birthday = dateOfBirth;
         model.Gender = gender;
-        Database.DBRegister.InsertUser(model);
+        Database.DbUsers.InsertUser(model);
         return View("Views/RegisteredSuccess.cshtml");
     }
 }
