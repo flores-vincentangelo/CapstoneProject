@@ -27,7 +27,7 @@ public class DbSessions
         }
     }    
 
-    public static SessionsModel AddSessionsForUser(string EmailAddress)
+    public static SessionsModel AddSessionsForUser(string EmailAddress, long LastLogin)
     {
         SessionsModel session = new SessionsModel();
         using (var db = new SqlConnection(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")))
@@ -41,7 +41,7 @@ public class DbSessions
         return session;
     }
 
-    public static SessionsModel AddSessionWithCredentials(string EmailAddress, string Password)
+    public static SessionsModel AddSessionWithCredentials(string EmailAddress, string Password, long LastLogin)
     {
         var result = false;
         SessionsModel session = new SessionsModel();
@@ -50,7 +50,8 @@ public class DbSessions
             db.Open();
             using(var command = db.CreateCommand())
             {
-                command.CommandText = $"SELECT EmailAddress, Password FROM Users where EmailAddress = '{EmailAddress}';";
+                command.CommandText = "SELECT EmailAddress, Password FROM Users where EmailAddress = @EmailAddress;";
+                command.Parameters.AddWithValue("@EmailAddress", EmailAddress);
                 var reader = command.ExecuteReader();
                 while(reader.Read())
                 {
@@ -60,7 +61,7 @@ public class DbSessions
         }
         if (result)
         {
-            session = AddSessionsForUser(EmailAddress);
+            session = AddSessionsForUser(EmailAddress, LastLogin);
             return session;
         }
        return null;
@@ -74,7 +75,8 @@ public class DbSessions
             db.Open();
             using(var command = db.CreateCommand())
             {
-                command.CommandText = $"SELECT * FROM Sessions WHERE Id = '{Id}';";
+                command.CommandText = "SELECT * FROM Sessions WHERE Id = @Id;";
+                command.Parameters.AddWithValue("@Id",Id);
                 var reader = command.ExecuteReader();
                 while(reader.Read())
                 {
@@ -94,7 +96,8 @@ public class DbSessions
             db.Open();
             using(var command = db.CreateCommand())
             {
-                command.CommandText = $"DELETE FROM Sessions WHERE Id = '{Id}';";
+                command.CommandText = "DELETE FROM Sessions WHERE Id = @Id;";
+                command.Parameters.AddWithValue("@Id",Id);
                 command.ExecuteNonQuery(); 
             }
         }

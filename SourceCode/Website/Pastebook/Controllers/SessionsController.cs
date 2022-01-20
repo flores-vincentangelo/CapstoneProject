@@ -9,7 +9,9 @@ public class SessionsController: Controller
     [Route("/sessions")]
     public IActionResult AddSession ([FromBody] UserCredentialsModel userCredentials)
     {
-        var session = DbSessions.AddSessionWithCredentials(userCredentials.EmailAddress, userCredentials.Password);
+        var lastLogin = (long)((System.DateTime.Now.Subtract(new System.DateTime(1970, 1, 1))).TotalSeconds);
+        var readableLastLogin = new System.DateTime(1970, 1, 1).AddSeconds(lastLogin);
+        var session = DbSessions.AddSessionWithCredentials(userCredentials.EmailAddress, userCredentials.Password, lastLogin);
         if (session == null) {
             return Unauthorized();
         }

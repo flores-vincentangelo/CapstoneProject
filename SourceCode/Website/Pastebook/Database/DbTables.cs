@@ -57,7 +57,7 @@ public class DbTables
             {
                 command.CommandText = @"IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Sessions' and xtype='U')
                 CREATE TABLE Sessions (
-                    Id VARCHAR(255) NOT NULL PRIMARY KEY,
+                    Id VARCHAR(255) NOT NULL,
                     EmailAddress VARCHAR (255),
                     LastLogin BIGINT
                     );";
