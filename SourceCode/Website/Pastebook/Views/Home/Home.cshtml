@@ -5,18 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="initial-scale=1,maximum-scale=1"/>
     <title>Pastebook</title>
-    <link rel="stylesheet" href="./Styles/Home/Home.css">
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="./Styles/Home/Home.css">
+    <script src="Scripts/Home.js"></script>
+
+    
 </head>
 
 <body class="home">
     <div class="home-header">
         <div class="home-header-left">
-            <button>logo</button>
-            <form action="/">
-                <input type="text" placeholder="Search Pastebook"/>
+            <a href="/">logo</a>
+            <form action="/" class="home-header-left-searchform">
+                <input type="text" placeholder="Search Pastebook" class="home-header-left-searchform-input"/>
             </form>
+            <div class="home-header-left-searchpanel">
+                <div  class="home-header-left-searchpanel-recent">Recent Searches</div>
+                <div class="home-header-left-searchpanel-searchresults"></div>
+            </div>
         </div>
         <div class="home-header-middle">
             <button>Home</button>
