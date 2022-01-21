@@ -1,5 +1,6 @@
-@import '../Shared/colors';
-@import '../Shared/header';
+// @import '../Shared/colors';
+// @import '../Shared/header';
+@import '../Shared/import';
 
 .layout{
 
@@ -24,6 +25,8 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+
+        box-shadow: $box-shadow;
 
         
 
