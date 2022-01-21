@@ -57,5 +57,15 @@
   width: 5%;
   height: 80%;
 }
+.layout-accountpanel {
+  display: none;
+  position: fixed;
+  top: 75px;
+  right: 0;
+  height: 300px;
+  width: 300px;
+  background-color: red;
+  z-index: 1;
+}
 
 /*# sourceMappingURL=_Layout.css.map */

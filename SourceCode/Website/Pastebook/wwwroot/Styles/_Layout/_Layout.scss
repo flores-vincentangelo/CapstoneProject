@@ -77,5 +77,15 @@
             
         }
     }
-    
+
+    &-accountpanel{
+        display: none;
+        position: fixed;
+        top:$header-total-height;
+        right: 0;
+        height: 300px;
+        width: 300px;
+        background-color: red;
+        z-index: 1;
+    }
 }
