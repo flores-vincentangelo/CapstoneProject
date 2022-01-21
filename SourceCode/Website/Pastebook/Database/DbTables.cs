@@ -27,6 +27,9 @@ public class DbTables
                     Password VARCHAR (255),
                     Birthday BIGINT,
                     Gender VARCHAR (255),
+                    FullName VARCHAR (255),
+                    Duplicate INTEGER,
+                    ProfileLink VARCHAR (255),
                     );";
                 command.ExecuteNonQuery();
                 Console.WriteLine("Users Table created successfully!");

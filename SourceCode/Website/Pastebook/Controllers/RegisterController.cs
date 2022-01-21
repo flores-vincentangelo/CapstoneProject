@@ -1,18 +1,16 @@
 namespace Controllers;
+using Microsoft.AspNetCore.Mvc;
+using System.Net.Mail; 
+using System.Text;  
 using Database;
 using Models;
-using Microsoft.AspNetCore.Mvc;
-using System.IO;  
-using System.Net;
-using System.Text;  
-using System.Net.Mail; 
 
 public class RegisterController : Controller
 {
     [HttpGet]
     [Route("/register")]
     public IActionResult GetRegisterAction() {
-        return View("/Views/Register.cshtml");
+        return View("/Views/Register/Register.cshtml");
     }
 
     public bool SendVerificationEmail(UserModel user) {
@@ -20,7 +18,6 @@ public class RegisterController : Controller
         string from = "pastebooktest@gmail.com";
         MailMessage message = new MailMessage(from, to);
         var firstName = user.FirstName;
-
         string mailBody = $@"Welcome {firstName} to Pastebook!";
         message.Subject = "Registration successful!";
         message.Body = mailBody;
@@ -55,6 +52,13 @@ public class RegisterController : Controller
         var gender = HttpContext.Request.Form["Gender"];
 
         var model = new UserModel();
+
+        var isEmailUnique = DbUsers.checkEmailAddress(emailAddress);
+        if (isEmailUnique)
+        {
+            return View("Views/Register/EmailExists.cshtml");
+        }
+
         model.FirstName = firstName;
         model.LastName = lastName;
         model.EmailAddress = emailAddress;
@@ -62,8 +66,22 @@ public class RegisterController : Controller
         model.Password = password;
         model.Birthday = dateOfBirth;
         model.Gender = gender;
+        model.FullName = (firstName + lastName).ToLower();
+
+        var duplicate = DbUsers.checkFullName(model.FullName);
+        if(duplicate == -1)
+        {
+            duplicate = 0;
+        }
+        else 
+        { 
+            duplicate += 1; 
+        }
+
+        model.Duplicate = duplicate;
+        model.ProfileLink= model.FullName + model.Duplicate;
         DbUsers.InsertUser(model);
         SendVerificationEmail(model);
-        return View("Views/RegisteredSuccess.cshtml");
+        return View("Views/Register/RegisteredSuccess.cshtml");
     }
 }

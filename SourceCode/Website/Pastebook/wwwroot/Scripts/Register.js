@@ -1,6 +1,6 @@
 // LETTER INPUT RESTRICTION
 function lettersInput(input) {
-    var regex = /[^a-z]/gi;
+    var regex = /^([a-zA-Z'-.]+ [a-zA-Z'-.]+)$/;
     input.value = input.value.replace(regex,"");
 }
 
