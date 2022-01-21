@@ -1,6 +1,6 @@
 namespace Database;
-using Models;
 using System.Data.SqlClient;
+using Models;
 
 public class DbUsers
 {
@@ -19,8 +19,8 @@ public class DbUsers
             using (var cmd = db.CreateCommand())
             {
                 cmd.CommandText =
-                    @"INSERT INTO Users (FirstName, LastName, EmailAddress, MobileNumber, Password, Birthday, Gender) 
-                    VALUES (@FirstName, @LastName, @EmailAddress, @MobileNumber, @Password, @Birthday, @Gender);";
+                    @"INSERT INTO Users (FirstName, LastName, EmailAddress, MobileNumber, Password, Birthday, Gender, FullName, Duplicate, ProfileLink) 
+                    VALUES (@FirstName, @LastName, @EmailAddress, @MobileNumber, @Password, @Birthday, @Gender, @FullName, @Duplicate, @ProfileLink);";
                 cmd.Parameters.AddWithValue("@FirstName", user.FirstName);
                 cmd.Parameters.AddWithValue("@LastName", user.LastName);
                 cmd.Parameters.AddWithValue("@EmailAddress", user.EmailAddress);
@@ -28,9 +28,55 @@ public class DbUsers
                 cmd.Parameters.AddWithValue("@Password", BCrypt.Net.BCrypt.HashPassword(user.Password));
                 cmd.Parameters.AddWithValue("@Birthday", user.Birthday);
                 cmd.Parameters.AddWithValue("@Gender", user.Gender);
+                cmd.Parameters.AddWithValue("@FullName", user.FullName);
+                cmd.Parameters.AddWithValue("@Duplicate", user.Duplicate);
+                cmd.Parameters.AddWithValue("@ProfileLink", user.ProfileLink);
                 cmd.ExecuteNonQuery();
                 Console.WriteLine("Form successfully added to Users Table!");
             }
         }
+    }
+
+    public static bool checkEmailAddress(string email)
+    {
+        var isUsed = false;
+        using (var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var cmd = db.CreateCommand())
+            {
+                cmd.CommandText = $"SELECT EmailAddress FROM Users where EmailAddress = @EmailAddress;";
+                cmd.Parameters.AddWithValue("@EmailAddress", email);
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    return true;
+                }
+            }
+        }
+        return isUsed;
+    }
+
+    public static int checkFullName(string fullName)
+    {
+        var maxDuplicate = -1;
+        using (var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var cmd = db.CreateCommand())
+            {
+                cmd.CommandText = $"SELECT MAX(Duplicate) FROM Users where FullName = @FullName;";
+                cmd.Parameters.AddWithValue("@FullName", fullName);
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while(reader.Read())
+                    {
+                        maxDuplicate = reader.GetInt32(0);
+                    }
+                }
+            }
+        }
+        return maxDuplicate;
     }
 }

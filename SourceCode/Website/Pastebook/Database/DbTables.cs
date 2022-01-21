@@ -27,6 +27,9 @@ public class DbTables
                     Password VARCHAR (255),
                     Birthday BIGINT,
                     Gender VARCHAR (255),
+                    FullName VARCHAR (255),
+                    Duplicate INTEGER,
+                    ProfileLink VARCHAR (255),
                     );";
                 command.ExecuteNonQuery();
                 Console.WriteLine("Users Table created successfully!");
@@ -57,7 +60,7 @@ public class DbTables
             {
                 command.CommandText = @"IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Sessions' and xtype='U')
                 CREATE TABLE Sessions (
-                    Id VARCHAR(255) NOT NULL PRIMARY KEY,
+                    Id VARCHAR(255) NOT NULL,
                     EmailAddress VARCHAR (255),
                     LastLogin BIGINT
                     );";
