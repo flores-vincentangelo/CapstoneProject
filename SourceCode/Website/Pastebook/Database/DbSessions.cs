@@ -41,7 +41,7 @@ public class DbSessions
         return session;
     }
 
-    public static SessionsModel AddSessionWithCredentials(string EmailAddress, string Password, long LastLogin)
+    public static SessionsModel? AddSessionWithCredentials(string EmailAddress, string Password, long LastLogin)
     {
         var result = false;
         SessionsModel session = new SessionsModel();
@@ -56,6 +56,7 @@ public class DbSessions
                 while(reader.Read())
                 {
                     result = BCrypt.Net.BCrypt.Verify(Password, reader.GetString(1));
+                    System.Console.WriteLine($"{Environment.NewLine} {result} {Environment.NewLine}");
                 }
             } 
         }

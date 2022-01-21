@@ -50,7 +50,7 @@ public class RegisterController : Controller
         DateTime birthDate = DateTime.Parse(birthday);
         var dateOfBirth = (long)((birthDate.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0))).TotalSeconds);
         var gender = HttpContext.Request.Form["Gender"];
-
+        
         var model = new UserModel();
 
         var isEmailUnique = DbUsers.checkEmailAddress(emailAddress);

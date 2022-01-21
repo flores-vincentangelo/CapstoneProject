@@ -12,14 +12,25 @@ public class LoginController: Controller
     }
 
     [HttpPost]
-    [Route("/")]
-    public IActionResult doPostLogin()
+    [Route("/login")]
+    public IActionResult AddSession ([FromBody] UserCredentialsModel userCredentials)
     {
-        var emailAddress = HttpContext.Request.Form["EmailAddress"];
-        var model = new SessionsModel();
-        model.EmailAddress = emailAddress;
-        model.LastLogin = (long)((System.DateTime.Now.Subtract(new System.DateTime(1970, 1, 1))).TotalSeconds);
-        DbSessions.AddSessions(model);
-        return View("Views/RegisteredSuccess.cshtml");
+        var lastLogin = (long)((System.DateTime.Now.Subtract(new System.DateTime(1970, 1, 1))).TotalSeconds);
+        var readableLastLogin = new System.DateTime(1970, 1, 1).AddSeconds(lastLogin);
+        var session = DbSessions.AddSessionWithCredentials(userCredentials.EmailAddress, userCredentials.Password, lastLogin);
+        if (session == null) {
+            return Unauthorized();
+        }
+        else {
+            return (Json(session));
+        }
+    }
+
+    [HttpDelete]
+    [Route("/login/{id}")]
+    public IActionResult DeleteSession(string Id)
+    {
+        DbSessions.DeleteSession(Id);
+        return Ok("Session Deleted!");
     }
 }
