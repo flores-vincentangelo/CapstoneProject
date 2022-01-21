@@ -25,7 +25,7 @@ $(document).ready(function () {
         $(".layout-accountpanel").css("display", "none");
     });
 
-    $(".layout-header-right-accountbutton").click(function (e) { 
+    $(".layout-header-right-settings").click(function (e) { 
         // e.preventDefault();
         e.stopPropagation();
         $(".layout-accountpanel").css("display", "block");
