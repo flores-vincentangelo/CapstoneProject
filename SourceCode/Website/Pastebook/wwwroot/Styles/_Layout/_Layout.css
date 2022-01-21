@@ -50,5 +50,12 @@
   height: 400px;
   width: 300px;
 }
+.layout-header-middle {
+  display: flex;
+}
+.layout-header-middle-home {
+  width: 5%;
+  height: 80%;
+}
 
 /*# sourceMappingURL=_Layout.css.map */

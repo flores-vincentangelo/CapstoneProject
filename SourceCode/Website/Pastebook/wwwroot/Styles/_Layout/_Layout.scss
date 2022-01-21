@@ -68,5 +68,14 @@
 
             }
         }
+        &-middle {
+            display: flex;
+            &-home {
+                width: 5%;
+                height: 80%;
+            }
+            
+        }
     }
+    
 }
