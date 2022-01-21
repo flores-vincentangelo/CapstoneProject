@@ -7,8 +7,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  min-height: auto;
-  height: 70px;
+  height: 55px;
   z-index: 1;
   padding: 5px;
   background-color: white;
@@ -21,41 +20,61 @@
 .layout-header-left {
   display: flex;
   flex-direction: row;
+  text-align: center;
 }
 .layout-header-left a {
-  right: 0;
+  margin-right: 0;
+  justify-content: center;
 }
 .layout-header-left-logo {
-  width: 15%;
-  height: 50%;
-  margin-left: 10px;
+  width: 50%;
+  height: 90%;
 }
 .layout-header-left-searchform {
   z-index: 2;
-  margin: auto 2%;
+  margin: auto 0;
 }
 .layout-header-left-searchform-input {
   background-color: #d9dbdd;
-  padding: 8px;
+  padding: 8px 8px 8px 15px;
   border: solid #d9dbdd 1.5px;
   border-radius: 2em;
-  width: 150%;
+  width: 250%;
 }
 .layout-header-left-searchpanel {
   display: none;
   position: fixed;
   background-color: white;
-  z-index: 1;
+  z-index: 5;
   padding-top: 30px;
   height: 400px;
   width: 300px;
 }
 .layout-header-middle {
-  display: flex;
+  text-align: center;
+  padding: 10px;
+  margin-left: 7%;
+}
+.layout-header-middle a {
+  margin: 2%;
 }
 .layout-header-middle-home {
-  width: 5%;
-  height: 80%;
+  width: 3%;
+  height: 3%;
+}
+.layout-header-middle-home:hover {
+  width: 4%;
+  height: 4%;
+}
+.layout-header-right-settings {
+  width: 9%;
+  height: 9%;
+  float: right;
+  margin-right: 10%;
+}
+.layout-header-right-settings:hover {
+  width: 10%;
+  height: 10%;
 }
 
 /*# sourceMappingURL=_Layout.css.map */
