@@ -1,0 +1,29 @@
+@{Layout = "/Views/_Layout.cshtml";}
+
+<head>
+    <link rel="stylesheet" href="./Styles/Friends/Friends.css">
+</head>
+
+<div class="friends">
+    <div class="friends-sidepanel">
+        <div class="friends-sidepanel-title">Friends</div>
+        <a class="friends-sidepanel-link" href="/friends"><img class="friends-sidepanel-link-icon" src="Images/Friends/icon.png">Home</a>
+        <a class="friends-sidepanel-link" href="/friends"><img class="friends-sidepanel-link-icon" src="Images/Friends/icon.png">Friend Requests</a>
+        <a class="friends-sidepanel-link" href="/friends"><img class="friends-sidepanel-link-icon" src="Images/Friends/icon.png">Suggestions</a>
+        <a class="friends-sidepanel-link" href="/friends"><img class="friends-sidepanel-link-icon" src="Images/Friends/icon.png">All Friends</a>
+        <a class="friends-sidepanel-link" href="/friends"><img class="friends-sidepanel-link-icon" src="Images/Friends/icon.png">Birthdays</a>
+        <a class="friends-sidepanel-link" href="/friends"><img class="friends-sidepanel-link-icon" src="Images/Friends/icon.png">Custom Lists</a>
+    </div>
+    <div class="friends-main">
+        <div class="friends-main-title">Friend Requests</div>
+        <div class="friends-main-friendcardcontainer">
+            @{
+                for(var i = 1; i <= 8; i++)
+                {
+                    await Html.RenderPartialAsync("_FriendCard.cshtml");
+                }
+            }
+            @* @await Html.PartialAsync("_FriendCard.cshtml") *@
+        </div>
+    </div>
+</div>

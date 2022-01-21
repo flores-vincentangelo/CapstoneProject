@@ -7,6 +7,7 @@ public class HomeController: Controller
     [Route("/")]
     public IActionResult GetHome()
     {
+        ViewData["Title"] = "";
         return View("/Views/Home/Home.cshtml");
     }
 }

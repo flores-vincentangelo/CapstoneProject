@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1"/>
+    <title>@ViewData["Title"]Pastebook </title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="./Styles/_Layout/_Layout.css">
+    <script src="Scripts/_Layout.js"></script>
+
+    
+</head>
+
+<body class="layout">
+    <div class="layout-header">
+        <div class="layout-header-left">
+            <a href="/">logo</a>
+            <form action="/" class="layout-header-left-searchform">
+                <input type="text" placeholder="Search Pastebook" class="layout-header-left-searchform-input"/>
+            </form>
+            <div class="layout-header-left-searchpanel">
+                <div  class="layout-header-left-searchpanel-recent">Recent Searches</div>
+                <div class="layout-header-left-searchpanel-searchresults"></div>
+            </div>
+        </div>
+        <div class="layout-header-middle">
+            <a href="/">Home</a>
+        </div>
+        <div class="layout-header-right">
+            <button>Profile</button>
+            <button>messages</button>
+            <button>notifications</button>
+        </div>
+    </div>
+
+    @RenderBody()
+
+</body>
+</html>

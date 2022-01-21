@@ -1,129 +1,74 @@
-$grey: #e9ebee;
-$blue: #1877f2;
+@import '../Shared/colors';
+@import '../Shared/header';
 
-$header-height: 70px;
-$padding: 5px;
-$header-total-height: $padding + $header-height;
+.home-body{
+    position: relative;
+    top: $header-total-height;
 
-.home{
+    display: flex;
+    flex-direction: row;
 
-    background-color: $grey;
+    width: 100%;
 
-    &-header{
+    $leftsidepanel-width: 25%;
+    $rightsidepanel-wdith: 25%;
+    
+
+    &-leftsidepanel{
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        min-height: auto;
-        
-        height: $header-height;
-        z-index: 1;
-        
-        padding: $padding;
-
-        background-color: white;
+        width: $leftsidepanel-width;
 
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+        flex-direction: column;
+
+        overflow: auto;
+        height: 100vh;
+    }
+
+    &-timeline{
+        position: relative;
+        left: $leftsidepanel-width;
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
         align-items: center;
 
-        
+        &-post{
+            width: 90%;
+            background-color: white;
 
-        &-left{
-            display: flex;
-            flex-direction: row;
+            border-radius: 10px;
+            $margin-top-bottom: 10px;
+            margin: $margin-top-bottom 0 $margin-top-bottom 0;
+            border: 1px solid grey;
+            padding-top: 20px;
+            $padding-left-right: 10px;
+            padding-left: $padding-left-right;
+            padding-right: $padding-left-right;
 
-            &-searchform{
-                z-index: 2;
-                &-input{
-                    background-color: red;
-                    
-                }
+            & > div{
+                width: auto;
             }
 
-            &-searchpanel{
-                display: block;
-                position: fixed;
-                background-color: white;
-                z-index: 1;
-                padding-top: 30px;
-                height: 400px;
-                width: 300px;
+            &-buttons{
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
 
+                & button{
+                    width: 50%;
+                }
             }
         }
     }
 
-    &-body{
-        position: relative;
-        top: $header-total-height;
-
-        display: flex;
-        flex-direction: row;
-
-        width: 100%;
-
-        $leftsidepanel-width: 25%;
-        $rightsidepanel-wdith: 25%;
-        
-
-        &-leftsidepanel{
-            position: fixed;
-            width: $leftsidepanel-width;
-
-            display: flex;
-            flex-direction: column;
-
-            overflow: auto;
-            height: 100vh;
-        }
-
-        &-timeline{
-            position: relative;
-            left: $leftsidepanel-width;
-            width: 50%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            align-items: center;
-
-            &-post{
-                width: 90%;
-                background-color: white;
-
-                border-radius: 10px;
-                $margin-top-bottom: 10px;
-                margin: $margin-top-bottom 0 $margin-top-bottom 0;
-                border: 1px solid grey;
-                padding-top: 20px;
-                $padding-left-right: 10px;
-                padding-left: $padding-left-right;
-                padding-right: $padding-left-right;
-
-                & > div{
-                    width: auto;
-                }
-
-                &-buttons{
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: center;
-
-                    & button{
-                        width: 50%;
-                    }
-                }
-            }
-        }
-
-        &-rightsidepanel{
-            position: fixed;
-            right: 0;
-            width: $rightsidepanel-wdith;
-            overflow: auto;
-            height: 100vh;
-        }
+    &-rightsidepanel{
+        position: fixed;
+        right: 0;
+        width: $rightsidepanel-wdith;
+        overflow: auto;
+        height: 100vh;
     }
-
 }
+

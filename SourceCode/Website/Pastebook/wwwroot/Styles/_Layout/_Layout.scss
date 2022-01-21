@@ -1,0 +1,57 @@
+// @import '../Shared/colors';
+// @import '../Shared/header';
+@import '../Shared/import';
+
+.layout{
+
+    background-color: $grey;
+    font-family: Arial, Helvetica, sans-serif;
+
+    &-header{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        min-height: auto;
+        
+        height: $header-height;
+        z-index: 1;
+        
+        padding: $padding;
+
+        background-color: white;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        box-shadow: $box-shadow;
+
+        
+
+        &-left{
+            display: flex;
+            flex-direction: row;
+
+            &-searchform{
+                z-index: 2;
+                &-input{
+                    background-color: red;
+                    
+                }
+            }
+
+            &-searchpanel{
+                display: none;
+                position: fixed;
+                background-color: white;
+                z-index: 1;
+                padding-top: 30px;
+                height: 400px;
+                width: 300px;
+
+            }
+        }
+    }
+}

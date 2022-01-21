@@ -1,0 +1,41 @@
+.layout {
+  background-color: #e9ebee;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.layout-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: auto;
+  height: 70px;
+  z-index: 1;
+  padding: 5px;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0.1px 10px 2px gray;
+}
+.layout-header-left {
+  display: flex;
+  flex-direction: row;
+}
+.layout-header-left-searchform {
+  z-index: 2;
+}
+.layout-header-left-searchform-input {
+  background-color: red;
+}
+.layout-header-left-searchpanel {
+  display: none;
+  position: fixed;
+  background-color: white;
+  z-index: 1;
+  padding-top: 30px;
+  height: 400px;
+  width: 300px;
+}
+
+/*# sourceMappingURL=_Layout.css.map */
