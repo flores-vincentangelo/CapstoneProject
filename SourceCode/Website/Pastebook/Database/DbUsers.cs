@@ -72,7 +72,11 @@ public class DbUsers
                 {
                     while(reader.Read())
                     {
-                        maxDuplicate = reader.GetInt32(0);
+                        if(reader.IsDBNull(0))return maxDuplicate;
+                        else 
+                        {
+                            maxDuplicate = reader.GetInt32(0);
+                        }
                     }
                 }
             }
