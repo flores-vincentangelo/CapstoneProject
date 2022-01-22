@@ -1,0 +1,15 @@
+.profile-ext-container {
+    background: #f1f1f1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+}
+
+.ext-container {
+    border-radius: 10px;
+    background: #ffffff;
+    margin: 0 12% 2%;
+    padding: 10px 15px;
+}

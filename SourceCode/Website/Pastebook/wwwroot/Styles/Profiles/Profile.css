@@ -1,0 +1,157 @@
+.profile-container {
+    display: flex;
+    margin: 12% 5% 2%;
+    justify-content: center;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-cover-container {
+    width: 100%;
+    height: 250px;
+    background: #1877f2;
+    position: absolute;
+    top: -150px;
+    z-index: -1;
+    border-radius: 10px;
+}
+
+.profile-photo-container {
+
+}
+
+.photo-edit-btn:hover,
+.photo-edit-btn:focus {
+    cursor: pointer;
+}
+
+.profile-photo-edit-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    /* padding-top: 100px; */
+    left: auto;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.modal-container {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 12px;
+    width: 40%;
+}
+.profile-photo-title-modal{
+    text-align: center;
+}
+#profile-photo-close-modal {
+    color: #aaaaaa;
+    float: right;
+    font-size: 36px;
+    font-weight: bold;
+}
+#profile-photo-close-modal:hover,
+#profile-photo-close-modal:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+.profile-photo-modal {
+    border: #000 2px solid;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+#profile-photo-modal-img {
+    display: block;
+    margin: auto;
+    height: 168px;
+    width: 168px;
+    border-radius: 50%;
+}
+.profile-photo-btn{
+    width: 50%;
+}
+#photo-save-btn {
+    float: right;
+}
+#photo-cancel-btn {
+    float: left;
+}
+
+#profile-photo-img {
+    height: 168px;
+    width: 168px;
+    border-radius: 50%;
+    border: 5px solid #ffffff;
+}
+
+.profile-name-container {
+
+}
+
+.profile-about-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+}
+#profile-about-text {
+    word-break: break-word;
+    text-align: center;
+}
+
+.profile-about-btn {
+    width: 49%;
+    margin: 10px 0 0;
+    padding: 0 10px;
+}
+.profile-about-btn:hover,
+.profile-about-btn:focus {
+    cursor: pointer;
+}
+
+.profile-about-readonly {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.profile-about-edit {
+    display: none;
+    flex-direction: column;
+}
+
+.form-edit-about {
+    box-sizing: border-box;
+    overflow-y: auto;
+    text-align: center;
+    border-radius: 6px;
+    width: 250px;
+    height: 100px;
+    resize: none;
+    font: inherit;
+}
+
+.profile-tabs-container {
+    width: 100%;
+}
+.profile-btn-container {
+    margin: 15px 10px;
+}
+.ext-btn {
+    width: 100px;
+    font-size: inherit;
+}
+.ext-btn:hover,
+.ext-btn:focus {
+    cursor: pointer;
+}
+
+
+
+
