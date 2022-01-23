@@ -1,5 +1,7 @@
 namespace Database;
 using System.Data.SqlClient;
+using System.Net.Mail; 
+using System.Text; 
 using Models;
 
 public class DbUsers
@@ -72,7 +74,7 @@ public class DbUsers
                 {
                     while(reader.Read())
                     {
-                        if(reader.IsDBNull(0))return maxDuplicate;
+                        if(reader.IsDBNull(0)) return maxDuplicate;
                         else 
                         {
                             maxDuplicate = reader.GetInt32(0);
@@ -82,5 +84,29 @@ public class DbUsers
             }
         }
         return maxDuplicate;
+    }
+
+    public static bool SendVerificationEmail(UserModel user) {
+        string? to = user.EmailAddress;
+        string from = "pastebooktest@gmail.com";
+        MailMessage message = new MailMessage(from, to);
+        var firstName = user.FirstName;
+        string mailBody = $@"Welcome {firstName} to Pastebook!";
+        message.Subject = "Registration successful!";
+        message.Body = mailBody;
+        message.BodyEncoding = Encoding.UTF8;
+        message.IsBodyHtml = true;
+        SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+        System.Net.NetworkCredential basicCredential1 = new System.Net.NetworkCredential("pastebooktest", "pasteb00kt3st");
+        client.EnableSsl = true;
+        client.UseDefaultCredentials = false;
+        client.Credentials = basicCredential1;
+        try {
+            client.Send(message);
+            return true;
+        }
+        catch (Exception e) {
+            throw e;
+        }
     }
 }

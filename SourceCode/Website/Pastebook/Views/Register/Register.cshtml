@@ -30,10 +30,10 @@
                     <input type="text" placeholder="Email address" name="EmailAddress" required>
                 </div>
                 <div class="register-container-form-field">
-                    <input type="text" placeholder="Mobile Number" name="MobileNumber" onkeyup="numbersInput(this)">
+                    <input type="text" placeholder="Mobile Number" name="MobileNumber" onkeyup="numbersInput(this)" onkeydown="mobileNumLimit(this)">
                 </div>
                 <div class="register-container-form-field">
-                    <input type="password" placeholder="New Password" name="Password" required class="password">
+                    <input type="password" placeholder="New Password" name="Password" required class="password" onkeydown="passwordLimit(this)">
                 </div>
                 <div class="register-container-form-field">
                     <input type="password" placeholder="Confirm Password" name="ConfirmPassword" required class="confirm-password">
@@ -44,7 +44,8 @@
                 </div>
                 <div class="register-container-form-field">
                     <label>Gender</label>
-                    <select name="Gender" required>
+                    <select name="Gender">
+                        <option>---</option>
                         <option>Female</option>
                         <option>Male</option>
                     </select>
