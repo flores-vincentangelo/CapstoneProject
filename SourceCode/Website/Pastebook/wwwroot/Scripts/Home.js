@@ -19,6 +19,7 @@ $(document).ready(function () {
 
     $("[href='/friends']").click(function (e) { 
         // e.preventDefault();
+        window.location.href = "/friends";
         alert("hi");
     });
 

@@ -13,12 +13,14 @@ public class ConfigureController: Controller
             DbTables.CreateUsersTable();
             DbTables.CreateSessionsTable();
             DbTables.CreateProfilesTable(); // added by JP
+            DbTables.CreateFriendsTable(); //added by Vincent
             return Ok("All Tables are Created!");
         }
         else if (config == "DropTables") {
             DbTables.DropUsersTable();
             DbTables.DropSessionsTable();
             DbTables.DropProfilesTable(); // added by JP
+            DbTables.DropFriendsTable(); //added by Vincent
             return Ok("All Tables are Dropped");
         }
         else {
