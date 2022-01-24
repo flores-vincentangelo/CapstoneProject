@@ -53,13 +53,30 @@ function EditProfilePicture() {
             result = e.target.result;
             $('#profile-photo-img').attr('src', result);
             const formData = {
-                ProfilePicture: result
+                Photo: result
             }
             var data = JSON.stringify(formData);
             modifyProfile(event, data);
         };
         
     });
+
+    // When the user clicks on the "Choose file" button
+    $("#myFile").change(function() {
+        if (this.files && this.files[0] && this.files[0].type.includes("image")) { 
+            var reader = new FileReader();
+            reader.onload = imageIsLoaded;
+            reader.readAsDataURL(this.files[0]);
+        }
+        else {
+            alert("This is not valid image file");
+        }
+    });
+    // Change photo
+    function imageIsLoaded(e) {
+        result = e.target.result;
+        $('#profile-photo-modal-img').attr('src', result);
+    };
 }
 
 function EditAboutMe() {
@@ -107,7 +124,7 @@ async function modifyProfile(event, jsonData) {
         body: jsonData
     });
     if(response.status == 200) {
-        alert(await response.text());
+        alert("Profile modified successfully!");
     }
 }
 
