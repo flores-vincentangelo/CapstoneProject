@@ -121,10 +121,28 @@ function showProfileExt() {
     $('#ext-about-btn').click(() => {
         $('#profile-ext-about').css("display", "flex");
         $('#profile-ext-posts').css("display", "none");
+        $('#profile-ext-friends').css("display", "none");
+        $('#profile-ext-album').css("display", "none");
     });
 
     $('#ext-posts-btn').click(() => {
         $('#profile-ext-about').css("display", "none");
         $('#profile-ext-posts').css("display", "flex");
+        $('#profile-ext-friends').css("display", "none");
+        $('#profile-ext-album').css("display", "none");
+    });
+
+    $('#ext-friends-btn').click(() => {
+        $('#profile-ext-about').css("display", "none");
+        $('#profile-ext-posts').css("display", "none");
+        $('#profile-ext-friends').css("display", "flex");
+        $('#profile-ext-album').css("display", "none");
+    });
+
+    $('#ext-album-btn').click(() => {
+        $('#profile-ext-about').css("display", "none");
+        $('#profile-ext-posts').css("display", "none");
+        $('#profile-ext-friends').css("display", "none");
+        $('#profile-ext-album').css("display", "flex");
     });
 }
