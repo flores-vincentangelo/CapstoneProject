@@ -39,7 +39,7 @@ public class DbUsers
         }
     }
 
-    public static UserModel? GetInformationById(string id)
+    public static UserModel? GetInformationById(string profileLink)
     {
         UserModel user = new UserModel();
         using (var db = new SqlConnection(DB_CONNECTION_STRING))
@@ -47,9 +47,10 @@ public class DbUsers
             db.Open();
             using (var cmd = db.CreateCommand())
             {
-                cmd.CommandText = "SELECT * FROM Users WHERE Id = @Id;";
-                cmd.Parameters.AddWithValue("@Id", id);
+                cmd.CommandText = "SELECT * FROM Users WHERE ProfileLink = @ProfileLink;";
+                cmd.Parameters.AddWithValue("@ProfileLink", profileLink);
                 var reader = cmd.ExecuteReader();
+                if(!reader.HasRows) return null;
                 while(reader.Read()) {
                     user.UserId = reader.GetInt32(0);
                     user.FirstName = reader.GetString(1);
@@ -68,22 +69,22 @@ public class DbUsers
         return user;
     }
 
-    public static void DeleteUser(string id)
+    public static void DeleteUser(string profileLink)
     {
         using (var db = new SqlConnection(DB_CONNECTION_STRING))
         {
             db.Open();
             using (var cmd = db.CreateCommand())
             {
-                cmd.CommandText = $"DELETE FROM Users WHERE Id = @Id;";
-                cmd.Parameters.AddWithValue("@Id", id);
+                cmd.CommandText = $"DELETE FROM Users WHERE ProfileLink = @ProfileLink;";
+                cmd.Parameters.AddWithValue("@ProfileLink", profileLink);
                 cmd.ExecuteNonQuery();
             }
 
         }
     }
 
-    public static void ModifyInformation(string id, UserModel user)
+    public static void ModifyInformation(string profileLink, UserModel user)
     {
         using (var db = new SqlConnection(DB_CONNECTION_STRING))
         {
@@ -94,42 +95,42 @@ public class DbUsers
                 {
                     cmd.CommandText = "UPDATE Users SET FirstName = @FirstName WHERE Id = @Id;";
                     cmd.Parameters.AddWithValue("@FirstName", user.FirstName);
-                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.Parameters.AddWithValue("@ProfileLink", profileLink);
                     cmd.ExecuteNonQuery();
                 }
                 if(!String.IsNullOrEmpty(user.LastName))
                 {
                     cmd.CommandText = "UPDATE Users SET LastName = @LastName WHERE Id = @Id;";
                     cmd.Parameters.AddWithValue("@LastName", user.LastName);
-                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.Parameters.AddWithValue("@ProfileLink", profileLink);
                     cmd.ExecuteNonQuery();
                 }
                 if(!String.IsNullOrEmpty(user.EmailAddress))
                 {
                     cmd.CommandText = "UPDATE Users SET EmailAddress = @EmailAddress WHERE Id = @Id;";
                     cmd.Parameters.AddWithValue("@EmailAddress", user.EmailAddress);
-                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.Parameters.AddWithValue("@ProfileLink", profileLink);
                     cmd.ExecuteNonQuery();
                 }
                 if(!String.IsNullOrEmpty(user.MobileNumber))
                 {
                     cmd.CommandText = "UPDATE Users SET MobileNumber = @MobileNumber WHERE Id = @Id;";
                     cmd.Parameters.AddWithValue("@MobileNumber", user.MobileNumber);
-                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.Parameters.AddWithValue("@ProfileLink", profileLink);
                     cmd.ExecuteNonQuery();
                 }
                 if(!String.IsNullOrEmpty(user.Password))
                 {
                     cmd.CommandText = "UPDATE Users SET Password = @Password WHERE Id = @Id;";
                     cmd.Parameters.AddWithValue("@Password", BCrypt.Net.BCrypt.HashPassword(user.Password));
-                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.Parameters.AddWithValue("@ProfileLink", profileLink);
                     cmd.ExecuteNonQuery();
                 }
                 if(!String.IsNullOrEmpty(user.Gender))
                 {
                     cmd.CommandText = "UPDATE Users SET Gender = @Gender WHERE Id = @Id;";
                     cmd.Parameters.AddWithValue("@Gender", user.Gender);
-                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.Parameters.AddWithValue("@ProfileLink", profileLink);
                     cmd.ExecuteNonQuery();
                 }
             }
