@@ -1,5 +1,6 @@
 namespace Database;
 using System.Data.SqlClient;
+using Models;
 
 public class DbFriends
 {
@@ -25,4 +26,42 @@ public class DbFriends
             }
         }
     }
+
+    public static void SendFriendRequest(FriendsModel friendsModel)
+    {
+        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var cmd = db.CreateCommand())
+            {
+                cmd.CommandText = 
+                    @"UPDATE Friends 
+                    SET FriendRequests = @friendrequests 
+                    WHERE UserEmail = @email;";
+                cmd.Parameters.AddWithValue("@friendrequests",friendsModel.FriendRequests);
+                cmd.Parameters.AddWithValue("@email",friendsModel.UserEmail);
+                cmd.ExecuteNonQuery();
+            }
+        }
+    }
+
+    public static void AddAsFriend(FriendsModel friendsModel)
+    {
+        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var cmd = db.CreateCommand())
+            {
+                cmd.CommandText =
+                    @"UPDATE Friends
+                    SET FriendsList = @friendslist
+                    WHERE UserEmail = @email;";
+                cmd.Parameters.AddWithValue("@friendslist",friendsModel.FriendsList);
+                cmd.Parameters.AddWithValue("@email",friendsModel.UserEmail);
+                cmd.ExecuteNonQuery();
+            }
+        }
+    }
+
+
 }

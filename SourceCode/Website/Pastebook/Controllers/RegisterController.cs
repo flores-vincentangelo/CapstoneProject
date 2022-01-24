@@ -61,6 +61,7 @@ public class RegisterController : Controller
         profile.About = "Write something about me";
         profile.Photo = "";
         profile.Cover = "";
+        DbFriends.InitializeFriends(model.EmailAddress);
         DbProfiles.AddProfile(profile);
         DbUsers.SendVerificationEmail(model);
         return View("Views/Register/RegisteredSuccess.cshtml");

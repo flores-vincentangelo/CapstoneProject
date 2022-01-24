@@ -45,7 +45,6 @@
   display: none;
   position: fixed;
   background-color: white;
-  z-index: 5;
   padding-top: 30px;
   height: 400px;
   width: 300px;
