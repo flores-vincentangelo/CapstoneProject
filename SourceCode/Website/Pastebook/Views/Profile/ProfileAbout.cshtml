@@ -1,3 +1,5 @@
+@model Models.UserModel
+
 <link rel="stylesheet" type="text/css" href="./Styles/Profiles/ProfileExt.css">
 
 <script>
@@ -8,6 +10,14 @@
 <div class="profile-ext-container">
     <h3>About goes here</h3>
     <div class="ext-container">
+        Profilename: @Model.ProfileName<br>
+        Email Address: @Model.EmailAddress<br>
+        First Name: @Model.FirstName<br>
+        Last Name: @Model.LastName<br>
+        Birthday: @Model.Birthday<br>
+        Mobile Number: @Model.MobileNumber<br>
+        Gender: @Model.Gender<br>
+        About Me: @Model.About<br>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis dolore hic nihil, fugiat accusantium molestiae perferendis adipisci totam corporis possimus nesciunt quaerat magni repudiandae excepturi exercitationem non architecto eos.
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo numquam, amet exercitationem a magni consectetur quidem, velit eius aperiam maxime, provident et adipisci facere quibusdam veniam labore repudiandae ad temporibus.
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati eaque tenetur aliquid nemo excepturi. Eum iusto, itaque minus porro, doloribus magni illum adipisci atque in sint quaerat ratione, incidunt soluta!
