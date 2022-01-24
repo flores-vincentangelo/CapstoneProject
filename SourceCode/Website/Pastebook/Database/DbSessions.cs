@@ -68,7 +68,7 @@ public class DbSessions
        return null;
     }
 
-    public static SessionsModel GetSessionById(string Id)
+    public static SessionsModel? GetSessionById(string Id)
     {
         SessionsModel session = new SessionsModel();
         using(var db = new SqlConnection(DB_CONNECTION_STRING))
@@ -79,12 +79,17 @@ public class DbSessions
                 command.CommandText = "SELECT * FROM Sessions WHERE Id = @Id;";
                 command.Parameters.AddWithValue("@Id",Id);
                 var reader = command.ExecuteReader();
-                while(reader.Read())
+                if(!reader.HasRows) return null;
+                else
                 {
-                    session.Id = reader.GetString(0);
-                    session.EmailAddress = reader.GetString(1);
-                    session.LastLogin = reader.GetInt64(2);
+                    while(reader.Read())
+                    {
+                        session.Id = reader.GetString(0);
+                        session.EmailAddress = reader.GetString(1);
+                        session.LastLogin = reader.GetInt64(2);
+                    }
                 }
+                
             }
         }
         return session;

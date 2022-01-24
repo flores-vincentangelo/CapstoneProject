@@ -1,5 +1,7 @@
 namespace Controllers;
 using Microsoft.AspNetCore.Mvc;
+using Database;
+using Models;
 
 public class HomeController: Controller
 {
@@ -8,6 +10,19 @@ public class HomeController: Controller
     public IActionResult GetHome()
     {
         ViewData["Title"] = "";
-        return View("/Views/Home/Home.cshtml");
+        string? cookieEmail = HttpContext.Request.Cookies["email"];
+        string? cookieSessionId = HttpContext.Request.Cookies["sessionId"];
+        if(cookieSessionId != null)
+        {
+            SessionsModel? sessionModel = DbSessions.GetSessionById(cookieSessionId);
+            if(sessionModel != null)
+            {
+                return View("/Views/Home/Home.cshtml");
+            }
+        }
+
+        return RedirectToAction("doLoginAction", "Login");
+        // return Ok($"no session found {cookieEmail} {cookieSessionId}");
+        // return RedirectToRoute("/login");
     }
 }
