@@ -115,7 +115,7 @@ function EditAboutMe() {
 
 async function modifyProfile(event, jsonData) {
     event.preventDefault();
-    const link = localStorage.getItem('profileLink');
+    const link = localStorage.getItem('profileId');
     const response = await fetch(`/${link}`, {
         method: 'PATCH',
         headers: {

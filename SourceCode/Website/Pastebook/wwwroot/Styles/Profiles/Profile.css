@@ -105,7 +105,9 @@
     word-break: break-word;
     text-align: center;
 }
-
+#about-edit-btn {
+    width: 150px;
+}
 .profile-about-btn {
     width: 49%;
     margin: 10px 0 0;
