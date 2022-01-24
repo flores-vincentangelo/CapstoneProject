@@ -39,6 +39,103 @@ public class DbUsers
         }
     }
 
+    public static UserModel? GetInformationById(string id)
+    {
+        UserModel user = new UserModel();
+        using (var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using (var cmd = db.CreateCommand())
+            {
+                cmd.CommandText = "SELECT * FROM Users WHERE Id = @Id;";
+                cmd.Parameters.AddWithValue("@Id", id);
+                var reader = cmd.ExecuteReader();
+                while(reader.Read()) {
+                    user.UserId = reader.GetInt32(0);
+                    user.FirstName = reader.GetString(1);
+                    user.LastName = reader.GetString(2);
+                    user.EmailAddress = reader.GetString(3);
+                    user.MobileNumber = reader.GetString(4);
+                    user.Password = reader.GetString(5);
+                    user.Birthday = reader.GetInt64(6);
+                    user.Gender = reader.GetString(7);
+                    user.FullName = reader.GetString(8);
+                    user.Duplicate = reader.GetInt32(9);
+                    user.ProfileLink = reader.GetString(10);
+                }
+            }
+        }
+        return user;
+    }
+
+    public static void DeleteUser(string id)
+    {
+        using (var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using (var cmd = db.CreateCommand())
+            {
+                cmd.CommandText = $"DELETE FROM Users WHERE Id = @Id;";
+                cmd.Parameters.AddWithValue("@Id", id);
+                cmd.ExecuteNonQuery();
+            }
+
+        }
+    }
+
+    public static void ModifyInformation(string id, UserModel user)
+    {
+        using (var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using (var cmd = db.CreateCommand())
+            {
+                if(!String.IsNullOrEmpty(user.FirstName))
+                {
+                    cmd.CommandText = "UPDATE Users SET FirstName = @FirstName WHERE Id = @Id;";
+                    cmd.Parameters.AddWithValue("@FirstName", user.FirstName);
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.ExecuteNonQuery();
+                }
+                if(!String.IsNullOrEmpty(user.LastName))
+                {
+                    cmd.CommandText = "UPDATE Users SET LastName = @LastName WHERE Id = @Id;";
+                    cmd.Parameters.AddWithValue("@LastName", user.LastName);
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.ExecuteNonQuery();
+                }
+                if(!String.IsNullOrEmpty(user.EmailAddress))
+                {
+                    cmd.CommandText = "UPDATE Users SET EmailAddress = @EmailAddress WHERE Id = @Id;";
+                    cmd.Parameters.AddWithValue("@EmailAddress", user.EmailAddress);
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.ExecuteNonQuery();
+                }
+                if(!String.IsNullOrEmpty(user.MobileNumber))
+                {
+                    cmd.CommandText = "UPDATE Users SET MobileNumber = @MobileNumber WHERE Id = @Id;";
+                    cmd.Parameters.AddWithValue("@MobileNumber", user.MobileNumber);
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.ExecuteNonQuery();
+                }
+                if(!String.IsNullOrEmpty(user.Password))
+                {
+                    cmd.CommandText = "UPDATE Users SET Password = @Password WHERE Id = @Id;";
+                    cmd.Parameters.AddWithValue("@Password", BCrypt.Net.BCrypt.HashPassword(user.Password));
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.ExecuteNonQuery();
+                }
+                if(!String.IsNullOrEmpty(user.Gender))
+                {
+                    cmd.CommandText = "UPDATE Users SET Gender = @Gender WHERE Id = @Id;";
+                    cmd.Parameters.AddWithValue("@Gender", user.Gender);
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+    }
+
     public static bool checkEmailAddress(string email)
     {
         var isUsed = false;
