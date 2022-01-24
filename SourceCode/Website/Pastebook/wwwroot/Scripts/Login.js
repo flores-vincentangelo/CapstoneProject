@@ -27,10 +27,10 @@ async function addSession(userCredentials) {
         body: JSON.stringify(userCredentials)
     });
         if (response.status == 200) {
-            localStorage.setItem('currentUserStorage', userCredentials.EmailAddress);
+            document.cookie = 'email=' + userCredentials.EmailAddress;
             const data = await response.json();
             const sessionId = data.id;
-            localStorage.setItem('sessionIdStorage', sessionId);
+            document.cookie = 'sessionId=' +  sessionId;
             window.location.replace("/");
         }
         else {

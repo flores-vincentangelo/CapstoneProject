@@ -1,0 +1,34 @@
+@model Models.UserModel
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" type="text/css" href="./Styles/Settings/Settings.css">
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        localStorage.setItem('profileId', "@Model.ProfileLink");  
+    </script>    
+    <script src="./Scripts/Settings.js"></script>
+    
+<body>
+    <div class="user-container">
+        <div class="user-firstname-container">
+            <div class="user-firstname-readonly">
+                <h2 id="user-firstname-text">@Model.FirstName</h2>
+                <button class="user-firstname-btn" id="firstname-edit-btn">Edit</button>
+            </div>
+            
+            <div class="user-firstname-edit">
+                <form class="form-edit" id="form-user-firstname">
+                    <textarea class="form-edit-firstname" id="form-edit-firstname" name="FirstName" value=@Model.FirstName></textarea>
+                </form>
+                <div class="user-firstname-btn-holder">
+                    <button class="user-firstname-btn" id="firstname-cancel-btn">Cancel</button>
+                    <button class="user-firstname-btn" id="firstname-save-btn">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

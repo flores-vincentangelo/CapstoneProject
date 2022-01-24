@@ -53,17 +53,17 @@ public class RegisterController : Controller
         model.Duplicate = duplicate;
         model.ProfileLink= model.FullName + model.Duplicate;
         DbUsers.InsertUser(model);
-        // Added by JP
-        // Add new profile upon registration of new user
+        DbUsers.SendVerificationEmail(model);
         var profile = new ProfileModel();
         profile.Id = model.ProfileLink;
         profile.FullName = model.FirstName + " " + model.LastName;
         profile.About = "Write something about me";
-        profile.Photo = "";
+        byte[] imageArray = System.IO.File.ReadAllBytes("./wwwroot/Images/img_avatar.png"); // added by JP
+        string base64ImageRepresentation = Convert.ToBase64String(imageArray); // added by JP
+        profile.Photo = "data:image/png;base64," + base64ImageRepresentation; // added by JP
         profile.Cover = "";
         DbFriends.InitializeFriends(model.EmailAddress);
         DbProfiles.AddProfile(profile);
-        DbUsers.SendVerificationEmail(model);
         return View("Views/Register/RegisteredSuccess.cshtml");
     }
 }
