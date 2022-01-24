@@ -21,8 +21,8 @@ public class DbUsers
             using (var cmd = db.CreateCommand())
             {
                 cmd.CommandText =
-                    @"INSERT INTO Users (FirstName, LastName, EmailAddress, MobileNumber, Password, Birthday, Gender, FullName, Duplicate, ProfileLink, About, Photo, Cover) 
-                    VALUES (@FirstName, @LastName, @EmailAddress, @MobileNumber, @Password, @Birthday, @Gender, @FullName, @Duplicate, @ProfileLink, @About, @Photo, @Cover);";
+                    @"INSERT INTO Users (FirstName, LastName, EmailAddress, MobileNumber, Password, Birthday, Gender, FullName, Duplicate, ProfileLink, ProfileName, About, Photo, Cover) 
+                    VALUES (@FirstName, @LastName, @EmailAddress, @MobileNumber, @Password, @Birthday, @Gender, @FullName, @Duplicate, @ProfileLink, @ProfileName, @About, @Photo, @Cover);";
                 cmd.Parameters.AddWithValue("@FirstName", user.FirstName);
                 cmd.Parameters.AddWithValue("@LastName", user.LastName);
                 cmd.Parameters.AddWithValue("@EmailAddress", user.EmailAddress);
@@ -33,6 +33,7 @@ public class DbUsers
                 cmd.Parameters.AddWithValue("@FullName", user.FullName);
                 cmd.Parameters.AddWithValue("@Duplicate", user.Duplicate);
                 cmd.Parameters.AddWithValue("@ProfileLink", user.ProfileLink);
+                cmd.Parameters.AddWithValue("@ProfileName", user.ProfileName);
                 cmd.Parameters.AddWithValue("@About", user.About);
                 cmd.Parameters.AddWithValue("@Photo", user.Photo);
                 cmd.Parameters.AddWithValue("@Cover", user.Cover);
@@ -66,9 +67,10 @@ public class DbUsers
                     user.FullName = reader.GetString(8);
                     user.Duplicate = reader.GetInt32(9);
                     user.ProfileLink = reader.GetString(10);
-                    user.About = reader.GetString(11);
-                    user.Photo = reader.GetString(12);
-                    user.Cover = reader.GetString(13);
+                    user.ProfileName = reader.GetString(11);
+                    user.About = reader.GetString(12);
+                    user.Photo = reader.GetString(13);
+                    user.Cover = reader.GetString(14);
                 }
             }
         }
@@ -82,7 +84,7 @@ public class DbUsers
             db.Open();
             using (var cmd = db.CreateCommand())
             {
-                cmd.CommandText = $"DELETE FROM Users WHERE ProfileLink = @ProfileLink;";
+                cmd.CommandText = "DELETE FROM Users WHERE ProfileLink = @ProfileLink;";
                 cmd.Parameters.AddWithValue("@ProfileLink", profileLink);
                 cmd.ExecuteNonQuery();
             }
@@ -136,6 +138,13 @@ public class DbUsers
                 {
                     cmd.CommandText = "UPDATE Users SET Gender = @Gender WHERE ProfileLink = @ProfileLink;";
                     cmd.Parameters.AddWithValue("@Gender", user.Gender);
+                    cmd.Parameters.AddWithValue("@ProfileLink", profileLink);
+                    cmd.ExecuteNonQuery();
+                }
+                if(!String.IsNullOrEmpty(user.ProfileName))
+                {
+                    cmd.CommandText = "UPDATE Users SET ProfileName = @ProfileName WHERE ProfileLink = @ProfileLink;";
+                    cmd.Parameters.AddWithValue("@ProfileName", user.ProfileName);
                     cmd.Parameters.AddWithValue("@ProfileLink", profileLink);
                     cmd.ExecuteNonQuery();
                 }

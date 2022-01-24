@@ -1,11 +1,4 @@
-@model Models.ProfileModel
-@{
-    var profilePicture = "../Images/img_avatar.png";
-    if(Model !=null && Model.Photo != "") {
-        profilePicture = Model.Photo;
-    }
-}
-
+@model Models.UserModel
 
 <head>
     <!-- Styles  -->
@@ -15,8 +8,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         // This is temporary
-        // Need to set profileId in localstorage at currentProfile.profileId
-        localStorage.setItem('profileId', "@Model.Id");  
+        // Need to set profileLink in localstorage at currentProfile.profileLink
+        localStorage.setItem('profileLink', "@Model.ProfileLink");  
     </script>    
     <script src="./Scripts/Profile.js"></script>
 
@@ -29,7 +22,7 @@
     </div>
 
     <div class="profile-photo-container">
-        <img id="profile-photo-img" src=@profilePicture >
+        <img id="profile-photo-img" src=@Model.Photo >
     </div>
     <button class="photo-edit-btn" id="photo-edit-btn">Change photo</button>
     <div class="profile-photo-edit-modal" id="profile-photo-edit-modal">
@@ -38,10 +31,10 @@
             <h2 class="profile-photo-title-modal">Update Profile Picture</h2>
             <hr>
             <form class="form-edit" id="form-profile-picture">
-                <input type="file" id="myFile" name="ProfilePicture" accept="image/*" data-type='image' >
+                <input type="file" id="myFile" name="Photo" accept="image/*" data-type='image' >
             </form>
             <div class="profile-photo-modal">
-                <img id="profile-photo-modal-img" src=@profilePicture >
+                <img id="profile-photo-modal-img" src=@Model.Photo >
             </div>
             <button class="profile-photo-btn" id="photo-save-btn">Save</button>
             <button class="profile-photo-btn" id="photo-cancel-btn">Cancel</button>
@@ -49,7 +42,7 @@
     </div>
 
     <div class="profile-name-container">
-        <h1>@Model.FullName</h1>
+        <h1>@Model.ProfileName</h1>
     </div>
 
     <div class="profile-about-container">
@@ -81,7 +74,7 @@
             <a class="ext-btn" id="ext-posts-btn" href="/@Model.Id/posts">Posts</a>
             <a class="ext-btn" id="ext-friends-btn" href="/@Model.Id/friends">Friends</a>
             <a class="ext-btn" id="ext-album-btn" href="/@Model.Id/photos">Photos</a> *@
-            
+
         </div>
     </div>
 </div>

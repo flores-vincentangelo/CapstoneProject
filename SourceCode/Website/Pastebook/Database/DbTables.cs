@@ -30,6 +30,10 @@ public class DbTables
                     FullName VARCHAR (255),
                     Duplicate INTEGER,
                     ProfileLink VARCHAR (255),
+                    ProfileName VARCHAR (255),
+                    About VARCHAR(MAX),
+                    Photo VARCHAR(MAX),
+                    Cover VARCHAR(MAX)
                     );";
                 command.ExecuteNonQuery();
                 Console.WriteLine("Users Table created successfully!");

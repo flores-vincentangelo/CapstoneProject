@@ -13,6 +13,7 @@ public class UserModel
     public string? FullName { get; set; }
     public int Duplicate { get; set; }
     public string? ProfileLink { get; set; }
+    public string? ProfileName { get; set; }
     public string? About {get;set;}
     public string? Photo {get;set;}
     public string? Cover {get;set;}

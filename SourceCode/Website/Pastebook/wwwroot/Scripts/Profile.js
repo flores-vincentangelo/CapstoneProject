@@ -104,7 +104,7 @@ function EditAboutMe() {
 
 async function modifyProfile(event, jsonData) {
     event.preventDefault();
-    const link = localStorage.getItem('profileId');
+    const link = localStorage.getItem('profileLink');
     const response = await fetch(`/${link}`, {
         method: 'PATCH',
         headers: {
@@ -119,13 +119,11 @@ async function modifyProfile(event, jsonData) {
 
 function showProfileExt() {
     $('#ext-about-btn').click(() => {
-        console.log("About");
         $('#profile-ext-about').css("display", "flex");
         $('#profile-ext-posts').css("display", "none");
     });
 
     $('#ext-posts-btn').click(() => {
-        console.log("Posts");
         $('#profile-ext-about').css("display", "none");
         $('#profile-ext-posts').css("display", "flex");
     });
