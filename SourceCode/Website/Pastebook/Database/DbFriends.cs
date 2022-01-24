@@ -27,6 +27,49 @@ public class DbFriends
         }
     }
 
+    // public static FriendsModel GetFriendRequests(string email)
+    // {
+    //     FriendsModel model = new FriendsModel();
+    //     using(var db = new SqlConnection(DB_CONNECTION_STRING))
+    //     {
+    //         db.Open();
+    //         using(var cmd = db.CreateCommand())
+    //         {
+    //             cmd.CommandText = "SELECT FriendRequests FROM Friends WHERE UserEmail = @email;";
+    //             cmd.Parameters.AddWithValue("@email", email);
+    //             var reader = cmd.ExecuteReader();
+    //             while(reader.Read())
+    //             {
+    //                 model.UserEmail = email;
+    //                 model.FriendRequests = reader.GetString(0);
+    //             }
+    //         }
+    //     }
+    //     return model;
+    // }
+
+    public static FriendsModel GetFriendsData(string email)
+    {
+        FriendsModel model = new FriendsModel();
+        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var cmd = db.CreateCommand())
+            {
+                cmd.CommandText = "SELECT FriendsList, FriendRequests FROM Friends WHERE UserEmail = @email;";
+                cmd.Parameters.AddWithValue("@email",email);
+                var reader = cmd.ExecuteReader();
+                while(reader.Read())
+                {
+                    model.UserEmail = email;
+                    model.FriendsList = reader.GetString(0);
+                    model.FriendRequests = reader.GetString(1);
+                }
+            }
+        }
+        return model;
+    }
+
     public static void SendFriendRequest(FriendsModel friendsModel)
     {
         using(var db = new SqlConnection(DB_CONNECTION_STRING))

@@ -22,7 +22,5 @@ public class HomeController: Controller
         }
 
         return RedirectToAction("doLoginAction", "Login");
-        // return Ok($"no session found {cookieEmail} {cookieSessionId}");
-        // return RedirectToRoute("/login");
     }
 }
