@@ -83,4 +83,38 @@ public class DbTables
             }
         }
     }
+    public static void CreateProfilesTable()
+    {     
+        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var command = db.CreateCommand())
+            {
+                command.CommandText = @"IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Profiles' and xtype='U')
+                CREATE TABLE Profiles(
+                    Id VARCHAR(255),
+                    FullName VARCHAR(255),
+                    About VARCHAR(MAX),
+                    Photo VARCHAR(MAX),
+                    Cover VARCHAR(MAX)
+                );";
+                command.ExecuteNonQuery();
+                Console.WriteLine("Profiles Table created successfully!");
+             }
+        }
+    }
+
+    public static void DropProfilesTable()
+    {
+        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var command = db.CreateCommand())
+            {
+                command.CommandText = "DROP TABLE IF EXISTS Profiles";
+                command.ExecuteNonQuery();
+                Console.WriteLine("Profiles Table deleted successfully!");
+            }
+        }
+    }
 }

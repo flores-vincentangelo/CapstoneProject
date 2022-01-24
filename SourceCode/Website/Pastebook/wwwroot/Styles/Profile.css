@@ -1,0 +1,99 @@
+.profile-container {
+    display: flex;
+    margin: 12% auto;
+    justify-content: center;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-cover-container {
+    width: 100%;
+    height: 200px;
+    background: #1877f2;
+    position: absolute;
+    top: -100px;
+    z-index: -1;
+}
+
+.profile-photo-container {
+
+}
+
+.profile-photo-edit-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    /* padding-top: 100px; */
+    left: auto;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.modal-container {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+.profile-photo-title-modal{
+    text-align: center;
+}
+
+#profile-photo-close-modal {
+    color: #aaaaaa;
+    float: right;
+    font-size: 36px;
+    font-weight: bold;
+}
+#profile-photo-close-modal:hover,
+#profile-photo-close-modal:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#profile-photo-img {
+    height: 168px;
+    width: 168px;
+    border-radius: 50%;
+}
+
+.profile-name-container {
+
+}
+
+.profile-about-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-about-btn {
+    margin: 10px 0 0;
+    padding: 0 10px;
+}
+
+.profile-about-readonly {
+    display: flex;
+    flex-direction: column;
+}
+.profile-about-edit {
+    display: none;
+    flex-direction: column;
+}
+
+.form-edit-about {
+    box-sizing: border-box;
+    overflow-y: auto;
+    text-align: center;
+    border-radius: 6px;
+    width: 250px;
+    resize: none;
+}
+
+
+
