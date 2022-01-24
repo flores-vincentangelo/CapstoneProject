@@ -1,45 +1,16 @@
 namespace Controllers;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc; 
+using Database;
+using Models;
 
 public class RegisterController : Controller
 {
     [HttpGet]
     [Route("/register")]
     public IActionResult GetRegisterAction() {
-        return View("/Views/Register.cshtml");
+        return View("/Views/Register/Register.cshtml");
     }
-
-<<<<<<< Updated upstream
-    // [HttpPost]
-    // [Route("/users")]
-    // public IActionResult PostRegisterAction() {
-    //     return View("/Views/RegisterSuccess.cshtml");
-    // }
-=======
-    public bool SendVerificationEmail(UserModel user) {
-        string? to = user.EmailAddress;
-        string from = "pastebooktest@gmail.com";
-        MailMessage message = new MailMessage(from, to);
-        var firstName = user.FirstName;
-        string mailBody = $@"Welcome {firstName} to Pastebook!";
-        message.Subject = "Registration successful!";
-        message.Body = mailBody;
-        message.BodyEncoding = Encoding.UTF8;
-        message.IsBodyHtml = true;
-        SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
-        System.Net.NetworkCredential basicCredential1 = new System.Net.NetworkCredential("pastebooktest", "pasteb00kt3st");
-        client.EnableSsl = true;
-        client.UseDefaultCredentials = false;
-        client.Credentials = basicCredential1;
-        try {
-            client.Send(message);
-            return true;
-        }
-        catch (Exception e) {
-            throw e;
-        }
-    }
-
+    
     [HttpPost]
     [Route("/register")]
     public IActionResult doPostRegistration()
@@ -55,9 +26,8 @@ public class RegisterController : Controller
         var gender = HttpContext.Request.Form["Gender"];
         
         var model = new UserModel();
-
-        var isEmailUnique = DbUsers.checkEmailAddress(emailAddress);
-        if (isEmailUnique)
+        var isEmailExists = DbUsers.checkEmailAddress(emailAddress);
+        if (isEmailExists)
         {
             return View("Views/Register/EmailExists.cshtml");
         }
@@ -69,8 +39,7 @@ public class RegisterController : Controller
         model.Password = password;
         model.Birthday = dateOfBirth;
         model.Gender = gender;
-        model.FullName = (firstName + lastName).ToLower();
-
+        model.FullName = ((firstName + lastName).Replace(" ", "")).ToLower();
         var duplicate = DbUsers.checkFullName(model.FullName);
         if(duplicate == -1)
         {
@@ -84,8 +53,6 @@ public class RegisterController : Controller
         model.Duplicate = duplicate;
         model.ProfileLink= model.FullName + model.Duplicate;
         DbUsers.InsertUser(model);
-        SendVerificationEmail(model);
-
         // Added by JP
         // Add new profile upon registration of new user
         var profile = new ProfileModel();
@@ -95,8 +62,7 @@ public class RegisterController : Controller
         profile.Photo = "";
         profile.Cover = "";
         DbProfiles.AddProfile(profile);
-
+        DbUsers.SendVerificationEmail(model);
         return View("Views/Register/RegisteredSuccess.cshtml");
     }
->>>>>>> Stashed changes
 }

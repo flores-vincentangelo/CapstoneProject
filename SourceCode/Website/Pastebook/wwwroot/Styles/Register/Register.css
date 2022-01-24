@@ -9,7 +9,7 @@ html,body {
 }
 
 .register-container {
-    margin: 5% auto;
+    margin: 4% auto;
 }
 
 .register-container-form {
@@ -37,10 +37,9 @@ html,body {
     background-color: #e9ebee;
 }
 
-
 .register-container-form-field {
     width: 100%;
-    margin: 10px auto;
+    margin: 5px auto;
 }
 
 .register-container-form-field-fullname {

@@ -1,0 +1,154 @@
+// @import '../Shared/colors';
+// @import '../Shared/header';
+@import '../Shared/import';
+
+.friends{
+    position: relative;
+    top: $header-total-height;
+
+    display: flex;
+    flex-direction: row;
+
+    width: 100%;
+
+    $sidepanel-padding: 10px;
+    $sidepanel-width: 20%;
+
+    &-sidepanel{
+        background-color: white;
+        position: fixed;
+        left: 0;
+        padding-left: $sidepanel-padding;
+        padding-top: $sidepanel-padding;
+        margin-right: $sidepanel-padding;
+        width: $sidepanel-width;
+
+
+        display: flex;
+        flex-direction: column;
+
+        height: 100vh;
+
+        &-title{
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        &-link{
+            vertical-align: middle;
+            height: 5%;
+            display: flex;
+            align-items: center;
+            &-icon{
+                height: 30px;
+                width: auto;
+                margin-right: 10px;
+            }
+        }
+    }
+
+    &-main{
+        padding-top: $sidepanel-padding;
+        // padding-left: $sidepanel-padding;
+        background-color: $grey;
+        position: relative;
+        left: $sidepanel-width;
+        right: 0;
+
+        width: 100% - $sidepanel-width;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+
+        &-title{
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        &-friendcardcontainer{
+            width: 100%;
+            display:grid;
+            $grid-column-width: auto;
+            grid-template-columns: $grid-column-width $grid-column-width $grid-column-width $grid-column-width;
+            $grid-gap:10px;
+            grid-gap: $grid-gap 0;
+            justify-content: space-around;
+            // text-align: center;
+            
+
+            &-friendcard{
+                background-color: white;
+                border-radius: 20px;
+                width: 210px;
+                // padding: 10px;
+                height: 350px;
+
+
+                &-picture{ 
+                    height: 50%;
+                    width: 100%;
+
+                    & img{
+                        height: 100%;
+                        width: 100%;
+                        object-fit: cover;
+                        border-radius: 20px 20px 0 0;
+                    }
+                }
+
+                &-content{
+                    height: 50%;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    
+                    $padding-left-right:20px;
+                    padding: 0 $padding-left-right 0 $padding-left-right;
+
+                    &-name{
+                        font-weight: bold;
+                    }
+    
+                    $button-height:50px;
+                    $button-width:80%;
+
+                    &-confirm, &-delete{
+                        display: flex;
+                        flex-direction: column;
+
+                        &-button{
+                            border-radius: 10px;
+                            border:none;
+                            font-weight: bold;
+                            cursor: pointer;
+                        }
+                    }
+    
+                    &-confirm{
+                        width: 100%;
+                        &-button{
+                            width: 100%;
+                            background-color: $blue;
+                            color: white;
+                            width: $button-width;
+                            height: $button-height;
+                        }
+                    }
+    
+                    &-delete{
+                        width: 100%;
+                        &-button{
+                            width: 100%;
+                            color: black;
+                            width: $button-width;
+                            height: $button-height;
+                            background-color: $grey;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

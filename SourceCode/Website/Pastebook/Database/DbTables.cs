@@ -83,7 +83,6 @@ public class DbTables
             }
         }
     }
-
     public static void CreateProfilesTable()
     {     
         using(var db = new SqlConnection(DB_CONNECTION_STRING))
@@ -118,7 +117,4 @@ public class DbTables
             }
         }
     }
-
-
-
 }

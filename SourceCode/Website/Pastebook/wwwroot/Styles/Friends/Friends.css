@@ -1,0 +1,115 @@
+.friends {
+  position: relative;
+  top: 75px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.friends-sidepanel {
+  background-color: white;
+  position: fixed;
+  left: 0;
+  padding-left: 10px;
+  padding-top: 10px;
+  margin-right: 10px;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.friends-sidepanel-title {
+  font-size: 2em;
+  font-weight: bold;
+}
+.friends-sidepanel-link {
+  vertical-align: middle;
+  height: 5%;
+  display: flex;
+  align-items: center;
+}
+.friends-sidepanel-link-icon {
+  height: 30px;
+  width: auto;
+  margin-right: 10px;
+}
+.friends-main {
+  padding-top: 10px;
+  background-color: #e9ebee;
+  position: relative;
+  left: 20%;
+  right: 0;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.friends-main-title {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.friends-main-friendcardcontainer {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 10px 0;
+  justify-content: space-around;
+}
+.friends-main-friendcardcontainer-friendcard {
+  background-color: white;
+  border-radius: 20px;
+  width: 210px;
+  height: 350px;
+}
+.friends-main-friendcardcontainer-friendcard-picture {
+  height: 50%;
+  width: 100%;
+}
+.friends-main-friendcardcontainer-friendcard-picture img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 20px 20px 0 0;
+}
+.friends-main-friendcardcontainer-friendcard-content {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 0 20px 0 20px;
+}
+.friends-main-friendcardcontainer-friendcard-content-name {
+  font-weight: bold;
+}
+.friends-main-friendcardcontainer-friendcard-content-confirm, .friends-main-friendcardcontainer-friendcard-content-delete {
+  display: flex;
+  flex-direction: column;
+}
+.friends-main-friendcardcontainer-friendcard-content-confirm-button, .friends-main-friendcardcontainer-friendcard-content-delete-button {
+  border-radius: 10px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+.friends-main-friendcardcontainer-friendcard-content-confirm {
+  width: 100%;
+}
+.friends-main-friendcardcontainer-friendcard-content-confirm-button {
+  width: 100%;
+  background-color: #1877f2;
+  color: white;
+  width: 80%;
+  height: 50px;
+}
+.friends-main-friendcardcontainer-friendcard-content-delete {
+  width: 100%;
+}
+.friends-main-friendcardcontainer-friendcard-content-delete-button {
+  width: 100%;
+  color: black;
+  width: 80%;
+  height: 50px;
+  background-color: #e9ebee;
+}
+
+/*# sourceMappingURL=Friends.css.map */
