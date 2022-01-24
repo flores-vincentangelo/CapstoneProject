@@ -3,6 +3,8 @@ $(document).ready( () => {
     EditProfilePicture();
     // About Me
     EditAboutMe();
+
+    showProfileExt();
 });
 
 function EditProfilePicture() {
@@ -32,41 +34,12 @@ function EditProfilePicture() {
         }
     }
 
-    // When the user clicks on the "Save" button,
-    $('#photo-save-btn').click((event) => {
-        event.preventDefault();
-        // Close modal
-        $('.profile-photo-edit-modal').css("display","none");
-
-        var myImage = document.getElementById("myFile");
-        if (myImage.files && myImage.files[0] && myImage.files[0].type.includes("image") ) {
-            var reader = new FileReader();
-            reader.readAsDataURL(myImage.files[0]);
-            reader.onload = imageIsLoaded;
-        }
-        else {
-            alert("This is not valid image file");
-        }
-
-        // Change photo
-        function imageIsLoaded(e) {
-            result = e.target.result;
-            $('#profile-photo-img').attr('src', result);
-            const formData = {
-                Photo: result
-            }
-            var data = JSON.stringify(formData);
-            modifyProfile(event, data);
-        };
-        
-    });
-
     // When the user clicks on the "Choose file" button
     $("#myFile").change(function() {
         if (this.files && this.files[0] && this.files[0].type.includes("image")) { 
             var reader = new FileReader();
-            reader.onload = imageIsLoaded;
             reader.readAsDataURL(this.files[0]);
+            reader.onload = imageIsLoaded;
         }
         else {
             alert("This is not valid image file");
@@ -76,6 +49,22 @@ function EditProfilePicture() {
     function imageIsLoaded(e) {
         result = e.target.result;
         $('#profile-photo-modal-img').attr('src', result);
+        saveImage(result);
+    };
+
+    function saveImage(image) {
+        // When the user clicks on the "Save" button,
+        $('#photo-save-btn').click((event) => {
+            event.preventDefault();
+            // Close modal
+            $('.profile-photo-edit-modal').css("display","none");
+            $('#profile-photo-img').attr('src', image);
+            const formData = {
+                Photo: image
+            }
+            var data = JSON.stringify(formData);
+            modifyProfile(event, data);
+        });
     };
 }
 
@@ -128,3 +117,16 @@ async function modifyProfile(event, jsonData) {
     }
 }
 
+function showProfileExt() {
+    $('#ext-about-btn').click(() => {
+        console.log("About");
+        $('#profile-ext-about').css("display", "flex");
+        $('#profile-ext-posts').css("display", "none");
+    });
+
+    $('#ext-posts-btn').click(() => {
+        console.log("Posts");
+        $('#profile-ext-about').css("display", "none");
+        $('#profile-ext-posts').css("display", "flex");
+    });
+}
