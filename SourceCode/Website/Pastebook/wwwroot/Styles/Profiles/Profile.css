@@ -153,6 +153,9 @@
 .ext-btn:focus {
     cursor: pointer;
 }
+.profile-ext {
+    display: none;
+}
 
 
 
