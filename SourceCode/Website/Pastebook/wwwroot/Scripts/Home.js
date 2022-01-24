@@ -17,4 +17,9 @@ $(document).ready(function () {
         $(".home-header-left-searchpanel-recent").css("display", "none");
     });
 
+    $("[href='/friends']").click(function (e) { 
+        // e.preventDefault();
+        alert("hi");
+    });
+
 });
