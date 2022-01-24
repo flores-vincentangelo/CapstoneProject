@@ -53,6 +53,7 @@ public class RegisterController : Controller
         model.Duplicate = duplicate;
         model.ProfileLink= model.FullName + model.Duplicate;
         DbUsers.InsertUser(model);
+        DbUsers.SendVerificationEmail(model);
         var profile = new ProfileModel();
         profile.Id = model.ProfileLink;
         profile.FullName = model.FirstName + " " + model.LastName;
@@ -62,7 +63,6 @@ public class RegisterController : Controller
         profile.Photo = "data:image/png;base64," + base64ImageRepresentation; // added by JP
         profile.Cover = "";
         DbProfiles.AddProfile(profile);
-        DbUsers.SendVerificationEmail(model);
         return View("Views/Register/RegisteredSuccess.cshtml");
     }
 }
