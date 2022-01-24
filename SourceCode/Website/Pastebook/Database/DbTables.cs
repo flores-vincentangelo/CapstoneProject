@@ -125,9 +125,9 @@ public class DbTables
             db.Open();
             using(var command = db.CreateCommand())
             {
-                command.CommandText = @"IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Users' and xtype='U')
+                command.CommandText = @"IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Friends' and xtype='U')
                 CREATE TABLE Friends (
-                    User VARCHAR (255) NOT NULL PRIMARY KEY,
+                    UserEmail VARCHAR(255) NOT NULL PRIMARY KEY,
                     FriendsList TEXT,
                     FriendRequests TEXT
                     );";
