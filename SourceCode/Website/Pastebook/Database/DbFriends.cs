@@ -27,27 +27,6 @@ public class DbFriends
         }
     }
 
-    // public static FriendsModel GetFriendRequests(string email)
-    // {
-    //     FriendsModel model = new FriendsModel();
-    //     using(var db = new SqlConnection(DB_CONNECTION_STRING))
-    //     {
-    //         db.Open();
-    //         using(var cmd = db.CreateCommand())
-    //         {
-    //             cmd.CommandText = "SELECT FriendRequests FROM Friends WHERE UserEmail = @email;";
-    //             cmd.Parameters.AddWithValue("@email", email);
-    //             var reader = cmd.ExecuteReader();
-    //             while(reader.Read())
-    //             {
-    //                 model.UserEmail = email;
-    //                 model.FriendRequests = reader.GetString(0);
-    //             }
-    //         }
-    //     }
-    //     return model;
-    // }
-
     public static FriendsModel GetFriendsData(string email)
     {
         FriendsModel model = new FriendsModel();
@@ -70,7 +49,25 @@ public class DbFriends
         return model;
     }
 
-    public static void SendFriendRequest(FriendsModel friendsModel)
+    public static void UpdateFriendsListOfUser(string userEmail, string friendsList)
+    {
+        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var cmd = db.CreateCommand())
+            {
+                cmd.CommandText = 
+                    @"UPDATE Friends
+                    SET FriendsList = @friendslist
+                    WHERE UserEmail = @email;";
+                cmd.Parameters.AddWithValue("@friendslist", friendsList);
+                cmd.Parameters.AddWithValue("@email",userEmail);
+                cmd.ExecuteNonQuery();
+            }
+        }
+    }
+
+    public static void UpdateFriendReqsListOfUser(string userEmail, string friendReqsList)
     {
         using(var db = new SqlConnection(DB_CONNECTION_STRING))
         {
@@ -81,29 +78,36 @@ public class DbFriends
                     @"UPDATE Friends 
                     SET FriendRequests = @friendrequests 
                     WHERE UserEmail = @email;";
-                cmd.Parameters.AddWithValue("@friendrequests",friendsModel.FriendRequests);
-                cmd.Parameters.AddWithValue("@email",friendsModel.UserEmail);
+                cmd.Parameters.AddWithValue("@friendrequests", friendReqsList);
+                cmd.Parameters.AddWithValue("@email",userEmail);
                 cmd.ExecuteNonQuery();
             }
         }
     }
 
-    public static void AddAsFriend(FriendsModel friendsModel)
+    public static string RemoveEmailFromFriendReqs(string email, string friendReqs)
     {
-        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        
+        var _friendReqsArr = friendReqs.Split(",");
+        List<string> friendReqsList = new List<string>(_friendReqsArr);
+        friendReqsList.Remove(email);
+        return String.Join(",",friendReqsList);
+    }
+
+    public static string AddEmailtoFriendsList(string emailToAdd, string? friendsListStr)
+    {
+        if(!String.IsNullOrEmpty(friendsListStr))
         {
-            db.Open();
-            using(var cmd = db.CreateCommand())
-            {
-                cmd.CommandText =
-                    @"UPDATE Friends
-                    SET FriendsList = @friendslist
-                    WHERE UserEmail = @email;";
-                cmd.Parameters.AddWithValue("@friendslist",friendsModel.FriendsList);
-                cmd.Parameters.AddWithValue("@email",friendsModel.UserEmail);
-                cmd.ExecuteNonQuery();
-            }
+            var _friendsListArr = friendsListStr.Split(",");
+            List<string> friendsList = new List<string>(_friendsListArr);
+            friendsList.Add(emailToAdd);
+            return String.Join(",",friendsList);
         }
+        else
+        {
+            return emailToAdd;
+        }
+        
     }
 
 

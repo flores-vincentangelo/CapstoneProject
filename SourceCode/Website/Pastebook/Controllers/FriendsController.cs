@@ -78,59 +78,20 @@ public class FriendsController: Controller
             SessionsModel? sessionModel = DbSessions.GetSessionById(cookieSessionId);
             if(sessionModel != null && sessionModel.EmailAddress == cookieEmail)
             {
-                friendsModel.UserEmail = cookieEmail;
-                FriendsModel friendsModel2 = DbFriends.GetFriendsData(cookieEmail);
+                FriendsModel User = DbFriends.GetFriendsData(cookieEmail);
+                FriendsModel UserToBeAdded = DbFriends.GetFriendsData(friendsModel.ConfirmFriendReqOf);
                 
-                string? friendReqStr = friendsModel2.FriendRequests;
-                string? friendListStr = friendsModel2.FriendsList;
 
-                List<string> friendReqList = new List<string>();
-                List<string> friendsList = new List<string>();
+                var newFriendsListOfUser = DbFriends.AddEmailtoFriendsList(friendsModel.ConfirmFriendReqOf, User.FriendsList);
+                var newFriendsReqsListOfUser = DbFriends.RemoveEmailFromFriendReqs(friendsModel.ConfirmFriendReqOf, User.FriendRequests);
 
-                if(!String.IsNullOrEmpty(friendReqStr))
-                {
-                    var _friendReqArr = friendReqStr.Split(",");
-                    friendReqList = new List<string>(_friendReqArr);
-                    System.Console.WriteLine($"{Environment.NewLine} Friend Requests Before Remove: {String.Join(",",friendReqList)} {Environment.NewLine}");
-                    friendReqList.Remove(friendsModel.ConfirmFriendReqOf);
-                    
-                }
-                else
-                {
-                    //fix this, a user cannot accept a friend request if s/he has no friend requests to begin with
-                    return Ok();
-                }
-
-                System.Console.WriteLine($"{Environment.NewLine} Friends List Before Add: {friendListStr} {Environment.NewLine}");
-
-                if(!String.IsNullOrEmpty(friendListStr))
-                {
-                    var _friendsListArr = friendListStr.Split(",");
-                    friendsList = new List<string>(_friendsListArr);
-                    friendsList.Add(friendsModel.ConfirmFriendReqOf);
-                }
-                else
-                {
-                    friendsList.Add(friendsModel.ConfirmFriendReqOf);
-                }
-
-                friendReqStr = String.Join(",",friendReqList);
-                friendListStr = String.Join(",",friendsList);
-
-                System.Console.WriteLine($"{Environment.NewLine} Friend Requests After Remove: {friendReqStr} {Environment.NewLine}");
-                System.Console.WriteLine($"{Environment.NewLine} Friends List After Remove: {friendListStr} {Environment.NewLine}");
+                var newFriendsListOfOtherPerson = DbFriends.AddEmailtoFriendsList(cookieEmail, UserToBeAdded.FriendsList);
                 
-                
-                // System.Console.WriteLine($"{Environment.NewLine} Friend Requests {String.Join(",",friendReqList)} {Environment.NewLine}");
-
-
-
-
-
-
-
-                // var jsonArray2 = JsonSerializer.Serialize(friendsModel2,new JsonSerializerOptions{WriteIndented = true});
-                // System.Console.WriteLine(jsonArray2);
+                var jsonArray2 = JsonSerializer.Serialize(User,new JsonSerializerOptions{WriteIndented = true});
+                System.Console.WriteLine(jsonArray2);
+                System.Console.WriteLine($"{Environment.NewLine} Updated friends list of user {newFriendsListOfUser} {Environment.NewLine}");
+                System.Console.WriteLine($"{Environment.NewLine} Updated friend reqs list of user {newFriendsReqsListOfUser} {Environment.NewLine}");
+                System.Console.WriteLine($"{Environment.NewLine} Updated friend reqs list of other person {newFriendsListOfOtherPerson} {Environment.NewLine}");
                 return Ok();
             }
         }
