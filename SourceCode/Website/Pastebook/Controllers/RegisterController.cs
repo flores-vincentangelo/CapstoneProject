@@ -23,7 +23,6 @@ public class RegisterController : Controller
         var birthday = HttpContext.Request.Form["Birthday"];
         DateTime birthDate = DateTime.Parse(birthday);
         var dateOfBirth = (long)((birthDate.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0))).TotalSeconds);
-        DateTime readableBirthday = new System.DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(dateOfBirth);
         var gender = HttpContext.Request.Form["Gender"];
         
         var model = new UserModel();
@@ -39,7 +38,6 @@ public class RegisterController : Controller
         model.MobileNumber = mobileNumber;
         model.Password = password;
         model.Birthday = dateOfBirth;
-        model.ReadableBirthday = readableBirthday.ToString("yyyy-MM-dd");
         model.Gender = gender;
         model.FullName = ((firstName + lastName).Replace(" ", "")).ToLower();
         var duplicate = DbUsers.checkFullName(model.FullName);

@@ -8,6 +8,12 @@ function EditProfile() {
         // show edit form 
         $('.profile-edit-modal').css("display","flex");
     });
+
+    // When the user clicks on the "x",
+    $('#profile-close-modal').click(() => {
+        // Close modal
+        $('.profile-edit-modal').css("display","none");
+    });
     
     // When the user clicks on the "Cancel" button,
     $('#cancel-btn').click(() => {
@@ -19,16 +25,16 @@ function EditProfile() {
     $('#about-save-btn').click((event) => {
         // Change "Details"
         var firstName = document.getElementById("first-name");
-        $('#first-name').text(firstName.value);
+        $('#profile-first-name').text(firstName.value);
         // Save about.value to database
         var formData = new FormData(document.getElementById('form-profile'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
-        modifyProfile(event, data);
+        modifyProfileData(event, data);
 
         // show readonly profile
-        $('.profile-about-readonly').css("display","flex");
+        $('.profile-readonly').css("display","flex");
         // hide edit form
-        $('.profile-about-edit').css("display","none");
+        $('.profile-edit').css("display","none");
     });
 }
 
