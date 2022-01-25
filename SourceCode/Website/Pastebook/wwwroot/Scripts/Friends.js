@@ -9,15 +9,34 @@ $(document).ready(function () {
         console.log(emailToAdd);
         ConfirmFriendReq(emailToAdd);
     });
+
+    $(".friends-main-friendcardcontainer-friendcard-content-delete-button").click(function (e) { 
+        var emailToDelete = $(this).attr("id");
+        console.log(emailToDelete);
+        DeleteFriendReq(emailToDelete);
+        
+    });
 });
 
 async function ConfirmFriendReq(email) { 
-    var requestBody = "ConfirmFriendReqOf:" + email;
     var requestBodyObj = {
         ConfirmFriendReqOf: email
     }
     console.log(requestBodyObj);
     const response = await fetch("/friends/confirm",{
+        method: "PATCH",
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestBodyObj)
+    });
+}
+
+async function DeleteFriendReq(email){
+    var requestBodyObj = {
+        DeleteFriendReqOf: email
+    }
+    const response = await fetch("/friends/delete",{
         method: "PATCH",
         headers:{
             'Content-Type': 'application/json'

@@ -99,5 +99,27 @@ public class FriendsController: Controller
         return RedirectToAction("doLoginAction", "Login");
     } 
 
+    [HttpPatch]
+    [Route("/friends/delete")]
+    public IActionResult DeleteRequest(
+        [FromBody] FriendsModel friendsModel
+    )
+    {
+        string? cookieEmail = HttpContext.Request.Cookies["email"];
+        string? cookieSessionId = HttpContext.Request.Cookies["sessionId"];
+        if(!String.IsNullOrEmpty(cookieSessionId) && !String.IsNullOrEmpty(cookieEmail))
+        {
+            SessionsModel? sessionModel = DbSessions.GetSessionById(cookieSessionId);
+            if(sessionModel != null && sessionModel.EmailAddress == cookieEmail)
+            {
+                FriendsModel user = DbFriends.GetFriendsData(cookieEmail);
+                var newFriendsReqsListOfUser = DbFriends.RemoveEmailFromFriendReqs(friendsModel.DeleteFriendReqOf, user.FriendRequests);
+                System.Console.WriteLine($"{Environment.NewLine} {newFriendsReqsListOfUser} {Environment.NewLine}");
+                return Ok();
+            }
+        }
 
+
+        return RedirectToAction("doLoginAction", "Login");
+    }
 }
