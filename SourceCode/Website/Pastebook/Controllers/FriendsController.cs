@@ -2,6 +2,7 @@ namespace Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Database;
 using Models;
+using System.Text.Json;
 
 public class FriendsController: Controller
 {
@@ -17,7 +18,42 @@ public class FriendsController: Controller
             SessionsModel? sessionModel = DbSessions.GetSessionById(cookieSessionId);
             if(sessionModel != null)
             {
-                FriendsModel? friendsModel = DbFriends.GetFriendsData(cookieEmail);
+                
+                FriendsModel friendsModel = DbFriends.GetFriendsData(cookieEmail);
+                List<UserModel> friendRequestsObj = new List<UserModel>();
+                if(String.IsNullOrEmpty(friendsModel.FriendRequests))
+                {
+                    // System.Console.WriteLine($"{Environment.NewLine} null {Environment.NewLine}");
+                    friendsModel.FriendRequestObjList = null;
+                }
+                else
+                {
+                    // System.Console.WriteLine($"{Environment.NewLine} {friendsModel.FriendRequests} {Environment.NewLine}");
+                    var emailArr = friendsModel.FriendRequests.Split(',');
+                    foreach (string email in emailArr)
+                    {
+                        UserModel userModel = DbUsers.GetUserByEmail(email);
+                        friendRequestsObj.Add(userModel);
+                    }
+
+                    friendsModel.FriendRequestObjList = friendRequestsObj;
+                }
+                
+                List<UserModel> friendsListObj = new List<UserModel>();
+                if(String.IsNullOrEmpty(friendsModel.FriendsList))
+                {
+                    friendsModel.FriendsObjList = null;
+                }
+                else
+                {
+                    var emailArr = friendsModel.FriendsList.Split(',');
+                    foreach (string email in emailArr)
+                    {
+                        UserModel userModel = DbUsers.GetUserByEmail(email);
+                        friendsListObj.Add(userModel);
+                    }
+                    friendsModel.FriendsObjList = friendsListObj;
+                }
                 
                 // UserModel userModel = 
                 return View("/Views/Friends/Friends.cshtml",friendsModel);
@@ -26,7 +62,7 @@ public class FriendsController: Controller
         return RedirectToAction("doLoginAction", "Login");
     }
 
-    [HttpPost]
+    [HttpPatch]
     [Route("/friends/request")]
     public IActionResult SendFriendRequest(
         [FromBody] FriendsModel friendsModel
@@ -35,14 +71,69 @@ public class FriendsController: Controller
         return Ok();
     }
 
-    [HttpPost]
-    [Route("/friends/add")]
+    [HttpPatch]
+    [Route("/friends/confirm")]
     public IActionResult AddFriend(
         [FromBody] FriendsModel friendsModel
     )
     {
-        return Ok();
+        string? cookieEmail = HttpContext.Request.Cookies["email"];
+        string? cookieSessionId = HttpContext.Request.Cookies["sessionId"];
+        if(!String.IsNullOrEmpty(cookieSessionId) && !String.IsNullOrEmpty(cookieEmail))
+        {
+            SessionsModel? sessionModel = DbSessions.GetSessionById(cookieSessionId);
+            if(sessionModel != null && sessionModel.EmailAddress == cookieEmail)
+            {
+                FriendsModel User = DbFriends.GetFriendsData(cookieEmail);
+                FriendsModel UserToBeAdded = DbFriends.GetFriendsData(friendsModel.ConfirmFriendReqOf);
+                
+
+                var newFriendsListOfUser = DbFriends.AddEmailtoFriendsList(friendsModel.ConfirmFriendReqOf, User.FriendsList);
+                var newFriendsReqsListOfUser = DbFriends.RemoveEmailFromFriendReqs(friendsModel.ConfirmFriendReqOf, User.FriendRequests);
+
+                var newFriendsListOfOtherPerson = DbFriends.AddEmailtoFriendsList(cookieEmail, UserToBeAdded.FriendsList);
+
+                DbFriends.UpdateFriendsListOfUser(User.UserEmail, newFriendsListOfUser);
+                DbFriends.UpdateFriendReqsListOfUser(User.UserEmail, newFriendsReqsListOfUser);
+
+                DbFriends.UpdateFriendsListOfUser(UserToBeAdded.UserEmail, newFriendsListOfOtherPerson);
+                
+                // var jsonArray2 = JsonSerializer.Serialize(User,new JsonSerializerOptions{WriteIndented = true});
+                // System.Console.WriteLine(jsonArray2);
+                // System.Console.WriteLine($"{Environment.NewLine} Updated friends list of user {newFriendsListOfUser} {Environment.NewLine}");
+                // System.Console.WriteLine($"{Environment.NewLine} Updated friend reqs list of user {newFriendsReqsListOfUser} {Environment.NewLine}");
+                // System.Console.WriteLine($"{Environment.NewLine} Updated friend reqs list of other person {newFriendsListOfOtherPerson} {Environment.NewLine}");
+                return Ok();
+            }
+        }
+
+        return RedirectToAction("doLoginAction", "Login");
     } 
 
+    [HttpPatch]
+    [Route("/friends/delete")]
+    public IActionResult DeleteRequest(
+        [FromBody] FriendsModel friendsModel
+    )
+    {
+        string? cookieEmail = HttpContext.Request.Cookies["email"];
+        string? cookieSessionId = HttpContext.Request.Cookies["sessionId"];
+        if(!String.IsNullOrEmpty(cookieSessionId) && !String.IsNullOrEmpty(cookieEmail))
+        {
+            SessionsModel? sessionModel = DbSessions.GetSessionById(cookieSessionId);
+            if(sessionModel != null && sessionModel.EmailAddress == cookieEmail)
+            {
+                FriendsModel user = DbFriends.GetFriendsData(cookieEmail);
+                // System.Console.WriteLine($"{Environment.NewLine} {user.FriendRequests} {Environment.NewLine}");
+                var newFriendsReqsListOfUser = DbFriends.RemoveEmailFromFriendReqs(friendsModel.DeleteFriendReqOf, user.FriendRequests);
+                // System.Console.WriteLine($"{Environment.NewLine} {newFriendsReqsListOfUser} {Environment.NewLine}");
+                DbFriends.UpdateFriendReqsListOfUser(user.UserEmail, newFriendsReqsListOfUser);
+                // System.Console.WriteLine($"{Environment.NewLine} {newFriendsReqsListOfUser} {Environment.NewLine}");
+                return Ok();
+            }
+        }
 
+
+        return RedirectToAction("doLoginAction", "Login");
+    }
 }

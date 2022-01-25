@@ -59,6 +59,7 @@ public class RegisterController : Controller
         string base64ImageRepresentation = Convert.ToBase64String(imageArray);
         model.Photo = "data:image/png;base64," + base64ImageRepresentation;
 
+        DbFriends.InitializeFriends(model.EmailAddress); //make an entry to the friends table
         DbUsers.InsertUser(model);
         DbUsers.SendVerificationEmail(model);
         return View("Views/Register/RegisteredSuccess.cshtml");
