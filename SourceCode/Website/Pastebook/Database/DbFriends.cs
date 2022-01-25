@@ -67,7 +67,7 @@ public class DbFriends
         }
     }
 
-    public static void UpdateFriendReqsListOfUser(string userEmail, string friendReqsList)
+    public static void UpdateFriendReqsListOfUser(string userEmail, string? friendReqsList)
     {
         using(var db = new SqlConnection(DB_CONNECTION_STRING))
         {
@@ -78,7 +78,14 @@ public class DbFriends
                     @"UPDATE Friends 
                     SET FriendRequests = @friendrequests 
                     WHERE UserEmail = @email;";
-                cmd.Parameters.AddWithValue("@friendrequests", friendReqsList);
+                if(String.IsNullOrEmpty(friendReqsList))
+                {
+                    cmd.Parameters.AddWithValue("@friendrequests", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@friendrequests", friendReqsList);
+                }
                 cmd.Parameters.AddWithValue("@email",userEmail);
                 cmd.ExecuteNonQuery();
             }
