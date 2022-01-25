@@ -86,12 +86,17 @@ public class FriendsController: Controller
                 var newFriendsReqsListOfUser = DbFriends.RemoveEmailFromFriendReqs(friendsModel.ConfirmFriendReqOf, User.FriendRequests);
 
                 var newFriendsListOfOtherPerson = DbFriends.AddEmailtoFriendsList(cookieEmail, UserToBeAdded.FriendsList);
+
+                DbFriends.UpdateFriendsListOfUser(User.UserEmail, newFriendsListOfUser);
+                DbFriends.UpdateFriendReqsListOfUser(User.UserEmail, newFriendsReqsListOfUser);
+
+                DbFriends.UpdateFriendReqsListOfUser(UserToBeAdded.UserEmail, newFriendsListOfOtherPerson);
                 
-                var jsonArray2 = JsonSerializer.Serialize(User,new JsonSerializerOptions{WriteIndented = true});
-                System.Console.WriteLine(jsonArray2);
-                System.Console.WriteLine($"{Environment.NewLine} Updated friends list of user {newFriendsListOfUser} {Environment.NewLine}");
-                System.Console.WriteLine($"{Environment.NewLine} Updated friend reqs list of user {newFriendsReqsListOfUser} {Environment.NewLine}");
-                System.Console.WriteLine($"{Environment.NewLine} Updated friend reqs list of other person {newFriendsListOfOtherPerson} {Environment.NewLine}");
+                // var jsonArray2 = JsonSerializer.Serialize(User,new JsonSerializerOptions{WriteIndented = true});
+                // System.Console.WriteLine(jsonArray2);
+                // System.Console.WriteLine($"{Environment.NewLine} Updated friends list of user {newFriendsListOfUser} {Environment.NewLine}");
+                // System.Console.WriteLine($"{Environment.NewLine} Updated friend reqs list of user {newFriendsReqsListOfUser} {Environment.NewLine}");
+                // System.Console.WriteLine($"{Environment.NewLine} Updated friend reqs list of other person {newFriendsListOfOtherPerson} {Environment.NewLine}");
                 return Ok();
             }
         }
@@ -114,7 +119,8 @@ public class FriendsController: Controller
             {
                 FriendsModel user = DbFriends.GetFriendsData(cookieEmail);
                 var newFriendsReqsListOfUser = DbFriends.RemoveEmailFromFriendReqs(friendsModel.DeleteFriendReqOf, user.FriendRequests);
-                System.Console.WriteLine($"{Environment.NewLine} {newFriendsReqsListOfUser} {Environment.NewLine}");
+                DbFriends.UpdateFriendReqsListOfUser(user.UserEmail, newFriendsReqsListOfUser);
+                // System.Console.WriteLine($"{Environment.NewLine} {newFriendsReqsListOfUser} {Environment.NewLine}");
                 return Ok();
             }
         }

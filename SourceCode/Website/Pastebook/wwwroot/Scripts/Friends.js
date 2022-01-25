@@ -30,6 +30,9 @@ async function ConfirmFriendReq(email) {
         },
         body: JSON.stringify(requestBodyObj)
     });
+    if(response.ok){
+        location.reload();
+    }
 }
 
 async function DeleteFriendReq(email){
@@ -43,4 +46,7 @@ async function DeleteFriendReq(email){
         },
         body: JSON.stringify(requestBodyObj)
     });
+    if(response.ok){
+        location.reload();
+    }
 }
