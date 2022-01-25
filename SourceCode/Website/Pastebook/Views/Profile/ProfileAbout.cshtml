@@ -8,14 +8,36 @@
 <script src="./Scripts/ProfileExt.js"></script>
 
 <div class="profile-ext-container">
-    <h3>About goes here</h3>
-    <div class="ext-container">
-        Profilename: @Model.ProfileName<br>
+    <h3>About</h3>
+    <button class="profile-edit-btn" id="profile-edit-btn">Edit Profile</button>
+    <div class="profile-edit-modal" id="profile-edit-modal">
+        <div class="modal-container">
+            <span id="profile-close-modal">&times;</span>
+            <h2 class="profile-title-modal">Edit Information</h2>
+            <hr>
+            <form class="form-edit" id="form-profile">
+                <label>First Name:</label>
+                <input type="text" id="first-name" name="FirstName" value="@Model.FirstName" /><br><br>
+                <label>Last Name:</label>
+                <input type="text" id="last-name" name="FirstName" value="@Model.LastName" /><br><br>
+                <label>Mobile Number:</label>
+                <input type="text" id="mobile-number" name="MobileNumber" value="@Model.MobileNumber" /><br><br>
+                <label>Birthday:</label>
+                <input type="date" id="birthday" name="Birthday" value="@Model.Birthday" /><br><br>
+                <label>Gender:</label>
+                <input type="text" id="gender" name="Gender" value="@Model.Gender" />
+            </form>
+            <button class="profile-btn" id="save-btn">Save</button>
+            <button class="profile-btn" id="cancel-btn">Cancel</button>
+        </div>
+    </div>
+        
+    <div class="profile-readonly" id="profile-readonly">
+        <h3>First Name: @Model.FirstName</h3><br>
+        <h3>Last Name: @Model.LastName</h3><br>
         Email Address: @Model.EmailAddress<br>
-        First Name: @Model.FirstName<br>
-        Last Name: @Model.LastName<br>
-        Birthday: @Model.Birthday<br>
         Mobile Number: @Model.MobileNumber<br>
+        Birthday: @Model.ReadableBirthday<br>
         Gender: @Model.Gender<br>
         About Me: @Model.About<br>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis dolore hic nihil, fugiat accusantium molestiae perferendis adipisci totam corporis possimus nesciunt quaerat magni repudiandae excepturi exercitationem non architecto eos.

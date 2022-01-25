@@ -122,9 +122,11 @@ async function modifyProfile(event, jsonData) {
 function showProfileExt() {
     $('#ext-about-btn').click(() => {
         $('#profile-ext-about').css("display", "flex");
+        $('#profile-about-readonly').css("display", "flex");
         $('#profile-ext-posts').css("display", "none");
         $('#profile-ext-friends').css("display", "none");
         $('#profile-ext-album').css("display", "none");
+        $('#profile-edit-modal').css("display", "none");
     });
 
     $('#ext-posts-btn').click(() => {

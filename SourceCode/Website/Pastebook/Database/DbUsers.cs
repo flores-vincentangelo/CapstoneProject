@@ -77,6 +77,40 @@ public class DbUsers
         return user;
     }
 
+    public static UserModel? GetUserByEmail(string email)
+    {
+        UserModel user = new UserModel();
+        using (var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using (var cmd = db.CreateCommand())
+            {
+                cmd.CommandText = "SELECT * FROM Users WHERE EmailAddress = @EmailAddress;";
+                cmd.Parameters.AddWithValue("@EmailAddress", email);
+                var reader = cmd.ExecuteReader();
+                if(!reader.HasRows) return null;
+                while(reader.Read()) {
+                    user.UserId = reader.GetInt32(0);
+                    user.FirstName = reader.GetString(1);
+                    user.LastName = reader.GetString(2);
+                    user.EmailAddress = reader.GetString(3);
+                    user.MobileNumber = reader.GetString(4);
+                    user.Password = reader.GetString(5);
+                    user.Birthday = reader.GetInt64(6);
+                    user.Gender = reader.GetString(7);
+                    user.FullName = reader.GetString(8);
+                    user.Duplicate = reader.GetInt32(9);
+                    user.ProfileLink = reader.GetString(10);
+                    user.ProfileName = reader.GetString(11);
+                    user.About = reader.GetString(12);
+                    user.Photo = reader.GetString(13);
+                    user.Cover = reader.GetString(14);
+                }
+            }
+        }
+        return user;
+    }
+
     public static void DeleteUser(string profileLink)
     {
         using (var db = new SqlConnection(DB_CONNECTION_STRING))
@@ -131,6 +165,13 @@ public class DbUsers
                 {
                     cmd.CommandText = "UPDATE Users SET Password = @Password WHERE ProfileLink = @ProfileLink;";
                     cmd.Parameters.AddWithValue("@Password", BCrypt.Net.BCrypt.HashPassword(user.Password));
+                    cmd.Parameters.AddWithValue("@ProfileLink", profileLink);
+                    cmd.ExecuteNonQuery();
+                }
+                if(user.Birthday != 0)
+                {
+                    cmd.CommandText = "UPDATE Users SET Birthday = @Birthday WHERE ProfileLink = @ProfileLink;";
+                    cmd.Parameters.AddWithValue("@Birthday", user.Birthday);
                     cmd.Parameters.AddWithValue("@ProfileLink", profileLink);
                     cmd.ExecuteNonQuery();
                 }
