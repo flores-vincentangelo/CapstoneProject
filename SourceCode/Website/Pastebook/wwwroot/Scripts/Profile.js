@@ -104,7 +104,7 @@ function EditAboutMe() {
 
 async function modifyProfile(event, jsonData) {
     event.preventDefault();
-    const link = localStorage.getItem('profileId');
+    const link = localStorage.getItem('profileLink');
     const response = await fetch(`/${link}`, {
         method: 'PATCH',
         headers: {
@@ -114,19 +114,39 @@ async function modifyProfile(event, jsonData) {
     });
     if(response.status == 200) {
         alert("Profile modified successfully!");
+        var userData = await response.json();
+        localStorage.setItem('User', JSON.stringify(userData));
     }
 }
 
 function showProfileExt() {
     $('#ext-about-btn').click(() => {
-        console.log("About");
         $('#profile-ext-about').css("display", "flex");
+        $('#profile-about-readonly').css("display", "flex");
         $('#profile-ext-posts').css("display", "none");
+        $('#profile-ext-friends').css("display", "none");
+        $('#profile-ext-album').css("display", "none");
+        $('#profile-edit-modal').css("display", "none");
     });
 
     $('#ext-posts-btn').click(() => {
-        console.log("Posts");
         $('#profile-ext-about').css("display", "none");
         $('#profile-ext-posts').css("display", "flex");
+        $('#profile-ext-friends').css("display", "none");
+        $('#profile-ext-album').css("display", "none");
+    });
+
+    $('#ext-friends-btn').click(() => {
+        $('#profile-ext-about').css("display", "none");
+        $('#profile-ext-posts').css("display", "none");
+        $('#profile-ext-friends').css("display", "flex");
+        $('#profile-ext-album').css("display", "none");
+    });
+
+    $('#ext-album-btn').click(() => {
+        $('#profile-ext-about').css("display", "none");
+        $('#profile-ext-posts').css("display", "none");
+        $('#profile-ext-friends').css("display", "none");
+        $('#profile-ext-album').css("display", "flex");
     });
 }
