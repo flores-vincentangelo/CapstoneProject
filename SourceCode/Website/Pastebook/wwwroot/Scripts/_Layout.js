@@ -30,4 +30,9 @@ $(document).ready(function () {
         e.stopPropagation();
         $(".layout-accountpanel").css("display", "block");
     });
+
+    //logout button
+    $(".layout-accountpanel-logout").click(() => {
+        window.location.replace("/login");
+    })
 });
