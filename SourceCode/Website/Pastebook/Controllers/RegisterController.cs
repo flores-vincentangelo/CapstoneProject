@@ -51,18 +51,16 @@ public class RegisterController : Controller
         }
 
         model.Duplicate = duplicate;
-        model.ProfileLink= model.FullName + model.Duplicate;
+        model.ProfileLink = model.FullName + model.Duplicate;
+        model.ProfileName =  firstName + " " + lastName;
+        model.About = "Write something about me";
+        model.Cover = "";
+        byte[] imageArray = System.IO.File.ReadAllBytes("./wwwroot/Images/img_avatar.png");
+        string base64ImageRepresentation = Convert.ToBase64String(imageArray);
+        model.Photo = "data:image/png;base64," + base64ImageRepresentation;
+
         DbUsers.InsertUser(model);
         DbUsers.SendVerificationEmail(model);
-        var profile = new ProfileModel();
-        profile.Id = model.ProfileLink;
-        profile.FullName = model.FirstName + " " + model.LastName;
-        profile.About = "Write something about me";
-        byte[] imageArray = System.IO.File.ReadAllBytes("./wwwroot/Images/img_avatar.png"); // added by JP
-        string base64ImageRepresentation = Convert.ToBase64String(imageArray); // added by JP
-        profile.Photo = "data:image/png;base64," + base64ImageRepresentation; // added by JP
-        profile.Cover = "";
-        DbProfiles.AddProfile(profile);
         return View("Views/Register/RegisteredSuccess.cshtml");
     }
 }

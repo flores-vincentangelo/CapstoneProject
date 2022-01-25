@@ -83,12 +83,14 @@
 #photo-cancel-btn {
     float: left;
 }
-
 #profile-photo-img {
     height: 168px;
     width: 168px;
     border-radius: 50%;
     border: 5px solid #ffffff;
+}
+#form-profile-picture {
+    margin-bottom: 10px;
 }
 
 .profile-name-container {
