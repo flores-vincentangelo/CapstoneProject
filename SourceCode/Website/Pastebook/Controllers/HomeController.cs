@@ -10,4 +10,11 @@ public class HomeController: Controller
         ViewData["Title"] = "";
         return View("/Views/Home/Home.cshtml");
     }
+
+    [HttpGet]
+    [Route("/post")]
+    public IActionResult GetPost()
+    {
+        return View("/Views/Post.cshtml");
+    }
 }
