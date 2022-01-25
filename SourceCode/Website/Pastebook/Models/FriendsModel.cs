@@ -7,5 +7,6 @@ public class FriendsModel
     public string? FriendRequests {get;set;}
     public List<UserModel>? FriendsObjList {get;set;}
     public List<UserModel>? FriendRequestObjList {get;set;}
+    public string? ConfirmFriendReqOf {get;set;}
     
 }
