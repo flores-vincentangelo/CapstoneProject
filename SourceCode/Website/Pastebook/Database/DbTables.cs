@@ -121,4 +121,37 @@ public class DbTables
             }
         }
     }
+
+    public static void CreateFriendsTable()
+    {
+        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var command = db.CreateCommand())
+            {
+                command.CommandText = @"IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Friends' and xtype='U')
+                CREATE TABLE Friends (
+                    UserEmail VARCHAR(255) NOT NULL PRIMARY KEY,
+                    FriendsList TEXT,
+                    FriendRequests TEXT
+                    );";
+                command.ExecuteNonQuery();
+                Console.WriteLine("Friends Table created successfully!");
+            }
+        }
+    }
+
+    public static void DropFriendsTable()
+    {
+        using (var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using (var command = db.CreateCommand())
+            {
+                command.CommandText = "DROP TABLE IF EXISTS Friends";
+                command.ExecuteNonQuery();
+                Console.WriteLine("Friends Table deleted successfully!");
+            }
+        }
+    }
 }

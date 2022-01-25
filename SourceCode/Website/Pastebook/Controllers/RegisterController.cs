@@ -63,7 +63,6 @@ public class RegisterController : Controller
 
         DbUsers.InsertUser(model);
         DbUsers.SendVerificationEmail(model);
-        
         return View("Views/Register/RegisteredSuccess.cshtml");
     }
 }
