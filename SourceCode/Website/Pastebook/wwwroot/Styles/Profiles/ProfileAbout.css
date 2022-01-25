@@ -1,20 +1,29 @@
 .profile-ext-container {
     background: #f1f1f1;
     display: flex;
+    width: 100vw;
     flex-direction: column;
     justify-content: center;
     position: relative;
     align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
 }
 
 .profile-readonly {
     border-radius: 10px;
+    width: 40vw;
     background: #ffffff;
-    margin: 0 12% 2%;
+    margin: 0 14% 2%;
     padding: 10px 15px;
 }
 
-.profile-edit-modal {
+.profile-edit-firstname-modal,
+.profile-edit-lastname-modal,
+.profile-edit-email-modal,
+.profile-edit-mobile-modal,
+.profile-edit-birthday-modal,
+.profile-edit-gender-modal {
     display: none;
     position: fixed;
     z-index: 1;
@@ -29,42 +38,165 @@
 .modal-container {
     background-color: #fefefe;
     margin: auto;
-    padding: 20px;
+    padding: 15px;
     border: 1px solid #888;
     border-radius: 12px;
-    width: 40%;
+    width: 25%;
 }
 
 .profile-title-modal{
     text-align: center;
+    margin: 10px 0 0 0;
+    font-size: 13px;
 }
 
-#profile-close-modal {
+#profile-close-firstname-modal,
+#profile-close-lastname-modal,
+#profile-close-email-modal,
+#profile-close-mobile-modal,
+#profile-close-birthday-modal,
+#profile-close-gender-modal {
     color: #aaaaaa;
     float: right;
-    font-size: 36px;
+    font-size: 25px;
     font-weight: bold;
+    cursor: pointer;
 }
 
-#profile-close-modal:hover,
-#profile-close-modal:focus {
+#profile-close-firstname-modal:hover,
+#profile-close-firstname-modal:focus,
+#profile-close-lastname-modal:hover,
+#profile-close-lastname-modal:focus,
+#profile-close-email-modal:hover,
+#profile-close-email-modal:focus,
+#profile-close-mobile-modal:hover,
+#profile-close-mobile-modal:focus,
+#profile-close-birthday-modal:hover,
+#profile-close-birthday-modal:focus,
+#profile-close-gender-modal:hover,
+#profile-close-gender-modal:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
 }
 
-.profile-btn{
+.profile-firstname-btn,
+.profile-lastname-btn,
+.profile-email-btn,
+.profile-mobile-btn,
+.profile-birthday-btn,
+.profile-gender-btn {
     width: 50%;
 }
 
-#save-btn {
-    float: right;
+#firstname-save-btn,
+#lastname-save-btn,
+#email-save-btn,
+#mobile-save-btn,
+#birthday-save-btn,
+#gender-save-btn {
+    width: 20%;
+    margin-right: 10px;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 2px;
 }
 
-#cancel-btn {
-    float: left;
+#firstname-save-btn:hover,
+#lastname-save-btn:hover,
+#email-save-btn:hover,
+#mobile-save-btn:hover,
+#birthday-save-btn:hover,
+#gender-save-btn:hover {
+    color: white;
+    background-color: green;
+}
+
+#firstname-cancel-btn,
+#lastname-cancel-btn,
+#email-cancel-btn,
+#mobile-cancel-btn,
+#birthday-cancel-btn,
+#gender-cancel-btn {
+    width: 20%;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+#firstname-cancel-btn:hover,
+#lastname-cancel-btn:hover,
+#email-cancel-btn:hover,
+#mobile-cancel-btn:hover,
+#birthday-cancel-btn:hover,
+#gender-cancel-btn:hover {
+    color: white;
+    background-color: red;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    font-size: 13px;
 }
 
 #form-profile {
     margin-bottom: 10px;
+}
+
+.field {
+    display: flex;
+}
+
+#profile-edit-firstname-btn,
+#profile-edit-lastname-btn,
+#profile-edit-email-btn,
+#profile-edit-mobile-btn,
+#profile-edit-birthday-btn,
+#profile-edit-gender-btn {
+    width: 8%;
+    height: 5%;
+    float: right;
+    margin: auto 0px auto auto;
+    font-size: 10px;
+    cursor: pointer;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#profile-edit-firstname-btn:hover,
+#profile-edit-lastname-btn:hover,
+#profile-edit-email-btn:hover,
+#profile-edit-mobile-btn:hover,
+#profile-edit-birthday-btn:hover,
+#profile-edit-gender-btn:hover {
+    background-color: #1877f2;
+    color: white;
+}
+
+p {
+    margin: 0;
+    padding: 8px;
+    font-size: 13px;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+#password {
+    margin-left: 50px;
+    width: 60%;
+}
+
+#confirm-password {
+    width: 60%;
+}
+
+#email {
+    margin-left: 24px;
+    width: 60%;
 }

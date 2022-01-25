@@ -7,6 +7,9 @@
 <html>
 
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./Styles/Profiles/ProfileAbout.css">
     <script>
         // This is temporary
@@ -20,60 +23,127 @@
     <div class="profile-ext-container">
         <h3>About</h3>
         <div class="profile-readonly" id="profile-readonly">
-            <button class="profile-edit-btn" id="profile-edit-btn">Edit Profile</button>
-            <p id="profile-first-name">First Name: @Model.FirstName</p>
-            <p id="profile-last-name">Last Name: @Model.LastName</p>
-            <p id="profile-email-address">Email Address: @Model.EmailAddress</p>
-            <p id="profile-mobile-number">Mobile Number: @Model.MobileNumber</p>
-            <p id="profile-birthday">Birthday: @birthdate</p>
-            <p id="profile-gender">Gender: @Model.Gender</p>
-            <p>About Me: @Model.About</p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis dolore hic nihil, fugiat accusantium
-            molestiae perferendis adipisci totam corporis possimus nesciunt quaerat magni repudiandae excepturi
-            exercitationem non architecto eos.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo numquam, amet exercitationem a magni
-            consectetur quidem, velit eius aperiam maxime, provident et adipisci facere quibusdam veniam labore
-            repudiandae ad temporibus.
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati eaque tenetur aliquid nemo excepturi.
-            Eum iusto, itaque minus porro, doloribus magni illum adipisci atque in sint quaerat ratione, incidunt
-            soluta!
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi magni facere rem, dolore quibusdam aperiam
-            laborum optio neque, harum saepe vel rerum consequuntur, eos eum quidem sunt repellat. Beatae, molestiae.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus eligendi accusamus, exercitationem,
-            sed et nulla beatae enim pariatur quibusdam a voluptate magni eveniet maxime? Repellat eligendi repellendus
-            rem inventore adipisci.
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere amet, error corporis molestias ad eligendi,
-            consectetur, tempora ea reprehenderit praesentium libero? Suscipit, aliquid eum fuga asperiores nihil
-            nostrum sed iste!
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta ab blanditiis consequatur dolorem inventore
-            recusandae est laboriosam facilis sit laudantium mollitia odio voluptatibus nesciunt, similique aut corporis
-            ipsam error quasi.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga porro, perspiciatis accusantium odio maiores
-            voluptatibus vero placeat tempora non nihil quod cumque sint exercitationem quae iure aliquam mollitia ad
-            facilis.
+            <div class="field">
+                <p id="profile-first-name">First Name: @Model.FirstName</p>
+                <button class="profile-edit-firstname-btn" id="profile-edit-firstname-btn">Edit</button>
+            </div>
+            <div class="field">
+                <p id="profile-last-name">Last Name: @Model.LastName</p>
+                <button class="profile-edit-lastname-btn" id="profile-edit-lastname-btn">Edit</button>
+            </div>
+            <div class="field">
+                <p id="profile-email">Email Address: @Model.EmailAddress</p>
+                <button class="profile-edit-email-btn" id="profile-edit-email-btn">Edit</button>
+            </div>      
+            <div class="field">
+                <p id="profile-mobile">Mobile Number: @Model.MobileNumber</p>
+                <button class="profile-edit-mobile-btn" id="profile-edit-mobile-btn">Edit</button>
+            </div> 
+            <div class="field">
+                <p id="profile-birthday">Birthday: @birthdate</p>
+                <button class="profile-edit-birthday-btn" id="profile-edit-birthday-btn">Edit</button>
+            </div>  
+            <div class="field">
+                <p id="profile-gender">Gender: @Model.Gender</p>
+                <button class="profile-edit-gender-btn" id="profile-edit-gender-btn">Edit</button>
+            </div>
         </div>
-        <div class="profile-edit-modal" id="profile-edit-modal">
+        <div class="profile-edit-firstname-modal" id="profile-edit-firstname-modal">
             <div class="modal-container">
-                <span id="profile-close-modal">&times;</span>
-                <h2 class="profile-title-modal">Edit Information</h2>
+                <span id="profile-close-firstname-modal">&times;</span>
+                <h2 class="profile-title-modal">Edit First Name</h2>
                 <hr>
-                <form class="form-edit" id="form-profile">
+                <form class="form-edit-firstname" id="form-profile-firstname">
                     <label>First Name:</label>
                     <input type="text" id="first-name" name="FirstName" value="@Model.FirstName" /><br><br>
+                </form>
+                <div class="buttons">
+                    <button class="profile-firstname-btn" id="firstname-save-btn">Save</button>
+                    <button class="profile-firstname-btn" id="firstname-cancel-btn">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div class="profile-edit-lastname-modal" id="profile-edit-lastname-modal">
+            <div class="modal-container">
+                <span id="profile-close-lastname-modal">&times;</span>
+                <h2 class="profile-title-modal">Edit Last Name</h2>
+                <hr>
+                <form class="form-edit-lastname" id="form-profile-lastname">
                     <label>Last Name:</label>
                     <input type="text" id="last-name" name="LastName" value="@Model.LastName" /><br><br>
+                </form>
+                <div class="buttons">
+                    <button class="profile-lastname-btn" id="lastname-save-btn">Save</button>
+                    <button class="profile-lastname-btn" id="lastname-cancel-btn">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div class="profile-edit-email-modal" id="profile-edit-email-modal">
+            <div class="modal-container">
+                <span id="profile-close-email-modal">&times;</span>
+                <h2 class="profile-title-modal">Edit Email Address</h2>
+                <hr>
+                <form class="form-edit-email" id="form-profile-email">
+                    <label>Email Address:</label>
+                    <input type="text" id="email" name="EmailAddress" value="@Model.EmailAddress" /><br><br>
+                    <label>Password:</label>
+                    <input type="password" id="password" /><br><br>
+                    <label>Confirm Password:</label>
+                    <input type="password" id="confirm-password" /><br><br>
+                </form>
+                <div class="buttons">
+                    <button class="profile-email-btn" id="email-save-btn">Save</button>
+                    <button class="profile-email-btn" id="email-cancel-btn">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div class="profile-edit-mobile-modal" id="profile-edit-mobile-modal">
+            <div class="modal-container">
+                <span id="profile-close-mobile-modal">&times;</span>
+                <h2 class="profile-title-modal">Edit Mobile Number</h2>
+                <hr>
+                <form class="form-edit-mobile" id="form-profile-mobile">
                     <label>Mobile Number:</label>
-                    <input type="text" id="mobile-number" name="MobileNumber" value="@Model.MobileNumber" /><br><br>
-                    <label>Birthday:</label>
+                    <input type="text" id="mobile" name="MobileNumber" value="@Model.MobileNumber" /><br><br>
+                </form>
+                <div class="buttons">
+                    <button class="profile-mobile-btn" id="mobile-save-btn">Save</button>
+                    <button class="profile-mobile-btn" id="mobile-cancel-btn">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div class="profile-edit-birthday-modal" id="profile-edit-birthday-modal">
+            <div class="modal-container">
+                <span id="profile-close-birthday-modal">&times;</span>
+                <h2 class="profile-title-modal">Edit Birthday</h2>
+                <hr>
+                <form class="form-edit-birthday" id="form-profile-birthday">
+                     <label>Birthday:</label>
                     <input type="date" id="birthday" name="Birthday" value="@Model.Birthday" /><br><br>
+                </form>
+                <div class="buttons">
+                    <button class="profile-birthday-btn" id="birthday-save-btn">Save</button>
+                    <button class="profile-birthday-btn" id="birthday-cancel-btn">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div class="profile-edit-gender-modal" id="profile-edit-gender-modal">
+            <div class="modal-container">
+                <span id="profile-close-gender-modal">&times;</span>
+                <h2 class="profile-title-modal">Edit Gender</h2>
+                <hr>
+                <form class="form-edit-gender" id="form-profile-gender">
                     <label>Gender:</label>
                     <select type="text" id="gender" name="Gender" value="@Model.Gender">
+                        <option>---</option>
                         <option>Female</option>
                         <option>Male</option>
-                    </select>
+                    </select><br><br>
                 </form>
-                <button class="profile-btn" id="save-btn">Save</button>
-                <button class="profile-btn" id="cancel-btn">Cancel</button>
+                <div class="buttons">
+                    <button class="profile-gender-btn" id="gender-save-btn">Save</button>
+                    <button class="profile-gender-btn" id="gender-cancel-btn">Cancel</button>
+                </div>
             </div>
         </div>
     </div>
