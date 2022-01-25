@@ -2,6 +2,7 @@ namespace Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Database;
 using Models;
+using System.Text.Json;
 
 public class FriendsController: Controller
 {
@@ -17,7 +18,27 @@ public class FriendsController: Controller
             SessionsModel? sessionModel = DbSessions.GetSessionById(cookieSessionId);
             if(sessionModel != null)
             {
-                FriendsModel? friendsModel = DbFriends.GetFriendsData(cookieEmail);
+                
+                FriendsModel friendsModel = DbFriends.GetFriendsData(cookieEmail);
+                List<UserModel> friendRequestsObj = new List<UserModel>();
+                List<UserModel> friendsListObj = new List<UserModel>();
+                if(String.IsNullOrEmpty(friendsModel.FriendRequests))
+                {
+                    friendsModel.FriendRequestObjList = null;
+                }
+                else
+                {
+                    
+                }
+
+                if(String.IsNullOrEmpty(friendsModel.FriendsList))
+                {
+                    friendsModel.FriendsObjList = null;
+                }
+                else
+                {
+                    
+                }
                 
                 // UserModel userModel = 
                 return View("/Views/Friends/Friends.cshtml",friendsModel);

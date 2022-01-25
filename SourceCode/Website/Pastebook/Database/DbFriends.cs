@@ -48,7 +48,7 @@ public class DbFriends
     //     return model;
     // }
 
-    public static FriendsModel? GetFriendsData(string email)
+    public static FriendsModel GetFriendsData(string email)
     {
         FriendsModel model = new FriendsModel();
         using(var db = new SqlConnection(DB_CONNECTION_STRING))
