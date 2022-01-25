@@ -1,26 +1,27 @@
 // @import '../Shared/colors';
-// @import '../Shared/header';
+// @import '../Shared/_header';
 @import '../Shared/import';
 
 .friends{
-    position: relative;
-    top: $header-total-height;
-
-    display: flex;
-    flex-direction: row;
-
-    width: 100%;
+    // position: relative;
+    // top: $header-height;
+    // top: 0;
+    height: 100vh;
+    // display: flex;
+    // flex-direction: row;
+    // width: 100vw;
 
     $sidepanel-padding: 10px;
-    $sidepanel-width: 20%;
+    $sidepanel-width: 350px;
 
     &-sidepanel{
         background-color: white;
         position: fixed;
         left: 0;
-        padding-left: $sidepanel-padding;
+        top: $header-total-height;
+        // padding-left: $sidepanel-padding;
         padding-top: $sidepanel-padding;
-        margin-right: $sidepanel-padding;
+        // margin-right: $sidepanel-padding;
         width: $sidepanel-width;
 
 
@@ -48,105 +49,157 @@
     }
 
     &-main{
-        padding-top: $sidepanel-padding;
-        // padding-left: $sidepanel-padding;
         background-color: $grey;
-        position: relative;
+        position: absolute;
+        top: $header-total-height;
         left: $sidepanel-width;
+        padding-top: $sidepanel-padding;
         right: 0;
-
-        width: 100% - $sidepanel-width;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-
-        &-title{
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        &-friendcardcontainer{
-            width: 100%;
-            display:grid;
-            $grid-column-width: auto;
-            grid-template-columns: $grid-column-width $grid-column-width $grid-column-width $grid-column-width;
-            $grid-gap:10px;
-            grid-gap: $grid-gap 0;
-            justify-content: space-around;
-            // text-align: center;
-            
-
-            &-friendcard{
-                background-color: white;
-                border-radius: 20px;
-                width: 210px;
-                // padding: 10px;
-                height: 350px;
-
-
-                &-picture{ 
-                    height: 50%;
-                    width: 100%;
-
-                    & img{
-                        height: 100%;
+        // padding-left: $sidepanel-padding;
+        margin: 10px;
+        
+        &-requests{
+            display: block;
+            flex-direction: column;
+            align-items: center;
+            &-title{
+                font-weight: bold;
+                margin-bottom: 20px;
+                // padding-left: $sidepanel-padding;
+                align-self: flex-start;
+            }
+    
+            &-friendcardcontainer{
+                display:grid;
+                $grid-column-width: auto;
+                grid-template-columns: $grid-column-width $grid-column-width $grid-column-width $grid-column-width;
+                $grid-gap:10px;
+                grid-gap: $grid-gap $grid-gap;
+                // justify-content: space-around;
+                // text-align: center;
+                
+    
+                &-friendreqcard{
+                    background-color: white;
+                    border-radius: 20px;
+                    width: 240px;
+                    // padding: 10px;
+                    height: 350px;
+    
+    
+                    &-picture{ 
+                        height: 50%;
                         width: 100%;
-                        object-fit: cover;
-                        border-radius: 20px 20px 0 0;
-                    }
-                }
-
-                &-content{
-                    height: 50%;
-                    width: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-around;
-                    
-                    $padding-left-right:20px;
-                    padding: 0 $padding-left-right 0 $padding-left-right;
-
-                    &-name{
-                        font-weight: bold;
+    
+                        & img{
+                            height: 100%;
+                            width: 100%;
+                            object-fit: cover;
+                            border-radius: 20px 20px 0 0;
+                        }
                     }
     
-                    $button-height:50px;
-                    $button-width:80%;
-
-                    &-confirm, &-delete{
+                    &-content{
+                        height: 50%;
+                        width: 100%;
                         display: flex;
                         flex-direction: column;
-
-                        &-button{
-                            border-radius: 10px;
-                            border:none;
+                        justify-content: space-around;
+                        
+                        $padding-left-right:20px;
+                        padding: 0 $padding-left-right 0 $padding-left-right;
+    
+                        &-name{
                             font-weight: bold;
-                            cursor: pointer;
                         }
-                    }
+        
+                        $button-height:50px;
+                        $button-width:80%;
     
-                    &-confirm{
-                        width: 100%;
-                        &-button{
-                            width: 100%;
-                            background-color: $blue;
-                            color: white;
-                            width: $button-width;
-                            height: $button-height;
-                        }
-                    }
+                        &-confirm, &-delete{
+                            display: flex;
+                            flex-direction: column;
     
-                    &-delete{
-                        width: 100%;
-                        &-button{
+                            &-button{
+                                border-radius: 10px;
+                                border:none;
+                                font-weight: bold;
+                                cursor: pointer;
+                            }
+                        }
+        
+                        &-confirm{
                             width: 100%;
-                            color: black;
-                            width: $button-width;
-                            height: $button-height;
-                            background-color: $grey;
+                            &-button{
+                                width: 100%;
+                                background-color: $blue;
+                                color: white;
+                                width: $button-width;
+                                height: $button-height;
+                            }
+                        }
+        
+                        &-delete{
+                            width: 100%;
+                            &-button{
+                                width: 100%;
+                                color: black;
+                                width: $button-width;
+                                height: $button-height;
+                                background-color: $grey;
+                            }
                         }
                     }
+                }
+            }
+        }
+
+        &-all{
+            display: none;
+            width: 100%;
+            height: 100%;
+
+            &-title{
+                font-weight: bold;
+                margin-bottom: 20px;
+                // padding-left: $sidepanel-padding;
+            }
+
+            &-container{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                &-friendcard{
+                    background-color: white;
+                    margin: 5px 0 5px 0;
+                    // height: 100px;
+                    padding: 10px;
+                    width: 90%;
+                    display: flex;
+                    $border-radius: 20px;
+                    border-radius: $border-radius;
+                    flex-direction: row;
+                    align-items: center;
+                    
+
+                    &-picture{
+                        $picture-dimensions:90px; 
+                        height: $picture-dimensions;
+                        width: $picture-dimensions;
+    
+                        & img{
+                            height: 100%;
+                            width: 100%;
+                            object-fit: cover;
+                            border-radius: 50%;
+                        }
+                    }
+
+                    &-name{
+                        padding-left: 10px;
+                    }
+                    
                 }
             }
         }

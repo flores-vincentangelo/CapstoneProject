@@ -1,6 +1,4 @@
 $(document).ready(function () {
-    // alert("HI");
-    // var model = @(Model.UserEmail);
 
     //confirm friend request 
     //moves email from friend request to the friendslist column
@@ -14,6 +12,20 @@ $(document).ready(function () {
         var emailToDelete = $(this).attr("id");
         console.log(emailToDelete);
         DeleteFriendReq(emailToDelete);
+        
+    });
+
+    $("#friends-sidepanel-link-all").click(function (e) { 
+        e.preventDefault();
+        // alert("hi");
+        $(".friends-main-requests").css("display", "none");
+        $(".friends-main-all").css("display", "block");
+    });
+
+    $("#friends-sidepanel-link-reqs").click(function (e) { 
+        e.preventDefault();
+        $(".friends-main-requests").css("display", "block");
+        $(".friends-main-all").css("display", "none");
         
     });
 });

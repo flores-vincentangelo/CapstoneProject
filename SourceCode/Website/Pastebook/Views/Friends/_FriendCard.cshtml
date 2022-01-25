@@ -1,18 +1,9 @@
 @model Models.UserModel
-
-<div class="friends-main-friendcardcontainer-friendcard">
-    <div class="friends-main-friendcardcontainer-friendcard-picture">
+<div class="friends-main-all-container-friendcard">
+    <div class="friends-main-all-container-friendcard-picture">
         <img src=@Model.Photo>
-        @* <img id="profile-photo-img" src=@Model.Photo > *@
     </div>
-    <div class="friends-main-friendcardcontainer-friendcard-content">
-        <div class="friends-main-friendcardcontainer-friendcard-content-name">@Model.FullName</div>
-        <div class="friends-main-friendcardcontainer-friendcard-content-confirm">
-            <button class="friends-main-friendcardcontainer-friendcard-content-confirm-button" id=@Model.EmailAddress>Confirm</button>
-        </div>
-        <div class="friends-main-friendcardcontainer-friendcard-content-delete">
-            <button class="friends-main-friendcardcontainer-friendcard-content-delete-button" id=@Model.EmailAddress>Delete</button>
-        </div>
+    <div class="friends-main-all-container-friendcard-name">
+        <a href=@(Model.ProfileLink)>@Model.FullName</a>
     </div>
-    
 </div>

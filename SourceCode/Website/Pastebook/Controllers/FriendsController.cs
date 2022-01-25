@@ -21,7 +21,6 @@ public class FriendsController: Controller
                 
                 FriendsModel friendsModel = DbFriends.GetFriendsData(cookieEmail);
                 List<UserModel> friendRequestsObj = new List<UserModel>();
-                List<UserModel> friendsListObj = new List<UserModel>();
                 if(String.IsNullOrEmpty(friendsModel.FriendRequests))
                 {
                     // System.Console.WriteLine($"{Environment.NewLine} null {Environment.NewLine}");
@@ -30,7 +29,7 @@ public class FriendsController: Controller
                 else
                 {
                     // System.Console.WriteLine($"{Environment.NewLine} {friendsModel.FriendRequests} {Environment.NewLine}");
-                    var emailArr = friendsModel.FriendRequests.Split(",");
+                    var emailArr = friendsModel.FriendRequests.Split(',');
                     foreach (string email in emailArr)
                     {
                         UserModel userModel = DbUsers.GetUserByEmail(email);
@@ -39,14 +38,21 @@ public class FriendsController: Controller
 
                     friendsModel.FriendRequestObjList = friendRequestsObj;
                 }
-
+                
+                List<UserModel> friendsListObj = new List<UserModel>();
                 if(String.IsNullOrEmpty(friendsModel.FriendsList))
                 {
                     friendsModel.FriendsObjList = null;
                 }
                 else
                 {
-                    
+                    var emailArr = friendsModel.FriendsList.Split(',');
+                    foreach (string email in emailArr)
+                    {
+                        UserModel userModel = DbUsers.GetUserByEmail(email);
+                        friendsListObj.Add(userModel);
+                    }
+                    friendsModel.FriendsObjList = friendsListObj;
                 }
                 
                 // UserModel userModel = 
