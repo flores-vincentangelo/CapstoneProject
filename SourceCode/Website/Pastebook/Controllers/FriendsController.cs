@@ -17,12 +17,10 @@ public class FriendsController: Controller
             SessionsModel? sessionModel = DbSessions.GetSessionById(cookieSessionId);
             if(sessionModel != null)
             {
-                // FriendsModel model = DbFriends.GetFriendsData(cookieEmail);
-                FriendsModel model = new FriendsModel();
-                model.UserEmail = cookieEmail;
-                model.FriendsList = "a@gmail.com,b@gmail.com,c@gmail.com,d@gmail.com,e@gmail.com";
-                model.FriendRequests = "a@gmail.com,b@gmail.com,c@gmail.com,d@gmail.com,e@gmail.com";
-                return View("/Views/Friends/Friends.cshtml",model);
+                FriendsModel? friendsModel = DbFriends.GetFriendsData(cookieEmail);
+                
+                // UserModel userModel = 
+                return View("/Views/Friends/Friends.cshtml",friendsModel);
             }
         }
         return RedirectToAction("doLoginAction", "Login");

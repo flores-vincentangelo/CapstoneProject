@@ -21,7 +21,7 @@ $(document).ready(function () {
 
     //account button
     $(window).click(function (e) { 
-        e.preventDefault();
+        // e.preventDefault();
         $(".layout-accountpanel").css("display", "none");
     });
 

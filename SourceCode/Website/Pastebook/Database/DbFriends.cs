@@ -48,7 +48,7 @@ public class DbFriends
     //     return model;
     // }
 
-    public static FriendsModel GetFriendsData(string email)
+    public static FriendsModel? GetFriendsData(string email)
     {
         FriendsModel model = new FriendsModel();
         using(var db = new SqlConnection(DB_CONNECTION_STRING))
@@ -62,8 +62,8 @@ public class DbFriends
                 while(reader.Read())
                 {
                     model.UserEmail = email;
-                    model.FriendsList = reader.GetString(0);
-                    model.FriendRequests = reader.GetString(1);
+                    model.FriendsList = reader.IsDBNull(0) ? null : reader.GetString(0);
+                    model.FriendRequests = reader.IsDBNull(1) ? null : reader.GetString(1);
                 }
             }
         }
