@@ -154,4 +154,38 @@ public class DbTables
             }
         }
     }
+
+    public static void CreateAlbumsTable()
+    {     
+        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var command = db.CreateCommand())
+            {
+                command.CommandText = @"IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Albums' and xtype='U')
+                CREATE TABLE Albums (
+                    Id INTEGER NOT NULL IDENTITY (1,1) PRIMARY KEY,
+                    Name VARCHAR (255),
+                    UserEmail VARCHAR (255),
+                    CreatedDate BIGINT
+                    );";
+                command.ExecuteNonQuery();
+                Console.WriteLine("Albums Table created successfully!");
+             }
+        }
+    }
+
+    public static void DropAlbumsTable()
+    {
+        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var command = db.CreateCommand())
+            {
+                command.CommandText = "DROP TABLE IF EXISTS Albums";
+                command.ExecuteNonQuery();
+                Console.WriteLine("Albums Table deleted successfully!");
+            }
+        }
+    }
 }
