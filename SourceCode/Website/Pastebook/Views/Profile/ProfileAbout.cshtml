@@ -7,37 +7,20 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="./Styles/Profiles/ProfileExt.css">
-    <script src="./Scripts/ProfileExt.js"></script>
+    <link rel="stylesheet" type="text/css" href="./Styles/Profiles/ProfileAbout.css">
+    <script>
+        // This is temporary
+        // Need to set profileLink in localstorage at currentProfile.profileLink
+        localStorage.setItem('profileLink', "@Model.ProfileLink");  
+    </script>
+    <script src="./Scripts/ProfileAbout.js"></script>
 </head>
 
 <body>
     <div class="profile-ext-container">
         <h3>About</h3>
-        <button class="profile-edit-btn" id="profile-edit-btn">Edit Profile</button>
-        <div class="profile-edit-modal" id="profile-edit-modal">
-            <div class="modal-container">
-                <span id="profile-close-modal">&times;</span>
-                <h2 class="profile-title-modal">Edit Information</h2>
-                <hr>
-                <form class="form-edit" id="form-profile">
-                    <label>First Name:</label>
-                    <input type="text" id="first-name" name="FirstName" value="@Model.FirstName" /><br><br>
-                    <label>Last Name:</label>
-                    <input type="text" id="last-name" name="FirstName" value="@Model.LastName" /><br><br>
-                    <label>Mobile Number:</label>
-                    <input type="text" id="mobile-number" name="MobileNumber" value="@Model.MobileNumber" /><br><br>
-                    <label>Birthday:</label>
-                    <input type="date" id="birthday" name="Birthday" value="@Model.Birthday" /><br><br>
-                    <label>Gender:</label>
-                    <input type="text" id="gender" name="Gender" value="@Model.Gender" />
-                </form>
-                <button class="profile-btn" id="save-btn">Save</button>
-                <button class="profile-btn" id="cancel-btn">Cancel</button>
-            </div>
-        </div>
-
         <div class="profile-readonly" id="profile-readonly">
+            <button class="profile-edit-btn" id="profile-edit-btn">Edit Profile</button>
             <p id="profile-first-name">First Name: @Model.FirstName</p>
             <p id="profile-last-name">Last Name: @Model.LastName</p>
             <p id="profile-email-address">Email Address: @Model.EmailAddress</p>
@@ -68,6 +51,30 @@
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga porro, perspiciatis accusantium odio maiores
             voluptatibus vero placeat tempora non nihil quod cumque sint exercitationem quae iure aliquam mollitia ad
             facilis.
+        </div>
+        <div class="profile-edit-modal" id="profile-edit-modal">
+            <div class="modal-container">
+                <span id="profile-close-modal">&times;</span>
+                <h2 class="profile-title-modal">Edit Information</h2>
+                <hr>
+                <form class="form-edit" id="form-profile">
+                    <label>First Name:</label>
+                    <input type="text" id="first-name" name="FirstName" value="@Model.FirstName" /><br><br>
+                    <label>Last Name:</label>
+                    <input type="text" id="last-name" name="LastName" value="@Model.LastName" /><br><br>
+                    <label>Mobile Number:</label>
+                    <input type="text" id="mobile-number" name="MobileNumber" value="@Model.MobileNumber" /><br><br>
+                    <label>Birthday:</label>
+                    <input type="date" id="birthday" name="Birthday" value="@Model.Birthday" /><br><br>
+                    <label>Gender:</label>
+                    <select type="text" id="gender" name="Gender" value="@Model.Gender">
+                        <option>Female</option>
+                        <option>Male</option>
+                    </select>
+                </form>
+                <button class="profile-btn" id="save-btn">Save</button>
+                <button class="profile-btn" id="cancel-btn">Cancel</button>
+            </div>
         </div>
     </div>
 </body>
