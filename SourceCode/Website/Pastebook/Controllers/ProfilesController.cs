@@ -8,18 +8,29 @@ public class ProfilesController: Controller
     [HttpGet]
     [Route("/{profileLink}")]
     public IActionResult GetUserByLink(string profileLink) {
-        string? cookieEmail = HttpContext.Request.Cookies["email"];
-        string? cookieSessionId = HttpContext.Request.Cookies["sessionId"];
-        if(cookieSessionId != null)
+        Console.WriteLine("Profile Link: " + profileLink);
+        if( profileLink != "favicon.ico" && 
+            profileLink != "login" && 
+            profileLink != "register" && 
+            profileLink != "sessions" && 
+            profileLink != "albums" && 
+            profileLink != "friends")
         {
-            SessionsModel? sessionModel = DbSessions.GetSessionById(cookieSessionId);
-            if(sessionModel != null)
+            string? cookieEmail = HttpContext.Request.Cookies["email"];
+            string? cookieSessionId = HttpContext.Request.Cookies["sessionId"];
+        
+            if(cookieSessionId != null)
             {
-                var user = DbUsers.GetInformationById(profileLink);
-                return View("/Views/Profile/Profile.cshtml", user);
+                SessionsModel? sessionModel = DbSessions.GetSessionById(cookieSessionId);
+                if(sessionModel != null)
+                {
+                    var user = DbUsers.GetInformationById(profileLink);
+                    return View("/Views/Profile/Profile.cshtml", user);
+                }
             }
         }
-        return RedirectToAction("doLoginAction", "Login");
+        // return RedirectToAction("doLoginAction", "Login");
+        return Ok();
     }
 
     [HttpPatch]

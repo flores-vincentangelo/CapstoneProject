@@ -14,6 +14,7 @@ public class ConfigureController: Controller
             DbTables.CreateSessionsTable();
             DbTables.CreateFriendsTable(); //added by Vincent
             DbTables.CreateAlbumsTable(); //added by JP
+            DbTables.CreatePhotosTable(); //added by JP
             return Ok("All Tables are Created!");
         }
         else if (config == "DropTables") {
@@ -21,6 +22,7 @@ public class ConfigureController: Controller
             DbTables.DropSessionsTable();
             DbTables.DropFriendsTable(); //added by Vincent
             DbTables.DropAlbumsTable(); //added by JP
+            DbTables.DropPhotosTable(); //added by JP
             return Ok("All Tables are Dropped");
         }
         else if(config == "MakeUsers")
