@@ -1,3 +1,4 @@
+/* GENERAL */
 .profile-ext-container {
     background: #f1f1f1;
     display: flex;
@@ -12,4 +13,67 @@
     background: #ffffff;
     margin: 0 12% 2%;
     padding: 10px 15px;
+}
+
+/* PROFILE ABOUT */
+.profile-readonly {
+    border-radius: 10px;
+    background: #ffffff;
+    margin: 0 12% 2%;
+    padding: 10px 15px;
+}
+
+.profile-edit-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: auto;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-container {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 12px;
+    width: 40%;
+}
+
+.profile-title-modal{
+    text-align: center;
+}
+
+#profile-close-modal {
+    color: #aaaaaa;
+    float: right;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+#profile-close-modal:hover,
+#profile-close-modal:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.profile-btn{
+    width: 50%;
+}
+
+#save-btn {
+    float: right;
+}
+
+#cancel-btn {
+    float: left;
+}
+
+#form-profile {
+    margin-bottom: 10px;
 }
