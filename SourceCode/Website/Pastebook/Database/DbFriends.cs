@@ -85,13 +85,20 @@ public class DbFriends
         }
     }
 
-    public static string RemoveEmailFromFriendReqs(string email, string friendReqs)
+    public static string? RemoveEmailFromFriendReqs(string email, string friendReqs)
     {
         
         var _friendReqsArr = friendReqs.Split(",");
         List<string> friendReqsList = new List<string>(_friendReqsArr);
         friendReqsList.Remove(email);
-        return String.Join(",",friendReqsList);
+        if(friendReqsList.Count == 0){
+            return null;
+        }
+        else
+        {
+            return String.Join(",",friendReqsList);
+        }
+        
     }
 
     public static string AddEmailtoFriendsList(string emailToAdd, string? friendsListStr)
