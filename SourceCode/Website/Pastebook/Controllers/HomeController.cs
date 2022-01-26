@@ -24,10 +24,4 @@ public class HomeController: Controller
         return RedirectToAction("doLoginAction", "Login");
     }
 
-    [HttpGet]
-    [Route("/post")]
-    public IActionResult GetPost()
-    {
-        return View("/Views/Post.cshtml");
-    }
 }
