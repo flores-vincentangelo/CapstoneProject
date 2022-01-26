@@ -18,7 +18,6 @@ public class ProfilesController: Controller
         {
             string? cookieEmail = HttpContext.Request.Cookies["email"];
             string? cookieSessionId = HttpContext.Request.Cookies["sessionId"];
-        
             if(cookieSessionId != null)
             {
                 SessionsModel? sessionModel = DbSessions.GetSessionById(cookieSessionId);
@@ -28,8 +27,8 @@ public class ProfilesController: Controller
                     return View("/Views/Profile/Profile.cshtml", user);
                 }
             }
+            return RedirectToAction("doLoginAction", "Login");
         }
-        // return RedirectToAction("doLoginAction", "Login");
         return Ok();
     }
 
