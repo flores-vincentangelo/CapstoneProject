@@ -17,7 +17,8 @@ public class HomeController: Controller
             SessionsModel? sessionModel = DbSessions.GetSessionById(cookieSessionId);
             if(sessionModel != null)
             {
-                return View("/Views/Home/Home.cshtml");
+                UserModel user = DbUsers.GetUserByEmail(cookieEmail);
+                return View("/Views/Home/Home.cshtml",user);
             }
         }
 
