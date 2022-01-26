@@ -1,0 +1,73 @@
+/* GENERAL */
+.profile-ext-container {
+    background: #f1f1f1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+    width: 100%;
+}
+
+.ext-container {
+    width: -webkit-fill-available;
+    border-radius: 10px;
+    background: #ffffff;
+    margin: 0 12% 2%;
+    padding: 10px 15px;
+}
+
+.album-btn:hover,
+.album-btn:focus {
+    cursor: pointer;
+}
+
+/* MODAL ADD NEW ALBUM */
+#album-add-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+.modal-container {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 12px;
+    width: 40%;
+}
+.album-add-title-modal {
+    text-align: center;
+}
+#album-add-close-modal {
+    color: #aaaaaa;
+    float: right;
+    font-size: 36px;
+    font-weight: bold;
+}
+#album-add-close-modal:hover,
+#album-add-close-modal:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+.album-btn{
+    width: 50%;
+}
+#album-save-btn {
+    float: right;
+}
+#album-cancel-btn {
+    float: left;
+}
+
+/* FORM INSIDE MODAL */
+.form-add-album {
+    margin-bottom: 10px;
+}
