@@ -154,4 +154,75 @@ public class DbTables
             }
         }
     }
+
+    public static void CreateAlbumsTable()
+    {     
+        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var command = db.CreateCommand())
+            {
+                command.CommandText = @"IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Albums' and xtype='U')
+                CREATE TABLE Albums (
+                    AlbumId INTEGER NOT NULL IDENTITY (1,1) PRIMARY KEY,
+                    AlbumName VARCHAR (255),
+                    UserEmail VARCHAR (255),
+                    CreatedDate BIGINT
+                    );";
+                command.ExecuteNonQuery();
+                Console.WriteLine("Albums Table created successfully!");
+             }
+        }
+    }
+
+    public static void DropAlbumsTable()
+    {
+        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var command = db.CreateCommand())
+            {
+                command.CommandText = "DROP TABLE IF EXISTS Albums";
+                command.ExecuteNonQuery();
+                Console.WriteLine("Albums Table deleted successfully!");
+            }
+        }
+    }
+
+    public static void CreatePhotosTable()
+    {     
+        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var command = db.CreateCommand())
+            {
+                command.CommandText = @"IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Photos' and xtype='U')
+                CREATE TABLE Photos (
+                    PhotoId INTEGER NOT NULL IDENTITY (1,1) PRIMARY KEY,
+                    UserEmail VARCHAR (255),
+                    Photo VARCHAR (MAX),
+                    UploadDate BIGINT,
+                    AlbumId VARCHAR (255),
+                    Likes VARCHAR (MAX),
+                    Comments VARCHAR (MAX)
+                    );";
+                command.ExecuteNonQuery();
+                Console.WriteLine("Photos Table created successfully!");
+             }
+        }
+    }
+
+    public static void DropPhotosTable()
+    {
+        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var command = db.CreateCommand())
+            {
+                command.CommandText = "DROP TABLE IF EXISTS Photos";
+                command.ExecuteNonQuery();
+                Console.WriteLine("Photos Table deleted successfully!");
+            }
+        }
+    }
 }

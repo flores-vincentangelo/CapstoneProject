@@ -1,18 +1,13 @@
 .friends {
-  position: relative;
-  top: 75px;
-  display: flex;
-  flex-direction: row;
-  width: 100%;
+  height: 100vh;
 }
 .friends-sidepanel {
   background-color: white;
   position: fixed;
   left: 0;
-  padding-left: 10px;
+  top: 60px;
   padding-top: 10px;
-  margin-right: 10px;
-  width: 20%;
+  width: 350px;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -33,44 +28,46 @@
   margin-right: 10px;
 }
 .friends-main {
-  padding-top: 10px;
   background-color: #e9ebee;
-  position: relative;
-  left: 20%;
+  position: absolute;
+  top: 60px;
+  left: 350px;
+  padding-top: 10px;
   right: 0;
-  width: 80%;
-  display: flex;
+  margin: 10px;
+}
+.friends-main-requests {
+  display: block;
   flex-direction: column;
   align-items: center;
 }
-.friends-main-title {
+.friends-main-requests-title {
   font-weight: bold;
   margin-bottom: 20px;
+  align-self: flex-start;
 }
-.friends-main-friendcardcontainer {
-  width: 100%;
+.friends-main-requests-friendcardcontainer {
   display: grid;
   grid-template-columns: auto auto auto auto;
-  grid-gap: 10px 0;
-  justify-content: space-around;
+  grid-gap: 10px 10px;
 }
-.friends-main-friendcardcontainer-friendcard {
+.friends-main-requests-friendcardcontainer-friendreqcard {
   background-color: white;
   border-radius: 20px;
-  width: 210px;
+  width: 240px;
   height: 350px;
 }
-.friends-main-friendcardcontainer-friendcard-picture {
+.friends-main-requests-friendcardcontainer-friendreqcard-picture {
   height: 50%;
   width: 100%;
 }
-.friends-main-friendcardcontainer-friendcard-picture img {
+.friends-main-requests-friendcardcontainer-friendreqcard-picture img {
   height: 100%;
   width: 100%;
   object-fit: cover;
   border-radius: 20px 20px 0 0;
 }
-.friends-main-friendcardcontainer-friendcard-content {
+.friends-main-requests-friendcardcontainer-friendreqcard-content {
   height: 50%;
   width: 100%;
   display: flex;
@@ -78,38 +75,75 @@
   justify-content: space-around;
   padding: 0 20px 0 20px;
 }
-.friends-main-friendcardcontainer-friendcard-content-name {
+.friends-main-requests-friendcardcontainer-friendreqcard-content-name {
   font-weight: bold;
 }
-.friends-main-friendcardcontainer-friendcard-content-confirm, .friends-main-friendcardcontainer-friendcard-content-delete {
+.friends-main-requests-friendcardcontainer-friendreqcard-content-confirm, .friends-main-requests-friendcardcontainer-friendreqcard-content-delete {
   display: flex;
   flex-direction: column;
 }
-.friends-main-friendcardcontainer-friendcard-content-confirm-button, .friends-main-friendcardcontainer-friendcard-content-delete-button {
+.friends-main-requests-friendcardcontainer-friendreqcard-content-confirm-button, .friends-main-requests-friendcardcontainer-friendreqcard-content-delete-button {
   border-radius: 10px;
   border: none;
   font-weight: bold;
   cursor: pointer;
 }
-.friends-main-friendcardcontainer-friendcard-content-confirm {
+.friends-main-requests-friendcardcontainer-friendreqcard-content-confirm {
   width: 100%;
 }
-.friends-main-friendcardcontainer-friendcard-content-confirm-button {
+.friends-main-requests-friendcardcontainer-friendreqcard-content-confirm-button {
   width: 100%;
   background-color: #1877f2;
   color: white;
   width: 80%;
   height: 50px;
 }
-.friends-main-friendcardcontainer-friendcard-content-delete {
+.friends-main-requests-friendcardcontainer-friendreqcard-content-delete {
   width: 100%;
 }
-.friends-main-friendcardcontainer-friendcard-content-delete-button {
+.friends-main-requests-friendcardcontainer-friendreqcard-content-delete-button {
   width: 100%;
   color: black;
   width: 80%;
   height: 50px;
   background-color: #e9ebee;
+}
+.friends-main-all {
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+.friends-main-all-title {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.friends-main-all-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.friends-main-all-container-friendcard {
+  background-color: white;
+  margin: 5px 0 5px 0;
+  padding: 10px;
+  width: 90%;
+  display: flex;
+  border-radius: 20px;
+  flex-direction: row;
+  align-items: center;
+}
+.friends-main-all-container-friendcard-picture {
+  height: 90px;
+  width: 90px;
+}
+.friends-main-all-container-friendcard-picture img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.friends-main-all-container-friendcard-name {
+  padding-left: 10px;
 }
 
 /*# sourceMappingURL=Friends.css.map */

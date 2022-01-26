@@ -1,15 +1,9 @@
-<div class="friends-main-friendcardcontainer-friendcard">
-    <div class="friends-main-friendcardcontainer-friendcard-picture">
-        <img src="Images/Friends/defaultpicture.jpg">
+@model Models.UserModel
+<div class="friends-main-all-container-friendcard">
+    <div class="friends-main-all-container-friendcard-picture">
+        <img src=@Model.Photo>
     </div>
-    <div class="friends-main-friendcardcontainer-friendcard-content">
-        <div class="friends-main-friendcardcontainer-friendcard-content-name">Juan Dela Cruz</div>
-        <div class="friends-main-friendcardcontainer-friendcard-content-confirm">
-            <button class="friends-main-friendcardcontainer-friendcard-content-confirm-button">Confirm</button>
-        </div>
-        <div class="friends-main-friendcardcontainer-friendcard-content-delete">
-            <button class="friends-main-friendcardcontainer-friendcard-content-delete-button">Delete</button>
-        </div>
+    <div class="friends-main-all-container-friendcard-name">
+        <a href=@(Model.ProfileLink)>@Model.FullName</a>
     </div>
-    
 </div>
