@@ -221,12 +221,16 @@ label {
     width: 60%;
 }
 
-#old-password {
-    margin-left: 30px;
+#old-password{
+    margin-left: 27px;
     width: 62%;
 }
 
-#new-password,
+#new-password {
+    margin-left: 18px;
+    width: 62%;
+}
+
 #confirm-password,
 #confirm-new-password {
     width: 62%;
@@ -234,7 +238,7 @@ label {
 
 #email {
     margin-left: 22px;
-    width: 62%;
+    width: 61%;
 }
 
 #gender {
