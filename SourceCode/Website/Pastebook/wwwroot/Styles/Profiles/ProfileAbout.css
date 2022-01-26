@@ -223,14 +223,14 @@ label {
     width: 60%;
 }
 
-.modal-about-container .input-about {
+/* .modal-about-container .input-about {
     width: auto;
     height: auto;
     padding: 5px;
     margin: auto;
     border-radius: 0;
     background-color: white;
-}
+} */
 
 #gender {
     width: 80%;
