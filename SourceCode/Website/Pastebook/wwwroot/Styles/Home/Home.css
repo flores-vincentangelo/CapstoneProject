@@ -1,17 +1,38 @@
 .home-body {
   position: relative;
-  top: 75px;
+  top: 60px;
   display: flex;
   flex-direction: row;
   width: 100%;
 }
 .home-body-leftsidepanel {
+  padding-top: 10px;
   position: fixed;
   width: 25%;
   display: flex;
   flex-direction: column;
   overflow: auto;
   height: 100vh;
+}
+.home-body-leftsidepanel > a {
+  margin-bottom: 10px;
+}
+.home-body-leftsidepanel > a > div {
+  display: flex;
+  align-items: center;
+}
+.home-body-leftsidepanel-profilelink-picture {
+  height: 50px;
+  width: 50px;
+}
+.home-body-leftsidepanel-profilelink-picture img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.home-body-leftsidepanel-profilelink-name {
+  padding-left: 10px;
 }
 .home-body-timeline {
   position: relative;
