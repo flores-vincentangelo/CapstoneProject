@@ -15,18 +15,15 @@ $(document).ready(function () {
 
     $(".profilelink").on("click", function () {
         var url = $(this).attr("href");
-        console.log(url);
         window.location = url;
     });
 
     //account button
     $(window).click(function (e) { 
-        // e.preventDefault();
         var target = e.target;
         if(!target.closest(".layout-accountpanel") && !target.closest(".layout-header-right-settings")){
             $(".layout-accountpanel").css("display", "none");
         }
-        console.log(target);
         if(!target.closest(".layout-header-left-searchpanel") && !target.closest(".layout-header-left-searchform-input")){
             $(".layout-header-left-searchpanel").css("display", "none");
             $(".layout-header-left-searchform-input").val('');
@@ -53,7 +50,6 @@ $(document).ready(function () {
 });
 
 async function SearchUsers(searchTerm){
-    // console.log(searchTerm);
 
     if(!searchTerm){
         $(".layout-header-left-searchpanel-searchresults").html("No Results");
@@ -68,9 +64,7 @@ async function SearchUsers(searchTerm){
     if(data.length == 0){
         $(".layout-header-left-searchpanel-searchresults").html("No Results");
     } else {
-        console.log(data);
         data.forEach((item,index) => {
-            // console.log(item.);
             AddSearchCard(item.profileName,item.profileLink,item.photo);
         });
     }
