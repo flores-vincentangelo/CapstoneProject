@@ -1,4 +1,6 @@
 $(document).ready( () => {
+    // Add to cookie
+    // document.cookie = 'profilelink=' + user.ProfileLink;
     // Profile picture
     EditProfilePicture();
     // About Me
@@ -104,8 +106,10 @@ function EditAboutMe() {
 
 async function modifyProfile(event, jsonData) {
     event.preventDefault();
-    const link = localStorage.getItem('profileLink');
-    const response = await fetch(`/${link}`, {
+    // const link = localStorage.getItem('profileLink');
+    const link = getCookieValue('profilelink');
+    const url = `/${link}`;
+    const response = await fetch(url, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json'
@@ -118,6 +122,10 @@ async function modifyProfile(event, jsonData) {
         localStorage.setItem('User', JSON.stringify(userData));
     }
 }
+
+const getCookieValue = (name) => (
+    document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || ''
+)
 
 function showProfileExt() {
     $('#ext-about-btn').click(() => {

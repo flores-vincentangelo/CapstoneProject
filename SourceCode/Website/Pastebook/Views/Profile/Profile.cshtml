@@ -1,5 +1,5 @@
-@model Models.UserModel
 @{Layout = "/Views/_Layout.cshtml";}
+@model Models.UserModel
 <head>
     <!-- Styles  -->
     <link rel="stylesheet" type="text/css" href="./Styles/Profiles/Profile.css">
@@ -8,8 +8,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         // This is temporary
-        // Need to set profileLink in localstorage at currentProfile.profileLink
-        localStorage.setItem('profileLink', "@Model.ProfileLink");  
+        @* localStorage.setItem('profileLink', "@Model.ProfileLink"); *@
+        document.cookie = 'profilelink=' + "@Model.ProfileLink";  
     </script>    
     <script src="./Scripts/Profile.js"></script>
 
@@ -42,7 +42,7 @@
     </div>
 
     <div class="profile-name-container">
-        <h1>@Model.ProfileName</h1>
+        <h1>@Model.FirstName @Model.LastName</h1>
     </div>
 
     <div class="profile-about-container">
