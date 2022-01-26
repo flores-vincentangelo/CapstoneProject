@@ -6,6 +6,10 @@ $(document).ready(() => {
     EditBirthday();
     EditGender();
     EditPassword();
+    MobileNumLimit(element);
+    PasswordLimit(element);
+    LettersInput(input);
+    NumbersInput(input);
 });
 
 function EditFirstName() {
@@ -31,13 +35,17 @@ function EditFirstName() {
     $('#firstname-save-btn').click((event) => {
         // Change "First Name"
         var firstName = document.getElementById("first-name");
-        $('#profile-first-name').text("First Name: " + firstName.value);
+        $('#model-firstname-details').text(firstName.value);
         // Save firstName.value to database
         var formData = new FormData(document.getElementById('form-profile-firstname'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
         modifyDetails(event, data);
+        // show readonly profile
+        $('.profile-readonly').css("display", "block");
         // hide edit form
         $('.profile-edit-firstname').css("display", "none");
+        // hide modal
+        $('.profile-edit-firstname-modal').css("display", "none");
     });
 }
 
@@ -64,13 +72,17 @@ function EditLastName() {
     $('#lastname-save-btn').click((event) => {
         // Change "Last Name"
         var lastName = document.getElementById("last-name");
-        $('#profile-last-name').text("Last Name: " + lastName.value);
+        $('#model-lastname-details').text(lastName.value);
         // Save lastName.value to database
         var formData = new FormData(document.getElementById('form-profile-lastname'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
         modifyDetails(event, data);
+        // show readonly profile
+        $('.profile-readonly').css("display", "block");
         // hide edit form
         $('.profile-edit-lastname').css("display", "none");
+        // hide modal
+        $('.profile-edit-lastname-modal').css("display", "none");
     });
 }
 
@@ -97,13 +109,18 @@ function EditEmailAddress() {
     $('#email-save-btn').click((event) => {
         // Change "Email Address"
         var email = document.getElementById("email");
-        $('#profile-email').text("Email Address: " + email.value);
+        $('#model-email-details').text(email.value);
         // Save email.value to database
         var formData = new FormData(document.getElementById('form-profile-email'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
         modifyEmail(event, data);
-        // hide edit form
-        $('.profile-edit-email').css("display", "none");
+        window.location.replace("/login");
+        //delete sessions
+        deleteSession();
+        //delete cookies
+        document.cookie = "email=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+        document.cookie = "sessionId=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+        document.cookie = "profilelink=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     });
 }
 
@@ -130,17 +147,34 @@ function EditMobileNumber() {
     $('#mobile-save-btn').click((event) => {
         // Change "Mobile Number"
         var mobile = document.getElementById("mobile");
-        $('#profile-mobile').text("Mobile Number: " + mobile.value);
+        $('#model-mobile-details').text(mobile.value);
         // Save mobile.value to database
         var formData = new FormData(document.getElementById('form-profile-mobile'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
         modifyDetails(event, data);
+        // show readonly profile
+        $('.profile-readonly').css("display", "block");
         // hide edit form
         $('.profile-edit-mobile').css("display", "none");
+        // hide modal
+        $('.profile-edit-mobile-modal').css("display", "none");
     });
 }
 
 function EditBirthday() {
+    var date = new Date();
+    var tdate = date.getDate(); 
+    var month = date.getMonth() + 1;
+    if (tdate < 10) {
+        tdate = '0' + tdate;
+    }
+    if (month < 10) {
+        month = '0' + month;
+    }
+    var year = date.getUTCFullYear();
+    var maxDate = year + "-" + month + "-" + tdate;
+    document.getElementById("birthday").setAttribute("max", maxDate);
+
     // When the user clicks on the "Edit" button,
     $('#profile-edit-birthday-btn').click(() => {
         // show edit form 
@@ -163,15 +197,17 @@ function EditBirthday() {
     $('#birthday-save-btn').click((event) => {
         // Change "Birthday"
         var birthday = document.getElementById("birthday");
-        $('#profile-birthday').text("Birthdate: " + birthday.value);
+        $('#model-birthday-details').text(birthday.value);
         // Save birthday.value to database
-
         var formData = new FormData(document.getElementById('form-profile-birthday'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
-        console.log(data);
         modifyDetails(event, data);
+        // show readonly profile
+        $('.profile-readonly').css("display", "block");
         // hide edit form
         $('.profile-edit-birthday').css("display", "none");
+        // hide modal
+        $('.profile-edit-birthday-modal').css("display", "none");
     });
 }
 
@@ -198,13 +234,17 @@ function EditGender() {
     $('#gender-save-btn').click((event) => {
         // Change "Gender"
         var gender = document.getElementById("gender");
-        $('#profile-gender').text("Gender: " + gender.value);
+        $('#model-gender-details').text(gender.value);
         // Save gender.value to database
         var formData = new FormData(document.getElementById('form-profile-gender'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
         modifyDetails(event, data);
+        // show readonly profile
+        $('.profile-readonly').css("display", "block");
         // hide edit form
         $('.profile-edit-gender').css("display", "none");
+        // hide modal
+        $('.profile-edit-gender-modal').css("display", "none");
     });
 }
 
@@ -249,9 +289,7 @@ async function modifyDetails(event, jsonData) {
         body: jsonData
     });
     if (response.status == 200) {
-        alert("Details successfully modified!");
-        var userData = await response.json();
-        localStorage.setItem('User', JSON.stringify(userData));
+        alert("Detail successfully modified!");
     }
 }
 
@@ -269,9 +307,7 @@ async function modifyPassword(event, jsonData) {
             body: jsonData
         });
         if (response.status == 200) {
-            alert("Details successfully modified!");
-            var userData = await response.json();
-            localStorage.setItem('User', JSON.stringify(userData));
+            alert("Password successfully changed!");
         }
         else {
             alert("Wrong password. Try again.")
@@ -296,9 +332,7 @@ async function modifyEmail(event, jsonData) {
             body: jsonData
         });
         if (response.status == 200) {
-            alert("Details successfully modified!");
-            var userData = await response.json();
-            localStorage.setItem('User', JSON.stringify(userData));
+            alert("Email Address successfully changed!");
         }
         else {
             alert("Wrong password. Try again.")
@@ -307,4 +341,42 @@ async function modifyEmail(event, jsonData) {
     else {
         alert("Passwords do not match! Try again.");
     }
+}
+
+async function deleteSession() {  
+    fetch(`/login`, {
+    method: 'DELETE',
+    });
+}
+
+// LENGTH OF USER'S INPUT RESTRICTION
+function MobileNumLimit(element) {
+    var max_chars = 10;
+
+    if(element.value.length > max_chars) {
+        element.value = element.value.substr(0, max_chars);
+        alert("Input is restricted to 11 digits only!");
+    }
+}
+
+function PasswordLimit(element)
+{
+    var max_chars = 11;
+
+    if(element.value.length > max_chars) {
+        element.value = element.value.substr(0, max_chars);
+        alert("Password should have a maximum of 12 characters only!");
+    }
+}
+
+// LETTER INPUT RESTRICTION
+function LettersInput(input) {
+    var regex = /[^a-z ]/gi;
+    input.value = input.value.replace(regex,"");
+}
+
+// NUMBER INPUT RESTRICTION
+function NumbersInput(input) {
+    var regex = /[^0-9]/g;
+    input.value = input.value.replace(regex,"");
 }
