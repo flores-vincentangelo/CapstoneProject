@@ -7,7 +7,7 @@
     <div class="home-body">
         <div class="home-body-leftsidepanel">
             @* <button>Profile</button> *@
-            <a href=@($"/{Model.ProfileLink}")></a>
+            <a href=@($"/{Model.ProfileLink}")>
                 <div class="home-body-leftsidepanel-profilelink">
                     <div class="home-body-leftsidepanel-profilelink-picture">
                         <img src=@Model.Photo>
@@ -15,7 +15,6 @@
                     <div class="home-body-leftsidepanel-profilelink-name">
                         <div>@Model.FullName</div>
                     </div>
-
                 </div>
             </a>
             <a href="/friends">Friends</a>
