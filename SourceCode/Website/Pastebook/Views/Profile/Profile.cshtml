@@ -53,7 +53,7 @@
         
         <div class="profile-about-edit">
             <form class="form-edit" id="form-profile-about">
-                <textarea class="form-edit-about" id="form-edit-about" name="About" value=@Model.About ></textarea>
+                <textarea class="form-edit-about" id="form-edit-about" name="About" value=@Model.About maxlength="2000"></textarea>
             </form>
             <div class="profile-about-btn-holder">
                 <button class="profile-about-btn" id="about-cancel-btn">Cancel</button>
@@ -94,9 +94,3 @@
 <div class="profile-ext" id="profile-ext-album">
     @await Html.PartialAsync("ProfileAlbum.cshtml")
 </div>
-
-
-
-
-    
-

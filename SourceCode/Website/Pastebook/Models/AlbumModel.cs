@@ -8,4 +8,6 @@ public class AlbumModel
     public long CreatedDate {get;set;}
     public string? PhotosList {get;set;}
     
+    public List<PhotoModel>? PhotoModelList {get;set;}
+    
 }

@@ -9,6 +9,7 @@ public class AlbumsController: Controller
     [Route("/albums")]
     public IActionResult AddAlbum([FromBody] AlbumModel album) {
         album.CreatedDate = (long)((System.DateTime.Now.Subtract(new System.DateTime(1970, 1, 1))).TotalSeconds);
+        album.PhotosList = "";
         DbAlbums.InsertAlbum(album);
         return Ok("Album created successfully");
     }

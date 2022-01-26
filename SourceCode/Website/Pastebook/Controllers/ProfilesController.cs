@@ -24,6 +24,10 @@ public class ProfilesController: Controller
                 if(sessionModel != null)
                 {
                     var user = DbUsers.GetInformationById(profileLink);
+                    // var userProfile = new ProfileModel();
+                    // userProfile.User = DbUsers.GetInformationById(profileLink);
+                    // userProfile.AlbumList = DbAlbums.GetAlbumByEmail(cookieEmail);
+                    
                     return View("/Views/Profile/Profile.cshtml", user);
                 }
             }
