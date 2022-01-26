@@ -35,7 +35,7 @@ function EditFirstName() {
     $('#firstname-save-btn').click((event) => {
         // Change "First Name"
         var firstName = document.getElementById("first-name");
-        $('#profile-first-name').text("First Name: " + firstName.value);
+        $('#model-firstname-details').text(firstName.value);
         // Save firstName.value to database
         var formData = new FormData(document.getElementById('form-profile-firstname'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
@@ -72,7 +72,7 @@ function EditLastName() {
     $('#lastname-save-btn').click((event) => {
         // Change "Last Name"
         var lastName = document.getElementById("last-name");
-        $('#profile-last-name').text("Last Name: " + lastName.value);
+        $('#model-lastname-details').text(lastName.value);
         // Save lastName.value to database
         var formData = new FormData(document.getElementById('form-profile-lastname'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
@@ -109,7 +109,7 @@ function EditEmailAddress() {
     $('#email-save-btn').click((event) => {
         // Change "Email Address"
         var email = document.getElementById("email");
-        $('#profile-email').text("Email Address: " + email.value);
+        $('#model-email-details').text(email.value);
         // Save email.value to database
         var formData = new FormData(document.getElementById('form-profile-email'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
@@ -147,7 +147,7 @@ function EditMobileNumber() {
     $('#mobile-save-btn').click((event) => {
         // Change "Mobile Number"
         var mobile = document.getElementById("mobile");
-        $('#profile-mobile').text("Mobile Number: " + mobile.value);
+        $('#model-mobile-details').text(mobile.value);
         // Save mobile.value to database
         var formData = new FormData(document.getElementById('form-profile-mobile'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
@@ -197,7 +197,7 @@ function EditBirthday() {
     $('#birthday-save-btn').click((event) => {
         // Change "Birthday"
         var birthday = document.getElementById("birthday");
-        $('#profile-birthday').text("Birthday: " + birthday.value);
+        $('#model-birthday-details').text(birthday.value);
         // Save birthday.value to database
         var formData = new FormData(document.getElementById('form-profile-birthday'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
@@ -234,7 +234,7 @@ function EditGender() {
     $('#gender-save-btn').click((event) => {
         // Change "Gender"
         var gender = document.getElementById("gender");
-        $('#profile-gender').text("Gender: " + gender.value);
+        $('#model-gender-details').text(gender.value);
         // Save gender.value to database
         var formData = new FormData(document.getElementById('form-profile-gender'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
