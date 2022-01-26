@@ -82,6 +82,22 @@ public class DbAlbums
         return album;
     }
 
+    public static void UpdatePhotoList(int albumId, string photoList)
+    {
+        AlbumModel album = new AlbumModel();
+        using (var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using (var cmd = db.CreateCommand())
+            {
+                cmd.CommandText = "UPDATE Albums SET PhotosList = @PhotosList WHERE AlbumId = @AlbumId;";
+                cmd.Parameters.AddWithValue("@PhotosList", album.PhotosList);
+                cmd.Parameters.AddWithValue("@AlbumId", albumId);
+                cmd.ExecuteNonQuery();
+            }
+        }
+    }
+
     public static AlbumModel? GetAlbumByEmail(string email)
     {
         AlbumModel album = new AlbumModel();
@@ -120,7 +136,7 @@ public class DbAlbums
         }
     }
 
-    public static void Modify(int id, AlbumModel album)
+    public static void Modify(int albumId, AlbumModel album)
     {
         using (var db = new SqlConnection(DB_CONNECTION_STRING))
         {
@@ -131,7 +147,7 @@ public class DbAlbums
                 {
                     cmd.CommandText = "UPDATE Albums SET UserEmail = @UserEmail WHERE AlbumId = @AlbumId;";
                     cmd.Parameters.AddWithValue("@UserEmail", album.UserEmail);
-                    cmd.Parameters.AddWithValue("@AlbumId", id);
+                    cmd.Parameters.AddWithValue("@AlbumId", albumId);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -141,7 +157,7 @@ public class DbAlbums
                 {
                     cmd.CommandText = "UPDATE Albums SET AlbumName = @AlbumName WHERE AlbumId = @AlbumId;";
                     cmd.Parameters.AddWithValue("@AlbumName", album.AlbumName);
-                    cmd.Parameters.AddWithValue("@AlbumId", id);
+                    cmd.Parameters.AddWithValue("@AlbumId", albumId);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -151,10 +167,25 @@ public class DbAlbums
                 {
                     cmd.CommandText = "UPDATE Albums SET PhotosList = @PhotosList WHERE AlbumId = @AlbumId;";
                     cmd.Parameters.AddWithValue("@PhotosList", album.PhotosList);
-                    cmd.Parameters.AddWithValue("@AlbumId", id);
+                    cmd.Parameters.AddWithValue("@AlbumId", albumId);
                     cmd.ExecuteNonQuery();
                 }
             }
+        }
+    }
+
+    public static void AddPhotoIdToPhotosList(int photoId, string photosList)
+    {
+        using (var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using (var cmd = db.CreateCommand())
+            {
+                cmd.CommandText = "UPDATE Albums SET PhotosList = @PhotosList WHERE AlbumId = @AlbumId;";
+                cmd.Parameters.AddWithValue("@PhotosList", photosList);
+                cmd.Parameters.AddWithValue("@AlbumId", photoId);
+                cmd.ExecuteNonQuery();
+            }    
         }
     }
 

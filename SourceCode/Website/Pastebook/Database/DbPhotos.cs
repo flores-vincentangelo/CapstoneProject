@@ -12,7 +12,7 @@ public class DbPhotos
         DB_CONNECTION_STRING = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
     }
 
-    public static void InsertPhoto(PhotoModel photo)
+    public static void AddPhotoInAlbumId(int albumId, PhotoModel photo)
     {
         using (var db = new SqlConnection(DB_CONNECTION_STRING))
         {
@@ -34,7 +34,81 @@ public class DbPhotos
         }
     }
 
-    public static void DeletePhotoById(int id)
+    public static PhotoModel? GetPhotoByPhotoId(int photoId)
+    {
+        PhotoModel photo = new PhotoModel();
+        using (var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using (var cmd = db.CreateCommand())
+            {
+                cmd.CommandText = "SELECT * FROM Photos WHERE PhotoId = @PhotoId;";
+                cmd.Parameters.AddWithValue("@PhotoId", photoId);
+                var reader = cmd.ExecuteReader();
+                if(!reader.HasRows) return null;
+                while(reader.Read()) {
+                    photo.PhototId = reader.GetInt32(0);
+                    photo.UserEmail = reader.GetString(1);
+                    photo.Photo = reader.GetString(2);
+                    photo.UploadDate = reader.GetInt64(3);
+                    photo.AlbumId = reader.GetInt32(4);
+                    photo.Likes = reader.GetString(5);
+                    photo.Comments = reader.GetString(6);
+                }
+            }
+        }
+        return photo;
+    }
+
+    public static List<PhotoModel>? GetAllPhotosByAlbumId(int albumId)
+    {
+        List<PhotoModel> photos = new List<PhotoModel>();
+        using (var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using (var cmd = db.CreateCommand())
+            {
+                cmd.CommandText = "SELECT * FROM Photos WHERE AlbumId = @AlbumId;";
+                cmd.Parameters.AddWithValue("@AlbumId", albumId);
+                var reader = cmd.ExecuteReader();
+                if(!reader.HasRows) return null;
+                while(reader.Read()) {
+                    PhotoModel photo = new PhotoModel();
+                    photo.PhototId = reader.GetInt32(0);
+                    photo.UserEmail = reader.GetString(1);
+                    photo.Photo = reader.GetString(2);
+                    photo.UploadDate = reader.GetInt64(3);
+                    photo.AlbumId = reader.GetInt32(4);
+                    photo.Likes = reader.GetString(5);
+                    photo.Comments = reader.GetString(6);
+                    photos.Add(photo);
+                }
+            }
+        }
+        return photos;
+    }
+
+    public static List<int>? GetPhotoList(int albumId)
+    {
+        List<int> photolist = new List<int>();
+        using (var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using (var cmd = db.CreateCommand())
+            {
+                cmd.CommandText = "SELECT PhotoId FROM Photos WHERE AlbumId = @AlbumId;";
+                cmd.Parameters.AddWithValue("@AlbumId", albumId);
+                var reader = cmd.ExecuteReader();
+                if(!reader.HasRows) return null;
+                while(reader.Read()) {
+                    photolist.Add(reader.GetInt32(0));
+                }
+            }
+        }
+        return photolist;
+    }
+
+    public static void DeletePhotoByPhotoId(int photoId)
     {
         using (var db = new SqlConnection(DB_CONNECTION_STRING))
         {
@@ -42,13 +116,13 @@ public class DbPhotos
             using (var cmd = db.CreateCommand())
             {
                 cmd.CommandText = "DELETE FROM Photos WHERE PhotoId = @PhotoId;";
-                cmd.Parameters.AddWithValue("@PhotoId", id);
+                cmd.Parameters.AddWithValue("@PhotoId", photoId);
                 cmd.ExecuteNonQuery();
             }
         }
     }
 
-    public static void DeletePhotoByAlbum(int albumId)
+    public static void DeletePhotoByAlbumId(int albumId)
     {
         using (var db = new SqlConnection(DB_CONNECTION_STRING))
         {

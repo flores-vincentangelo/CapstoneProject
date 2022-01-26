@@ -8,7 +8,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         // This is temporary
-        @* localStorage.setItem('profileLink', "@Model.ProfileLink"); *@
+        localStorage.setItem('profileLink', "@Model.ProfileLink");
         document.cookie = 'profilelink=' + "@Model.ProfileLink";  
     </script>    
     <script src="./Scripts/Profile.js"></script>
@@ -94,3 +94,4 @@
 <div class="profile-ext" id="profile-ext-album">
     @await Html.PartialAsync("ProfileAlbum.cshtml")
 </div>
+
