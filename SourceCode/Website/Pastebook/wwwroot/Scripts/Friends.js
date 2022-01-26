@@ -2,13 +2,13 @@ $(document).ready(function () {
 
     //confirm friend request 
     //moves email from friend request to the friendslist column
-    $(".friends-main-friendcardcontainer-friendcard-content-confirm-button").click(function (e) { 
+    $(".friends-main-requests-friendcardcontainer-friendreqcard-content-confirm-button").click(function (e) { 
         var emailToAdd = $(this).attr("id");
         console.log(emailToAdd);
         ConfirmFriendReq(emailToAdd);
     });
 
-    $(".friends-main-friendcardcontainer-friendcard-content-delete-button").click(function (e) { 
+    $(".friends-main-requests-friendcardcontainer-friendreqcard-content-delete-button").on("click",function (e) { 
         var emailToDelete = $(this).attr("id");
         console.log(emailToDelete);
         DeleteFriendReq(emailToDelete);
