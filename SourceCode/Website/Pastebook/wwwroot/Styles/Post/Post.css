@@ -1,0 +1,124 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100%
+}
+
+.post-container {
+    display: flex;
+}
+
+.post-container-left {
+    background: black;
+    width: 70%;
+    padding-top: 10px;
+    height: 780px;
+}
+
+#post-container-left-close {
+    color: white;
+    float: left;
+    font-size: 30px;
+    margin-left: 10px;
+}
+
+.post-container-left-logo {
+    height: 25px;
+    width: 25px;
+    background-color: white;  
+    margin-left: 10px;
+    border-radius: 50%;
+}
+
+.post-container-left-post {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    height: 50%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.post-container-right {
+    width: 30%;
+    margin: 10px
+}
+
+.post-container-right-notifications img {
+    float: right;
+    margin-right: 10px
+}
+
+.post-container-right-notifications-option {
+    width: 25px;
+    height: 25px;
+    background-color: rgb(190, 185, 185);
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.post-container-right-notifications-messenger {
+    width: 45px;
+    height: 45px;
+    background-color: rgb(190, 185, 185);
+    border-radius: 50%;
+}
+
+.post-container-right-notifications-notification {
+    width: 25px;
+    height: 25px;
+    background-color: rgb(190, 185, 185);
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.post-container-right-profile {
+    margin-top: 80px;
+    display: flex;
+    font-size: 13px;
+}
+
+.post-container-right-profile-logo {
+    height: 25px;
+    width: 25px;
+    background-color: white;  
+    margin-left: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.post-container-right-caption {
+    margin-top: 20px;
+    font-size: 13px;
+    margin-left: 20px
+}
+
+.post-container-right-status {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: row;
+    font-size: 13px;
+    margin-bottom: 10px
+}
+
+#like {
+    text-align: left;
+    width: 50%;
+    margin-left: 15px;
+}
+
+#comment {
+    text-align: right;
+    width: 50%;
+    margin-right: 15px;
+}
+
+.post-container-right-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.post-container-right-buttons button {
+    width: 50%;
+}

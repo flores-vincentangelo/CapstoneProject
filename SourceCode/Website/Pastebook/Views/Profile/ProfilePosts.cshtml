@@ -1,11 +1,53 @@
-<link rel="stylesheet" type="text/css" href="./Styles/Profiles/ProfileExt.css">
+@model Models.UserModel
 
-<script>
 
-</script>    
-<script src="./Scripts/ProfileExt.js"></script>
-
-<div class="profile-ext-container">
+<!DOCTYPE html>
+    <html>
+        <head>
+            @* <link rel="stylesheet" type="text/css" href="./Styles/Profiles/ProfileExt.css"> *@
+            <link rel="stylesheet" type="text/css" href="./Styles/Profiles/ProfilePost.css">
+            <script src="./Scripts/ProfileExt.js"></script>
+        </head>
+        <body>
+            <div class = "profile-post-container">
+                <div class = "profile-post-container-status">
+                    <div class = "profile-post-container-status-user">
+                        <div class = "profile-post-container-status-user1">
+                            <img id = "user-photo" src=@Model.Photo>
+                            <form class = "status-edit">
+                                <input type="text" id="status" name="status" placeholder="What's on your mind?">
+                            </form>
+                        </div>
+                        <div class = "user-upload">
+                            <a href>Photo</a>
+                        </div>
+                    </div>
+                    <div class = "profile-post-container-status-label">
+                        <p id = "label">Posts</p>
+                    </div>
+                    <div class = "profile-post-container-status-post">
+                        <div class ="profile-post-container-status-post-profile">
+                            <img class = "user-photo" src=@Model.Photo>
+                            <span id ="user-details">@Model.FirstName @Model.LastName <br> Insert Date Here</span>
+                        </div>
+                        <div class ="profile-post-container-status-post-caption">
+                            <span>Insert caption here</span>
+                        </div>
+                        <div class = "profile-post-container-status-post-status">
+                            <span id = "like">Likes</span>
+                            <span id = "comment">Comments</span>
+                        </div>
+                        <div class = "profile-post-container-status-post-buttons">
+                            <button>Like</button>
+                            <button>Comments</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </body>
+    </html>
+    
+        @* <div class="profile-ext-container">
     <h3>Posts go here</h3>
     <div class="ext-container">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis dolore hic nihil, fugiat accusantium molestiae perferendis adipisci totam corporis possimus nesciunt quaerat magni repudiandae excepturi exercitationem non architecto eos.
@@ -47,4 +89,7 @@
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta ab blanditiis consequatur dolorem inventore recusandae est laboriosam facilis sit laudantium mollitia odio voluptatibus nesciunt, similique aut corporis ipsam error quasi.
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga porro, perspiciatis accusantium odio maiores voluptatibus vero placeat tempora non nihil quod cumque sint exercitationem quae iure aliquam mollitia ad facilis.
     </div>
-</div>
+</div> *@
+ 
+
+

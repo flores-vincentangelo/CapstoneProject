@@ -1,0 +1,119 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.profile-post-container {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+input[type=text], select, textarea {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: rgb(212, 206, 206);
+    padding: 20px;
+    border-radius: 20px;
+    width: 680px;
+    margin-left: 10px;
+}
+
+.profile-post-container-status-user {
+    background-color: white;
+    width: 800px;
+    height: auto;
+    padding: 30px;
+    margin: auto;
+    border-radius: 15px;
+}
+
+.profile-post-container-status-user1 {
+    display: flex;
+}
+
+.profile-post-container-status-user img {
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+}
+
+.profile-post-container-status-user a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.user-upload {
+    text-align: center;
+}
+
+.profile-post-container-status-label {
+    background-color: white;
+    width: 810px;
+    padding: 10px;
+    margin-top: 30px;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    padding-left: 40px;
+}
+
+.profile-post-container-status-post {
+    background-color: white;
+    width: 800px;
+    height: auto;
+    padding: 30px;
+    margin: auto;
+    border-radius: 15px;
+}
+
+.profile-post-container-status-post-profile {
+    display: flex;   
+    font-size: 13px;
+}
+
+.profile-post-container-status-post-profile img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-right: 20px
+}
+
+.profile-post-container-status-post-caption {
+    margin-top: 20px;
+    font-size: 13px;
+    margin-left: 20px
+}
+
+.profile-post-container-status-post-status {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: row;
+    font-size: 13px;
+    margin-bottom: 10px
+}
+
+#like {
+    text-align: left;
+    width: 50%;
+    margin-left: 15px;
+}
+
+#comment {
+    text-align: right;
+    width: 50%;
+    margin-right: 15px;
+}
+
+.profile-post-container-status-post-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.profile-post-container-status-post-buttons button{
+    width: 50%;
+}
+
+
