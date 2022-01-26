@@ -8,6 +8,7 @@ public class UserModel
     public string? EmailAddress { get; set; }
     public string? MobileNumber { get; set; }
     public string? Password { get; set; }
+    public string? NewPassword { get; set; }
     public long Birthday { get; set; }
     public string? ReadableBirthday { get; set; }
     public string? Gender { get; set; }
