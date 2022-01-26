@@ -18,7 +18,6 @@ public class ProfilesController: Controller
         {
             string? cookieEmail = HttpContext.Request.Cookies["email"];
             string? cookieSessionId = HttpContext.Request.Cookies["sessionId"];
-        
             if(cookieSessionId != null)
             {
                 SessionsModel? sessionModel = DbSessions.GetSessionById(cookieSessionId);
@@ -28,19 +27,53 @@ public class ProfilesController: Controller
                     return View("/Views/Profile/Profile.cshtml", user);
                 }
             }
+            return RedirectToAction("doLoginAction", "Login");
         }
-        // return RedirectToAction("doLoginAction", "Login");
         return Ok();
     }
-
+    
     [HttpPatch]
     [Route("/{profileLink}")]
     public IActionResult ModifyProfile(string profileLink,  [FromBody] UserModel user) {
-        // Modify Users Table
-        DbUsers.ModifyInformation(profileLink, user);
+        
         // Get Updated User Table
         var updatedUser = DbUsers.GetInformationById(profileLink);
-        return Json(updatedUser);
-    }
 
+        // Modify Users Table
+        if (!String.IsNullOrEmpty(user.EmailAddress)) {
+            bool result = false;
+            result = BCrypt.Net.BCrypt.Verify(user.Password, updatedUser.Password);
+            if(result)
+            {
+                DbUsers.ModifyInformation(profileLink, user);
+                updatedUser = DbUsers.GetInformationById(profileLink);
+                return Json(updatedUser);
+            }
+            else 
+            {
+                return(Unauthorized());
+            }
+        }
+        else if (!String.IsNullOrEmpty(user.Password)) {
+            bool result = false;
+            result = BCrypt.Net.BCrypt.Verify(user.Password, updatedUser.Password);
+            if(result)
+            {
+                user.Password = user.NewPassword;
+                DbUsers.ModifyInformation(profileLink, user);
+                updatedUser = DbUsers.GetInformationById(profileLink);
+                return Json(updatedUser);
+            }
+            else 
+            {
+                return(Unauthorized());
+            }
+        }
+        else 
+        { 
+            DbUsers.ModifyInformation(profileLink, user);
+            updatedUser = DbUsers.GetInformationById(profileLink);
+            return Json(updatedUser);
+        }
+    }
 }
