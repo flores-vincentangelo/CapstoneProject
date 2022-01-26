@@ -114,8 +114,13 @@ function EditEmailAddress() {
         var formData = new FormData(document.getElementById('form-profile-email'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
         modifyEmail(event, data);
-        // hide edit form
-        $('.profile-edit-email').css("display", "none");
+        window.location.replace("/login");
+        //delete sessions
+        deleteSession();
+        //delete cookies
+        document.cookie = "email=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+        document.cookie = "sessionId=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+        document.cookie = "profilelink=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     });
 }
 
@@ -157,7 +162,6 @@ function EditMobileNumber() {
 }
 
 function EditBirthday() {
-
     var date = new Date();
     var tdate = date.getDate(); 
     var month = date.getMonth() + 1;
@@ -329,7 +333,6 @@ async function modifyEmail(event, jsonData) {
         });
         if (response.status == 200) {
             alert("Email Address successfully changed!");
-            window.location.replace("/login");
         }
         else {
             alert("Wrong password. Try again.")
@@ -338,6 +341,12 @@ async function modifyEmail(event, jsonData) {
     else {
         alert("Passwords do not match! Try again.");
     }
+}
+
+async function deleteSession() {  
+    fetch(`/login`, {
+    method: 'DELETE',
+    });
 }
 
 // LENGTH OF USER'S INPUT RESTRICTION
