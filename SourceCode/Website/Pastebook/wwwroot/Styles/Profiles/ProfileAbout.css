@@ -36,7 +36,7 @@
     background-color: rgba(0,0,0,0.4);
 }
 
-.modal-container {
+.modal-about-container {
     background-color: #fefefe;
     margin: auto;
     padding: 15px;
@@ -221,4 +221,22 @@ label {
 #email {
     margin-left: 24px;
     width: 60%;
+}
+
+.modal-about-container .input-about {
+    width: auto;
+    height: auto;
+    padding: 5px;
+    margin: auto;
+    border-radius: 0;
+    background-color: white;
+}
+
+#gender {
+    width: 80%;
+    height: auto;
+    padding: 5px;
+    margin: auto;
+    border-radius: 0;
+    background-color: white;
 }
