@@ -44,10 +44,39 @@
 .layout-header-left-searchpanel {
   display: none;
   position: fixed;
+  left: 0;
+  top: 0;
   background-color: white;
-  padding-top: 30px;
+  padding-top: 55px;
   height: 400px;
-  width: 300px;
+  width: 400px;
+}
+.layout-header-left-searchpanel-searchresults {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.layout-header-left-searchpanel-searchresults-searchcard {
+  width: 100%;
+  border-color: red;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 50px;
+  margin-bottom: 30px;
+}
+.layout-header-left-searchpanel-searchresults-searchcard-picture {
+  height: 50px;
+  width: 50px;
+}
+.layout-header-left-searchpanel-searchresults-searchcard-picture img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.layout-header-left-searchpanel-searchresults-searchcard-name {
+  padding-left: 20px;
 }
 .layout-header-middle {
   text-align: center;
