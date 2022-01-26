@@ -58,40 +58,51 @@
                 // z-index: 5;
                 padding-top: $header-height;
                 height: 400px;
-                width: 400px;
+                width: 370px;
+                box-shadow: $box-shadow;
+                border-radius: 0 0 10px 10px;
+                padding-left: 30px;
+
+                &-recent{
+                    text-align: left;
+                }
 
                 &-searchresults{
                     display: flex;
                     flex-direction: column;
-                    align-items: center;
+                    align-items: flex-start;
                     // width: 100%;
+                    
 
-                    &-searchcard{
+                    &-link{
                         width: 100%;
-                        border-color: red;
-                        display: flex;
-                        flex-direction: row;
-                        align-items: center;
-                        padding-left: 50px;
-                        margin-bottom: 30px;
-                        
-                        &-picture{
-                            $picture-dimensions:50px; 
-                            height: $picture-dimensions;
-                            width: $picture-dimensions;
-        
-                            & img{
-                                height: 100%;
-                                width: 100%;
-                                object-fit: cover;
-                                border-radius: 50%;
+                        &-searchcard{
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            // padding-left: 30px;
+                            margin-bottom: 30px;
+                            
+                            &-picture{
+                                $picture-dimensions:50px; 
+                                height: $picture-dimensions;
+                                width: $picture-dimensions;
+            
+                                & img{
+                                    height: 100%;
+                                    width: 100%;
+                                    object-fit: cover;
+                                    border-radius: 50%;
+                                }
+                            }
+    
+                            &-name{
+                                padding-left: 20px;
                             }
                         }
-
-                        &-name{
-                            padding-left: 20px;
-                        }
                     }
+
+                    
                 }
             }
         }

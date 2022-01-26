@@ -2,30 +2,15 @@ $(document).ready(function () {
 
     //search bar functionality
     $(".layout-header-left-searchform-input").focus(function (e) { 
-        // e.preventDefault();  
-        // e.stopPropagation();
         $(".layout-header-left-searchpanel").css("display", "block");
         $(".layout-header-left-searchpanel-recent").css("display", "block");
     });
 
-    $(".layout-header-left-searchform-input").blur(function (e) { 
-        // e.preventDefault();
-        // $(".layout-header-left-searchpanel").css("display", "none");
-        // $(this).val('');
-        // $(".layout-header-left-searchpanel-searchresults").empty();
-    });
-
     $(".layout-header-left-searchform-input").keyup(function (e) { 
-        // $(".layout-header-left-searchpanel").css("display", "block");
-        // $(".layout-header-left-searchpanel-recent").css("display", "block");
+        $(".layout-header-left-searchpanel-searchresults").empty();
         var searchTerm = $(this).val();
-        // $(".layout-header-left-searchpanel-searchresults").html(searchTerm);
         $(".layout-header-left-searchpanel-recent").css("display", "none");
-        if(searchTerm){
-            SearchUsers(searchTerm);
-        } else {
-            $(this).val("");
-        }
+        SearchUsers(searchTerm);
     });
 
     $(".profilelink").on("click", function () {
@@ -38,12 +23,11 @@ $(document).ready(function () {
     $(window).click(function (e) { 
         // e.preventDefault();
         var target = e.target;
-        if(!target.closest(".layout-accountpanel")){
+        if(!target.closest(".layout-accountpanel") && !target.closest(".layout-header-right-settings")){
             $(".layout-accountpanel").css("display", "none");
         }
         console.log(target);
         if(!target.closest(".layout-header-left-searchpanel") && !target.closest(".layout-header-left-searchform-input")){
-            console.log("was true");
             $(".layout-header-left-searchpanel").css("display", "none");
             $(".layout-header-left-searchform-input").val('');
             $(".layout-header-left-searchpanel-searchresults").empty();
@@ -52,9 +36,6 @@ $(document).ready(function () {
     });
 
     $(".layout-header-right-settings").click(function (e) { 
-        // e.preventDefault();
-        e.stopPropagation();
-        
         $(".layout-accountpanel").css("display", "block");
     });
 
@@ -73,7 +54,12 @@ $(document).ready(function () {
 
 async function SearchUsers(searchTerm){
     // console.log(searchTerm);
-    $(".layout-header-left-searchpanel-searchresults").empty();
+
+    if(!searchTerm){
+        $(".layout-header-left-searchpanel-searchresults").html("No Results");
+        return;
+    }
+    
     const url = `/search/${searchTerm}`;
     const response = await fetch(url, {
         method: "GET"
@@ -99,15 +85,16 @@ async function deleteSession() {
 
 function AddSearchCard(profileName,profileLink,photo){
     var searchCard = 
-    `<div class="layout-header-left-searchpanel-searchresults-searchcard">
-        <div class="layout-header-left-searchpanel-searchresults-searchcard-picture">
-            <img src="${photo}">
+    `<a class="layout-header-left-searchpanel-searchresults-link" href="/${profileLink}">
+        <div class="layout-header-left-searchpanel-searchresults-link-searchcard">
+            <div class="layout-header-left-searchpanel-searchresults-link-searchcard-picture">
+                <img src="${photo}">
+            </div>
+            <div class="layout-header-left-searchpanel-searchresults-link-searchcard-name">
+                ${profileName}
+            </div>
         </div>
-        <div class="layout-header-left-searchpanel-searchresults-searchcard-name">
-            <a class="profilelink" href="/${profileLink}">${profileName}</a>
-        </div>
-    </div>`
-    // var name = `<div>${profileName}</div>`;
+    </a>`
     $(".layout-header-left-searchpanel-searchresults").append(searchCard);
 }
 
