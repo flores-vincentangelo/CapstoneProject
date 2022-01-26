@@ -14,7 +14,8 @@
     <script>
         // This is temporary
         // Need to set profileLink in localstorage at currentProfile.profileLink
-        localStorage.setItem('profileLink', "@Model.ProfileLink");  
+        localStorage.setItem('profileLink', "@Model.ProfileLink");
+        localStorage.setItem('password', "@Model.Password");  
     </script>
     <script src="./Scripts/ProfileAbout.js"></script>
 </head>
@@ -46,6 +47,10 @@
             <div class="field">
                 <p id="profile-gender">Gender: @Model.Gender</p>
                 <button class="profile-edit-gender-btn" id="profile-edit-gender-btn">Edit</button>
+            </div>
+            <div class="field">
+                <p id="profile-password">Change Password</p>
+                <button class="profile-edit-password-btn" id="profile-edit-password-btn">Edit</button>
             </div>
         </div>
         <div class="profile-edit-firstname-modal" id="profile-edit-firstname-modal">
@@ -87,9 +92,9 @@
                     <label>Email Address:</label>
                     <input type="text" id="email" name="EmailAddress" value="@Model.EmailAddress" /><br><br>
                     <label>Password:</label>
-                    <input type="password" id="password" /><br><br>
+                    <input type="password" id="password" name="Password" /><br><br>
                     <label>Confirm Password:</label>
-                    <input type="password" id="confirm-password" /><br><br>
+                    <input type="password" id="confirm-password" name="ConfirmPassword" /><br><br>
                 </form>
                 <div class="buttons">
                     <button class="profile-email-btn" id="email-save-btn">Save</button>
@@ -143,6 +148,25 @@
                 <div class="buttons">
                     <button class="profile-gender-btn" id="gender-save-btn">Save</button>
                     <button class="profile-gender-btn" id="gender-cancel-btn">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div class="profile-edit-password-modal" id="profile-edit-password-modal">
+            <div class="modal-container">
+                <span id="profile-close-password-modal">&times;</span>
+                <h2 class="profile-title-modal">Edit Password</h2>
+                <hr>
+                <form class="form-edit-password" id="form-profile-password">
+                    <label>Old Password</label>
+                    <input type="password" id="old-password" name="Password" /><br><br>
+                    <label>New Password:</label>
+                    <input type="password" id="new-password" name="NewPassword" /><br><br>
+                    <label>Confirm Password:</label>
+                    <input type="password" id="confirm-new-password" name="ConfirmPassword" /><br><br>
+                </form>
+                <div class="buttons">
+                    <button class="profile-password-btn" id="password-save-btn">Save</button>
+                    <button class="profile-password-btn" id="password-cancel-btn">Cancel</button>
                 </div>
             </div>
         </div>

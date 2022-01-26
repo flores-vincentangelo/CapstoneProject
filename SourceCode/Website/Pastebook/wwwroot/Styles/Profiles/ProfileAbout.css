@@ -23,7 +23,8 @@
 .profile-edit-email-modal,
 .profile-edit-mobile-modal,
 .profile-edit-birthday-modal,
-.profile-edit-gender-modal {
+.profile-edit-gender-modal,
+.profile-edit-password-modal {
     display: none;
     position: fixed;
     z-index: 1;
@@ -55,7 +56,8 @@
 #profile-close-email-modal,
 #profile-close-mobile-modal,
 #profile-close-birthday-modal,
-#profile-close-gender-modal {
+#profile-close-gender-modal,
+#profile-close-password-modal {
     color: #aaaaaa;
     float: right;
     font-size: 25px;
@@ -74,7 +76,9 @@
 #profile-close-birthday-modal:hover,
 #profile-close-birthday-modal:focus,
 #profile-close-gender-modal:hover,
-#profile-close-gender-modal:focus {
+#profile-close-gender-modal:focus,
+#profile-close-password-modal:hover,
+#profile-close-password-modal:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
@@ -85,7 +89,8 @@
 .profile-email-btn,
 .profile-mobile-btn,
 .profile-birthday-btn,
-.profile-gender-btn {
+.profile-gender-btn,
+.profile-password-btn {
     width: 50%;
 }
 
@@ -94,7 +99,8 @@
 #email-save-btn,
 #mobile-save-btn,
 #birthday-save-btn,
-#gender-save-btn {
+#gender-save-btn,
+#password-save-btn {
     width: 20%;
     margin-right: 10px;
     border: none;
@@ -108,7 +114,8 @@
 #email-save-btn:hover,
 #mobile-save-btn:hover,
 #birthday-save-btn:hover,
-#gender-save-btn:hover {
+#gender-save-btn:hover,
+#gender-password-btn:hover {
     color: white;
     background-color: green;
 }
@@ -118,7 +125,8 @@
 #email-cancel-btn,
 #mobile-cancel-btn,
 #birthday-cancel-btn,
-#gender-cancel-btn {
+#gender-cancel-btn,
+#password-cancel-btn {
     width: 20%;
     border: none;
     padding: 5px;
@@ -131,7 +139,8 @@
 #email-cancel-btn:hover,
 #mobile-cancel-btn:hover,
 #birthday-cancel-btn:hover,
-#gender-cancel-btn:hover {
+#gender-cancel-btn:hover,
+#password-cancel-btn:hover {
     color: white;
     background-color: red;
 }
@@ -155,7 +164,8 @@
 #profile-edit-email-btn,
 #profile-edit-mobile-btn,
 #profile-edit-birthday-btn,
-#profile-edit-gender-btn {
+#profile-edit-gender-btn,
+#profile-edit-password-btn {
     width: 8%;
     height: 5%;
     float: right;
@@ -172,7 +182,8 @@
 #profile-edit-email-btn:hover,
 #profile-edit-mobile-btn:hover,
 #profile-edit-birthday-btn:hover,
-#profile-edit-gender-btn:hover {
+#profile-edit-gender-btn:hover,
+#profile-edit-password-btn:hover {
     background-color: #1877f2;
     color: white;
 }
@@ -192,7 +203,18 @@ label {
     width: 60%;
 }
 
-#confirm-password {
+#new-password {
+    margin-left: 20px;
+    width: 60%;
+}
+
+#old-password {
+    margin-left: 30px;
+    width: 60%;
+}
+
+#confirm-password,
+#confirm-new-password {
     width: 60%;
 }
 

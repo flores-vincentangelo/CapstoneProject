@@ -5,27 +5,28 @@ $(document).ready(() => {
     EditMobileNumber();
     EditBirthday();
     EditGender();
+    EditPassword();
 });
 
 function EditFirstName() {
     // When the user clicks on the "Edit" button,
     $('#profile-edit-firstname-btn').click(() => {
         // show edit form 
-        $('.profile-edit-firstname-modal').css("display","flex");
+        $('.profile-edit-firstname-modal').css("display", "flex");
     });
 
     // When the user clicks on the "x",
     $('#profile-close-firstname-modal').click(() => {
         // Close modal
-        $('.profile-edit-firstname-modal').css("display","none");
+        $('.profile-edit-firstname-modal').css("display", "none");
     });
-    
+
     // When the user clicks on the "Cancel" button,
     $('#firstname-cancel-btn').click(() => {
         // hide edit form 
-        $('.profile-edit-firstname-modal').css("display","none");
+        $('.profile-edit-firstname-modal').css("display", "none");
     });
-    
+
     // When the user clicks on the "Save" button,
     $('#firstname-save-btn').click((event) => {
         // Change "First Name"
@@ -36,7 +37,7 @@ function EditFirstName() {
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
         modifyDetails(event, data);
         // hide edit form
-        $('.profile-edit-firstname').css("display","none");
+        $('.profile-edit-firstname').css("display", "none");
     });
 }
 
@@ -44,21 +45,21 @@ function EditLastName() {
     // When the user clicks on the "Edit" button,
     $('#profile-edit-lastname-btn').click(() => {
         // show edit form 
-        $('.profile-edit-lastname-modal').css("display","flex");
+        $('.profile-edit-lastname-modal').css("display", "flex");
     });
 
     // When the user clicks on the "x",
     $('#profile-close-lastname-modal').click(() => {
         // Close modal
-        $('.profile-edit-lastname-modal').css("display","none");
+        $('.profile-edit-lastname-modal').css("display", "none");
     });
-    
+
     // When the user clicks on the "Cancel" button,
     $('#lastname-cancel-btn').click(() => {
         // hide edit form 
-        $('.profile-edit-lastname-modal').css("display","none");
+        $('.profile-edit-lastname-modal').css("display", "none");
     });
-    
+
     // When the user clicks on the "Save" button,
     $('#lastname-save-btn').click((event) => {
         // Change "Last Name"
@@ -69,7 +70,7 @@ function EditLastName() {
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
         modifyDetails(event, data);
         // hide edit form
-        $('.profile-edit-lastname').css("display","none");
+        $('.profile-edit-lastname').css("display", "none");
     });
 }
 
@@ -77,21 +78,21 @@ function EditEmailAddress() {
     // When the user clicks on the "Edit" button,
     $('#profile-edit-email-btn').click(() => {
         // show edit form 
-        $('.profile-edit-email-modal').css("display","flex");
+        $('.profile-edit-email-modal').css("display", "flex");
     });
 
     // When the user clicks on the "x",
     $('#profile-close-email-modal').click(() => {
         // Close modal
-        $('.profile-edit-email-modal').css("display","none");
+        $('.profile-edit-email-modal').css("display", "none");
     });
-    
+
     // When the user clicks on the "Cancel" button,
     $('#email-cancel-btn').click(() => {
         // hide edit form 
-        $('.profile-edit-email-modal').css("display","none");
+        $('.profile-edit-email-modal').css("display", "none");
     });
-    
+
     // When the user clicks on the "Save" button,
     $('#email-save-btn').click((event) => {
         // Change "Email Address"
@@ -100,9 +101,9 @@ function EditEmailAddress() {
         // Save email.value to database
         var formData = new FormData(document.getElementById('form-profile-email'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
-        modifyDetails(event, data);
+        modifyEmail(event, data);
         // hide edit form
-        $('.profile-edit-email').css("display","none");
+        $('.profile-edit-email').css("display", "none");
     });
 }
 
@@ -110,21 +111,21 @@ function EditMobileNumber() {
     // When the user clicks on the "Edit" button,
     $('#profile-edit-mobile-btn').click(() => {
         // show edit form 
-        $('.profile-edit-mobile-modal').css("display","flex");
+        $('.profile-edit-mobile-modal').css("display", "flex");
     });
 
     // When the user clicks on the "x",
     $('#profile-close-mobile-modal').click(() => {
         // Close modal
-        $('.profile-edit-mobile-modal').css("display","none");
+        $('.profile-edit-mobile-modal').css("display", "none");
     });
-    
+
     // When the user clicks on the "Cancel" button,
     $('#mobile-cancel-btn').click(() => {
         // hide edit form 
-        $('.profile-edit-mobile-modal').css("display","none");
+        $('.profile-edit-mobile-modal').css("display", "none");
     });
-    
+
     // When the user clicks on the "Save" button,
     $('#mobile-save-btn').click((event) => {
         // Change "Mobile Number"
@@ -135,7 +136,7 @@ function EditMobileNumber() {
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
         modifyDetails(event, data);
         // hide edit form
-        $('.profile-edit-mobile').css("display","none");
+        $('.profile-edit-mobile').css("display", "none");
     });
 }
 
@@ -143,21 +144,21 @@ function EditBirthday() {
     // When the user clicks on the "Edit" button,
     $('#profile-edit-birthday-btn').click(() => {
         // show edit form 
-        $('.profile-edit-birthday-modal').css("display","flex");
+        $('.profile-edit-birthday-modal').css("display", "flex");
     });
 
     // When the user clicks on the "x",
     $('#profile-close-birthday-modal').click(() => {
         // Close modal
-        $('.profile-edit-birthday-modal').css("display","none");
+        $('.profile-edit-birthday-modal').css("display", "none");
     });
-    
+
     // When the user clicks on the "Cancel" button,
     $('#birthday-cancel-btn').click(() => {
         // hide edit form 
-        $('.profile-edit-birthday-modal').css("display","none");
+        $('.profile-edit-birthday-modal').css("display", "none");
     });
-    
+
     // When the user clicks on the "Save" button,
     $('#birthday-save-btn').click((event) => {
         // Change "Birthday"
@@ -166,13 +167,11 @@ function EditBirthday() {
         // Save birthday.value to database
 
         var formData = new FormData(document.getElementById('form-profile-birthday'));
-        
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
-        var datum = new Date(data).getTime();
-        console.log(datum);
-        modifyDetails(event, datum);
+        console.log(data);
+        modifyDetails(event, data);
         // hide edit form
-        $('.profile-edit-birthday').css("display","none");
+        $('.profile-edit-birthday').css("display", "none");
     });
 }
 
@@ -180,21 +179,21 @@ function EditGender() {
     // When the user clicks on the "Edit" button,
     $('#profile-edit-gender-btn').click(() => {
         // show edit form 
-        $('.profile-edit-gender-modal').css("display","flex");
+        $('.profile-edit-gender-modal').css("display", "flex");
     });
 
     // When the user clicks on the "x",
     $('#profile-close-gender-modal').click(() => {
         // Close modal
-        $('.profile-edit-gender-modal').css("display","none");
+        $('.profile-edit-gender-modal').css("display", "none");
     });
-    
+
     // When the user clicks on the "Cancel" button,
     $('#gender-cancel-btn').click(() => {
         // hide edit form 
-        $('.profile-edit-gender-modal').css("display","none");
+        $('.profile-edit-gender-modal').css("display", "none");
     });
-    
+
     // When the user clicks on the "Save" button,
     $('#gender-save-btn').click((event) => {
         // Change "Gender"
@@ -205,7 +204,37 @@ function EditGender() {
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
         modifyDetails(event, data);
         // hide edit form
-        $('.profile-edit-gender').css("display","none");
+        $('.profile-edit-gender').css("display", "none");
+    });
+}
+
+function EditPassword() {
+    // When the user clicks on the "Edit" button,
+    $('#profile-edit-password-btn').click(() => {
+        // show edit form 
+        $('.profile-edit-password-modal').css("display", "flex");
+    });
+
+    // When the user clicks on the "x",
+    $('#profile-close-password-modal').click(() => {
+        // Close modal
+        $('.profile-edit-password-modal').css("display", "none");
+    });
+
+    // When the user clicks on the "Cancel" button,
+    $('#password-cancel-btn').click(() => {
+        // hide edit form 
+        $('.profile-edit-password-modal').css("display", "none");
+    });
+
+    // When the user clicks on the "Save" button,
+    $('#password-save-btn').click((event) => {
+        // Save password.value to database
+        var formData = new FormData(document.getElementById('form-profile-password'));
+        var data = JSON.stringify(Object.fromEntries(formData.entries()));
+        modifyPassword(event, data);
+        // hide edit form
+        $('.profile-edit-password').css("display", "none");
     });
 }
 
@@ -223,5 +252,59 @@ async function modifyDetails(event, jsonData) {
         alert("Details successfully modified!");
         var userData = await response.json();
         localStorage.setItem('User', JSON.stringify(userData));
+    }
+}
+
+async function modifyPassword(event, jsonData) {
+    event.preventDefault();
+    var newPassword = document.getElementById('new-password').value;
+    var confirmNewPassword = document.getElementById('confirm-new-password').value;
+    const link = localStorage.getItem('profileLink');
+    if (newPassword == confirmNewPassword) {
+        const response = await fetch(`/${link}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: jsonData
+        });
+        if (response.status == 200) {
+            alert("Details successfully modified!");
+            var userData = await response.json();
+            localStorage.setItem('User', JSON.stringify(userData));
+        }
+        else {
+            alert("Wrong password. Try again.")
+        }
+    }
+    else {
+        alert("Passwords do not match! Try again.");
+    }
+}
+
+async function modifyEmail(event, jsonData) {
+    event.preventDefault();
+    var inputPassword = document.getElementById('password').value;
+    var confirmPassword = document.getElementById('confirm-password').value;
+    const link = localStorage.getItem('profileLink');
+    if (inputPassword == confirmPassword) {
+        const response = await fetch(`/${link}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: jsonData
+        });
+        if (response.status == 200) {
+            alert("Details successfully modified!");
+            var userData = await response.json();
+            localStorage.setItem('User', JSON.stringify(userData));
+        }
+        else {
+            alert("Wrong password. Try again.")
+        }
+    }
+    else {
+        alert("Passwords do not match! Try again.");
     }
 }
