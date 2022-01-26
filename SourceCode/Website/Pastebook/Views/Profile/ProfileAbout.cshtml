@@ -1,6 +1,6 @@
 @model Models.UserModel
 @{
-    var birthdate = new System.DateTime(1970, 1, 1).AddSeconds(Model.Birthday).ToString("MMMM dd yyyy");
+    var birthdate = new System.DateTime(1970, 1, 1).AddSeconds(Model.Birthday).ToString("yyyy-MM-dd");
 }
 
 <!DOCTYPE html>
@@ -12,10 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./Styles/Profiles/ProfileAbout.css">
     <script>
-        // This is temporary
-        // Need to set profileLink in localstorage at currentProfile.profileLink
         localStorage.setItem('profileLink', "@Model.ProfileLink");
-        localStorage.setItem('password', "@Model.Password");  
     </script>
     <script src="./Scripts/ProfileAbout.js"></script>
 </head>
@@ -124,7 +121,7 @@
                 <hr>
                 <form class="form-edit-birthday" id="form-profile-birthday">
                     <label>Birthday:</label>
-                    <input type="date" id="birthday" name="Birthday" value="@Model.Birthday" /><br><br>
+                    <input type="date" id="birthday" name="ReadableBirthday" /><br><br>
                 </form>
                 <div class="buttons">
                     <button class="profile-birthday-btn" id="birthday-save-btn">Save</button>

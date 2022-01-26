@@ -36,8 +36,12 @@ function EditFirstName() {
         var formData = new FormData(document.getElementById('form-profile-firstname'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
         modifyDetails(event, data);
+        // show readonly profile
+        $('.profile-readonly').css("display", "block");
         // hide edit form
         $('.profile-edit-firstname').css("display", "none");
+        // hide modal
+        $('.profile-edit-firstname-modal').css("display", "none");
     });
 }
 
@@ -69,8 +73,12 @@ function EditLastName() {
         var formData = new FormData(document.getElementById('form-profile-lastname'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
         modifyDetails(event, data);
+        // show readonly profile
+        $('.profile-readonly').css("display", "block");
         // hide edit form
         $('.profile-edit-lastname').css("display", "none");
+        // hide modal
+        $('.profile-edit-lastname-modal').css("display", "none");
     });
 }
 
@@ -102,8 +110,12 @@ function EditEmailAddress() {
         var formData = new FormData(document.getElementById('form-profile-email'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
         modifyEmail(event, data);
+        // show readonly profile
+        $('.profile-readonly').css("display", "block");
         // hide edit form
         $('.profile-edit-email').css("display", "none");
+        // hide modal
+        $('.profile-edit-email-modal').css("display", "none");
     });
 }
 
@@ -135,8 +147,12 @@ function EditMobileNumber() {
         var formData = new FormData(document.getElementById('form-profile-mobile'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
         modifyDetails(event, data);
+        // show readonly profile
+        $('.profile-readonly').css("display", "block");
         // hide edit form
         $('.profile-edit-mobile').css("display", "none");
+        // hide modal
+        $('.profile-edit-mobile-modal').css("display", "none");
     });
 }
 
@@ -163,15 +179,17 @@ function EditBirthday() {
     $('#birthday-save-btn').click((event) => {
         // Change "Birthday"
         var birthday = document.getElementById("birthday");
-        $('#profile-birthday').text("Birthdate: " + birthday.value);
+        $('#profile-birthday').text("Birthday: " + birthday.value);
         // Save birthday.value to database
-
         var formData = new FormData(document.getElementById('form-profile-birthday'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
-        console.log(data);
         modifyDetails(event, data);
+        // show readonly profile
+        $('.profile-readonly').css("display", "block");
         // hide edit form
         $('.profile-edit-birthday').css("display", "none");
+        // hide modal
+        $('.profile-edit-birthday-modal').css("display", "none");
     });
 }
 
@@ -203,8 +221,12 @@ function EditGender() {
         var formData = new FormData(document.getElementById('form-profile-gender'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
         modifyDetails(event, data);
+        // show readonly profile
+        $('.profile-readonly').css("display", "block");
         // hide edit form
         $('.profile-edit-gender').css("display", "none");
+        // hide modal
+        $('.profile-edit-gender-modal').css("display", "none");
     });
 }
 
@@ -233,8 +255,12 @@ function EditPassword() {
         var formData = new FormData(document.getElementById('form-profile-password'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
         modifyPassword(event, data);
+        // show readonly profile
+        $('.profile-readonly').css("display", "block");
         // hide edit form
         $('.profile-edit-password').css("display", "none");
+        // hide modal
+        $('.profile-edit-password-modal').css("display", "none");
     });
 }
 
@@ -299,6 +325,7 @@ async function modifyEmail(event, jsonData) {
             alert("Details successfully modified!");
             var userData = await response.json();
             localStorage.setItem('User', JSON.stringify(userData));
+            window.location.replace("/login");
         }
         else {
             alert("Wrong password. Try again.")
