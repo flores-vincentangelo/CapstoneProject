@@ -20,11 +20,12 @@ public class DbAlbums
             using (var cmd = db.CreateCommand())
             {
                 cmd.CommandText =
-                    @"INSERT INTO Albums (UserEmail, AlbumName, CreatedDate) 
-                    VALUES (@UserEmail, @AlbumName, @CreatedDate);";
+                    @"INSERT INTO Albums (UserEmail, AlbumName, CreatedDate, PhotosList) 
+                    VALUES (@UserEmail, @AlbumName, @CreatedDate, @PhotosList);";
                 cmd.Parameters.AddWithValue("@UserEmail", album.UserEmail);
                 cmd.Parameters.AddWithValue("@AlbumName", album.AlbumName);
                 cmd.Parameters.AddWithValue("@CreatedDate", album.CreatedDate);
+                cmd.Parameters.AddWithValue("@PhotosList", album.PhotosList);
                 cmd.ExecuteNonQuery();
                 Console.WriteLine("Album successfully added to Albums Table!");
             }
@@ -49,6 +50,7 @@ public class DbAlbums
                     album.AlbumName = reader.GetString(1);
                     album.UserEmail = reader.GetString(2);
                     album.CreatedDate = reader.GetInt64(3);
+                    album.PhotosList = reader.GetString(4);
                     albums.Add(album);
                 }
             }
@@ -73,6 +75,7 @@ public class DbAlbums
                     album.AlbumName = reader.GetString(1);
                     album.UserEmail = reader.GetString(2);
                     album.CreatedDate = reader.GetInt64(3);
+                    album.PhotosList = reader.GetString(4);
                 }
             }
         }
@@ -96,6 +99,7 @@ public class DbAlbums
                     album.AlbumName = reader.GetString(1);
                     album.UserEmail = reader.GetString(2);
                     album.CreatedDate = reader.GetInt64(3);
+                    album.UserEmail = reader.GetString(4);
                 }
             }
         }
@@ -137,6 +141,16 @@ public class DbAlbums
                 {
                     cmd.CommandText = "UPDATE Albums SET AlbumName = @AlbumName WHERE AlbumId = @AlbumId;";
                     cmd.Parameters.AddWithValue("@AlbumName", album.AlbumName);
+                    cmd.Parameters.AddWithValue("@AlbumId", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            if(!String.IsNullOrEmpty(album.PhotosList))
+            {
+                using (var cmd = db.CreateCommand())    
+                {
+                    cmd.CommandText = "UPDATE Albums SET PhotosList = @PhotosList WHERE AlbumId = @AlbumId;";
+                    cmd.Parameters.AddWithValue("@PhotosList", album.PhotosList);
                     cmd.Parameters.AddWithValue("@AlbumId", id);
                     cmd.ExecuteNonQuery();
                 }
