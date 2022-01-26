@@ -239,11 +239,10 @@ public class DbTables
                     PostId INTEGER NOT NULL IDENTITY (1,1) PRIMARY KEY,
                     DatePosted BIGINT,
                     Caption VARCHAR (255),
-                    PhotoId INTEGER NOT NULL IDENTITY (1,1) PRIMARY KEY,
+                    PhotoId INTEGER,
                     Photo VARCHAR (MAX),
-                    Like VARCHAR (MAX),
+                    Likes VARCHAR (MAX),
                     Comment VARCHAR (MAX),
-                    PostLink VARCHAR (255)
                     );";
                 command.ExecuteNonQuery();
                 Console.WriteLine("Posts Table created successfully!");
