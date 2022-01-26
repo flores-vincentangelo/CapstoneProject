@@ -57,7 +57,7 @@
                 <hr>
                 <form class="form-edit-firstname" id="form-profile-firstname">
                     <label>First Name:</label>
-                    <input class="input-about" type="text" id="first-name" name="FirstName" value="@Model.FirstName" /><br><br>
+                    <input class="input-about" type="text" id="first-name" name="FirstName" value="@Model.FirstName" onkeyup="LettersInput(this)" /><br><br>
                 </form>
                 <div class="buttons">
                     <button class="profile-firstname-btn" id="firstname-save-btn">Save</button>
@@ -72,7 +72,7 @@
                 <hr>
                 <form class="form-edit-lastname" id="form-profile-lastname">
                     <label>Last Name:</label>
-                    <input class="input-about" type="text" id="last-name" name="LastName" value="@Model.LastName" /><br><br>
+                    <input class="input-about" type="text" id="last-name" name="LastName" value="@Model.LastName" onkeyup="LettersInput(this)" /><br><br>
                 </form>
                 <div class="buttons">
                     <button class="profile-lastname-btn" id="lastname-save-btn">Save</button>
@@ -106,7 +106,7 @@
                 <hr>
                 <form class="form-edit-mobile" id="form-profile-mobile">
                     <label>Mobile Number:</label>
-                    <input class="input-about" type="text" id="mobile" name="MobileNumber" value="@Model.MobileNumber" /><br><br>
+                    <input class="input-about" type="text" id="mobile" name="MobileNumber" value="@Model.MobileNumber" onkeyup="NumbersInput(this)" onkeydown="MobileNumLimit(this)" /><br><br>
                 </form>
                 <div class="buttons">
                     <button class="profile-mobile-btn" id="mobile-save-btn">Save</button>
