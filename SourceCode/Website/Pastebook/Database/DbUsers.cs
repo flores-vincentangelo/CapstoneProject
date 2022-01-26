@@ -284,4 +284,37 @@ public class DbUsers
             throw e;
         }
     }
+
+    public static List<UserModel> GetUserByFirstOrLastName(string searchTerm)
+    {
+        List<UserModel> userList = new List<UserModel>();
+        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var cmd = db.CreateCommand())
+            {
+                cmd.CommandText = 
+                    @"SELECT ProfileName, ProfileLink, Photo 
+                    FROM Users
+                    WHERE FirstName LIKE @searchterm
+                    OR LastName LIKE @searchterm;";
+                cmd.Parameters.AddWithValue("@searchterm", $"%{searchTerm}%");
+                var reader = cmd.ExecuteReader();
+                if(!reader.HasRows) return userList;
+                else
+                {
+                    while(reader.Read())
+                    {
+                        UserModel user = new UserModel();
+                        user.ProfileName = reader.GetString(0);
+                        user.ProfileLink = reader.GetString(1);
+                        user.Photo = reader.GetString(2);
+                        userList.Add(user);
+                    }
+                }
+            }
+        }
+        return userList;
+    }
+
 }
