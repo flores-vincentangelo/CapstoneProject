@@ -149,9 +149,9 @@ public class DbUsers
                 }
                 if(!String.IsNullOrEmpty(user.EmailAddress))
                 {
-                    cmd.CommandText = "UPDATE Users SET EmailAddress = @EmailAddress WHERE ProfileLink = @ProfileLink;";
+                    cmd.CommandText = "UPDATE Users SET EmailAddress = @EmailAddress WHERE ProfileLink = @EmailId;";
                     cmd.Parameters.AddWithValue("@EmailAddress", user.EmailAddress);
-                    cmd.Parameters.AddWithValue("@ProfileLink", profileLink);
+                    cmd.Parameters.AddWithValue("@EmailId", profileLink);
                     cmd.ExecuteNonQuery();
                 }
                 if(!String.IsNullOrEmpty(user.MobileNumber))
@@ -170,9 +170,9 @@ public class DbUsers
                 }
                 if(user.Birthday != 0)
                 {
-                    cmd.CommandText = "UPDATE Users SET Birthday = @Birthday WHERE ProfileLink = @ProfileLink;";
+                    cmd.CommandText = "UPDATE Users SET Birthday = @Birthday WHERE ProfileLink = @BirthdayId;";
                     cmd.Parameters.AddWithValue("@Birthday", user.Birthday);
-                    cmd.Parameters.AddWithValue("@ProfileLink", profileLink);
+                    cmd.Parameters.AddWithValue("@BirthdayId", profileLink);
                     cmd.ExecuteNonQuery();
                 }
                 if(!String.IsNullOrEmpty(user.Gender))
