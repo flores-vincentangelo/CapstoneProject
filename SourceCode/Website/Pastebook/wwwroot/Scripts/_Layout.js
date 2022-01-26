@@ -30,4 +30,23 @@ $(document).ready(function () {
         e.stopPropagation();
         $(".layout-accountpanel").css("display", "block");
     });
+
+    //logout button
+    $(".layout-accountpanel-logout").click(() => {
+        window.location.replace("/login");
+        //delete sessions
+        deleteSession();
+        //delete cookies
+        document.cookie = "email=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+        document.cookie = "sessionId=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+    })
+    
 });
+
+async function deleteSession() {  
+        fetch(`/login`, {
+        method: 'DELETE',
+    });
+}
+
+

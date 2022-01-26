@@ -27,10 +27,11 @@ public class LoginController: Controller
     }
 
     [HttpDelete]
-    [Route("/login/{id}")]
-    public IActionResult DeleteSession(string Id)
+    [Route("/login")]
+    public IActionResult DeleteSession()
     {
-        DbSessions.DeleteSession(Id);
+        string? cookieSessionId = HttpContext.Request.Cookies["sessionId"];
+        DbSessions.DeleteSession(cookieSessionId);
         return Ok("Session Deleted!");
     }
 }
