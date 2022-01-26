@@ -52,11 +52,58 @@
             &-searchpanel{
                 display: none;
                 position: fixed;
+                left: 0;
+                top: 0;
                 background-color: white;
                 // z-index: 5;
-                padding-top: 30px;
+                padding-top: $header-height;
                 height: 400px;
-                width: 300px;
+                width: 370px;
+                box-shadow: $box-shadow;
+                border-radius: 0 0 10px 10px;
+                padding-left: 30px;
+
+                &-recent{
+                    text-align: left;
+                }
+
+                &-searchresults{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    // width: 100%;
+                    
+
+                    &-link{
+                        width: 100%;
+                        &-searchcard{
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            // padding-left: 30px;
+                            margin-bottom: 30px;
+                            
+                            &-picture{
+                                $picture-dimensions:50px; 
+                                height: $picture-dimensions;
+                                width: $picture-dimensions;
+            
+                                & img{
+                                    height: 100%;
+                                    width: 100%;
+                                    object-fit: cover;
+                                    border-radius: 50%;
+                                }
+                            }
+    
+                            &-name{
+                                padding-left: 20px;
+                            }
+                        }
+                    }
+
+                    
+                }
             }
         }
 

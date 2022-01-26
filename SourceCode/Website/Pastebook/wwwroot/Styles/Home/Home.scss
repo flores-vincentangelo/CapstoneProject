@@ -15,6 +15,7 @@
     
 
     &-leftsidepanel{
+        padding-top: 10px;
         position: fixed;
         width: $leftsidepanel-width;
 
@@ -23,6 +24,38 @@
 
         overflow: auto;
         height: 100vh;
+
+        & > a{
+            margin-bottom: 10px;
+
+            & > div{
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        &-profilelink{
+
+            &-picture{
+
+                $picture-dimensions:50px; 
+                height: $picture-dimensions;
+                width: $picture-dimensions;
+
+                & img{
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+            }
+
+            &-name{
+                padding-left: 10px;
+            }
+        }
+
+        
     }
 
     &-timeline{
