@@ -1,3 +1,7 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .profile-ext-container {
     background: #f1f1f1;
     display: flex;
@@ -7,7 +11,6 @@
     position: relative;
     align-items: center;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 13px;
 }
 
 .profile-readonly {
@@ -47,8 +50,8 @@
 
 .profile-title-modal{
     text-align: center;
-    margin: 10px 0 0 0;
-    font-size: 13px;
+    margin: 5px 0 0 0;
+    font-size: 12px;
 }
 
 #profile-close-firstname-modal,
@@ -58,11 +61,12 @@
 #profile-close-birthday-modal,
 #profile-close-gender-modal,
 #profile-close-password-modal {
-    color: #aaaaaa;
+    color: #000000;
     float: right;
-    font-size: 25px;
     font-weight: bold;
     cursor: pointer;
+    margin-right: 10px;
+    margin-top: 2px;
 }
 
 #profile-close-firstname-modal:hover,
@@ -79,7 +83,7 @@
 #profile-close-gender-modal:focus,
 #profile-close-password-modal:hover,
 #profile-close-password-modal:focus {
-    color: #000;
+    color: rgb(151, 149, 149);
     text-decoration: none;
     cursor: pointer;
 }
@@ -94,6 +98,20 @@
     width: 50%;
 }
 
+#profile-first-name,
+#profile-last-name,
+#profile-email,
+#profile-mobile,
+#profile-birthday,
+#profile-gender,
+#profile-password {
+    font-size: 12px;
+}
+
+.model-label {
+    font-weight: bold;
+}
+
 #firstname-save-btn,
 #lastname-save-btn,
 #email-save-btn,
@@ -102,11 +120,14 @@
 #gender-save-btn,
 #password-save-btn {
     width: 20%;
+    margin-left: 10px;
     margin-right: 10px;
     border: none;
     padding: 5px;
     cursor: pointer;
     border-radius: 2px;
+    background-color: #5ea4ff;
+    color: white;
 }
 
 #firstname-save-btn:hover,
@@ -117,7 +138,7 @@
 #gender-save-btn:hover,
 #gender-password-btn:hover {
     color: white;
-    background-color: green;
+    background-color: #006af5;
 }
 
 #firstname-cancel-btn,
@@ -132,6 +153,8 @@
     padding: 5px;
     cursor: pointer;
     border-radius: 2px;
+    color: white;
+    background-color: rgb(255, 92, 92);
 }
 
 #firstname-cancel-btn:hover,
@@ -149,6 +172,7 @@
     display: flex;
     justify-content: center;
     font-size: 13px;
+    margin-top: 10px;
 }
 
 #form-profile {
@@ -166,26 +190,14 @@
 #profile-edit-birthday-btn,
 #profile-edit-gender-btn,
 #profile-edit-password-btn {
-    width: 8%;
-    height: 5%;
     float: right;
     margin: auto 0px auto auto;
     font-size: 10px;
     cursor: pointer;
     border: none;
     padding: 5px;
-    border-radius: 5px;
-}
-
-#profile-edit-firstname-btn:hover,
-#profile-edit-lastname-btn:hover,
-#profile-edit-email-btn:hover,
-#profile-edit-mobile-btn:hover,
-#profile-edit-birthday-btn:hover,
-#profile-edit-gender-btn:hover,
-#profile-edit-password-btn:hover {
-    background-color: #1877f2;
-    color: white;
+    color: #1877f2;
+    background-color: white;
 }
 
 p {
@@ -195,12 +207,13 @@ p {
 }
 
 label {
+    font-size: 12px;
     margin-bottom: 5px;
 }
 
 #password {
-    margin-left: 50px;
-    width: 60%;
+    margin-left: 46px;
+    width: 62%;
 }
 
 #new-password {
@@ -210,33 +223,80 @@ label {
 
 #old-password {
     margin-left: 30px;
-    width: 60%;
+    width: 62%;
 }
 
+#new-password,
 #confirm-password,
 #confirm-new-password {
-    width: 60%;
+    width: 62%;
 }
 
 #email {
-    margin-left: 24px;
-    width: 60%;
+    margin-left: 22px;
+    width: 62%;
 }
 
-/* .modal-about-container .input-about {
-    width: auto;
-    height: auto;
-    padding: 5px;
-    margin: auto;
-    border-radius: 0;
-    background-color: white;
-} */
-
 #gender {
-    width: 80%;
+    width: 84%;
     height: auto;
-    padding: 5px;
+    padding: 3px;
     margin: auto;
     border-radius: 0;
+    font-size: 12px;
     background-color: white;
+}
+
+#model-lastname-details {
+    padding-left: 74px;
+}
+
+#model-firstname-details {
+    padding-left: 73px;
+}
+
+#model-email-details {
+    padding-left: 50px;
+}
+
+#model-mobile-details {
+    padding-left: 45px;
+}
+
+#model-birthday-details {
+    padding-left: 84px;
+}
+
+#model-gender-details {
+    padding-left: 92px;
+}
+
+#profile-readonly hr {
+    margin-top: 2px;
+    border: #c5c1c1 solid 0.2px;
+    background-color: #c5c1c1;
+    opacity: 0.3;
+}
+
+.input-about {
+    font-size: 12px;
+    width: 74%;
+    padding: 3px;
+}
+
+.modal-about-container hr {
+    margin-bottom: 20px;
+    border: #c5c1c1 solid 0.2px;
+    background-color: #c5c1c1;
+    opacity: 0.5;
+}
+
+#birthday {
+    font-size: 12px;
+    width: 80%;
+}
+
+#mobile {
+    width: 68%;
+    font-size: 12px;
 }

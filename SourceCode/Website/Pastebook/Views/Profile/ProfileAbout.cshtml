@@ -19,35 +19,35 @@
 
 <body>
     <div class="profile-ext-container">
-        <h3>About</h3>
+        <h3>Edit Profile</h3>
         <div class="profile-readonly" id="profile-readonly">
             <div class="field">
-                <p id="profile-first-name">First Name: @Model.FirstName</p>
-                <button class="profile-edit-firstname-btn" id="profile-edit-firstname-btn">Edit</button>
-            </div>
+                <p id="profile-first-name"><span class="model-label">First Name: </span><span id="model-firstname-details">@Model.FirstName</span></p>
+                <button class="profile-edit-firstname-btn" id="profile-edit-firstname-btn">Edit Info</button>
+            </div><hr>
             <div class="field">
-                <p id="profile-last-name">Last Name: @Model.LastName</p>
-                <button class="profile-edit-lastname-btn" id="profile-edit-lastname-btn">Edit</button>
-            </div>
+                <p id="profile-last-name"><span class="model-label">Last Name: </span><span id="model-lastname-details">@Model.LastName</span></p>
+                <button class="profile-edit-lastname-btn" id="profile-edit-lastname-btn">Edit Info</button>
+            </div><hr>
             <div class="field">
-                <p id="profile-email">Email Address: @Model.EmailAddress</p>
-                <button class="profile-edit-email-btn" id="profile-edit-email-btn">Edit</button>
-            </div>      
+                <p id="profile-email"><span class="model-label">Email Address: </span><span id="model-email-details">@Model.EmailAddress</span></p>
+                <button class="profile-edit-email-btn" id="profile-edit-email-btn">Edit Info</button>
+            </div><hr>    
             <div class="field">
-                <p id="profile-mobile">Mobile Number: @Model.MobileNumber</p>
-                <button class="profile-edit-mobile-btn" id="profile-edit-mobile-btn">Edit</button>
-            </div> 
+                <p id="profile-mobile"><span class="model-label">Mobile Number: </span><span id="model-mobile-details">@Model.MobileNumber</span></p>
+                <button class="profile-edit-mobile-btn" id="profile-edit-mobile-btn">Edit Info</button>
+            </div><hr>
             <div class="field">
-                <p id="profile-birthday">Birthday: @birthdate</p>
-                <button class="profile-edit-birthday-btn" id="profile-edit-birthday-btn">Edit</button>
-            </div>  
+                <p id="profile-birthday"><span class="model-label">Birthday: </span><span id="model-birthday-details">@birthdate</span></p>
+                <button class="profile-edit-birthday-btn" id="profile-edit-birthday-btn">Edit Info</button>
+            </div><hr> 
             <div class="field">
-                <p id="profile-gender">Gender: @Model.Gender</p>
-                <button class="profile-edit-gender-btn" id="profile-edit-gender-btn">Edit</button>
-            </div>
+                <p id="profile-gender"><span class="model-label">Gender: </span><span id="model-gender-details">@Model.Gender</span></p>
+                <button class="profile-edit-gender-btn" id="profile-edit-gender-btn">Edit Info</button>
+            </div><hr>
             <div class="field">
-                <p id="profile-password">Change Password</p>
-                <button class="profile-edit-password-btn" id="profile-edit-password-btn">Edit</button>
+                <p id="profile-password"><span class="model-label">Change Password</span></p>
+                <button class="profile-edit-password-btn" id="profile-edit-password-btn">Edit Info</button>
             </div>
         </div>
         <div class="profile-edit-firstname-modal" id="profile-edit-firstname-modal">
@@ -137,7 +137,7 @@
                 <form class="form-edit-gender" id="form-profile-gender">
                     <label>Gender:</label>
                     <select type="text" id="gender" name="Gender" value="@Model.Gender">
-                        <option>---</option>
+                        <option></option>
                         <option>Female</option>
                         <option>Male</option>
                     </select><br><br>
