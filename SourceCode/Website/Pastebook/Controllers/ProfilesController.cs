@@ -73,6 +73,15 @@ public class ProfilesController: Controller
                 return(Unauthorized());
             }
         }
+        else if (!String.IsNullOrEmpty(user.ReadableBirthday)) {
+
+            DateTime birthDate = DateTime.Parse(user.ReadableBirthday);
+            var dateOfBirth = (long)((birthDate.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0))).TotalSeconds);
+            user.Birthday = dateOfBirth;
+            DbUsers.ModifyInformation(profileLink, user);
+            updatedUser = DbUsers.GetInformationById(profileLink);
+            return Json(updatedUser);
+        }
         else 
         { 
             DbUsers.ModifyInformation(profileLink, user);
