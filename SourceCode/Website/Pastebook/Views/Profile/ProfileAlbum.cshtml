@@ -1,10 +1,19 @@
+@model List<Models.AlbumModel>
+@{
+    var albumList = Model;
+    var count = albumList.Count;
+}
+
 <link rel="stylesheet" type="text/css" href="./Styles/Profiles/ProfileAlbum.css">
+<link rel="stylesheet" type="text/css" href="./Styles/Profiles/ProfileAlbum_AlbumCard.css">
+
 <script src="./Scripts/ProfileAlbum.js"></script>
 
 <body>
     <div class="profile-ext-container">
         <h3>Albums</h3>
         <div class="ext-container">
+            <div>Number of Albums: @count</div>
             <button class="album-btn" id="album-add-btn">Add New Album</button>
             <div class="album-add-modal" id="album-add-modal">
                 <div class="modal-container">
@@ -21,14 +30,15 @@
             </div>
         </div>
         <div class="ext-container">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis dolore hic nihil, fugiat accusantium molestiae perferendis adipisci totam corporis possimus nesciunt quaerat magni repudiandae excepturi exercitationem non architecto eos.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo numquam, amet exercitationem a magni consectetur quidem, velit eius aperiam maxime, provident et adipisci facere quibusdam veniam labore repudiandae ad temporibus.
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati eaque tenetur aliquid nemo excepturi. Eum iusto, itaque minus porro, doloribus magni illum adipisci atque in sint quaerat ratione, incidunt soluta!
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi magni facere rem, dolore quibusdam aperiam laborum optio neque, harum saepe vel rerum consequuntur, eos eum quidem sunt repellat. Beatae, molestiae.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus eligendi accusamus, exercitationem, sed et nulla beatae enim pariatur quibusdam a voluptate magni eveniet maxime? Repellat eligendi repellendus rem inventore adipisci.
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere amet, error corporis molestias ad eligendi, consectetur, tempora ea reprehenderit praesentium libero? Suscipit, aliquid eum fuga asperiores nihil nostrum sed iste!
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta ab blanditiis consequatur dolorem inventore recusandae est laboriosam facilis sit laudantium mollitia odio voluptatibus nesciunt, similique aut corporis ipsam error quasi.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga porro, perspiciatis accusantium odio maiores voluptatibus vero placeat tempora non nihil quod cumque sint exercitationem quae iure aliquam mollitia ad facilis.
+            <div class="album-card-container">
+                @{
+                    foreach (Models.AlbumModel album in Model)
+                    {
+                        await Html.RenderPartialAsync("_AlbumCard.cshtml", album);
+                    }
+                }
+            </div>
         </div>
+        
     </div>
 </body>

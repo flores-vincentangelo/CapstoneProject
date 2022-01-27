@@ -6,10 +6,11 @@ $(document).ready(() => {
     EditBirthday();
     EditGender();
     EditPassword();
-    MobileNumLimit(element);
-    PasswordLimit(element);
-    LettersInput(input);
-    NumbersInput(input);
+    
+    // MobileNumLimit(element);
+    // PasswordLimit(element);
+    // LettersInput(input);
+    // NumbersInput(input);
 });
 
 function EditFirstName() {
