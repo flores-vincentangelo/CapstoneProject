@@ -9,18 +9,19 @@ body {
 }
 
 #status {
-    border: 1px solid #ccc;
+    border: 1px solid rgb(241, 239, 239);
     border-radius: 4px;
-    background-color: #d9dbdd;
+    background-color: rgb(241, 239, 239);
     padding: 20px;
     border-radius: 20px;
-    width: 680px;
+    width: 380px;
     margin-left: 10px;
+    margin-top: 10px;
 }
 
 .profile-post-container-status-user {
     background-color: white;
-    width: 800px;
+    width: 500px;
     height: auto;
     padding: 30px;
     margin: auto;
@@ -45,13 +46,12 @@ body {
 
 .profile-post-container-status-label {
     background-color: white;
-    width: 810px;
+    width: 510px;
     padding: 10px;
-    margin-top: 30px;
+    margin: 2% auto;
     font-weight: bold;
     font-size: 20px;
     border-radius: 15px;
-    margin-bottom: 30px;
     padding-left: 40px;
 }
 
@@ -59,7 +59,7 @@ body {
     display: none;
     position: fixed;
     z-index: 1;
-    left: auto;
+    left: 0;
     top: 0;
     width: 100%;
     height: 100%;
@@ -86,7 +86,7 @@ body {
 #modal-container-close {
     color: #aaaaaa;
     float: right;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: bold;
     cursor: pointer;
     background-color: #d9dbdd;
@@ -95,9 +95,19 @@ body {
     padding-right: 5px;
 }
 
+#modal-container-close:hover {
+    background-color: rgb(218, 214, 214);
+    color: black;
+}
+
 .modal-container-user {
     display: flex;
     margin-top: 15px;
+}
+
+.modal-container-user #user-details {
+    margin-top: 8px;
+    font-weight: bold;
 }
 
 .modal-container-user img {
@@ -115,27 +125,44 @@ body {
 }
 
 .modal-container-photo {
-    border: #000 2px solid;
+    border: rgba(0, 0, 0, 0.7) 2px solid;
     border-radius: 8px;
-    margin-bottom: 20px;
-    padding: 100px;
+    margin-bottom: 10px;
+    padding: 10px;
+    height: 40vh;
+    margin-top: 8px;
 }
 
-#modal-container-photo img {
+#modal-container-photo-img {
     display: block;
     margin: auto;
-    height: 168px;
-    width: 168px;
-    border-radius: 50%;
+    height: 40vh;
+    width: 30vw;
 }
 
 #caption {
-    width: 98%;
-    padding: 2px;
-    margin-bottom: 5px;
+    width: 96.5%;
+    padding: 5px;
+    margin-bottom: 8px;
 }
 
 .user-post-button {
     float: right;
     margin-right: 2px;
+    cursor: pointer;
+    background-color: rgba(24, 119, 242, 0.9);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 10%;
+    padding: 4px 6px;
+    font-weight: bold;
+}
+
+.user-post-button:hover {
+    background-color: rgb(24, 119, 242);
+}
+
+#caption-add {
+    margin-bottom: 5px;
 }

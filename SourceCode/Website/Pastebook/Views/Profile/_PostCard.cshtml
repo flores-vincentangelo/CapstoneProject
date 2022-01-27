@@ -9,7 +9,11 @@
 <div class="profile-post-container-status-post">
     <div class="profile-post-container-status-post-profile">
         <img class="user-photo" src=@Model.Poster.Photo>
-        <span id="user-details">@Model.Poster.FirstName @Model.Poster.LastName<br> @createdDate</span>
+        <span id="user-details"><span id="poster-fullname">@Model.Poster.FirstName @Model.Poster.LastName</span><br><span id="date-created">@createdDate</span></span>
+        <div class="profile-post-container-status-post-profile-buttons">
+            <button><img id="update-post" src="./Images/more.png"></button>
+            <button><img id="delete-post" src="./Images/close.png"></button>
+        </div>
     </div>
     <div class="profile-post-container-status-post-caption">
         <span>@Model.Caption</span>
@@ -21,8 +25,17 @@
         <span id="like">@Model.Likes Likes</span>
         <span id="comment">@Model.Comment Comments</span>
     </div>
+    <hr>
     <div class="profile-post-container-status-post-buttons">
-        <button>Like</button>
-        <button>Comments</button>
+        <button><img src="./Images/like.png"><span id="like-post">Like</span></button>
+        <button> <img src="./Images/comment.png"><span id="comment-post">Comment</span></button>
+    </div>
+    <hr>
+    <div class="profile-post-container-status-post-comments">
+        <img src="./Images/pastebook-logo.png">
+        <div class="friend-details">
+            <span id="friend-name">Friend Name</span><br>
+            <span id="friend-comment">Comment goes here......</span>
+        </div>
     </div>
 </div>

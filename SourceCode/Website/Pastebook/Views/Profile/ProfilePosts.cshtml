@@ -4,12 +4,10 @@
 }
 <!DOCTYPE html>
 <html>
-
 <head>
     <link rel="stylesheet" type="text/css" href="./Styles/Profiles/ProfilePost.css">
     <script src="./Scripts/ProfilePost.js"></script>
 </head>
-
 <body>
     <div class="profile-post-container">
         <div class="profile-post-container-status">
@@ -17,7 +15,8 @@
                 <div class="profile-post-container-status-user1">
                     <img id="user-photo" src=@Model.User.Photo>
                     <form class="status-edit">
-                        <input type="text" autocomplete="off" id="status" name="status" placeholder="What's on your mind?">
+                        <input type="text" autocomplete="off" id="status" name="status"
+                            placeholder="What's on your mind?">
                     </form>
                 </div>
             </div>
@@ -43,24 +42,23 @@
     </div>
     <div class="post-modal-container">
         <div class="post-modal-container-1">
-        <div class="modal-container-title">
-            <span id="modal-container-close">&times;</span>
-            <h1>Create Post</h1>
-        </div>
-        <div class="modal-container-user">
-            <img class="user-photo" src=@Model.User.Photo>
-            <p id="user-details">@Model.User.FirstName @Model.User.LastName</p>
-        </div>
-        <div class="modal-container-caption">
-            <form class="caption-add" id="caption-add">
-                <input type="text" id="caption" name="caption" placeholder="What's on your mind?" maxlength="1000">
-                <input type="file" id="myPhotoPost" name="Photo" accept="image/*" data-type='image'>
-                <button class="user-post-button" type="submit">Post</button>
-            </form>
-        </div>
-        <div class="modal-container-photo">
-            <img id = "modal-container-photo-img" src="" >
-        </div>
+            <div class="modal-container-title">
+                <span id="modal-container-close">&times;</span>
+            </div>
+            <div class="modal-container-user">
+                <img class="user-photo" src=@Model.User.Photo>
+                <p id="user-details">@Model.User.FirstName @Model.User.LastName</p>
+            </div>
+            <div class="modal-container-caption">
+                <form class="caption-add" id="caption-add">
+                    <input type="text" id="caption" name="caption" placeholder="What's on your mind?" maxlength="1000">
+                    <input type="file" id="myPhotoPost" name="Photo" accept="image/*" data-type='image'>
+                    <button class="user-post-button" type="submit">Post</button>
+                </form>
+            </div>
+            <div class="modal-container-photo">
+                <img id="modal-container-photo-img" src="">
+            </div>
         </div>
     </div>
 </body>
