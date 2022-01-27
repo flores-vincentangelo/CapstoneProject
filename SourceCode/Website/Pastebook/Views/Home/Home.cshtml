@@ -1,12 +1,32 @@
 @{Layout = "/Views/_Layout.cshtml";}
+@model Models.UserModel
 <link rel="stylesheet" href="./Styles/Home/Home.css">
 <script src="Scripts/Home.js"></script>
 
 
     <div class="home-body">
         <div class="home-body-leftsidepanel">
-            <button>Profile</button>
-            <a href="/friends">Friends</a>
+            @* <button>Profile</button> *@
+            <a href=@($"/{Model.ProfileLink}")>
+                <div class="home-body-leftsidepanel-profilelink">
+                    <div class="home-body-leftsidepanel-profilelink-picture">
+                        <img src=@Model.Photo>
+                    </div>
+                    <div class="home-body-leftsidepanel-profilelink-name">
+                        <div>@Model.ProfileName</div>
+                    </div>
+                </div>
+            </a>
+            <a href="/friends">
+                <div class="home-body-leftsidepanel-friendslink">
+                    <div class="home-body-leftsidepanel-friendslink-icon">
+                        
+                    </div>
+                    <div class="home-body-leftsidepanel-friendslink-name">
+                        Friends
+                    </div>
+                </div>
+            </a>
         </div>
 
         <div class="home-body-timeline">
