@@ -226,4 +226,42 @@ public class DbTables
             }
         }
     }
+
+    public static void CreatePostsTable()
+    {     
+        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var command = db.CreateCommand())
+            {
+                command.CommandText = @"IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Posts' and xtype='U')
+                CREATE TABLE Posts (
+                    EmailAddress VARCHAR (255),
+                    PostId INTEGER NOT NULL IDENTITY (1,1) PRIMARY KEY,
+                    DatePosted BIGINT,
+                    Caption VARCHAR (255),
+                    PhotoId INTEGER,
+                    Photo VARCHAR (MAX),
+                    Likes VARCHAR (MAX),
+                    Comment VARCHAR (MAX),
+                    );";
+                command.ExecuteNonQuery();
+                Console.WriteLine("Posts Table created successfully!");
+             }
+        }
+    }
+
+    public static void DropPostsTable()
+    {
+        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var command = db.CreateCommand())
+            {
+                command.CommandText = "DROP TABLE IF EXISTS Posts";
+                command.ExecuteNonQuery();
+                Console.WriteLine("Posts Table deleted successfully!");
+            }
+        }
+    }
 }
