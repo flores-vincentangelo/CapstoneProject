@@ -294,7 +294,7 @@ public class DbUsers
             using(var cmd = db.CreateCommand())
             {
                 cmd.CommandText = 
-                    @"SELECT ProfileName, ProfileLink, Photo 
+                    @"SELECT FirstName, LastName, ProfileLink, Photo 
                     FROM Users
                     WHERE FirstName LIKE @searchterm
                     OR LastName LIKE @searchterm;";
@@ -306,9 +306,10 @@ public class DbUsers
                     while(reader.Read())
                     {
                         UserModel user = new UserModel();
-                        user.ProfileName = reader.GetString(0);
-                        user.ProfileLink = reader.GetString(1);
-                        user.Photo = reader.GetString(2);
+                        user.FirstName = reader.GetString(0);
+                        user.LastName = reader.GetString(1);
+                        user.ProfileLink = reader.GetString(2);
+                        user.Photo = reader.GetString(3);
                         userList.Add(user);
                     }
                 }

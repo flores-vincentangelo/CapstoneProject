@@ -65,7 +65,7 @@ async function SearchUsers(searchTerm){
         $(".layout-header-left-searchpanel-searchresults").html("No Results");
     } else {
         data.forEach((item,index) => {
-            AddSearchCard(item.profileName,item.profileLink,item.photo);
+            AddSearchCard(item.firstName,item.lastName,item.profileLink,item.photo);
         });
     }
     
@@ -77,7 +77,8 @@ async function deleteSession() {
     });
 }
 
-function AddSearchCard(profileName,profileLink,photo){
+function AddSearchCard(firstName,lastName,profileLink,photo){
+    console.log(lastName);
     var searchCard = 
     `<a class="layout-header-left-searchpanel-searchresults-link" href="/${profileLink}">
         <div class="layout-header-left-searchpanel-searchresults-link-searchcard">
@@ -85,7 +86,7 @@ function AddSearchCard(profileName,profileLink,photo){
                 <img src="${photo}">
             </div>
             <div class="layout-header-left-searchpanel-searchresults-link-searchcard-name">
-                ${profileName}
+                ${firstName} ${lastName}
             </div>
         </div>
     </a>`
