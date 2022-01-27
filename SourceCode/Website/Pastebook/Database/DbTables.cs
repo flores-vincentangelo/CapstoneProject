@@ -87,40 +87,40 @@ public class DbTables
             }
         }
     }
-    public static void CreateProfilesTable()
-    {     
-        using(var db = new SqlConnection(DB_CONNECTION_STRING))
-        {
-            db.Open();
-            using(var command = db.CreateCommand())
-            {
-                command.CommandText = @"IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Profiles' and xtype='U')
-                CREATE TABLE Profiles(
-                    Id VARCHAR(255),
-                    FullName VARCHAR(255),
-                    About VARCHAR(MAX),
-                    Photo VARCHAR(MAX),
-                    Cover VARCHAR(MAX)
-                );";
-                command.ExecuteNonQuery();
-                Console.WriteLine("Profiles Table created successfully!");
-             }
-        }
-    }
+    // public static void CreateProfilesTable()
+    // {     
+    //     using(var db = new SqlConnection(DB_CONNECTION_STRING))
+    //     {
+    //         db.Open();
+    //         using(var command = db.CreateCommand())
+    //         {
+    //             command.CommandText = @"IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Profiles' and xtype='U')
+    //             CREATE TABLE Profiles(
+    //                 Id VARCHAR(255),
+    //                 FullName VARCHAR(255),
+    //                 About VARCHAR(MAX),
+    //                 Photo VARCHAR(MAX),
+    //                 Cover VARCHAR(MAX)
+    //             );";
+    //             command.ExecuteNonQuery();
+    //             Console.WriteLine("Profiles Table created successfully!");
+    //          }
+    //     }
+    // }
 
-    public static void DropProfilesTable()
-    {
-        using(var db = new SqlConnection(DB_CONNECTION_STRING))
-        {
-            db.Open();
-            using(var command = db.CreateCommand())
-            {
-                command.CommandText = "DROP TABLE IF EXISTS Profiles";
-                command.ExecuteNonQuery();
-                Console.WriteLine("Profiles Table deleted successfully!");
-            }
-        }
-    }
+    // public static void DropProfilesTable()
+    // {
+    //     using(var db = new SqlConnection(DB_CONNECTION_STRING))
+    //     {
+    //         db.Open();
+    //         using(var command = db.CreateCommand())
+    //         {
+    //             command.CommandText = "DROP TABLE IF EXISTS Profiles";
+    //             command.ExecuteNonQuery();
+    //             Console.WriteLine("Profiles Table deleted successfully!");
+    //         }
+    //     }
+    // }
 
     public static void CreateFriendsTable()
     {
@@ -167,7 +167,8 @@ public class DbTables
                     AlbumId INTEGER NOT NULL IDENTITY (1,1) PRIMARY KEY,
                     AlbumName VARCHAR (255),
                     UserEmail VARCHAR (255),
-                    CreatedDate BIGINT
+                    CreatedDate BIGINT,
+                    PhotosList VARCHAR(MAX)
                     );";
                 command.ExecuteNonQuery();
                 Console.WriteLine("Albums Table created successfully!");
@@ -202,7 +203,7 @@ public class DbTables
                     UserEmail VARCHAR (255),
                     Photo VARCHAR (MAX),
                     UploadDate BIGINT,
-                    AlbumId VARCHAR (255),
+                    AlbumId INT,
                     Likes VARCHAR (MAX),
                     Comments VARCHAR (MAX)
                     );";

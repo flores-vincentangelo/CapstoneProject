@@ -6,5 +6,6 @@ public class AlbumModel
     public string? UserEmail {get;set;}
     public string? AlbumName {get;set;}
     public long CreatedDate {get;set;}
+    public string? PhotosList {get;set;}
     
 }

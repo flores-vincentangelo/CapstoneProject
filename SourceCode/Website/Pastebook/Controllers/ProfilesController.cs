@@ -2,6 +2,7 @@ namespace Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Database;
 using Models;
+using System.Text.Json;
 
 public class ProfilesController: Controller
 {
@@ -24,7 +25,15 @@ public class ProfilesController: Controller
                 if(sessionModel != null)
                 {
                     var user = DbUsers.GetInformationById(profileLink);
-                    return View("/Views/Profile/Profile.cshtml", user);
+                    var userProfile = new ProfileModel();
+                    userProfile.User = DbUsers.GetInformationById(profileLink);
+                    userProfile.AlbumList = DbAlbums.GetAllAlbums(cookieEmail);
+                    
+                    // string jsonString = JsonSerializer.Serialize(userProfile);
+                    // Console.WriteLine("User Profile");
+                    // Console.WriteLine(jsonString);
+                    
+                    return View("/Views/Profile/Profile.cshtml", userProfile);
                 }
             }
             return RedirectToAction("doLoginAction", "Login");

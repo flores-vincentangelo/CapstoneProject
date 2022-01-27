@@ -6,7 +6,7 @@ public class PhotoModel
     public string? UserEmail {get;set;}
     public string? Photo {get;set;}
     public long UploadDate {get;set;}
-    public string? AlbumId {get;set;}
+    public int AlbumId {get;set;}
     public string? Likes {get;set;}
     public string? Comments {get;set;}
     
