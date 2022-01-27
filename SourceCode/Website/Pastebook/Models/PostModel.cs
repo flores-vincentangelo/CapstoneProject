@@ -10,4 +10,5 @@ public class PostModel
     public string? Photo {get;set;}
     public string? Likes {get;set;}
     public string? Comment {get;set;}
+    public string? ProfileLink {get;set;}
 }

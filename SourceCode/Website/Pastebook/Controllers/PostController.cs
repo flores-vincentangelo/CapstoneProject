@@ -14,14 +14,14 @@ public class PostController: Controller
     [HttpGet]
     [Route("/post")]
     public IActionResult GetAllPostDetails() {
-        string? cookieEmail = HttpContext.Request.Cookies["email"];
+        string? cookieProfileLink = HttpContext.Request.Cookies["profileLink"];
         string? cookieSessionId = HttpContext.Request.Cookies["sessionId"];
         if(cookieSessionId != null)
         {
             SessionsModel? sessionModel = DbSessions.GetSessionById(cookieSessionId);
             if(sessionModel != null)
             {
-                var posts = DbPosts.GetAllPostDetails(cookieEmail);
+                var posts = DbPosts.GetAllPostDetails(cookieProfileLink);
                 if(posts == null) {
                     return Ok("No Post found");
                 }
@@ -36,7 +36,9 @@ public class PostController: Controller
     public IActionResult doAddPost([FromBody] PostModel post) 
     {   
         string? cookieEmail = HttpContext.Request.Cookies["email"];
+        string? cookieProfileLink = HttpContext.Request.Cookies["profileLink"];
         post.EmailAddress = cookieEmail;
+        post.ProfileLink = cookieProfileLink;
         post.DatePosted = (long)((System.DateTime.Now.Subtract(new System.DateTime(1970, 1, 1))).TotalSeconds);
 
         if (post.Photo == null) {
