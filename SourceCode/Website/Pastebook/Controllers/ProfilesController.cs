@@ -25,7 +25,6 @@ public class ProfilesController: Controller
                     userProfile.DoesUserOwnProfile = DbUsers.DoesUserOwnProfile(cookieEmail,profileLink);
                     userProfile.User = DbUsers.GetInformationById(profileLink);
                     userProfile.AlbumList = DbAlbums.GetAllAlbums(cookieEmail);
-                    System.Console.WriteLine($"{Environment.NewLine} {userProfile.DoesUserOwnProfile} {Environment.NewLine}");
                     
                     // string jsonString = JsonSerializer.Serialize(userProfile);
                     // Console.WriteLine("User Profile");

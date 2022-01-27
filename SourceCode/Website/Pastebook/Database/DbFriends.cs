@@ -124,5 +124,24 @@ public class DbFriends
         
     }
 
+    public static string AddEmailtoFriendRequestList(string emailToAdd, string? friendReqListStr)
+    {
+        if(!String.IsNullOrEmpty(friendReqListStr))
+        {
+            var _friendReqListArr = friendReqListStr.Split(",");
+            List<string> friendReqList = new List<string>(_friendReqListArr);
+            friendReqList.Add(emailToAdd);
+            return String.Join(",",friendReqList);
+        }
+        else
+        {
+            return emailToAdd;
+        }
+        
+    }
 
+    // public static bool IsInFriendsList(string emailToTest, string userFriendsList)
+    // {
+
+    // }
 }
