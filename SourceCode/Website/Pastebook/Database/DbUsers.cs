@@ -318,4 +318,47 @@ public class DbUsers
         return userList;
     }
 
+    public static bool DoesProfileExist(string profileLink)
+    {
+        bool isExists = false;
+        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var cmd = db.CreateCommand())
+            {
+                cmd.CommandText = 
+                    @"SELECT *
+                    FROM Users
+                    WHERE ProfileLink = @profilelink;";
+                cmd.Parameters.AddWithValue("@profilelink",profileLink);
+                var reader = cmd.ExecuteReader();
+                isExists = reader.HasRows ? true : false;
+            }
+        }
+        return isExists;
+    }
+
+    public static bool DoesUserOwnProfile(string userEmail, string profileLink)
+    {
+        bool doesUserOwn = false;
+        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var cmd = db.CreateCommand())
+            {
+                cmd.CommandText = 
+                    @"SELECT ProfileLink
+                    FROM Users
+                    WHERE EmailAddress = @email;";
+                cmd.Parameters.AddWithValue("@email", userEmail);
+                var reader = cmd.ExecuteReader();
+                while(reader.Read())
+                {
+                    var linkFromDb = reader.GetString(0);
+                    doesUserOwn = linkFromDb == profileLink ? true : false;
+                }
+            }
+        }
+        return doesUserOwn;
+    }
 }

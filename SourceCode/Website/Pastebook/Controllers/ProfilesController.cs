@@ -9,13 +9,9 @@ public class ProfilesController: Controller
     [HttpGet]
     [Route("/{profileLink}")]
     public IActionResult GetUserByLink(string profileLink) {
-        Console.WriteLine("Profile Link: " + profileLink);
-        if( profileLink != "favicon.ico" && 
-            profileLink != "login" && 
-            profileLink != "register" && 
-            profileLink != "sessions" && 
-            profileLink != "albums" && 
-            profileLink != "friends")
+
+        bool doesProfileExist = DbUsers.DoesProfileExist(profileLink);
+        if(doesProfileExist)
         {
             string? cookieEmail = HttpContext.Request.Cookies["email"];
             string? cookieSessionId = HttpContext.Request.Cookies["sessionId"];
@@ -26,8 +22,10 @@ public class ProfilesController: Controller
                 {
                     var user = DbUsers.GetInformationById(profileLink);
                     var userProfile = new ProfileModel();
+                    userProfile.DoesUserOwnProfile = DbUsers.DoesUserOwnProfile(cookieEmail,profileLink);
                     userProfile.User = DbUsers.GetInformationById(profileLink);
                     userProfile.AlbumList = DbAlbums.GetAllAlbums(cookieEmail);
+                    System.Console.WriteLine($"{Environment.NewLine} {userProfile.DoesUserOwnProfile} {Environment.NewLine}");
                     
                     // string jsonString = JsonSerializer.Serialize(userProfile);
                     // Console.WriteLine("User Profile");
