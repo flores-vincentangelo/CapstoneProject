@@ -78,7 +78,6 @@ async function deleteSession() {
 }
 
 function AddSearchCard(firstName,lastName,profileLink,photo){
-    console.log(lastName);
     var searchCard = 
     `<a class="layout-header-left-searchpanel-searchresults-link" href="/${profileLink}">
         <div class="layout-header-left-searchpanel-searchresults-link-searchcard">
