@@ -1,7 +1,10 @@
 @model List<Models.AlbumModel>
 @{
     var albumList = Model;
-    var count = albumList.Count;
+    var count = 0;
+    if(albumList != null) {
+        count = albumList.Count;
+    }
 }
 
 <link rel="stylesheet" type="text/css" href="./Styles/Profiles/ProfileAlbum.css">
@@ -32,9 +35,11 @@
         <div class="ext-container">
             <div class="album-card-container">
                 @{
-                    foreach (Models.AlbumModel album in Model)
-                    {
-                        await Html.RenderPartialAsync("_AlbumCard.cshtml", album);
+                    if(albumList != null) {
+                        foreach (Models.AlbumModel album in albumList)
+                        {
+                            await Html.RenderPartialAsync("_AlbumCard.cshtml", album);
+                        }
                     }
                 }
             </div>
