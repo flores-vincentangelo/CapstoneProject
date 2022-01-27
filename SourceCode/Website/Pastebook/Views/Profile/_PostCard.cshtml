@@ -1,0 +1,25 @@
+@model Models.PostModel
+@{
+    var createdDate = new System.DateTime(1970, 1, 1).AddSeconds(Model.DatePosted).ToString("MMMM dd, yyyy");
+                        
+}
+
+<link rel="stylesheet" type="text/css" href="./Styles/Profiles/_PostCard.css">
+
+<div class="profile-post-container-status-post">
+    <div class="profile-post-container-status-post-profile">
+        <img class="user-photo" src=@Model.Poster.Photo>
+        <span id="user-details">@Model.Poster.FirstName @Model.Poster.LastName<br> @createdDate</span>
+    </div>
+    <div class="profile-post-container-status-post-caption">
+        <span>@Model.Caption</span>
+    </div>
+    <div class="profile-post-container-status-post-status">
+        <span id="like">@Model.Likes Likes</span>
+        <span id="comment">@Model.Comment Comments</span>
+    </div>
+    <div class="profile-post-container-status-post-buttons">
+        <button>Like</button>
+        <button>Comments</button>
+    </div>
+</div>

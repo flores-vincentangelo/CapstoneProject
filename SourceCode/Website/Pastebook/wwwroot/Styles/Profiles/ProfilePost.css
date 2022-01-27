@@ -59,72 +59,8 @@ body {
     padding-left: 40px;
 }
 
-.profile-post-container-status-post {
-    background-color: white;
-    width: 800px;
-    height: auto;
-    padding: 30px;
-    margin: auto;
-    border-radius: 15px;
-}
-
-.profile-post-container-status-post-profile {
-    display: flex;   
-    font-size: 13px;
-}
-
-.profile-post-container-status-post-profile img {
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    margin-right: 20px
-}
-
-.profile-post-container-status-post-caption {
-    margin-top: 20px;
-    font-size: 13px;
-    margin-left: 20px
-}
-
-.profile-post-container-status-post-status {
-    margin-top: 80px;
-    display: flex;
-    flex-direction: row;
-    font-size: 13px;
-    margin-bottom: 10px
-}
-
-#like {
-    text-align: left;
-    width: 50%;
-    margin-left: 15px;
-}
-
-#comment {
-    text-align: right;
-    width: 50%;
-    margin-right: 15px;
-}
-
-.profile-post-container-status-post-buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-.profile-post-container-status-post-buttons button{
-    width: 50%;
-}
-
 .post-modal-container {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 15px;
-    border: 1px solid #888;
-    border-radius: 12px;
-    width: 25%;
-    display: none
-    /* display: none;
+    display: none;
     position: fixed;
     z-index: 1;
     left: auto;
@@ -132,9 +68,17 @@ body {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.4); */
+    background-color: rgba(0,0,0,0.4);
 }
 
+.post-modal-container-1{
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 15px;
+    border: 1px solid #888;
+    border-radius: 12px;
+    width: 40%;
+}
 
 .modal-container-title h1 {
     text-align: center;
@@ -188,27 +132,31 @@ body {
 #modal-container-addToPost-photo {
     text-align: right;
     width: 50%;
-    margin-right: 30px
+    margin-right: 30px;
 }
-
-/* .modal-container-button {
-    margin-top: 15px;
-} 
-
-.modal-container-button button {
-    width: 100%
-} */
 
 .modal-container-photo {
     border: #000 2px solid;
     border-radius: 8px;
     margin-bottom: 20px;
-    padding: 10px;
+    padding: 100px;
 }
+
 #modal-container-photo img {
     display: block;
     margin: auto;
     height: 168px;
     width: 168px;
     border-radius: 50%;
+}
+
+#caption {
+    width: 98%;
+    padding: 2px;
+    margin-bottom: 5px;
+}
+
+.user-post-button {
+    float: right;
+    margin-right: 2px;
 }

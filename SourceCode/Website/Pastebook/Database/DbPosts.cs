@@ -45,6 +45,7 @@ public class DbPosts
                 command.CommandText = "SELECT * FROM Posts WHERE ProfileLink = @ProfileLink";
                 command.Parameters.AddWithValue("@ProfileLink", profileLink);
                 var reader = command.ExecuteReader();
+                if(!reader.HasRows) return null;
                 while(reader.Read())
                 {
                     PostModel postDetail = new PostModel();
