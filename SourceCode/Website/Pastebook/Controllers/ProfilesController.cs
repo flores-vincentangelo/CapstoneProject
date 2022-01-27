@@ -33,7 +33,7 @@ public class ProfilesController: Controller
                     // Console.WriteLine("User Profile");
                     // Console.WriteLine(jsonString);
                     
-                    return View("/Views/Profile/Profile.cshtml", user);
+                    return View("/Views/Profile/Profile.cshtml", userProfile);
                 }
             }
             return RedirectToAction("doLoginAction", "Login");

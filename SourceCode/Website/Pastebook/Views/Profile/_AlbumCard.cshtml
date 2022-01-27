@@ -1,0 +1,27 @@
+@model Models.AlbumModel
+@{
+    var createdDate = new System.DateTime(1970, 1, 1).AddSeconds(Model.CreatedDate).ToString("yyyy-MM-dd");
+                        
+}
+
+<div class="albums-main-all-container-albumcard">
+    @* <div class="albums-main-all-container-albumcard-picture">
+        <img src="" alt="Folder">
+    </div> *@
+    <div class="albums-main-all-container-albumcard-title">@Model.AlbumName</div>
+    <div class="albums-main-all-container-albumcard-name">
+        <p>Album Id: @Model.AlbumId</p>
+        <p>Album Name: @Model.AlbumName</p>
+        <p>User Email: @Model.UserEmail</p>
+        <p>Date Created: @createdDate</p>
+        <p>Photo List: @Model.PhotosList</p>
+        <button class="album-btn" id=@Model.AlbumId value=@Model.AlbumId >Add Photo</button>
+    </div>
+</div>
+
+<script>
+    $('#@Model.AlbumId').click(() => {
+        var albumId = document.getElementById("@Model.AlbumId")
+        console.log(albumId.value);
+    });
+</script>

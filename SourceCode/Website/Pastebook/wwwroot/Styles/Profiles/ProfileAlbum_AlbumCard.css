@@ -1,0 +1,15 @@
+.albums-main-all-container-albumcard{
+    background: #ccc;
+    border: #fff solid 1px;
+    width: 200px;
+    padding: 5px;
+    margin: 10px;
+    align-items: center;
+}
+.albums-main-all-container-albumcard-picture{
+    background: #fff;
+    border: #000 solid 1px;
+}
+.albums-main-all-container-albumcard-name{
+    color: #0000ff;
+}

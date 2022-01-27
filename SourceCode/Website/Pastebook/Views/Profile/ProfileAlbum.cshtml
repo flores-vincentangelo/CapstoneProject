@@ -1,10 +1,19 @@
+@model List<Models.AlbumModel>
+@{
+    var albumList = Model;
+    var count = albumList.Count;
+}
+
 <link rel="stylesheet" type="text/css" href="./Styles/Profiles/ProfileAlbum.css">
+<link rel="stylesheet" type="text/css" href="./Styles/Profiles/ProfileAlbum_AlbumCard.css">
+
 <script src="./Scripts/ProfileAlbum.js"></script>
 
 <body>
     <div class="profile-ext-container">
         <h3>Albums</h3>
         <div class="ext-container">
+            <div>Number of Albums: @count</div>
             <button class="album-btn" id="album-add-btn">Add New Album</button>
             <div class="album-add-modal" id="album-add-modal">
                 <div class="modal-container">
@@ -22,7 +31,12 @@
         </div>
         <div class="ext-container">
             <div class="album-card-container">
-                Album Cards Here
+                @{
+                    foreach (Models.AlbumModel album in Model)
+                    {
+                        await Html.RenderPartialAsync("_AlbumCard.cshtml", album);
+                    }
+                }
             </div>
         </div>
         
