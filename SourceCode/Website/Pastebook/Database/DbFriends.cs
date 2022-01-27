@@ -152,4 +152,18 @@ public class DbFriends
         }
         
     }
+
+    public static bool IsInFriendReqList(string emailToTest, string? userFriendReqList)
+    {
+        if(String.IsNullOrEmpty(userFriendReqList))
+        {
+            return false;
+        }
+        else
+        {
+            return userFriendReqList.Contains(emailToTest);
+        }
+        
+    }
+
 }

@@ -49,11 +49,21 @@
         string profileLink = Model.User.ProfileLink;
         //if user does not own profile
         //show the add a friend button
-        if(Model.DoesUserOwnProfile == false && Model.IsUserAFriend == false)
+        if(Model.DoesUserOwnProfile == false)
         {
-            <div class="profile-friendbuttoncontainer">
-                <button class="profile-friendbuttoncontainer-addfriend" onclick="Addfriend('@Model.User.ProfileLink')">Add Friend</button>
-            </div>
+            if(Model.IsUserInFriendsList == false && Model.IsUserInFriendReqList == false)
+            {
+                <div class="profile-friendbuttoncontainer">
+                    <button class="profile-friendbuttoncontainer-addfriend" onclick="Addfriend('@Model.User.ProfileLink')">Add Friend</button>
+                </div>
+            }
+            else if (Model.IsUserInFriendsList == false && Model.IsUserInFriendReqList == true)
+            {
+                <div class="profile-friendbuttoncontainer">
+                    <button class="profile-friendbuttoncontainer-requestsend" >Friend Request Sent</button>
+                </div>
+            }
+            
         }
     }
 

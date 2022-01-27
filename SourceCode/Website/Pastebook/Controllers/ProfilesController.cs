@@ -20,19 +20,20 @@ public class ProfilesController: Controller
                 SessionsModel? sessionModel = DbSessions.GetSessionById(cookieSessionId);
                 if(sessionModel != null)
                 {
-                    var user = DbUsers.GetInformationById(profileLink);
-                    var userProfile = new ProfileModel();
-                    userProfile.DoesUserOwnProfile = DbUsers.DoesUserOwnProfile(cookieEmail,profileLink);
-                    userProfile.User = DbUsers.GetInformationById(profileLink);
-                    userProfile.AlbumList = DbAlbums.GetAllAlbums(cookieEmail);
-                    FriendsModel userFriends = DbFriends.GetFriendsData(userProfile.User.EmailAddress);
-                    userProfile.IsUserAFriend = DbFriends.IsInFriendsList(cookieEmail,userFriends.FriendsList);
+                    var profileOwnerDetails = DbUsers.GetInformationById(profileLink);
+                    var profileOwner = new ProfileModel();
+                    profileOwner.DoesUserOwnProfile = DbUsers.DoesUserOwnProfile(cookieEmail,profileLink);
+                    profileOwner.User = profileOwnerDetails;
+                    profileOwner.AlbumList = DbAlbums.GetAllAlbums(cookieEmail);
+                    FriendsModel profileOwnerFriends = DbFriends.GetFriendsData(profileOwner.User.EmailAddress);
+                    profileOwner.IsUserInFriendsList = DbFriends.IsInFriendsList(cookieEmail,profileOwnerFriends.FriendsList);
+                    profileOwner.IsUserInFriendReqList = DbFriends.IsInFriendReqList(cookieEmail, profileOwnerFriends.FriendRequests);
                     
                     // string jsonString = JsonSerializer.Serialize(userProfile);
                     // Console.WriteLine("User Profile");
                     // Console.WriteLine(jsonString);
                     
-                    return View("/Views/Profile/Profile.cshtml", userProfile);
+                    return View("/Views/Profile/Profile.cshtml", profileOwner);
                 }
             }
             return RedirectToAction("doLoginAction", "Login");

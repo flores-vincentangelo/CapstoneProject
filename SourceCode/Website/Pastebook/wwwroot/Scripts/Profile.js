@@ -13,7 +13,10 @@ async function Addfriend(profileLink){
     var url = `/friends/request/${profileLink}`
     const response = await fetch(url, {
         method: "PATCH"
-    })
+    });
+    if(response.ok){
+        location.reload();
+    }
 }
 
 function EditProfilePicture() {
