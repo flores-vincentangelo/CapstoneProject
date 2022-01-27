@@ -116,7 +116,7 @@ body {
     width: 50%;
 }
 
-.modal-container {
+.post-modal-container {
     background-color: #fefefe;
     margin: auto;
     padding: 15px;
@@ -185,7 +185,7 @@ body {
     width: 50%;
 }
 
-#user-addToPost-photo {
+#modal-container-addToPost-photo {
     text-align: right;
     width: 50%;
     margin-right: 30px
@@ -198,3 +198,17 @@ body {
 .modal-container-button button {
     width: 100%
 } */
+
+.modal-container-photo {
+    border: #000 2px solid;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+#modal-container-photo img {
+    display: block;
+    margin: auto;
+    height: 168px;
+    width: 168px;
+    border-radius: 50%;
+}

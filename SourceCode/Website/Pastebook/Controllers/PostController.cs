@@ -41,9 +41,9 @@ public class PostController: Controller
 
         if (post.Photo == null) {
             post.Photo = "";
+            post.PhotoId = 0;
         }
 
-        post.PhotoId = 0;
         post.Likes = "";
         post.Comment = "";
 

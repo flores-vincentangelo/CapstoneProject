@@ -8,12 +8,12 @@ function viewAddPostModal() {
     //When the user clicks on the status form,
     $('.status-edit').click(() => {
         //show Create Post Modal
-        $('.modal-container').css("display", "block");
+        $('.post-modal-container').css("display", "block");
     });
     //When the user clicks on the "x",
     $('#modal-container-close').click(() => {
         //close Create Post Modal
-        $('.modal-container').css("display", "none");
+        $('.post-modal-container').css("display", "none");
     });
 }
 
@@ -26,7 +26,7 @@ function addPost() {
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
         addPostToProfile(event, data);
         //close modal
-        $('.modal-container').css("display", "none");
+        $('.post-modal-container').css("display", "none");
         resetForm();
     })
 }
