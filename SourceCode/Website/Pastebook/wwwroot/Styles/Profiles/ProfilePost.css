@@ -11,7 +11,7 @@ body {
 #status {
     border: 1px solid #ccc;
     border-radius: 4px;
-    background-color: rgb(212, 206, 206);
+    background-color: #d9dbdd;
     padding: 20px;
     border-radius: 20px;
     width: 680px;
@@ -116,4 +116,99 @@ body {
     width: 50%;
 }
 
+.post-modal-container {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 15px;
+    border: 1px solid #888;
+    border-radius: 12px;
+    width: 25%;
+    display: none
+    /* display: none;
+    position: fixed;
+    z-index: 1;
+    left: auto;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); */
+}
 
+
+.modal-container-title h1 {
+    text-align: center;
+    margin: 5px 0 0 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#modal-container-close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #d9dbdd;
+    border-radius: 50%;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.modal-container-user {
+    display: flex;
+    margin-top: 15px;
+}
+
+.modal-container-user img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+.modal-container-caption {
+    margin-top: 15px;
+}
+
+.modal-container-caption {
+    height: 60px;
+}
+
+.modal-container-addToPost {
+    display: flex;
+    flex-direction: row;
+    font-size: 13px;
+}
+
+#user-addToPost {
+    text-align: left;
+    width: 50%;
+}
+
+#modal-container-addToPost-photo {
+    text-align: right;
+    width: 50%;
+    margin-right: 30px
+}
+
+/* .modal-container-button {
+    margin-top: 15px;
+} 
+
+.modal-container-button button {
+    width: 100%
+} */
+
+.modal-container-photo {
+    border: #000 2px solid;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+#modal-container-photo img {
+    display: block;
+    margin: auto;
+    height: 168px;
+    width: 168px;
+    border-radius: 50%;
+}
