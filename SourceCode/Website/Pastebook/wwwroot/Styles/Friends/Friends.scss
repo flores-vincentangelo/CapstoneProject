@@ -23,6 +23,7 @@
         padding-top: $sidepanel-padding;
         // margin-right: $sidepanel-padding;
         width: $sidepanel-width;
+        box-shadow: $box-shadow;
 
 
         display: flex;
@@ -85,7 +86,7 @@
                     width: 225px;
                     // padding: 10px;
                     height: 350px;
-    
+                    box-shadow: $box-shadow;
     
                     &-picture{ 
                         height: 50%;
@@ -181,7 +182,7 @@
                     border-radius: $border-radius;
                     flex-direction: row;
                     align-items: center;
-                    
+                    box-shadow: $box-shadow;
 
                     &-picture{
                         $picture-dimensions:90px; 

@@ -8,6 +8,7 @@
   top: 60px;
   padding-top: 10px;
   width: 350px;
+  box-shadow: 0 0.1px 8px 2px gray;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -56,6 +57,7 @@
   border-radius: 20px;
   width: 225px;
   height: 350px;
+  box-shadow: 0 0.1px 8px 2px gray;
 }
 .friends-main-requests-friendcardcontainer-friendreqcard-picture {
   height: 50%;
@@ -131,6 +133,7 @@
   border-radius: 20px;
   flex-direction: row;
   align-items: center;
+  box-shadow: 0 0.1px 8px 2px gray;
 }
 .friends-main-all-container-friendcard-picture {
   height: 90px;
