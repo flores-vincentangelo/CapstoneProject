@@ -25,6 +25,8 @@ public class ProfilesController: Controller
                     userProfile.DoesUserOwnProfile = DbUsers.DoesUserOwnProfile(cookieEmail,profileLink);
                     userProfile.User = DbUsers.GetInformationById(profileLink);
                     userProfile.AlbumList = DbAlbums.GetAllAlbums(cookieEmail);
+                    FriendsModel userFriends = DbFriends.GetFriendsData(userProfile.User.EmailAddress);
+                    userProfile.IsUserAFriend = DbFriends.IsInFriendsList(cookieEmail,userFriends.FriendsList);
                     
                     // string jsonString = JsonSerializer.Serialize(userProfile);
                     // Console.WriteLine("User Profile");

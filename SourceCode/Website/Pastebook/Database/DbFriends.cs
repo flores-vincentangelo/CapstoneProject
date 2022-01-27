@@ -140,8 +140,16 @@ public class DbFriends
         
     }
 
-    // public static bool IsInFriendsList(string emailToTest, string userFriendsList)
-    // {
-
-    // }
+    public static bool IsInFriendsList(string emailToTest, string? userFriendsList)
+    {
+        if(String.IsNullOrEmpty(userFriendsList))
+        {
+            return false;
+        }
+        else
+        {
+            return userFriendsList.Contains(emailToTest);
+        }
+        
+    }
 }
