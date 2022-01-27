@@ -14,7 +14,7 @@ public class PostController: Controller
     [HttpGet]
     [Route("/post")]
     public IActionResult GetAllPostDetails() {
-        string? cookieProfileLink = HttpContext.Request.Cookies["profileLink"];
+        string? cookieProfileLink = HttpContext.Request.Cookies["profilelink"];
         string? cookieSessionId = HttpContext.Request.Cookies["sessionId"];
         if(cookieSessionId != null)
         {
@@ -36,7 +36,7 @@ public class PostController: Controller
     public IActionResult doAddPost([FromBody] PostModel post) 
     {   
         string? cookieEmail = HttpContext.Request.Cookies["email"];
-        string? cookieProfileLink = HttpContext.Request.Cookies["profileLink"];
+        string? cookieProfileLink = HttpContext.Request.Cookies["profilelink"];
         post.EmailAddress = cookieEmail;
         post.ProfileLink = cookieProfileLink;
         post.DatePosted = (long)((System.DateTime.Now.Subtract(new System.DateTime(1970, 1, 1))).TotalSeconds);
