@@ -43,10 +43,6 @@ body {
     font-weight: bold;
 }
 
-.user-upload {
-    text-align: center;
-}
-
 .profile-post-container-status-label {
     background-color: white;
     width: 810px;
@@ -116,23 +112,6 @@ body {
 
 .modal-container-caption {
     height: 60px;
-}
-
-.modal-container-addToPost {
-    display: flex;
-    flex-direction: row;
-    font-size: 13px;
-}
-
-#user-addToPost {
-    text-align: left;
-    width: 50%;
-}
-
-#modal-container-addToPost-photo {
-    text-align: right;
-    width: 50%;
-    margin-right: 30px;
 }
 
 .modal-container-photo {
