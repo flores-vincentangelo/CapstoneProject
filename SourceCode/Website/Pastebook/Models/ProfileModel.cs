@@ -3,6 +3,9 @@ namespace Models;
 public class ProfileModel
 {
     public bool DoesUserOwnProfile {get;set;}
+    public bool IsUserInFriendsList {get;set;}
+    public bool IsUserInFriendReqList {get;set;}
+    public bool IsProfileOwnerInFriendReqList {get;set;}
     public UserModel? User {get;set;}
     public AlbumModel? Album {get;set;}
     public PhotoModel? Photo {get;set;}

@@ -124,5 +124,45 @@ public class DbFriends
         
     }
 
+    public static string AddEmailtoFriendRequestList(string emailToAdd, string? friendReqListStr)
+    {
+        if(!String.IsNullOrEmpty(friendReqListStr))
+        {
+            var _friendReqListArr = friendReqListStr.Split(",");
+            List<string> friendReqList = new List<string>(_friendReqListArr);
+            friendReqList.Add(emailToAdd);
+            return String.Join(",",friendReqList);
+        }
+        else
+        {
+            return emailToAdd;
+        }
+        
+    }
 
+    public static bool IsInFriendsList(string emailToTest, string? userFriendsList)
+    {
+        if(String.IsNullOrEmpty(userFriendsList))
+        {
+            return false;
+        }
+        else
+        {
+            return userFriendsList.Contains(emailToTest);
+        }
+        
+    }
+
+    public static bool IsInFriendReqList(string emailToTest, string? userFriendReqList)
+    {
+        if(String.IsNullOrEmpty(userFriendReqList))
+        {
+            return false;
+        }
+        else
+        {
+            return userFriendReqList.Contains(emailToTest);
+        }
+        
+    }
 }

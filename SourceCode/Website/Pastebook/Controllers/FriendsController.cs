@@ -63,11 +63,19 @@ public class FriendsController: Controller
     }
 
     [HttpPatch]
-    [Route("/friends/request")]
-    public IActionResult SendFriendRequest(
-        [FromBody] FriendsModel friendsModel
-    )
-    {
+    [Route("/friends/request/{profileLink}")]
+    public IActionResult SendFriendRequest(string profileLink)
+    {   
+        //Person A. The person who send the friend request
+        string userEmail = HttpContext.Request.Cookies["email"];
+        //Person B. the person who will receive the friend request
+        string userToBeAdded = DbUsers.GetInformationById(profileLink).EmailAddress;
+        //Person B's friend details
+        FriendsModel userToBeAddedFriends = DbFriends.GetFriendsData(userToBeAdded);
+        //adds person A's email to Person B's friend request list
+        string newFriendReqList = DbFriends.AddEmailtoFriendRequestList(userEmail,userToBeAddedFriends.FriendRequests);
+        //updates DB
+        DbFriends.UpdateFriendReqsListOfUser(userToBeAdded,newFriendReqList);
         return Ok();
     }
 

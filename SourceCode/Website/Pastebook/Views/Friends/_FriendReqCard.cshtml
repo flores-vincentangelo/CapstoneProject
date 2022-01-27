@@ -2,11 +2,11 @@
 
 <div class="friends-main-requests-friendcardcontainer-friendreqcard">
     <div class="friends-main-requests-friendcardcontainer-friendreqcard-picture">
-        <img src=@Model.Photo>
+        <a href=@($"/{Model.ProfileLink}")><img src=@Model.Photo></a>
         @* <img id="profile-photo-img" src=@Model.Photo > *@
     </div>
     <div class="friends-main-requests-friendcardcontainer-friendreqcard-content">
-        <div class="friends-main-requests-friendcardcontainer-friendreqcard-content-name">@Model.ProfileName</div>
+        <div class="friends-main-requests-friendcardcontainer-friendreqcard-content-name"><a href=@($"/{Model.ProfileLink}")>@Model.FirstName @Model.LastName</a></div>
         <div class="friends-main-requests-friendcardcontainer-friendreqcard-content-confirm">
             <button class="friends-main-requests-friendcardcontainer-friendreqcard-content-confirm-button" id=@Model.EmailAddress>Confirm</button>
         </div>

@@ -9,13 +9,9 @@ public class ProfilesController: Controller
     [HttpGet]
     [Route("/{profileLink}")]
     public IActionResult GetUserByLink(string profileLink) {
-        Console.WriteLine("Profile Link: " + profileLink);
-        if( profileLink != "favicon.ico" && 
-            profileLink != "login" && 
-            profileLink != "register" && 
-            profileLink != "sessions" && 
-            profileLink != "albums" && 
-            profileLink != "friends")
+
+        bool doesProfileExist = DbUsers.DoesProfileExist(profileLink);
+        if(doesProfileExist)
         {
             string? cookieEmail = HttpContext.Request.Cookies["email"];
             string? cookieSessionId = HttpContext.Request.Cookies["sessionId"];
@@ -24,16 +20,23 @@ public class ProfilesController: Controller
                 SessionsModel? sessionModel = DbSessions.GetSessionById(cookieSessionId);
                 if(sessionModel != null)
                 {
-                    var user = DbUsers.GetInformationById(profileLink);
-                    var userProfile = new ProfileModel();
-                    userProfile.User = DbUsers.GetInformationById(profileLink);
-                    userProfile.AlbumList = DbAlbums.GetAllAlbums(cookieEmail);
+                    var profileOwnerDetails = DbUsers.GetInformationById(profileLink);
+                    var profileOwner = new ProfileModel();
+                    profileOwner.DoesUserOwnProfile = DbUsers.DoesUserOwnProfile(cookieEmail,profileLink);
+                    profileOwner.User = profileOwnerDetails;
+                    profileOwner.AlbumList = DbAlbums.GetAllAlbums(cookieEmail);
+                    FriendsModel profileOwnerFriends = DbFriends.GetFriendsData(profileOwner.User.EmailAddress);
+                    profileOwner.IsUserInFriendsList = DbFriends.IsInFriendsList(cookieEmail,profileOwnerFriends.FriendsList);
+                    profileOwner.IsUserInFriendReqList = DbFriends.IsInFriendReqList(cookieEmail, profileOwnerFriends.FriendRequests);
+                    FriendsModel userFriendsData = DbFriends.GetFriendsData(cookieEmail);
+                    profileOwner.IsProfileOwnerInFriendReqList = DbFriends.IsInFriendReqList(profileOwner.User.EmailAddress,userFriendsData.FriendRequests);
+                    System.Console.WriteLine($"{Environment.NewLine} IsProfileOwnerInFriendReqList {profileOwner.IsProfileOwnerInFriendReqList} {Environment.NewLine}");
                     
                     // string jsonString = JsonSerializer.Serialize(userProfile);
                     // Console.WriteLine("User Profile");
                     // Console.WriteLine(jsonString);
                     
-                    return View("/Views/Profile/Profile.cshtml", userProfile);
+                    return View("/Views/Profile/Profile.cshtml", profileOwner);
                 }
             }
             return RedirectToAction("doLoginAction", "Login");

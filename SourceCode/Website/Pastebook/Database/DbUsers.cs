@@ -294,7 +294,7 @@ public class DbUsers
             using(var cmd = db.CreateCommand())
             {
                 cmd.CommandText = 
-                    @"SELECT ProfileName, ProfileLink, Photo 
+                    @"SELECT FirstName, LastName, ProfileLink, Photo 
                     FROM Users
                     WHERE FirstName LIKE @searchterm
                     OR LastName LIKE @searchterm;";
@@ -306,9 +306,10 @@ public class DbUsers
                     while(reader.Read())
                     {
                         UserModel user = new UserModel();
-                        user.ProfileName = reader.GetString(0);
-                        user.ProfileLink = reader.GetString(1);
-                        user.Photo = reader.GetString(2);
+                        user.FirstName = reader.GetString(0);
+                        user.LastName = reader.GetString(1);
+                        user.ProfileLink = reader.GetString(2);
+                        user.Photo = reader.GetString(3);
                         userList.Add(user);
                     }
                 }
@@ -317,4 +318,47 @@ public class DbUsers
         return userList;
     }
 
+    public static bool DoesProfileExist(string profileLink)
+    {
+        bool isExists = false;
+        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var cmd = db.CreateCommand())
+            {
+                cmd.CommandText = 
+                    @"SELECT *
+                    FROM Users
+                    WHERE ProfileLink = @profilelink;";
+                cmd.Parameters.AddWithValue("@profilelink",profileLink);
+                var reader = cmd.ExecuteReader();
+                isExists = reader.HasRows ? true : false;
+            }
+        }
+        return isExists;
+    }
+
+    public static bool DoesUserOwnProfile(string userEmail, string profileLink)
+    {
+        bool doesUserOwn = false;
+        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var cmd = db.CreateCommand())
+            {
+                cmd.CommandText = 
+                    @"SELECT ProfileLink
+                    FROM Users
+                    WHERE EmailAddress = @email;";
+                cmd.Parameters.AddWithValue("@email", userEmail);
+                var reader = cmd.ExecuteReader();
+                while(reader.Read())
+                {
+                    var linkFromDb = reader.GetString(0);
+                    doesUserOwn = linkFromDb == profileLink ? true : false;
+                }
+            }
+        }
+        return doesUserOwn;
+    }
 }

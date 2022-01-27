@@ -9,9 +9,6 @@ $(document).ready(() => {
             Password : password
         }
 
-        console.log(userCredentials.EmailAddress);
-        console.log(userCredentials.Password);
-
         addSession(userCredentials);
     });
 });
