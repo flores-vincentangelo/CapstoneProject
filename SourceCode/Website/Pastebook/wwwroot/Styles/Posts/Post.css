@@ -11,7 +11,8 @@ body {
     background: black;
     width: 70%;
     padding-top: 10px;
-    height: 780px;
+    height: 95vh;
+    overflow: hidden;
 }
 
 /* #post-container-left-close {
@@ -33,9 +34,9 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
-    height: 50%;
-    margin-top: auto;
+    width: 93%;
+    height: 80%;
+    margin-top: 3%;
     margin-bottom: auto;
 }
 
@@ -44,12 +45,12 @@ body {
     margin: 10px
 }
 
-.post-container-right-notifications img {
+.post-container-right-action img {
     float: right;
     margin-right: 10px
 }
 
-.post-container-right-notifications-option {
+.post-container-right-action-update {
     width: 25px;
     height: 25px;
     background-color: rgb(190, 185, 185);
@@ -57,14 +58,7 @@ body {
     border-radius: 50%;
 }
 
-.post-container-right-notifications-messenger {
-    width: 45px;
-    height: 45px;
-    background-color: rgb(190, 185, 185);
-    border-radius: 50%;
-}
-
-.post-container-right-notifications-notification {
+.post-container-right-action-delete {
     width: 25px;
     height: 25px;
     background-color: rgb(190, 185, 185);
@@ -101,6 +95,10 @@ body {
     margin-bottom: 10px
 }
 
+#post-modal-container-delete {
+    display: none;
+}
+
 #like {
     text-align: left;
     width: 50%;
@@ -122,3 +120,71 @@ body {
 .post-container-right-buttons button {
     width: 50%;
 }
+
+.profile-post-container-status-post-comments {
+    font-size: 13px;
+    margin-top: 2%;
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.profile-post-container-status-post-comments img {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin-right: 2px;
+}
+
+.friend-details {
+    margin-left: 5px;
+    background-color: rgb(241, 239, 239);
+    height: auto;
+    width: auto;
+    padding: 8px 10px;
+    border-radius: 15px;
+    font-size: 10px;
+}
+
+#friend-name {
+    font-weight: bold;
+}
+
+.post-container-right-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border: none;
+}
+
+#like-post, #comment-post {
+    padding-left: 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.post-container-right-buttons img {
+    width: 1vw;
+    height: auto;
+}
+
+.post-container-right-buttons button {
+    width: 48%;
+    border: none;
+    padding: 5px;
+    margin: 2px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.post-container-right-buttons button:hover {
+    background-color: rgba(24, 119, 242, 0.7);
+    font-weight: bold;
+    color: white;
+}
+
+.post-container-right hr {
+    margin: 0;
+    border: solid .2px #d3d5da;
+    background-color: #d3d5da;
+ }

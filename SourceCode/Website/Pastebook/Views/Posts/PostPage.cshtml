@@ -1,36 +1,66 @@
 @model Models.PostModel
 @{
-    var createdDate = new System.DateTime(1970, 1, 1).AddSeconds(Model.DatePosted).ToString("MMMM dd, yyyy");                       
+    var createdDate = new System.DateTime(1970, 1, 1).AddSeconds(Model.DatePosted).ToString("MMMM dd, yyyy");
 }
-
-<link rel="stylesheet" type="text/css" href="../../Styles/Posts/Post.css">
-    
-<div class = "post-container">
-    <div class = "post-container-left">
-        @* <span id="post-container-left-close">&times;</span> *@
-        <a href="/"><img class="post-container-left-logo" src="../../Images/pastebook-logo.png"></a>
-        <img class="post-container-left-post" src="@Model.Photo">
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../../Styles/Posts/Post.css">
+    <script src="../../Scripts/PostPage.js"></script>
+</head>
+<body>
+    <div class="post-container">
+        <div class="post-container-left">
+            @* <span id="post-container-left-close">&times;</span> *@
+            <a href="/"><img class="post-container-left-logo" src="../../Images/pastebook-logo.png"></a>
+            <img class="post-container-left-post" src="@Model.Photo">
+        </div>
+        <div class="post-container-right">
+            <div class="post-container-right-action">
+                <button><img class="post-container-right-action-update" src="../Images/more.png"></button>
+                <button><img class="post-container-right-action-delete" src="../Images/close.png"></button>
+            </div>
+            <div class="post-container-right-profile">
+                <img class="post-container-right-profile-logo" src="@Model.Poster.Photo">
+                <span>@Model.Poster.FirstName @Model.Poster.LastName<br>@createdDate</span>
+            </div>
+            <div class="post-container-right-caption">
+                <span>@Model.Caption</span>
+            </div>
+            <div class="post-container-right-status">
+                <span id="like">Likes</span>
+                <span id="comment">Comments</span>
+            </div>
+            <hr>
+            <div class="post-container-right-buttons">
+                <button><img src="../Images/like.png"><span id="like-post">Like</span></button>
+                <button> <img src="../Images/comment.png"><span id="comment-post">Comment</span></button>
+            </div>
+            <hr>
+            <div class="profile-post-container-status-post-comments">
+                <img src="../Images/img_avatar.png">
+                <div class="friend-details">
+                    <span id="friend-name">Friend Name</span><br>
+                    <span id="friend-comment">Comment goes here......</span>
+                </div>
+            </div>
+        </div>
+        <div id="post-modal-container-delete">
+            <div id="post-modal-container-1-delete">
+                <div id="modal-container-title-delete">
+                    <span id="modal-container-close-delete">&times;</span>
+                </div>
+                <div id="modal-container-caption-delete">
+                    <form id="caption-delete">
+                        <label>Are you sure you want to delete this post?</label>
+                    </form>
+                    <div id="buttons-delete">
+                        <button id="yes-btn">Yes</button>
+                        <button id="cancel-btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class = "post-container-right">
-        <div class = "post-container-right-notifications">
-            <a href="#"><img class="post-container-right-notifications-notification" src="../../Images/Posts/notification.png"></a>
-            <a href="#"><img class="post-container-right-notifications-messenger" src="../../Images/Posts/messenger.png"></a>
-            <a href="#"><img class="post-container-right-notifications-option" src="../../Images/Posts/option.png"></a>
-        </div>
-        <div class ="post-container-right-profile">
-            <img class="post-container-right-profile-logo" src="@Model.Poster.Photo">
-            <span>@Model.Poster.FirstName @Model.Poster.LastName<br> @createdDate</span>
-        </div>
-        <div class ="post-container-right-caption">
-            <span>@Model.Caption</span>
-        </div>
-        <div class = "post-container-right-status">
-            <span id = "like">Likes</span>
-            <span id = "comment">Comments</span>
-        </div>
-        <div class = "post-container-right-buttons">
-            <button>Like</button>
-            <button>Comments</button>
-        </div>
-    </div>
-</div>
+</body>
+</html>

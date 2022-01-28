@@ -5,15 +5,16 @@
 }
 
 <link rel="stylesheet" type="text/css" href="./Styles/Profiles/_PostCard.css">
+<script src="./Scripts/_PostCard.js"></script>
 
 <div class="profile-post-container-status-post">
     <div class="profile-post-container-status-post-profile">
         <img class="user-photo" src=@Model.Poster.Photo>
         <span id="user-details"><span id="poster-fullname">@Model.Poster.FirstName @Model.Poster.LastName</span><br><span id="date-created">@createdDate</span></span>
-        <div class="profile-post-container-status-post-profile-buttons">
+        @* <div class="profile-post-container-status-post-profile-buttons">
             <button><img id="update-post" src="./Images/more.png"></button>
-            <button><img id="delete-post" src="./Images/close.png"></button>
-        </div>
+            <button><img id=@Model.PostId src="./Images/close.png"></button>
+        </div> *@
     </div>
     <div class="profile-post-container-status-post-caption">
         <span>@Model.Caption</span>
@@ -38,4 +39,20 @@
             <span id="friend-comment">Comment goes here......</span>
         </div>
     </div>
+    @* <div class="post-modal-container-delete">
+        <div class="post-modal-container-1-delete">
+            <div class="modal-container-title-delete">
+                <span class="modal-container-close-delete">&times;</span>
+            </div>
+            <div class="modal-container-caption-delete">
+                <form class="caption-delete">
+                    <label>Are you sure you want to delete this post?</label>
+                </form>
+                <div class="buttons-delete">
+                    <button class="yes-btn">Yes</button>
+                    <button class="cancel-btn">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div> *@
 </div>

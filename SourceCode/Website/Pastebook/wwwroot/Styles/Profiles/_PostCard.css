@@ -27,7 +27,7 @@
     height: 1vw;
 }
 
-.profile-post-container-status-post-profile-buttons {
+/* .profile-post-container-status-post-profile-buttons {
     display: flex;
     margin-left: 56%;
 }
@@ -50,7 +50,7 @@
     width: 0.8vw;
     height: auto;
     margin: auto;
-}
+} */
 
 .profile-post-container-status-post-profile img {
     border-radius: 50%;
