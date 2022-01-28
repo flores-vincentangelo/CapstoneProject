@@ -1,0 +1,19 @@
+.photos-main-all-container-photocard {
+    background: #ccc;
+    border: #fff solid 1px;
+    width: 200px;
+    padding: 5px;
+    margin: 10px;
+    align-items: center;
+}
+.photos-main-all-container-photocard-image {
+    background: #fff;
+    border: #000 solid 1px;
+}
+.photos-main-all-container-photocard-details {
+    color: #0000ff;
+}
+.photocard-image {
+    width: 100px;
+    height: 100px;
+}

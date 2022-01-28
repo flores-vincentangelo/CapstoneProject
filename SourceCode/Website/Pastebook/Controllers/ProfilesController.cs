@@ -27,7 +27,8 @@ public class ProfilesController: Controller
                     var user = DbUsers.GetInformationById(profileLink);
                     var userProfile = new ProfileModel();
                     userProfile.User = DbUsers.GetInformationById(profileLink);
-                    userProfile.AlbumList = DbAlbums.GetAllAlbums(cookieEmail);
+                    userProfile.AlbumList = DbAlbums.GetAllAlbumsByProfileLink(profileLink);
+                    userProfile.PhotoList = DbPhotos.GetAllPhotosByProfileLink(profileLink);
                     
                     // string jsonString = JsonSerializer.Serialize(userProfile);
                     // Console.WriteLine("User Profile");

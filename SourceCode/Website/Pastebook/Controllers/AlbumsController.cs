@@ -8,15 +8,17 @@ public class AlbumsController: Controller
     [HttpPost]
     [Route("/albums")]
     public IActionResult AddAlbum([FromBody] AlbumModel album) {
+        string? profileLink = HttpContext.Request.Cookies["profilelink"];
         album.CreatedDate = (long)((System.DateTime.Now.Subtract(new System.DateTime(1970, 1, 1))).TotalSeconds);
         album.PhotosList = "";
+        album.ProfileLink = profileLink;
         DbAlbums.InsertAlbum(album);
         return Ok("Album created successfully");
     }
 
     [HttpGet]
     [Route("/albums")]
-    public IActionResult GetAllAlbums() {
+    public IActionResult GetAllAlbumsByEmail() {
         string? cookieEmail = HttpContext.Request.Cookies["email"];
         string? cookieSessionId = HttpContext.Request.Cookies["sessionId"];
         if(cookieSessionId != null)
@@ -24,7 +26,7 @@ public class AlbumsController: Controller
             SessionsModel? sessionModel = DbSessions.GetSessionById(cookieSessionId);
             if(sessionModel != null)
             {
-                var albums = DbAlbums.GetAllAlbums(cookieEmail);
+                var albums = DbAlbums.GetAllAlbumsByEmail(cookieEmail);
                 if(albums == null) {
                     return Ok("No Albums found");
                 }
@@ -37,7 +39,7 @@ public class AlbumsController: Controller
     [HttpGet]
     [Route("/albums/{email}")]
     public IActionResult GetAllAlbums(string email) {
-        var albums = DbAlbums.GetAllAlbums(email);
+        var albums = DbAlbums.GetAllAlbumsByEmail(email);
         if(albums == null) {
             return Ok("No Albums found");
         }
@@ -46,17 +48,16 @@ public class AlbumsController: Controller
 
     [HttpPatch]
     [Route("/albums/{id}")]
-    public IActionResult Modify(int id,  [FromBody] AlbumModel album) {
-        DbAlbums.Modify(id, album);
-        // var updatedAlbum = DbAlbums.GetAlbumById(id);
-        return Ok("Album updated successfully!");
+    public IActionResult ModifyAlbumName(int id,  [FromBody] AlbumModel album) {
+        DbAlbums.ModifyAlbumName(id, album.AlbumName);
+        return Ok("Album name updated successfully!");
     }
 
     [HttpDelete]
-    [Route("/albums")]
-    public IActionResult DeleteAlbum([FromBody] AlbumModel album) {
-        DbAlbums.DeleteAlbumByName(album.AlbumName);
-        // var updatedAlbum = DbAlbums.GetAlbumById(id);
+    [Route("/albums/{id}")]
+    public IActionResult DeleteAlbumByAlbumId(int id) {
+        DbAlbums.DeleteAlbumByAlbumId(id);
+        DbPhotos.DeletePhotoByAlbumId(id);
         return Ok("Album deleted successfully!");
     }
 
@@ -67,20 +68,30 @@ public class AlbumsController: Controller
     public IActionResult AddPhotoInAlbumId(int albumId, [FromBody] PhotoModel photo) {
         string? cookieEmail = HttpContext.Request.Cookies["email"];
         string? cookieSessionId = HttpContext.Request.Cookies["sessionId"];
-
+        string? profileLink = HttpContext.Request.Cookies["profilelink"];
+        
 
         photo.UserEmail = cookieEmail;
         // photo.Photo = base64image from body
         photo.UploadDate = (long)((System.DateTime.Now.Subtract(new System.DateTime(1970, 1, 1))).TotalSeconds);
         photo.AlbumId = albumId;
+        photo.ProfileLink = profileLink;
         photo.Likes = "";
         photo.Comments = "";
         DbPhotos.AddPhotoInAlbumId(albumId, photo);
         // Get Photo List with AlbumId = albumId
-        var photoList = DbPhotos.GetPhotoList(albumId);
-        // Update Album PhotoList
-        DbAlbums.UpdatePhotoList(albumId, photoList.ToString());
+        var photoList = DbPhotos.GetPhotoListByAlbumId(albumId);
         
+        if(photoList != null) {
+            string photoListString = string.Join( ",", photoList);
+            Console.WriteLine("-------------------");
+            Console.WriteLine($"There are {photoList.Count} photos in Album Id {albumId}");
+            Console.WriteLine(photoListString);
+            Console.WriteLine("-------------------");
+            
+            // Update Album PhotoList
+            DbAlbums.UpdatePhotoList(albumId, photoListString);
+        }
         return Ok("Photo added in album successfully!");
     }
 
@@ -105,6 +116,8 @@ public class AlbumsController: Controller
         }
         return Json(photo);
     }
+
+    
 
     
 

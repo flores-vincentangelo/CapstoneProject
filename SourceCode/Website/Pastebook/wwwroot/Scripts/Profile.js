@@ -118,8 +118,8 @@ async function modifyProfile(event, jsonData) {
     });
     if(response.status == 200) {
         alert("Profile modified successfully!");
-        var userData = await response.json();
-        localStorage.setItem('User', JSON.stringify(userData));
+        // var userData = await response.json();
+        // localStorage.setItem('User', JSON.stringify(userData));
     }
 }
 

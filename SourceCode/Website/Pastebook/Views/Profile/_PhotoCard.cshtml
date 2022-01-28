@@ -1,0 +1,21 @@
+@model Models.PhotoModel
+@{
+    var uploadDate = new System.DateTime(1970, 1, 1).AddSeconds(Model.UploadDate).ToString("yyyy-MM-dd");
+                        
+}
+
+<div class="photos-main-all-container-photocard">
+    <div class="photos-main-all-container-photocard-image">
+        <img class="photocard-image" src="@Model.Photo">
+    </div>
+    <div class="photos-main-all-container-photocard-details">
+        <p>Photo Id: @Model.PhototId</p>
+        <p>User Email: @Model.UserEmail</p>
+        <p>Date Uploaded: @uploadDate</p>
+        <p>Album Id: @Model.AlbumId</p>
+        <p>Profile Link: @Model.ProfileLink</p>
+        <p>Likes: @Model.Likes</p>
+        <p>Comments: @Model.Comments</p>
+    </div>
+</div>
+

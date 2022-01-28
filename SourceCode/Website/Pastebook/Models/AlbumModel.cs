@@ -7,5 +7,6 @@ public class AlbumModel
     public string? AlbumName {get;set;}
     public long CreatedDate {get;set;}
     public string? PhotosList {get;set;}
+    public string? ProfileLink {get;set;}
     
 }

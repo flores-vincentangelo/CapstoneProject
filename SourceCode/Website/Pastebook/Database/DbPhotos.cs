@@ -20,12 +20,13 @@ public class DbPhotos
             using (var cmd = db.CreateCommand())
             {
                 cmd.CommandText =
-                    @"INSERT INTO Photos (UserEmail, Photo, UploadDate, AlbumId, Likes, Comments) 
-                    VALUES (@UserEmail, @Photo, @UploadDate, @AlbumId, @Likes, @Comments);";
+                    @"INSERT INTO Photos (UserEmail, Photo, UploadDate, AlbumId, ProfileLink, Likes, Comments) 
+                    VALUES (@UserEmail, @Photo, @UploadDate, @AlbumId, @ProfileLink, @Likes, @Comments);";
                 cmd.Parameters.AddWithValue("@UserEmail", photo.UserEmail);
                 cmd.Parameters.AddWithValue("@Photo", photo.Photo);
                 cmd.Parameters.AddWithValue("@UploadDate", photo.UploadDate);
                 cmd.Parameters.AddWithValue("@AlbumId", photo.AlbumId);
+                cmd.Parameters.AddWithValue("@ProfileLink", photo.ProfileLink);
                 cmd.Parameters.AddWithValue("@Likes", photo.Likes);
                 cmd.Parameters.AddWithValue("@Comments", photo.Comments);
                 cmd.ExecuteNonQuery();
@@ -52,8 +53,9 @@ public class DbPhotos
                     photo.Photo = reader.GetString(2);
                     photo.UploadDate = reader.GetInt64(3);
                     photo.AlbumId = reader.GetInt32(4);
-                    photo.Likes = reader.GetString(5);
-                    photo.Comments = reader.GetString(6);
+                    photo.ProfileLink = reader.GetString(5);
+                    photo.Likes = reader.GetString(6);
+                    photo.Comments = reader.GetString(7);
                 }
             }
         }
@@ -79,8 +81,9 @@ public class DbPhotos
                     photo.Photo = reader.GetString(2);
                     photo.UploadDate = reader.GetInt64(3);
                     photo.AlbumId = reader.GetInt32(4);
-                    photo.Likes = reader.GetString(5);
-                    photo.Comments = reader.GetString(6);
+                    photo.ProfileLink = reader.GetString(5);
+                    photo.Likes = reader.GetString(6);
+                    photo.Comments = reader.GetString(7);
                     photos.Add(photo);
                 }
             }
@@ -88,7 +91,36 @@ public class DbPhotos
         return photos;
     }
 
-    public static List<int>? GetPhotoList(int albumId)
+    public static List<PhotoModel>? GetAllPhotosByProfileLink(string profileLink)
+    {
+        List<PhotoModel> photos = new List<PhotoModel>();
+        using (var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using (var cmd = db.CreateCommand())
+            {
+                cmd.CommandText = "SELECT * FROM Photos WHERE ProfileLink = @ProfileLink;";
+                cmd.Parameters.AddWithValue("@ProfileLink", profileLink);
+                var reader = cmd.ExecuteReader();
+                if(!reader.HasRows) return null;
+                while(reader.Read()) {
+                    PhotoModel photo = new PhotoModel();
+                    photo.PhototId = reader.GetInt32(0);
+                    photo.UserEmail = reader.GetString(1);
+                    photo.Photo = reader.GetString(2);
+                    photo.UploadDate = reader.GetInt64(3);
+                    photo.AlbumId = reader.GetInt32(4);
+                    photo.ProfileLink = reader.GetString(5);
+                    photo.Likes = reader.GetString(6);
+                    photo.Comments = reader.GetString(7);
+                    photos.Add(photo);
+                }
+            }
+        }
+        return photos;
+    }
+
+    public static List<int>? GetPhotoListByAlbumId(int albumId)
     {
         List<int> photolist = new List<int>();
         using (var db = new SqlConnection(DB_CONNECTION_STRING))
@@ -98,6 +130,26 @@ public class DbPhotos
             {
                 cmd.CommandText = "SELECT PhotoId FROM Photos WHERE AlbumId = @AlbumId;";
                 cmd.Parameters.AddWithValue("@AlbumId", albumId);
+                var reader = cmd.ExecuteReader();
+                if(!reader.HasRows) return null;
+                while(reader.Read()) {
+                    photolist.Add(reader.GetInt32(0));
+                }
+            }
+        }
+        return photolist;
+    }
+
+    public static List<int>? GetPhotoListByProfileLink(string profileLink)
+    {
+        List<int> photolist = new List<int>();
+        using (var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using (var cmd = db.CreateCommand())
+            {
+                cmd.CommandText = "SELECT PhotoId FROM Photos WHERE ProfileLink = @ProfileLink;";
+                cmd.Parameters.AddWithValue("@ProfileLink", profileLink);
                 var reader = cmd.ExecuteReader();
                 if(!reader.HasRows) return null;
                 while(reader.Read()) {
