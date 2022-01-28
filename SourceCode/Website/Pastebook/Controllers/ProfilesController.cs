@@ -34,6 +34,8 @@ public class ProfilesController: Controller
                     profileOwner.IsProfileOwnerInFriendReqList = DbFriends.IsInFriendReqList(profileOwner.User.EmailAddress,userFriendsData.FriendRequests);
                     System.Console.WriteLine($"{Environment.NewLine} IsProfileOwnerInFriendReqList {profileOwner.IsProfileOwnerInFriendReqList} {Environment.NewLine}");
 
+                    // profileOwner.FriendsList = 
+
 //                  var user = DbUsers.GetInformationById(profileLink);
 //                  var userProfile = new ProfileModel();
 //                  userProfile.User = DbUsers.GetInformationById(profileLink);
