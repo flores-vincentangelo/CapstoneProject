@@ -1,128 +1,65 @@
-@* @model Models.PostModel *@
-
-
+@model Models.ProfileModel
+@{
+    var postList = Model.PostsList;
+}
 <!DOCTYPE html>
-    <html>
-        <head>
-            <link rel="stylesheet" type="text/css" href="./Styles/Profiles/ProfilePost.css">
-            <script src="./Scripts/ProfilePost.js"></script>
-        </head>
-        <body>
-            <div class = "profile-post-container">
-                <div class = "profile-post-container-status">
-                    <div class = "profile-post-container-status-user">
-                        <div class = "profile-post-container-status-user1">
-                            @* <img id = "user-photo" src=@Model.Photo> *@
-                            <img id = "user-photo" src="Images/pastebook-logo.png">
-                            <form class = "status-edit">
-                                <input type="text" id="status" name="status" placeholder="What's on your mind?">
-                            </form>
-                        </div>
-                        <div class = "user-upload">
-                            <a href>Photo</a>
-                        </div>
-                    </div>
-                    <div class = "profile-post-container-status-label">
-                        <p id = "label">Posts</p>
-                    </div>
-                    <div class = "profile-post-container-status-post">
-                        <div class ="profile-post-container-status-post-profile">
-                            @* <img class = "user-photo" src=@Model.Photo> *@
-                            <img class = "user-photo" src="Images/pastebook-logo.png">
-                            @* <span id ="user-details">@Model.FirstName @Model.LastName <br> Insert Date Here</span> *@
-                            <span id ="user-details">Insert Name Here <br> Insert Date Here</span>
-                        </div>
-                        <div class ="profile-post-container-status-post-caption">
-                            <span>Insert caption here</span>
-                        </div>
-                        <div class = "profile-post-container-status-post-status">
-                            <span id = "like">Likes</span>
-                            <span id = "comment">Comments</span>
-                        </div>
-                        <div class = "profile-post-container-status-post-buttons">
-                            <button>Like</button>
-                            <button>Comments</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class = "post-modal-container">
-                <div class = "modal-container-title">
-                    <span id = "modal-container-close">&times;</span>
-                    <h1>Create Post</h1>
-                </div>
-                <div class = "modal-container-user">
-                    @* <img class = "user-photo" src=@Model.Photo> *@
-                    <img class = "user-photo" src="Images/pastebook-logo.png">
-                    @* <p id ="user-details">@Model.FirstName @Model.LastName</p> *@
-                    <p id ="user-details">Insert Name Here</p>
-                </div>
-                <div class = "modal-container-caption">
-                    <form class = "caption-add" id = "caption-add">
-                        <input type="text" id = "caption" name="caption" placeholder="What's on your mind?" maxlength="1000">
-                        <button class = "user-post-button" type = "submit">Post</button>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="./Styles/Profiles/ProfilePost.css">
+    <script src="./Scripts/ProfilePost.js"></script>
+</head>
+<body>
+    <div class="profile-post-container">
+        <div class="profile-post-container-status">
+            <div class="profile-post-container-status-user">
+                <div class="profile-post-container-status-user1">
+                    <img id="user-photo" src=@Model.User.Photo>
+                    <form class="status-edit">
+                        <input type="text" autocomplete="off" id="status" name="status"
+                            placeholder="What's on your mind?">
                     </form>
                 </div>
-                <div class="modal-container-photo">
-                    @* <img src=@Model.Photo > *@
-                    <img src="Images/pastebook-logo.png" >
-                </div>
-                <div class = "modal-container-addToPost">
-                    <span id = "user-addToPost">Add to your post</span>
-                    <form class="modal-container-addToPost-photo" id="modal-container-addToPost-photo">
-                        <input type="file" id="myPhotoPost" name="Photo" accept="image/*" data-type='image'>
-                    </form>
-                </div>
-                @* <div class = "modal-container-button">
-                    <button class = "user-post-button">Post</button>
-                </div> *@
             </div>
-        </body>
-    </html>
-    
-        @* <div class="profile-ext-container">
-    <h3>Posts go here</h3>
-    <div class="ext-container">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis dolore hic nihil, fugiat accusantium molestiae perferendis adipisci totam corporis possimus nesciunt quaerat magni repudiandae excepturi exercitationem non architecto eos.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo numquam, amet exercitationem a magni consectetur quidem, velit eius aperiam maxime, provident et adipisci facere quibusdam veniam labore repudiandae ad temporibus.
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati eaque tenetur aliquid nemo excepturi. Eum iusto, itaque minus porro, doloribus magni illum adipisci atque in sint quaerat ratione, incidunt soluta!
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi magni facere rem, dolore quibusdam aperiam laborum optio neque, harum saepe vel rerum consequuntur, eos eum quidem sunt repellat. Beatae, molestiae.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus eligendi accusamus, exercitationem, sed et nulla beatae enim pariatur quibusdam a voluptate magni eveniet maxime? Repellat eligendi repellendus rem inventore adipisci.
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere amet, error corporis molestias ad eligendi, consectetur, tempora ea reprehenderit praesentium libero? Suscipit, aliquid eum fuga asperiores nihil nostrum sed iste!
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta ab blanditiis consequatur dolorem inventore recusandae est laboriosam facilis sit laudantium mollitia odio voluptatibus nesciunt, similique aut corporis ipsam error quasi.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga porro, perspiciatis accusantium odio maiores voluptatibus vero placeat tempora non nihil quod cumque sint exercitationem quae iure aliquam mollitia ad facilis.
+            <div class="profile-post-container-status-label">
+                <p id="label">Posts</p>
+            </div>
+            <div id="user-post">
+                @{
+                    if (postList != null)
+                    {
+                        foreach (Models.PostModel post in postList)
+                        {
+                            post.PosterPhoto = Model.User.Photo;
+                            post.PosterFirstName = Model.User.FirstName;
+                            post.PosterLastName = Model.User.LastName;
+                            post.Poster = Model.User;
+                            await Html.RenderPartialAsync("_PostCard.cshtml", post);
+                        }
+                    }
+                }
+            </div>
+        </div>
     </div>
-    <div class="ext-container">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis dolore hic nihil, fugiat accusantium molestiae perferendis adipisci totam corporis possimus nesciunt quaerat magni repudiandae excepturi exercitationem non architecto eos.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo numquam, amet exercitationem a magni consectetur quidem, velit eius aperiam maxime, provident et adipisci facere quibusdam veniam labore repudiandae ad temporibus.
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati eaque tenetur aliquid nemo excepturi. Eum iusto, itaque minus porro, doloribus magni illum adipisci atque in sint quaerat ratione, incidunt soluta!
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi magni facere rem, dolore quibusdam aperiam laborum optio neque, harum saepe vel rerum consequuntur, eos eum quidem sunt repellat. Beatae, molestiae.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus eligendi accusamus, exercitationem, sed et nulla beatae enim pariatur quibusdam a voluptate magni eveniet maxime? Repellat eligendi repellendus rem inventore adipisci.
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere amet, error corporis molestias ad eligendi, consectetur, tempora ea reprehenderit praesentium libero? Suscipit, aliquid eum fuga asperiores nihil nostrum sed iste!
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta ab blanditiis consequatur dolorem inventore recusandae est laboriosam facilis sit laudantium mollitia odio voluptatibus nesciunt, similique aut corporis ipsam error quasi.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga porro, perspiciatis accusantium odio maiores voluptatibus vero placeat tempora non nihil quod cumque sint exercitationem quae iure aliquam mollitia ad facilis.
+    <div class="post-modal-container">
+        <div class="post-modal-container-1">
+            <div class="modal-container-title">
+                <span id="modal-container-close">&times;</span>
+            </div>
+            <div class="modal-container-user">
+                <img class="user-photo" src=@Model.User.Photo>
+                <p id="user-details">@Model.User.FirstName @Model.User.LastName</p>
+            </div>
+            <div class="modal-container-caption">
+                <form class="caption-add" id="caption-add">
+                    <input type="text" id="caption" name="caption" placeholder="What's on your mind?" maxlength="1000">
+                    <input type="file" id="myPhotoPost" name="Photo" accept="image/*" data-type='image'>
+                    <button class="user-post-button" type="submit">Post</button>
+                </form>
+            </div>
+            <div class="modal-container-photo">
+                <img id="modal-container-photo-img">
+            </div>
+        </div>
     </div>
-    <div class="ext-container">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis dolore hic nihil, fugiat accusantium molestiae perferendis adipisci totam corporis possimus nesciunt quaerat magni repudiandae excepturi exercitationem non architecto eos.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo numquam, amet exercitationem a magni consectetur quidem, velit eius aperiam maxime, provident et adipisci facere quibusdam veniam labore repudiandae ad temporibus.
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati eaque tenetur aliquid nemo excepturi. Eum iusto, itaque minus porro, doloribus magni illum adipisci atque in sint quaerat ratione, incidunt soluta!
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi magni facere rem, dolore quibusdam aperiam laborum optio neque, harum saepe vel rerum consequuntur, eos eum quidem sunt repellat. Beatae, molestiae.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus eligendi accusamus, exercitationem, sed et nulla beatae enim pariatur quibusdam a voluptate magni eveniet maxime? Repellat eligendi repellendus rem inventore adipisci.
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere amet, error corporis molestias ad eligendi, consectetur, tempora ea reprehenderit praesentium libero? Suscipit, aliquid eum fuga asperiores nihil nostrum sed iste!
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta ab blanditiis consequatur dolorem inventore recusandae est laboriosam facilis sit laudantium mollitia odio voluptatibus nesciunt, similique aut corporis ipsam error quasi.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga porro, perspiciatis accusantium odio maiores voluptatibus vero placeat tempora non nihil quod cumque sint exercitationem quae iure aliquam mollitia ad facilis.
-    </div>
-    <div class="ext-container">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis dolore hic nihil, fugiat accusantium molestiae perferendis adipisci totam corporis possimus nesciunt quaerat magni repudiandae excepturi exercitationem non architecto eos.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo numquam, amet exercitationem a magni consectetur quidem, velit eius aperiam maxime, provident et adipisci facere quibusdam veniam labore repudiandae ad temporibus.
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati eaque tenetur aliquid nemo excepturi. Eum iusto, itaque minus porro, doloribus magni illum adipisci atque in sint quaerat ratione, incidunt soluta!
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi magni facere rem, dolore quibusdam aperiam laborum optio neque, harum saepe vel rerum consequuntur, eos eum quidem sunt repellat. Beatae, molestiae.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus eligendi accusamus, exercitationem, sed et nulla beatae enim pariatur quibusdam a voluptate magni eveniet maxime? Repellat eligendi repellendus rem inventore adipisci.
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere amet, error corporis molestias ad eligendi, consectetur, tempora ea reprehenderit praesentium libero? Suscipit, aliquid eum fuga asperiores nihil nostrum sed iste!
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta ab blanditiis consequatur dolorem inventore recusandae est laboriosam facilis sit laudantium mollitia odio voluptatibus nesciunt, similique aut corporis ipsam error quasi.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga porro, perspiciatis accusantium odio maiores voluptatibus vero placeat tempora non nihil quod cumque sint exercitationem quae iure aliquam mollitia ad facilis.
-    </div>
-</div> *@
- 
-
-
+</body>
+</html>

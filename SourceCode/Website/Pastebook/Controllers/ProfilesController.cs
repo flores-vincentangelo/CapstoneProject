@@ -20,17 +20,26 @@ public class ProfilesController: Controller
                 SessionsModel? sessionModel = DbSessions.GetSessionById(cookieSessionId);
                 if(sessionModel != null)
                 {
+
                     var profileOwnerDetails = DbUsers.GetInformationById(profileLink);
                     var profileOwner = new ProfileModel();
                     profileOwner.DoesUserOwnProfile = DbUsers.DoesUserOwnProfile(cookieEmail,profileLink);
                     profileOwner.User = profileOwnerDetails;
                     profileOwner.AlbumList = DbAlbums.GetAllAlbums(cookieEmail);
+                    
                     FriendsModel profileOwnerFriends = DbFriends.GetFriendsData(profileOwner.User.EmailAddress);
                     profileOwner.IsUserInFriendsList = DbFriends.IsInFriendsList(cookieEmail,profileOwnerFriends.FriendsList);
                     profileOwner.IsUserInFriendReqList = DbFriends.IsInFriendReqList(cookieEmail, profileOwnerFriends.FriendRequests);
                     FriendsModel userFriendsData = DbFriends.GetFriendsData(cookieEmail);
                     profileOwner.IsProfileOwnerInFriendReqList = DbFriends.IsInFriendReqList(profileOwner.User.EmailAddress,userFriendsData.FriendRequests);
                     System.Console.WriteLine($"{Environment.NewLine} IsProfileOwnerInFriendReqList {profileOwner.IsProfileOwnerInFriendReqList} {Environment.NewLine}");
+
+//                  var user = DbUsers.GetInformationById(profileLink);
+//                  var userProfile = new ProfileModel();
+//                  userProfile.User = DbUsers.GetInformationById(profileLink);
+                    profileOwner.PostsList = DbPosts.GetAllPostDetails(profileLink);
+//                  userProfile.AlbumList = DbAlbums.GetAllAlbums(cookieEmail);
+
                     
                     // string jsonString = JsonSerializer.Serialize(userProfile);
                     // Console.WriteLine("User Profile");
