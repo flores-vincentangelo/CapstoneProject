@@ -13,8 +13,8 @@
         <span id="user-details"><span id="poster-fullname">@Model.Poster.FirstName
                 @Model.Poster.LastName</span><br><span id="date-created">@createdDate</span></span>
         <div class="profile-post-container-status-post-profile-buttons">
-            <button class="update-post"><img id=@Model.PostId class="update-post" src="./Images/more.png"></button>
-            <button class="delete-post"><img id=@Model.PostId class="delete-post" src="./Images/close.png"></button>
+            <button class="update-post" value=@Model.PostId id=@Model.PostId><img class="update-post" src="./Images/more.png"></button>
+            <button class="delete-post" value=@Model.PostId id=@Model.PostId><img class="delete-post" src="./Images/close.png"></button>
         </div>
     </div>
     <div class="profile-post-container-status-post-caption">
@@ -56,4 +56,28 @@
             </div>
         </div>
     </div>
+    <div id="post-modal-container-update">
+        <div class="post-modal-container-1-update">
+            <div class="modal-container-title-update">
+                <span id="modal-container-close-update">&times;</span>
+            </div>
+            <div class="modal-container-user-update">
+                <img class="user-photo-update" src=@Model.Poster.Photo>
+                <p id="user-details-update">@Model.Poster.FirstName @Model.Poster.LastName</p>
+            </div>
+            <div class="modal-container-caption-update">
+                <form class="caption-add-update">
+                    <input type="text" class="caption-update" name="caption" maxlength="1000">
+                    <button class="user-button-update" type="submit">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script>
+    $('#@Model.PostId').click(() => {
+        var postId = document.getElementById("@Model.PostId")
+        console.log(postId.value);
+    });
+</script>
