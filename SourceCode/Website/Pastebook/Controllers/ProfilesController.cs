@@ -25,7 +25,8 @@ public class ProfilesController: Controller
                     var profileOwner = new ProfileModel();
                     profileOwner.DoesUserOwnProfile = DbUsers.DoesUserOwnProfile(cookieEmail,profileLink);
                     profileOwner.User = profileOwnerDetails;
-                    profileOwner.AlbumList = DbAlbums.GetAllAlbums(cookieEmail);
+                    profileOwner.AlbumList = DbAlbums.GetAllAlbumsByProfileLink(profileLink);
+                    profileOwner.PhotoList = DbPhotos.GetAllPhotosByProfileLink(profileLink);
                     
                     FriendsModel profileOwnerFriends = DbFriends.GetFriendsData(profileOwner.User.EmailAddress);
                     profileOwner.IsUserInFriendsList = DbFriends.IsInFriendsList(cookieEmail,profileOwnerFriends.FriendsList);

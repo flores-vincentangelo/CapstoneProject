@@ -53,10 +53,7 @@
 
         <div class="ext-container photos-container" style="display: none;">
 
-            <div>
-                <button class="photo-btn" id="photo-add-btn">Add New Photo</button>
-                <button class="photo-btn" id="photo-close-album-btn">Close Album</button>
-
+            <div>    
                 <div class="photo-add-modal" id="photo-add-modal">
                     <div class="modal-container">
                         <span id="photo-add-close-modal">&times;</span>
@@ -74,18 +71,26 @@
                 </div>
             </div>
 
-            <div class="photos-card-container">
-                @{
-                    if(photoList != null) {
-                        foreach(Models.PhotoModel photo in photoList)
+            @{
+                foreach(Models.AlbumModel album in albumList)
+                {
+                    <div class="photos-card-container" id="@album.AlbumId" style="display: none;">
+                        <div>
+                            <button class="photo-btn add-new-photo" id="photo-add-btn">Add New Photo</button>
+                            <button class="photo-btn" id="photo-close-album-btn" onclick="CloseAlbum(@album.AlbumId);">Close Album</button>
+                        </div>
+                        @if(photoList != null) 
                         {
-                            if(photo.AlbumId == 8) {
-                                await Html.RenderPartialAsync("_PhotoCard.cshtml", photo);
+                            foreach(Models.PhotoModel photo in photoList)
+                            {
+                                if(photo.AlbumId == album.AlbumId) {
+                                    await Html.RenderPartialAsync("_PhotoCard.cshtml", photo);
+                                }
                             }
                         }
-                    }
+                    </div>
                 }
-            </div>
+            }
         </div>
         
     </div>

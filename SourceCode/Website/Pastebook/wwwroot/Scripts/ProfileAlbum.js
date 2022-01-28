@@ -1,7 +1,7 @@
 $(document).ready( () => {
     AddNewAlbum();
     AddNewPhoto();
-    CloseAlbum();
+    // CloseAlbum();
 });
 
 function AddNewAlbum() {
@@ -73,7 +73,7 @@ async function AddAlbum(event, jsonData) {
 
 function AddNewPhoto() {
     // When the user clicks on the "Add New Photo" button,
-    $('#photo-add-btn').click(() => {
+    $('.add-new-photo').click(() => {
         // Open modal
         $('.photo-add-modal').css("display","flex");
     });
@@ -152,14 +152,20 @@ function OpenAlbum(albumId) {
     document.cookie = 'currentAlbumId=' + albumId;
     $('.album-container').css("display", "none");
     $('.photos-container').css("display", "block");
+    
+    var albums = document.getElementsByClassName("photos-card-container");
+    console.log("No. of Albums: " + albums.length);
+
+    $(`#${albumId}`).css("display", "flex");
+    
 }
 
-function CloseAlbum() {
-    $('#photo-close-album-btn').click(function() {
-        document.cookie = 'currentAlbumId=' + 0;
-        $('.album-container').css("display", "block");
-        $('.photos-container').css("display", "none");
-    });
+function CloseAlbum(albumId) {
+    console.log("Current Album Id to close: " + albumId)
+    document.cookie = 'currentAlbumId=' + 0;
+    $('.album-container').css("display", "block");
+    $('.photos-container').css("display", "none");
+    $(`#${albumId}`).css("display", "none");
 }
 
 async function DeleteAlbum(albumId) {
