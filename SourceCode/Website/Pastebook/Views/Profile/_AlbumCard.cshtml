@@ -4,24 +4,33 @@
                         
 }
 
-<div class="albums-main-all-container-albumcard">
-    @* <div class="albums-main-all-container-albumcard-picture">
-        <img src="" alt="Folder">
-    </div> *@
-    <div class="albums-main-all-container-albumcard-title">@Model.AlbumName</div>
-    <div class="albums-main-all-container-albumcard-name">
+<div class="albumcard-main-container">
+    @{ var readOnlyId = "albumcard-title-readonly-" + Model.AlbumId; }
+    <div class="albumcard-title-readonly" id=@readOnlyId >
+        <h3 class="albumcard-title-text">@Model.AlbumName</h3>
+        <button class="albumcard-edit-btn" onclick="EditAlbumName(@Model.AlbumId);" >Edit</button>
+    </div>
+    @{ var editId = "albumcard-title-edit-" + Model.AlbumId; }
+    <div class="albumcard-title-edit" id=@editId style="display: none;">
+        @{ var formId = "albumcard-form-edit-" + Model.AlbumId; }
+        <form class="albumcard-form-edit" id=@formId >
+            <input type="text" class="album-card-form-input" name="AlbumName" value="@Model.AlbumName" maxlength="30"/>
+        </form>
+        <div class="albumcard-edit-btn-holder">
+            <button class="albumcard-edit-btn" onclick="CancelEditAlbumName(@Model.AlbumId);" >Cancel</button>
+            <button class="albumcard-edit-btn" onclick="SaveEditAlbumName(event, @Model.AlbumId);" >Save</button>
+        </div>
+    </div>
+    
+    <div class="albumcard-details-container">
         <p>Album Id: @Model.AlbumId</p>
         <p>Album Name: @Model.AlbumName</p>
         <p>User Email: @Model.UserEmail</p>
         <p>Date Created: @createdDate</p>
         <p>Photo List: @Model.PhotosList</p>
-        <button class="album-btn" id=@Model.AlbumId value=@Model.AlbumId >Add Photo</button>
+        <p>Profile Link: @Model.ProfileLink</p>
+        <button class="albumcard-open-btn" onclick="OpenAlbum(@Model.AlbumId);" >Open Album</button>
+        <button class="albumcard-del-btn" onclick="DeleteAlbum(@Model.AlbumId);" >Delete Album</button>
     </div>
 </div>
 
-<script>
-    $('#@Model.AlbumId').click(() => {
-        var albumId = document.getElementById("@Model.AlbumId")
-        console.log(albumId.value);
-    });
-</script>

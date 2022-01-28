@@ -1,4 +1,4 @@
-.albums-main-all-container-albumcard{
+.albumcard-main-container {
     background: #ccc;
     border: #fff solid 1px;
     width: 200px;
@@ -6,10 +6,12 @@
     margin: 10px;
     align-items: center;
 }
-.albums-main-all-container-albumcard-picture{
-    background: #fff;
-    border: #000 solid 1px;
+.albumcard-title-readonly {
+    
 }
-.albums-main-all-container-albumcard-name{
+.albumcard-title-edit {
+    
+}
+.albumcard-details-container {
     color: #0000ff;
 }

@@ -1,14 +1,23 @@
-@model List<Models.AlbumModel>
+@model Models.ProfileModel
 @{
-    var albumList = Model;
-    var count = 0;
+    var albumList = Model.AlbumList;
+    var albumCount = 0;
     if(albumList != null) {
-        count = albumList.Count;
+        albumCount = albumList.Count;
     }
+
+    var photoList = Model.PhotoList;
+    var photoCount = 0;
+    if(photoList != null) {
+        photoCount = photoList.Count;
+    }
+
+    @* var albumId = Convert.ToInt32(HttpContext.Request.Cookies["currentAlbumId"]); *@
 }
 
 <link rel="stylesheet" type="text/css" href="./Styles/Profiles/ProfileAlbum.css">
 <link rel="stylesheet" type="text/css" href="./Styles/Profiles/ProfileAlbum_AlbumCard.css">
+<link rel="stylesheet" type="text/css" href="./Styles/Profiles/ProfileAlbum_PhotoCard.css">
 
 <script src="./Scripts/ProfileAlbum.js"></script>
 
@@ -16,7 +25,6 @@
     <div class="profile-ext-container">
         <h3>Albums</h3>
         <div class="ext-container">
-            <div>Number of Albums: @count</div>
             <button class="album-btn" id="album-add-btn">Add New Album</button>
             <div class="album-add-modal" id="album-add-modal">
                 <div class="modal-container">
@@ -31,14 +39,43 @@
                     <button class="album-btn" id="album-cancel-btn">Cancel</button>
                 </div>
             </div>
-        </div>
-        <div class="ext-container">
+
             <div class="album-card-container">
+                Album Cards Here
+            </div>
+        </div>
+
+        <div class="ext-container photos-container" style="display: none;">
+
+            <div>
+                <button class="photo-btn" id="photo-add-btn">Add New Photo</button>
+                <button class="photo-btn" id="photo-close-album-btn">Close Album</button>
+
+                <div class="photo-add-modal" id="photo-add-modal">
+                    <div class="modal-container">
+                        <span id="photo-add-close-modal">&times;</span>
+                        <h2 class="photo-add-title-modal">Add Photo</h2>
+                        <hr>
+                        <form class="form-add-photo" id="form-add-photo">
+                            <input type="file" id="myPhoto" name="Photo" accept="image/*" data-type='image' >
+                        </form>
+                        <div class="album-photo-modal">
+                            <img id="album-photo-modal-img" src="./Images/img_avatar.png" >
+                        </div>
+                        <button class="photo-btn" id="add-photo-save-btn">Save</button>
+                        <button class="photo-btn" id="add-photo-cancel-btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="photos-card-container">
                 @{
-                    if(albumList != null) {
-                        foreach (Models.AlbumModel album in albumList)
+                    if(photoList != null) {
+                        foreach (Models.PhotoModel photo in photoList)
                         {
-                            await Html.RenderPartialAsync("_AlbumCard.cshtml", album);
+                            if(photo.AlbumId == 7) {
+                                await Html.RenderPartialAsync("_PhotoCard.cshtml", photo);
+                            }
                         }
                     }
                 }

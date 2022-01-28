@@ -22,8 +22,9 @@
     cursor: pointer;
 }
 
-/* MODAL ADD NEW ALBUM */
-#album-add-modal {
+/* MODAL ADD NEW ALBUM/PHOTO */
+#album-add-modal,
+#photo-add-modal {
     display: none;
     position: fixed;
     z-index: 1;
@@ -42,37 +43,59 @@
     border-radius: 12px;
     width: 40%;
 }
-.album-add-title-modal {
+.album-add-title-modal,
+.photo-add-title-modal {
     text-align: center;
 }
-#album-add-close-modal {
+#album-add-close-modal,
+#photo-add-close-modal {
     color: #aaaaaa;
     float: right;
     font-size: 36px;
     font-weight: bold;
 }
 #album-add-close-modal:hover,
-#album-add-close-modal:focus {
+#album-add-close-modal:focus,
+#photo-add-close-modal:hover,
+#photo-add-close-modal:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
 }
-.album-btn{
+.album-photo-modal {
+    border: #000 2px solid;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+#album-photo-modal-img {
+    display: block;
+    margin: auto;
+    height: 300px;
+    width: 300px;
+    border-radius: 8px;
+}
+.album-btn,
+.photo-btn {
     width: 50%;
 }
-#album-save-btn {
+#album-save-btn,
+#add-photo-save-btn {
     float: right;
 }
-#album-cancel-btn {
+#album-cancel-btn,
+#add-photo-cancel-btn {
     float: left;
 }
 
 /* FORM INSIDE MODAL */
-.form-add-album {
+.form-add-album,
+.form-add-photo {
     margin-bottom: 10px;
 }
 
-.album-card-container {
+.album-card-container,
+.photos-card-container {
     display: flex;
     flex-wrap: wrap;
 }
