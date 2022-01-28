@@ -244,6 +244,7 @@ public class DbTables
                     Photo VARCHAR (MAX),
                     Likes VARCHAR (MAX),
                     Comment VARCHAR (MAX),
+                    ProfileLink VARCHAR (255),
                     );";
                 command.ExecuteNonQuery();
                 Console.WriteLine("Posts Table created successfully!");
