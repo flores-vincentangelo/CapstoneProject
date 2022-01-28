@@ -1,17 +1,23 @@
 @{Layout = "/Views/_Layout.cshtml";}
 @model Models.ProfileModel
+@using System.Text.Json;
+@{
+    string jsonString = JsonSerializer.Serialize(Model);
+}
 <head>
     <!-- Styles  -->
     <link rel="stylesheet" type="text/css" href="./Styles/Profiles/Profile.css">
 
     <!-- Scripts  -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
+    <script src="./Scripts/Profile.js"></script>
+    <script type="text/javascript">
+        const model = '@jsonString';
         // This is temporary
         localStorage.setItem('profileLink', "@Model.User.ProfileLink");
         document.cookie = 'profilelink=' + "@Model.User.ProfileLink";  
     </script>    
-    <script src="./Scripts/Profile.js"></script>
+    
 
 </head>
 

@@ -1,4 +1,7 @@
 $(document).ready( () => {
+    var jsonObj = JSON.parse(model);
+    console.log(jsonObj);
+    
     // Add to cookie
     // document.cookie = 'profilelink=' + user.ProfileLink;
     // Profile picture
@@ -7,6 +10,10 @@ $(document).ready( () => {
     EditAboutMe();
     showProfileExt();
 });
+
+async function alertFunction (string){
+    alert(string);
+}
 
 async function Addfriend(profileLink){
     // alert(profileLink);
