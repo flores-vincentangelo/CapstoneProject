@@ -91,6 +91,12 @@ public class AlbumsController: Controller
             
             // Update Album PhotoList
             DbAlbums.UpdatePhotoList(albumId, photoListString);
+
+            // Add POSTS when saving a photo in album
+            // var post = new PostModel();
+            // post.PhotoId = photo.PhotoId;
+
+            // DbPosts.InsertPost(post);
         }
         return Ok("Photo added in album successfully!");
     }

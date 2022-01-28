@@ -4,11 +4,11 @@
                         
 }
 
-<div class="photos-main-all-container-photocard">
-    <div class="photos-main-all-container-photocard-image">
+<div class="photocard-main-container">
+    <div class="photocard-image-container">
         <img class="photocard-image" src="@Model.Photo">
     </div>
-    <div class="photos-main-all-container-photocard-details">
+    @* <div class="photocard-details-container">
         <p>Photo Id: @Model.PhototId</p>
         <p>User Email: @Model.UserEmail</p>
         <p>Date Uploaded: @uploadDate</p>
@@ -16,6 +16,7 @@
         <p>Profile Link: @Model.ProfileLink</p>
         <p>Likes: @Model.Likes</p>
         <p>Comments: @Model.Comments</p>
-    </div>
+    </div> *@
+    <button class="photocard-del-btn" onclick="DeletePhoto(@Model.PhotoId);" >Delete Photo</button>
 </div>
 

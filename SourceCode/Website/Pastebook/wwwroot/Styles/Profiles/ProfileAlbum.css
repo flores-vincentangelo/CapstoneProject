@@ -97,5 +97,10 @@
 .album-card-container,
 .photos-card-container {
     display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.photocard-holder {
+    display: flex;
     flex-wrap: wrap;
 }

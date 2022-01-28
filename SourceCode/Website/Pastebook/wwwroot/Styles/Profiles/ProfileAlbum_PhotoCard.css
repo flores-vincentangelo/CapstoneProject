@@ -1,19 +1,29 @@
-.photos-main-all-container-photocard {
+.photocard-main-container {
     background: #ccc;
     border: #fff solid 1px;
-    width: 200px;
+    width: 240px;
+    height: 240px;
     padding: 5px;
     margin: 10px;
     align-items: center;
 }
-.photos-main-all-container-photocard-image {
-    background: #fff;
+.photocard-image-container {
     border: #000 solid 1px;
-}
-.photos-main-all-container-photocard-details {
-    color: #0000ff;
+    border-radius: 5px;
+    height: 210px;
 }
 .photocard-image {
-    width: 100px;
-    height: 100px;
+    height: -webkit-fill-available;
+    width: -webkit-fill-available;
+}
+.photocard-details-container {
+    color: #0000ff;
+}
+.photocard-del-btn {
+    margin: 5px auto;
+    display: block;
+}
+.photocard-del-btn:hover,
+.photocard-del-btn:focus {
+    cursor: pointer;
 }

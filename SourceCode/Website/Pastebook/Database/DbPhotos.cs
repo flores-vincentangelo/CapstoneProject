@@ -48,7 +48,7 @@ public class DbPhotos
                 var reader = cmd.ExecuteReader();
                 if(!reader.HasRows) return null;
                 while(reader.Read()) {
-                    photo.PhototId = reader.GetInt32(0);
+                    photo.PhotoId = reader.GetInt32(0);
                     photo.UserEmail = reader.GetString(1);
                     photo.Photo = reader.GetString(2);
                     photo.UploadDate = reader.GetInt64(3);
@@ -76,7 +76,7 @@ public class DbPhotos
                 if(!reader.HasRows) return null;
                 while(reader.Read()) {
                     PhotoModel photo = new PhotoModel();
-                    photo.PhototId = reader.GetInt32(0);
+                    photo.PhotoId = reader.GetInt32(0);
                     photo.UserEmail = reader.GetString(1);
                     photo.Photo = reader.GetString(2);
                     photo.UploadDate = reader.GetInt64(3);
@@ -105,7 +105,7 @@ public class DbPhotos
                 if(!reader.HasRows) return null;
                 while(reader.Read()) {
                     PhotoModel photo = new PhotoModel();
-                    photo.PhototId = reader.GetInt32(0);
+                    photo.PhotoId = reader.GetInt32(0);
                     photo.UserEmail = reader.GetString(1);
                     photo.Photo = reader.GetString(2);
                     photo.UploadDate = reader.GetInt64(3);

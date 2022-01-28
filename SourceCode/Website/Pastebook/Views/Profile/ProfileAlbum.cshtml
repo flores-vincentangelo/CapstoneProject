@@ -75,19 +75,23 @@
                 foreach(Models.AlbumModel album in albumList)
                 {
                     <div class="photos-card-container" id="@album.AlbumId" style="display: none;">
-                        <div>
+                        <div class="photos-card-btn-container">
                             <button class="photo-btn add-new-photo" id="photo-add-btn">Add New Photo</button>
                             <button class="photo-btn" id="photo-close-album-btn" onclick="CloseAlbum(@album.AlbumId);">Close Album</button>
+                        <hr>
                         </div>
-                        @if(photoList != null) 
-                        {
-                            foreach(Models.PhotoModel photo in photoList)
+
+                        <div class="photocard-holder">
+                            @if(photoList != null) 
                             {
-                                if(photo.AlbumId == album.AlbumId) {
-                                    await Html.RenderPartialAsync("_PhotoCard.cshtml", photo);
+                                foreach(Models.PhotoModel photo in photoList)
+                                {
+                                    if(photo.AlbumId == album.AlbumId) {
+                                        await Html.RenderPartialAsync("_PhotoCard.cshtml", photo);
+                                    }
                                 }
                             }
-                        }
+                        </div>
                     </div>
                 }
             }
