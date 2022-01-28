@@ -45,6 +45,34 @@
         <h1>@Model.User.FirstName @Model.User.LastName</h1>
     </div>
 
+    <div class="profile-friendbuttoncontainer">
+    @{  
+        string profileLink = Model.User.ProfileLink;
+        //if user does not own profile
+        //show the add a friend button
+        if(Model.DoesUserOwnProfile == false)
+        {
+            if(Model.IsProfileOwnerInFriendReqList){
+                
+                <button class="profile-friendbuttoncontainer-addfriend" onclick="{location.href = '/friends'}">Sent you a friend Request</button>
+                
+            }
+            else if(Model.IsUserInFriendsList == false && Model.IsUserInFriendReqList == false)
+            {
+                
+                <button class="profile-friendbuttoncontainer-addfriend" onclick="Addfriend('@Model.User.ProfileLink')">Add Friend</button>
+                
+            }
+            else if (Model.IsUserInFriendsList == false && Model.IsUserInFriendReqList == true)
+            {
+
+                <button class="profile-friendbuttoncontainer-requestsend" >Friend Request Sent</button>
+                
+            }
+        }
+    }
+    </div>
+
     <div class="profile-about-container">
         <div class="profile-about-readonly">
             <h2 id="profile-about-text">@Model.User.About</h2>

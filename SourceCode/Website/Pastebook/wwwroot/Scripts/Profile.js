@@ -5,9 +5,19 @@ $(document).ready( () => {
     EditProfilePicture();
     // About Me
     EditAboutMe();
-
     showProfileExt();
 });
+
+async function Addfriend(profileLink){
+    // alert(profileLink);
+    var url = `/friends/request/${profileLink}`
+    const response = await fetch(url, {
+        method: "PATCH"
+    });
+    if(response.ok){
+        location.reload();
+    }
+}
 
 function EditProfilePicture() {
     // When the user clicks on the "Change photo" button,
