@@ -12,7 +12,7 @@
         photoCount = photoList.Count;
     }
 
-    @* var albumId = Convert.ToInt32(HttpContext.Request.Cookies["currentAlbumId"]); *@
+    @* var albumId = HttpContext.Request.Cookies["currentAlbumId"]; *@
 }
 
 <link rel="stylesheet" type="text/css" href="./Styles/Profiles/ProfileAlbum.css">
@@ -22,9 +22,9 @@
 <script src="./Scripts/ProfileAlbum.js"></script>
 
 <body>
-    <div class="profile-ext-container">
+    <div class="profile-ext-container ">
         <h3>Albums</h3>
-        <div class="ext-container">
+        <div class="ext-container album-container">
             <button class="album-btn" id="album-add-btn">Add New Album</button>
             <div class="album-add-modal" id="album-add-modal">
                 <div class="modal-container">
@@ -41,7 +41,15 @@
             </div>
 
             <div class="album-card-container">
-                Album Cards Here
+                @{
+                    if(@albumList != null) {
+                        foreach (Models.AlbumModel album in albumList) 
+                        {
+                            await Html.RenderPartialAsync("_AlbumCard.cshtml", album);
+                        }
+                    }
+                }
+                
             </div>
         </div>
 
@@ -71,7 +79,7 @@
             <div class="photos-card-container">
                 @{
                     if(photoList != null) {
-                        foreach (Models.PhotoModel photo in photoList)
+                        foreach(Models.PhotoModel photo in photoList)
                         {
                             if(photo.AlbumId == 7) {
                                 await Html.RenderPartialAsync("_PhotoCard.cshtml", photo);
