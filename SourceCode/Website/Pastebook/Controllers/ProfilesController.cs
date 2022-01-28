@@ -32,20 +32,9 @@ public class ProfilesController: Controller
                     profileOwner.IsUserInFriendReqList = DbFriends.IsInFriendReqList(cookieEmail, profileOwnerFriends.FriendRequests);
                     FriendsModel userFriendsData = DbFriends.GetFriendsData(cookieEmail);
                     profileOwner.IsProfileOwnerInFriendReqList = DbFriends.IsInFriendReqList(profileOwner.User.EmailAddress,userFriendsData.FriendRequests);
-                    System.Console.WriteLine($"{Environment.NewLine} IsProfileOwnerInFriendReqList {profileOwner.IsProfileOwnerInFriendReqList} {Environment.NewLine}");
+                    profileOwner.FriendsList = DbFriends.GetListAsUserObj(profileOwnerFriends.FriendsList);
 
-                    // profileOwner.FriendsList = 
-
-//                  var user = DbUsers.GetInformationById(profileLink);
-//                  var userProfile = new ProfileModel();
-//                  userProfile.User = DbUsers.GetInformationById(profileLink);
                     profileOwner.PostsList = DbPosts.GetAllPostDetails(profileLink);
-//                  userProfile.AlbumList = DbAlbums.GetAllAlbums(cookieEmail);
-
-                    
-                    // string jsonString = JsonSerializer.Serialize(userProfile);
-                    // Console.WriteLine("User Profile");
-                    // Console.WriteLine(jsonString);
                     
                     return View("/Views/Profile/Profile.cshtml", profileOwner);
                 }

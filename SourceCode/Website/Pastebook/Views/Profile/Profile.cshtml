@@ -120,7 +120,7 @@
 </div>
 
 <div class="profile-ext" id="profile-ext-friends">
-    @await Html.PartialAsync("ProfileFriends.cshtml")
+    @await Html.PartialAsync("ProfileFriends.cshtml", Model.FriendsList)
 </div>
 
 <div class="profile-ext" id="profile-ext-album">
