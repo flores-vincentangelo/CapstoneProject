@@ -4,7 +4,7 @@ $(document).ready(() => {
 });
 
 function openDeleteModal() {
-    $('.delete-post').click(() => {
+    $('.delete-but').click(() => {
         // show edit form 
         $('#post-modal-container-delete').css("display", "flex");
     });
@@ -17,7 +17,7 @@ function openDeleteModal() {
 }
 
 function openUpdateModal() {
-    $('.update-post').click(() => {
+    $('.update-but').click(() => {
         // show edit form 
         $('#post-modal-container-update').css("display", "flex");
     });

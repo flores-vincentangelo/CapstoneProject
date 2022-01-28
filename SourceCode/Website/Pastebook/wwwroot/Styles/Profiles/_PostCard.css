@@ -27,7 +27,7 @@
     height: 1vw;
 }
 
-/* .profile-post-container-status-post-profile-buttons {
+.profile-post-container-status-post-profile-buttons {
     display: flex;
     margin-left: 56%;
 }
@@ -46,13 +46,13 @@
     background-color: rgb(218, 214, 214);
 }
 
-#update-post, #delete-post {
+.profile-post-container-status-post-profile-buttons img {
     width: 0.8vw;
     height: auto;
     margin: auto;
-} */
+}
 
-.profile-post-container-status-post-profile img {
+.profile-post-container-status-post-profile .user-photo {
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -164,4 +164,148 @@
 
 #poster-fullname {
     font-weight: bold;
+}
+
+#post-modal-container-update,
+#post-modal-container-delete {
+   display: none;
+   position: fixed;
+   z-index: 1;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   overflow: auto;
+   background-color: rgba(0,0,0,0.4);
+}
+
+#modal-container-close-delete,
+#modal-container-close-update {
+    color: #aaaaaa;
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #d9dbdd;
+    border-radius: 50%;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+ #modal-container-close-delete:hover,
+ #modal-container-close-update:hover {
+    background-color: rgb(218, 214, 214);
+    color: black;
+}
+
+#post-modal-container-1-delete {
+    background-color: #fefefe;
+    margin: 6% auto;
+    padding: 15px;
+    border: 1px solid #888;
+    border-radius: 12px;
+    width: 24%;
+    height: 18vh;
+}
+
+#buttons-delete {
+    margin-top: 7%;
+}
+
+#buttons-delete button:hover {
+    background-color: rgb(24, 119, 242);
+}
+
+#buttons-delete button {
+    width: 20%;
+    cursor: pointer;
+    background-color: rgba(24, 119, 242, 0.9);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 5px;
+}
+
+#modal-container-caption-delete {
+    margin: 12% auto;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+}
+
+.post-modal-container-1-update {
+    background-color: #fefefe;
+    margin: 6% auto;
+    padding: 15px;
+    border: 1px solid #888;
+    border-radius: 12px;
+    width: 40%;
+    height: 21vh;
+}
+
+.modal-container-user-update {
+    display: flex;
+    margin-top: 15px;
+}
+
+.modal-container-user-update #user-details-update {
+    margin-top: 2%;
+    font-weight: bold;
+    font-size: 13px;
+    margin-left: 5px;
+}
+
+.modal-container-user-update img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+.modal-container-caption-update {
+    margin-top: 15px;
+    height: 60px;
+}
+
+.modal-container-photo-update {
+    border: rgba(0, 0, 0, 0.7) 2px solid;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    padding: 10px;
+    height: 40vh;
+    margin-top: 8px;
+}
+
+#modal-container-photo-img-update {
+    display: block;
+    margin: auto;
+    height: 40vh;
+    width: 30vw;
+}
+
+.caption-update {
+    width: 96.5%;
+    padding: 5px;
+    margin-bottom: 8px;
+}
+
+.user-button-update {
+    float: right;
+    margin-right: 2px;
+    cursor: pointer;
+    background-color: rgba(24, 119, 242, 0.9);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 15%;
+    padding: 4px 6px;
+    font-weight: bold;
+}
+
+.user-button-update:hover {
+    background-color: rgb(24, 119, 242);
+}
+
+#caption-add-update {
+    margin-bottom: 5px;
 }
