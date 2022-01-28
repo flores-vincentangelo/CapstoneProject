@@ -29,6 +29,9 @@ $(document).ready(function () {
             $(".layout-header-left-searchform-input").val('');
             $(".layout-header-left-searchpanel-searchresults").empty();
         }
+        if(!target.closest(".layout-header-right-notificationscontainer") && !target.closest(".layout-header-right-notifications")){
+            $(".layout-header-right-notificationscontainer").css("display", "none");
+        }
         
     });
 
@@ -48,7 +51,7 @@ $(document).ready(function () {
     });
 
     $(".layout-header-right-notifications").click(function (e) { 
-        
+        $(".layout-header-right-notificationscontainer").css("display", "flex");
         GetNotifications();
     });
     
@@ -104,5 +107,40 @@ async function GetNotifications(){
     if(response.ok){
         var data = await response.json();
         console.log(data);
+        data.friendReq.forEach((item,index) =>{
+            AddNotifCard(item.firstName, item.lastName, item.photo, "friend");
+        });
+        data.likers.forEach((item,index) =>{
+            AddNotifCard(item.firstName, item.lastName, item.photo, "likes");
+        });
+        data.commenters.forEach((item,index) =>{
+            AddNotifCard(item.firstName, item.lastName, item.photo, "comments");
+        });
     }
+}
+
+function AddNotifCard(firstName, lastName, photo, category){
+    var notifText;
+    switch (category) {
+        case "friend":
+            notifText = "sent you a friend request";
+            break;
+        case "likes":
+            notifText = "liked you post";
+            break;
+        case "comments":
+            notifText = "commented on your post";
+            break;
+    }
+    
+    var notifCard = 
+    `<div class="layout-header-right-notificationscontainer-notifcard">
+        <div class="layout-header-right-notificationscontainer-notifcard-picture">
+            <img src="${photo}">
+        </div>
+        <div class="layout-header-right-notificationscontainer-notifcard-text">
+            ${firstName} ${lastName} ${notifText}
+        </div>
+    </div>`;
+    $(".layout-header-right-notificationscontainer").append(notifCard);
 }
