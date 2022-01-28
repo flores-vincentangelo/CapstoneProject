@@ -151,13 +151,13 @@ function OpenAlbum(albumId) {
     console.log("Current Album Id: " + albumId);
     document.cookie = 'currentAlbumId=' + albumId;
     $('.album-container').css("display", "none");
-    $('.photos-container').css("display", "flex");
+    $('.photos-container').css("display", "block");
 }
 
 function CloseAlbum() {
     $('#photo-close-album-btn').click(function() {
         document.cookie = 'currentAlbumId=' + 0;
-        $('.album-container').css("display", "flex");
+        $('.album-container').css("display", "block");
         $('.photos-container').css("display", "none");
     });
 }

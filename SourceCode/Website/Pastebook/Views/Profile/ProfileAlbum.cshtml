@@ -11,8 +11,6 @@
     if(photoList != null) {
         photoCount = photoList.Count;
     }
-
-    @* var albumId = HttpContext.Request.Cookies["currentAlbumId"]; *@
 }
 
 <link rel="stylesheet" type="text/css" href="./Styles/Profiles/ProfileAlbum.css">
@@ -81,7 +79,7 @@
                     if(photoList != null) {
                         foreach(Models.PhotoModel photo in photoList)
                         {
-                            if(photo.AlbumId == 7) {
+                            if(photo.AlbumId == 8) {
                                 await Html.RenderPartialAsync("_PhotoCard.cshtml", photo);
                             }
                         }
