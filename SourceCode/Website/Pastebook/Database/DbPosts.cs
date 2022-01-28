@@ -1,6 +1,7 @@
 namespace Database;
 using System.Data.SqlClient;
 using Models;
+using System.Text.Json;
 
 public class DbPosts
 {
@@ -73,8 +74,8 @@ public class DbPosts
             db.Open();
             using(var command = db.CreateCommand())
             {
-                command.CommandText = "SELECT * FROM Posts WHERE PostId = @PostId";
-                command.Parameters.AddWithValue("@PostId", id);
+                command.CommandText = "SELECT * FROM Posts WHERE PostId = @postid;";
+                command.Parameters.AddWithValue("@postid", id);
                 var reader = command.ExecuteReader();
                 while(reader.Read())
                 {
@@ -135,7 +136,7 @@ public class DbPosts
         }
     }
 
-    public static void ModifyPost(PostModel post)
+    public static void ModifyPost(int postId, PostModel post)
     {
         using(var db = new SqlConnection(DB_CONNECTION_STRING))
         {
@@ -144,8 +145,9 @@ public class DbPosts
             {
                 if(!String.IsNullOrEmpty(post.Caption))
                 {
-                    command.CommandText = "UPDATE Posts SET Caption = @Caption;";
+                    command.CommandText = "UPDATE Posts SET Caption = @Caption WHERE PostId = @PostId;";
                     command.Parameters.AddWithValue("@Caption", post.Caption);
+                    command.Parameters.AddWithValue("PostId", postId);
                     command.ExecuteNonQuery();
                 }
             }

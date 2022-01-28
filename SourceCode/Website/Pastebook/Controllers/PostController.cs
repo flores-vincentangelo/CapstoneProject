@@ -5,15 +5,9 @@ using Models;
 public class PostController: Controller
 {
     [HttpGet]
-    [Route("/postX")]
-    public IActionResult GetPost()
+    [Route("/posts/{postId}")]
+    public IActionResult GetPostById(int postId)
     {
-        return View("/Views/Post.cshtml");
-    }
-
-    [HttpGet]
-    [Route("/post")]
-    public IActionResult GetAllPostDetails() {
         string? cookieProfileLink = HttpContext.Request.Cookies["profilelink"];
         string? cookieSessionId = HttpContext.Request.Cookies["sessionId"];
         if(cookieSessionId != null)
@@ -21,14 +15,15 @@ public class PostController: Controller
             SessionsModel? sessionModel = DbSessions.GetSessionById(cookieSessionId);
             if(sessionModel != null)
             {
-                var posts = DbPosts.GetAllPostDetails(cookieProfileLink);
-                if(posts == null) {
-                    return Ok("No Post found");
-                }
-                return Json(posts);
+                var postDetail = DbPosts.GetPostById(postId);
+                var poster = DbUsers.GetUserByEmail(postDetail.EmailAddress);
+                
+                postDetail.Poster = poster;
+                
+                return View("/Views/Posts/PostPage.cshtml", postDetail);
             }
         }
-        return Ok();
+        return RedirectToAction("doLoginAction", "Login");
     }
 
     [HttpPost]
@@ -52,4 +47,21 @@ public class PostController: Controller
         DbPosts.InsertPost(post);
         return Ok("Post successfully added!");
     }
+
+    [HttpPatch]
+    [Route("/posts/{postId}")]
+    
+    public IActionResult ModifyPost(int postId, [FromBody] PostModel post) {
+        DbPosts.ModifyPost(postId, post);
+        return Ok("Caption successfully modified!");
+    }
+
+    [HttpDelete]
+    [Route("/posts/{postId}")]
+
+    public IActionResult DeletePostById([FromBody] PostModel post) {
+        DbPosts.DeletePostById(post.PostId);
+        return Ok("Post successfully deleted!");
+    }
+
 }
