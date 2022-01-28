@@ -1,14 +1,21 @@
 @model Models.PostModel
+@using System.Text.Json
 @{
     var createdDate = new System.DateTime(1970, 1, 1).AddSeconds(Model.DatePosted).ToString("MMMM dd, yyyy");
+    string jsonString = JsonSerializer.Serialize(Model);
 }
+
+
 <!DOCTYPE html>
 <html>
 
 <head>
     <link rel="stylesheet" type="text/css" href="../../Styles/Posts/Post.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../../Scripts/PostPage.js"></script>
+    <script src="../../Scripts/PostsPage.js"></script>
+    <script type="text/javascript">
+        const model = '@jsonString';
+    </script>
 </head>
 
 <body>
@@ -63,7 +70,7 @@
                 </div>
             </div>
         </div>
-        <div class="post-modal-container-update">
+        <div id="post-modal-container-update">
             <div class="post-modal-container-1-update">
                 <div class="modal-container-title-update">
                     <span id="modal-container-close-update">&times;</span>
@@ -74,7 +81,7 @@
                 </div>
                 <div class="modal-container-caption-update">
                     <form class="caption-add-update" id="caption-add-update">
-                        <input type="text" id="caption-update" name="caption" value=@Model.Caption
+                        <input type="text" id="caption-update" name="caption" value='@Model.Caption'
                             maxlength="1000">
                         <input type="file" id="myPhotoPost-update" name="Photo" accept="image/*" data-type='image'>
                         <button class="user-button-update" type="submit">Update</button>
