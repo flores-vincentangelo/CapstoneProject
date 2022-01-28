@@ -1,5 +1,6 @@
 namespace Database;
 using System.Data.SqlClient;
+using Database;
 using Models;
 
 public class DbFriends
@@ -26,7 +27,6 @@ public class DbFriends
             }
         }
     }
-
     public static FriendsModel GetFriendsData(string email)
     {
         FriendsModel model = new FriendsModel();
@@ -48,7 +48,6 @@ public class DbFriends
         }
         return model;
     }
-
     public static void UpdateFriendsListOfUser(string userEmail, string friendsList)
     {
         using(var db = new SqlConnection(DB_CONNECTION_STRING))
@@ -66,7 +65,6 @@ public class DbFriends
             }
         }
     }
-
     public static void UpdateFriendReqsListOfUser(string userEmail, string? friendReqsList)
     {
         using(var db = new SqlConnection(DB_CONNECTION_STRING))
@@ -164,5 +162,24 @@ public class DbFriends
             return userFriendReqList.Contains(emailToTest);
         }
         
+    }
+
+    public static List<UserModel>? GetListAsUserObj (string? list)
+    {
+        List<UserModel> userListObj = new List<UserModel>();
+        if(String.IsNullOrEmpty(list))
+        {
+            return null;
+        }
+        else
+        {
+            var emailArr = list.Split(',');
+            foreach (string email in emailArr)
+            {
+                UserModel userModel = DbUsers.GetUserByEmail(email);
+                userListObj.Add(userModel);
+            }
+            return userListObj;
+        }
     }
 }

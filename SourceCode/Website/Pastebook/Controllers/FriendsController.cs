@@ -18,44 +18,9 @@ public class FriendsController: Controller
             SessionsModel? sessionModel = DbSessions.GetSessionById(cookieSessionId);
             if(sessionModel != null)
             {
-                
                 FriendsModel friendsModel = DbFriends.GetFriendsData(cookieEmail);
-                List<UserModel> friendRequestsObj = new List<UserModel>();
-                if(String.IsNullOrEmpty(friendsModel.FriendRequests))
-                {
-                    // System.Console.WriteLine($"{Environment.NewLine} null {Environment.NewLine}");
-                    friendsModel.FriendRequestObjList = null;
-                }
-                else
-                {
-                    // System.Console.WriteLine($"{Environment.NewLine} {friendsModel.FriendRequests} {Environment.NewLine}");
-                    var emailArr = friendsModel.FriendRequests.Split(',');
-                    foreach (string email in emailArr)
-                    {
-                        UserModel userModel = DbUsers.GetUserByEmail(email);
-                        friendRequestsObj.Add(userModel);
-                    }
-
-                    friendsModel.FriendRequestObjList = friendRequestsObj;
-                }
-                
-                List<UserModel> friendsListObj = new List<UserModel>();
-                if(String.IsNullOrEmpty(friendsModel.FriendsList))
-                {
-                    friendsModel.FriendsObjList = null;
-                }
-                else
-                {
-                    var emailArr = friendsModel.FriendsList.Split(',');
-                    foreach (string email in emailArr)
-                    {
-                        UserModel userModel = DbUsers.GetUserByEmail(email);
-                        friendsListObj.Add(userModel);
-                    }
-                    friendsModel.FriendsObjList = friendsListObj;
-                }
-                
-                // UserModel userModel = 
+                friendsModel.FriendRequestObjList = DbFriends.GetListAsUserObj(friendsModel.FriendRequests);
+                friendsModel.FriendsObjList = DbFriends.GetListAsUserObj(friendsModel.FriendsList);
                 return View("/Views/Friends/Friends.cshtml",friendsModel);
             }
         }
