@@ -233,7 +233,7 @@ body {
     background-color: #d3d5da;
  }
 
- .post-modal-container-update,
+ #post-modal-container-update,
  #post-modal-container-delete {
     display: none;
     position: fixed;

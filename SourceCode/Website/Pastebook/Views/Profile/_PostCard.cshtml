@@ -1,7 +1,7 @@
 @model Models.PostModel
 @{
     var createdDate = new System.DateTime(1970, 1, 1).AddSeconds(Model.DatePosted).ToString("MMMM dd, yyyy");
-                        
+
 }
 
 <link rel="stylesheet" type="text/css" href="./Styles/Profiles/_PostCard.css">
@@ -10,17 +10,18 @@
 <div class="profile-post-container-status-post">
     <div class="profile-post-container-status-post-profile">
         <img class="user-photo" src=@Model.Poster.Photo>
-        <span id="user-details"><span id="poster-fullname">@Model.Poster.FirstName @Model.Poster.LastName</span><br><span id="date-created">@createdDate</span></span>
-        @* <div class="profile-post-container-status-post-profile-buttons">
-            <button><img id="update-post" src="./Images/more.png"></button>
-            <button><img id=@Model.PostId src="./Images/close.png"></button>
-        </div> *@
+        <span id="user-details"><span id="poster-fullname">@Model.Poster.FirstName
+                @Model.Poster.LastName</span><br><span id="date-created">@createdDate</span></span>
+        <div class="profile-post-container-status-post-profile-buttons">
+            <button class="update-post"><img id=@Model.PostId class="update-post" src="./Images/more.png"></button>
+            <button class="delete-post"><img id=@Model.PostId class="delete-post" src="./Images/close.png"></button>
+        </div>
     </div>
     <div class="profile-post-container-status-post-caption">
         <span>@Model.Caption</span>
     </div>
     <div class="profile-post-container-status-post-photo">
-        <a href = @($"/posts/{Model.PostId}") ><img src="@Model.Photo"></a>
+        <a href=@($"/posts/{Model.PostId}")><img src="@Model.Photo"></a>
     </div>
     <div class="profile-post-container-status-post-status">
         <span id="like">@Model.Likes Likes</span>
@@ -39,20 +40,20 @@
             <span id="friend-comment">Comment goes here......</span>
         </div>
     </div>
-    @* <div class="post-modal-container-delete">
-        <div class="post-modal-container-1-delete">
-            <div class="modal-container-title-delete">
-                <span class="modal-container-close-delete">&times;</span>
+    <div id="post-modal-container-delete">
+        <div id="post-modal-container-1-delete">
+            <div id="modal-container-title-delete">
+                <span id="modal-container-close-delete">&times;</span>
             </div>
-            <div class="modal-container-caption-delete">
+            <div id="modal-container-caption-delete">
                 <form class="caption-delete">
                     <label>Are you sure you want to delete this post?</label>
                 </form>
-                <div class="buttons-delete">
-                    <button class="yes-btn">Yes</button>
-                    <button class="cancel-btn">Cancel</button>
+                <div id="buttons-delete">
+                    <button id="yes-btn">Yes</button>
+                    <button id="cancel-btn">Cancel</button>
                 </div>
             </div>
         </div>
-    </div> *@
+    </div>
 </div>
