@@ -46,8 +46,19 @@ $(document).ready(function () {
         document.cookie = "sessionId=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
         document.cookie = "profilelink=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     });
+
+    $(".layout-header-right-notifications").click(function (e) { 
+        
+        GetNotifications();
+    });
     
 });
+
+async function deleteSession() {  
+        fetch(`/login`, {
+        method: 'DELETE',
+    });
+}
 
 async function SearchUsers(searchTerm){
 
@@ -71,12 +82,6 @@ async function SearchUsers(searchTerm){
     
 }
 
-async function deleteSession() {  
-        fetch(`/login`, {
-        method: 'DELETE',
-    });
-}
-
 function AddSearchCard(firstName,lastName,profileLink,photo){
     var searchCard = 
     `<a class="layout-header-left-searchpanel-searchresults-link" href="/${profileLink}">
@@ -92,4 +97,12 @@ function AddSearchCard(firstName,lastName,profileLink,photo){
     $(".layout-header-left-searchpanel-searchresults").append(searchCard);
 }
 
-
+async function GetNotifications(){
+    const response = await fetch("/notifications",{
+        method: "GET"
+    });
+    if(response.ok){
+        var data = await response.json();
+        console.log(data);
+    }
+}
