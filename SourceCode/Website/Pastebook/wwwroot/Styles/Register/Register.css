@@ -75,6 +75,7 @@ html,body {
 
 .register-container-form-field #date {
     margin-top: 3px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .register-container-form-field select {

@@ -9,18 +9,19 @@ body {
 }
 
 #status {
-    border: 1px solid #ccc;
+    border: 1px solid rgb(241, 239, 239);
     border-radius: 4px;
-    background-color: #d9dbdd;
+    background-color: rgb(241, 239, 239);
     padding: 20px;
     border-radius: 20px;
-    width: 680px;
+    width: 380px;
     margin-left: 10px;
+    margin-top: 10px;
 }
 
 .profile-post-container-status-user {
     background-color: white;
-    width: 800px;
+    width: 500px;
     height: auto;
     padding: 30px;
     margin: auto;
@@ -43,98 +44,37 @@ body {
     font-weight: bold;
 }
 
-.user-upload {
-    text-align: center;
-}
-
 .profile-post-container-status-label {
     background-color: white;
-    width: 810px;
+    width: 510px;
     padding: 10px;
-    margin-top: 30px;
+    margin: 2% auto;
     font-weight: bold;
     font-size: 20px;
     border-radius: 15px;
-    margin-bottom: 30px;
     padding-left: 40px;
 }
 
-.profile-post-container-status-post {
-    background-color: white;
-    width: 800px;
-    height: auto;
-    padding: 30px;
-    margin: auto;
-    border-radius: 15px;
-}
-
-.profile-post-container-status-post-profile {
-    display: flex;   
-    font-size: 13px;
-}
-
-.profile-post-container-status-post-profile img {
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    margin-right: 20px
-}
-
-.profile-post-container-status-post-caption {
-    margin-top: 20px;
-    font-size: 13px;
-    margin-left: 20px
-}
-
-.profile-post-container-status-post-status {
-    margin-top: 80px;
-    display: flex;
-    flex-direction: row;
-    font-size: 13px;
-    margin-bottom: 10px
-}
-
-#like {
-    text-align: left;
-    width: 50%;
-    margin-left: 15px;
-}
-
-#comment {
-    text-align: right;
-    width: 50%;
-    margin-right: 15px;
-}
-
-.profile-post-container-status-post-buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-.profile-post-container-status-post-buttons button{
-    width: 50%;
-}
-
 .post-modal-container {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 15px;
-    border: 1px solid #888;
-    border-radius: 12px;
-    width: 25%;
-    display: none
-    /* display: none;
+    display: none;
     position: fixed;
     z-index: 1;
-    left: auto;
+    left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.4); */
+    background-color: rgba(0,0,0,0.4);
 }
 
+.post-modal-container-1{
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 15px;
+    border: 1px solid #888;
+    border-radius: 12px;
+    width: 40%;
+}
 
 .modal-container-title h1 {
     text-align: center;
@@ -146,7 +86,7 @@ body {
 #modal-container-close {
     color: #aaaaaa;
     float: right;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: bold;
     cursor: pointer;
     background-color: #d9dbdd;
@@ -155,9 +95,19 @@ body {
     padding-right: 5px;
 }
 
+#modal-container-close:hover {
+    background-color: rgb(218, 214, 214);
+    color: black;
+}
+
 .modal-container-user {
     display: flex;
     margin-top: 15px;
+}
+
+.modal-container-user #user-details {
+    margin-top: 8px;
+    font-weight: bold;
 }
 
 .modal-container-user img {
@@ -174,41 +124,45 @@ body {
     height: 60px;
 }
 
-.modal-container-addToPost {
-    display: flex;
-    flex-direction: row;
-    font-size: 13px;
-}
-
-#user-addToPost {
-    text-align: left;
-    width: 50%;
-}
-
-#modal-container-addToPost-photo {
-    text-align: right;
-    width: 50%;
-    margin-right: 30px
-}
-
-/* .modal-container-button {
-    margin-top: 15px;
-} 
-
-.modal-container-button button {
-    width: 100%
-} */
-
 .modal-container-photo {
-    border: #000 2px solid;
+    border: rgba(0, 0, 0, 0.7) 2px solid;
     border-radius: 8px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     padding: 10px;
+    height: 40vh;
+    margin-top: 8px;
 }
-#modal-container-photo img {
+
+#modal-container-photo-img {
     display: block;
     margin: auto;
-    height: 168px;
-    width: 168px;
-    border-radius: 50%;
+    height: 40vh;
+    width: 30vw;
+}
+
+#caption {
+    width: 96.5%;
+    padding: 5px;
+    margin-bottom: 8px;
+}
+
+.user-post-button {
+    float: right;
+    margin-right: 2px;
+    cursor: pointer;
+    background-color: rgba(24, 119, 242, 0.9);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 10%;
+    padding: 4px 6px;
+    font-weight: bold;
+}
+
+.user-post-button:hover {
+    background-color: rgb(24, 119, 242);
+}
+
+#caption-add {
+    margin-bottom: 5px;
 }

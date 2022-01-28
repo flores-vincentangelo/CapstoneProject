@@ -1,0 +1,41 @@
+@model Models.PostModel
+@{
+    var createdDate = new System.DateTime(1970, 1, 1).AddSeconds(Model.DatePosted).ToString("MMMM dd, yyyy");
+                        
+}
+
+<link rel="stylesheet" type="text/css" href="./Styles/Profiles/_PostCard.css">
+
+<div class="profile-post-container-status-post">
+    <div class="profile-post-container-status-post-profile">
+        <img class="user-photo" src=@Model.Poster.Photo>
+        <span id="user-details"><span id="poster-fullname">@Model.Poster.FirstName @Model.Poster.LastName</span><br><span id="date-created">@createdDate</span></span>
+        <div class="profile-post-container-status-post-profile-buttons">
+            <button><img id="update-post" src="./Images/more.png"></button>
+            <button><img id="delete-post" src="./Images/close.png"></button>
+        </div>
+    </div>
+    <div class="profile-post-container-status-post-caption">
+        <span>@Model.Caption</span>
+    </div>
+    <div class="profile-post-container-status-post-photo">
+        <a href = @($"/posts/{Model.PostId}") ><img src="@Model.Photo"></a>
+    </div>
+    <div class="profile-post-container-status-post-status">
+        <span id="like">@Model.Likes Likes</span>
+        <span id="comment">@Model.Comment Comments</span>
+    </div>
+    <hr>
+    <div class="profile-post-container-status-post-buttons">
+        <button><img src="./Images/like.png"><span id="like-post">Like</span></button>
+        <button> <img src="./Images/comment.png"><span id="comment-post">Comment</span></button>
+    </div>
+    <hr>
+    <div class="profile-post-container-status-post-comments">
+        <img src="./Images/img_avatar.png">
+        <div class="friend-details">
+            <span id="friend-name">Friend Name</span><br>
+            <span id="friend-comment">Comment goes here......</span>
+        </div>
+    </div>
+</div>

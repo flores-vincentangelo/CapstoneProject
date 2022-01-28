@@ -1,0 +1,36 @@
+@model Models.PostModel
+@{
+    var createdDate = new System.DateTime(1970, 1, 1).AddSeconds(Model.DatePosted).ToString("MMMM dd, yyyy");                       
+}
+
+<link rel="stylesheet" type="text/css" href="../../Styles/Posts/Post.css">
+    
+<div class = "post-container">
+    <div class = "post-container-left">
+        @* <span id="post-container-left-close">&times;</span> *@
+        <a href="/"><img class="post-container-left-logo" src="../../Images/pastebook-logo.png"></a>
+        <img class="post-container-left-post" src="@Model.Photo">
+    </div>
+    <div class = "post-container-right">
+        <div class = "post-container-right-notifications">
+            <a href="#"><img class="post-container-right-notifications-notification" src="../../Images/Posts/notification.png"></a>
+            <a href="#"><img class="post-container-right-notifications-messenger" src="../../Images/Posts/messenger.png"></a>
+            <a href="#"><img class="post-container-right-notifications-option" src="../../Images/Posts/option.png"></a>
+        </div>
+        <div class ="post-container-right-profile">
+            <img class="post-container-right-profile-logo" src="@Model.Poster.Photo">
+            <span>@Model.Poster.FirstName @Model.Poster.LastName<br> @createdDate</span>
+        </div>
+        <div class ="post-container-right-caption">
+            <span>@Model.Caption</span>
+        </div>
+        <div class = "post-container-right-status">
+            <span id = "like">Likes</span>
+            <span id = "comment">Comments</span>
+        </div>
+        <div class = "post-container-right-buttons">
+            <button>Like</button>
+            <button>Comments</button>
+        </div>
+    </div>
+</div>
