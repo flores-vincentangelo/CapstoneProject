@@ -1,3 +1,7 @@
+$(document).ready( () => {
+    openCommentModal();
+});
+
 function openCommentModal() {
     $('.post-button-comment').click(() => {
         // show edit form 
