@@ -1,16 +1,11 @@
 @model Models.PostModel
-@using System.Text.Json
 @{
     var createdDate = new System.DateTime(1970, 1, 1).AddSeconds(Model.DatePosted).ToString("MMMM dd, yyyy");
-    string jsonString = JsonSerializer.Serialize(Model);
+
 }
 
 <link rel="stylesheet" type="text/css" href="./Styles/Profiles/_PostCard.css">
 <script src="./Scripts/_PostCard.js"></script>
-<script type="text/javascript">
-        const model = '@jsonString';
-</script>
-
 
 <div class="profile-post-container-status-post">
     <div class="profile-post-container-status-post-profile">
@@ -72,7 +67,7 @@
             </div>
             <div class="modal-container-caption-update">
                 <form class="caption-add-update">
-                    <input type="text" class="caption-update" name="caption" maxlength="1000" value='@Model.Caption'>
+                    <input type="text" class="caption-update" name="caption" maxlength="1000">
                     <button class="user-button-update" type="submit">Update</button>
                 </form>
             </div>
