@@ -13,6 +13,6 @@ public class ProfileModel
     public PostModel? Posts {get;set;}
     public List<AlbumModel>? AlbumList {get;set;} 
     public List<PhotoModel>? PhotoList {get;set;} 
-    public List<FriendsModel>? FriendsList {get;set;} 
+    public List<UserModel>? FriendsList {get;set;} 
     public List<PostModel>? PostsList {get;set;} 
 }

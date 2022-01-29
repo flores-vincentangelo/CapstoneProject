@@ -1,0 +1,44 @@
+@import '../Shared/import';
+
+.profile-ext-container-friendcontainer{
+    display: grid;
+    $grid-column-width: 30%;
+    grid-template-columns: $grid-column-width $grid-column-width;
+    $grid-gap:10px;
+    grid-gap: $grid-gap $grid-gap;
+    justify-content: center;
+    width: inherit;
+
+    & .friends-main-all-container-friendcard{
+        justify-self: center;
+        background-color: white;
+        margin: 5px 0 5px 0;
+        // height: 100px;
+        padding: 10px;
+        width: 70%;
+        display: flex;
+        $border-radius: 20px;
+        border-radius: $border-radius;
+        flex-direction: row;
+        align-items: center;
+        box-shadow: $box-shadow;
+
+        &-picture{
+            $picture-dimensions:90px; 
+            height: $picture-dimensions;
+            width: $picture-dimensions;
+
+            & img{
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+        }
+
+        &-name{
+            padding-left: 10px;
+        }
+        
+    }
+}
