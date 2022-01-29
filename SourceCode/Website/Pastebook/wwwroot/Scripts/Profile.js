@@ -1,4 +1,20 @@
 $(document).ready( () => {
+    var modelObj = JSON.parse(model.replace(/&quot;/g,"\""));
+    // console.log(modelObj.DoesUserOwnProfile);
+    
+    if(!modelObj.DoesUserOwnProfile){
+        $("#photo-edit-btn").css("display", "none");
+        $("#about-edit-btn").css("display", "none");
+
+        $(".profile-edit-firstname-btn").css("display", "none");
+        $(".profile-edit-lastname-btn").css("display", "none");
+        $(".profile-edit-email-btn").css("display", "none");
+        $(".profile-edit-mobile-btn").css("display", "none");
+        $(".profile-edit-birthday-btn").css("display", "none");
+        $(".profile-edit-gender-btn").css("display", "none");
+        $("#profile-password").css("display", "none");
+        $(".profile-edit-password-btn").css("display", "none");
+    }
     // Add to cookie
     // document.cookie = 'profilelink=' + user.ProfileLink;
     // Profile picture
@@ -7,6 +23,10 @@ $(document).ready( () => {
     EditAboutMe();
     showProfileExt();
 });
+
+async function alertFunction (string){
+    alert(string);
+}
 
 async function Addfriend(profileLink){
     // alert(profileLink);
