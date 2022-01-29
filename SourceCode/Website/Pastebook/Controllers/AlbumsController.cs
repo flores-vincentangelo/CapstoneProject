@@ -68,14 +68,13 @@ public class AlbumsController: Controller
     public IActionResult AddPhotoInAlbumId(int albumId, [FromBody] PhotoModel photo) {
         string? cookieEmail = HttpContext.Request.Cookies["email"];
         string? cookieSessionId = HttpContext.Request.Cookies["sessionId"];
-        string? profileLink = HttpContext.Request.Cookies["profilelink"];
+        string? cookieProfileLink = HttpContext.Request.Cookies["profilelink"];
         
-
         photo.UserEmail = cookieEmail;
         // photo.Photo = base64image from body
         photo.UploadDate = (long)((System.DateTime.Now.Subtract(new System.DateTime(1970, 1, 1))).TotalSeconds);
         photo.AlbumId = albumId;
-        photo.ProfileLink = profileLink;
+        photo.ProfileLink = cookieProfileLink;
         photo.Likes = "";
         photo.Comments = "";
         DbPhotos.AddPhotoInAlbumId(albumId, photo);
@@ -84,20 +83,29 @@ public class AlbumsController: Controller
         
         if(photoList != null) {
             string photoListString = string.Join( ",", photoList);
-            Console.WriteLine("-------------------");
-            Console.WriteLine($"There are {photoList.Count} photos in Album Id {albumId}");
-            Console.WriteLine(photoListString);
-            Console.WriteLine("-------------------");
+            
+            // Console.WriteLine("-------------------");
+            // Console.WriteLine($"There are {photoList.Count} photos in Album Id {albumId}");
+            // Console.WriteLine(photoListString);
+            // Console.WriteLine("-------------------");
             
             // Update Album PhotoList
             DbAlbums.UpdatePhotoList(albumId, photoListString);
-
-            // Add POSTS when saving a photo in album
-            // var post = new PostModel();
-            // post.PhotoId = photo.PhotoId;
-
-            // DbPosts.InsertPost(post);
         }
+
+        // Add to Posts Table when saving a photo in album
+        var post = new PostModel();
+        post.PhotoId = photo.PhotoId;
+        post.EmailAddress = cookieEmail;
+        post.ProfileLink = cookieProfileLink;
+        post.DatePosted = (long)((System.DateTime.Now.Subtract(new System.DateTime(1970, 1, 1))).TotalSeconds);
+        post.Photo = photo.Photo;
+        post.PhotoId = photo.PhotoId;
+        post.Caption = "";
+        post.Likes = "";
+        post.Comment = "";
+        DbPosts.InsertPost(post);
+        
         return Ok("Photo added in album successfully!");
     }
 
@@ -121,6 +129,13 @@ public class AlbumsController: Controller
             return Ok("No photo found");
         }
         return Json(photo);
+    }
+
+    [HttpDelete]
+    [Route("/photos/{photoId}")]
+    public IActionResult DeletePhotoByPhotoId(int photoId) {
+        DbPhotos.DeletePhotoByPhotoId(photoId);
+        return Ok("Photo deleted successfully");
     }
 
     

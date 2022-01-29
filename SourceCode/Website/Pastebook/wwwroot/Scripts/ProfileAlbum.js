@@ -163,43 +163,51 @@ function OpenAlbum(albumId) {
 function CloseAlbum(albumId) {
     console.log("Current Album Id to close: " + albumId)
     document.cookie = 'currentAlbumId=' + 0;
+    CancelEditAlbumName(albumId);
+    // Show album container
     $('.album-container').css("display", "block");
+    // Hide photos container
     $('.photos-container').css("display", "none");
     $(`#${albumId}`).css("display", "none");
 }
 
-async function DeleteAlbum(albumId) {
-    console.log("Album Id to be deleted: " + albumId);
-    document.cookie = 'currentAlbumId=' + 0;
-    const url = `/albums/${albumId}`;
-    const response = await fetch(url, {
-        method: 'DELETE'
-    });
-    if(response.status == 200) {
-        alert(await response.text());
-    }
-}
+// function EditAlbumName(albumId) {
+//     var readOnlyId = "#albumcard-title-readonly-" + albumId;
+//     var editId = "#albumcard-title-edit-" + albumId;
+//     console.log("Album Id to be modified: " + albumId);
+//     document.cookie = 'currentAlbumId=' + albumId;
+//     $(readOnlyId).css("display", "none");
+//     $(editId).css("display", "block");
+// }
+
+// function CancelEditAlbumName(albumId) {
+//     console.log("Album Id to be modified: " + albumId);
+//     document.cookie = 'currentAlbumId=' + 0;
+//     $('.albumcard-title-readonly').css("display", "block");
+//     $('.albumcard-title-edit').css("display", "none");
+// }
 
 function EditAlbumName(albumId) {
-    var readOnlyId = "#albumcard-title-readonly-" + albumId;
-    var editId = "#albumcard-title-edit-" + albumId;
     console.log("Album Id to be modified: " + albumId);
     document.cookie = 'currentAlbumId=' + albumId;
-    $(readOnlyId).css("display", "none");
-    $(editId).css("display", "block");
+    // Hide the read-only album title
+    $(`#photos-card-title-readonly-${albumId}`).css("display", "none");
+    // Show the read-only album title
+    $(`#photos-card-title-edit-${albumId}`).css("display", "flex");
 }
 
 function CancelEditAlbumName(albumId) {
-    console.log("Album Id to be modified: " + albumId);
     document.cookie = 'currentAlbumId=' + 0;
-    $('.albumcard-title-readonly').css("display", "block");
-    $('.albumcard-title-edit').css("display", "none");
+    // Show the read-only album title
+    $(`#photos-card-title-readonly-${albumId}`).css("display", "flex");
+    // Hide the read-only album title
+    $(`#photos-card-title-edit-${albumId}`).css("display", "none");
 }
 
 async function SaveEditAlbumName(event, albumId) {
     event.preventDefault();
-    var formId = "albumcard-form-edit-" + albumId;
-    var formData = new FormData(document.getElementById(formId));
+    var formData = new FormData(document.getElementById(`photos-card-title-form-edit-${albumId}`));
+    console.log($(`#photos-card-form-input-${albumId}`).val());
     var data = JSON.stringify(Object.fromEntries(formData.entries()));
 
     const url = `albums/${albumId}`;
@@ -213,7 +221,91 @@ async function SaveEditAlbumName(event, albumId) {
     if(response.status == 200) {
         console.log("Album Id successfully modified: " + albumId);
         alert(await response.text());
-        $('.albumcard-title-readonly').css("display", "block");
-        $('.albumcard-title-edit').css("display", "none");
+        const newAlbumName = $(`#photos-card-form-input-${albumId}`).val();
+        $(`#photos-card-title-albumname-${albumId}`).text(newAlbumName);
+        // Show the read-only album title
+        $(`#photos-card-title-readonly-${albumId}`).css("display", "flex");
+        // Hide the read-only album title
+        $(`#photos-card-title-edit-${albumId}`).css("display", "none");
     }
 }
+
+function OpenDeleteAlbumModal(albumId) {
+    console.log("Album Id to be deleted: " + albumId);
+    // Show modal
+    $(`#album-delete-modal-${albumId}`).css("display", "flex");
+
+    // When the user clicks anywhere outside of the modal
+    window.onclick = function(event) {
+        if (event.target == document.getElementById(`album-delete-modal-${albumId}`)) {
+            // Close modal
+            $(`#album-delete-modal-${albumId}`).css("display", "none");
+        }
+    }
+
+    // When the user clicks on the "Cancel" button,
+    $('.album-delete-cancel-btn').click(() => {
+        // Close modal
+        $(`#album-delete-modal-${albumId}`).css("display", "none");
+    });
+
+    // When the user clicks on the "x",
+    $('.album-delete-close-modal').click(() => {
+        // Close modal
+        $(`#album-delete-modal-${albumId}`).css("display", "none");
+    });
+}
+
+async function DeleteAlbum(albumId) {
+    // Close modal
+    $(`#album-delete-modal-${albumId}`).css("display", "none");
+    document.cookie = 'currentAlbumId=' + 0;
+    const url = `/albums/${albumId}`;
+    const response = await fetch(url, {
+        method: 'DELETE'
+    });
+    if(response.status == 200) {
+        alert(await response.text());
+    }
+}
+
+function OpenDeletePhotoModal(photoId) {
+    console.log("Photo Id to be deleted: " + photoId);
+    // Show modal
+    $(`#photo-delete-modal-${photoId}`).css("display", "flex");
+
+    // When the user clicks anywhere outside of the modal
+    window.onclick = function(event) {
+        if (event.target == document.getElementById(`photo-delete-modal-${photoId}`)) {
+            // Close modal
+            $(`#photo-delete-modal-${photoId}`).css("display", "none");
+        }
+    }
+
+    // When the user clicks on the "Cancel" button,
+    $('.photo-delete-cancel-btn').click(() => {
+        // Close modal
+        $(`#photo-delete-modal-${photoId}`).css("display", "none");
+    });
+
+    // When the user clicks on the "x",
+    $('.photo-delete-close-modal').click(() => {
+        // Close modal
+        $(`#photo-delete-modal-${photoId}`).css("display", "none");
+    });
+
+}
+
+async function DeletePhoto(photoId) {
+    const url = `/photos/${photoId}`;
+    const response = await fetch(url, {
+        method: 'DELETE'
+    });
+    if(response.status == 200) {
+        alert(await response.text());
+        // Close modal
+        $(`#photo-delete-modal-${photoId}`).css("display", "none");
+    }
+}
+
+

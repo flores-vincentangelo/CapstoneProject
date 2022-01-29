@@ -23,7 +23,12 @@
     <div class="profile-ext-container ">
         <h3>Albums</h3>
         <div class="ext-container album-container">
-            <button class="album-btn" id="album-add-btn">Add New Album</button>
+            <div class="add-album-btn-container">
+                <img class="album-btn" src="./Images/folder.png" alt="folder icon">
+                <button class="album-btn" id="album-add-btn" >Add New Album</button>
+            </div>
+            <hr>
+
             <div class="album-add-modal" id="album-add-modal">
                 <div class="modal-container">
                     <span id="album-add-close-modal">&times;</span>
@@ -74,11 +79,50 @@
             @{
                 foreach(Models.AlbumModel album in albumList)
                 {
+                    <div>    
+                        <div class="album-delete-modal" id="album-delete-modal-@album.AlbumId" style="display: none;">
+                            <div class="modal-container">
+                                <p class="album-delete-close-modal">&times;</p>
+                                <h3 class="album-delete-title-modal">
+                                    Delete @album.AlbumName?
+                                </h3>
+                                <hr>
+                                <button class="album-delete-btn album-delete-confirm-btn" onclick="DeleteAlbum(@album.AlbumId);" >Confirm</button>
+                                <button class="album-delete-btn album-delete-cancel-btn" >Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="photos-card-container" id="@album.AlbumId" style="display: none;">
+                        <span class="photos-card-album-close" onclick="CloseAlbum(@album.AlbumId);" >&times;</span>
+                        <div class="photos-card-title-readonly photos-card-title" id="photos-card-title-readonly-@album.AlbumId">
+                            <h3 class="photos-card-title-albumname" id="photos-card-title-albumname-@album.AlbumId" >@album.AlbumName</h3>
+                            <button class="photos-card-edit-btn" onclick="EditAlbumName(@album.AlbumId);" >Edit</button>
+                        </div>
+                        <div class="photos-card-title-edit photos-card-title" id="photos-card-title-edit-@album.AlbumId" style="display: none;">
+                            <form class="photos-card-title-form-edit" id="photos-card-title-form-edit-@album.AlbumId" >
+                                <input 
+                                    type="text" 
+                                    class="photos-card-form-input" 
+                                    id="photos-card-form-input-@album.AlbumId" 
+                                    name="AlbumName"
+                                    value="@album.AlbumName" 
+                                    maxlength="20"
+                                />
+                            </form>
+                            <div class="photos-card-title-edit-btn-holder">
+                                <button class="photos-card-title-edit-btn" onclick="CancelEditAlbumName(@album.AlbumId);" >Cancel</button>
+                                <button class="photos-card-title-edit-btn" onclick="SaveEditAlbumName(event, @album.AlbumId);" >Save</button>
+                            </div>
+                        </div>
+
                         <div class="photos-card-btn-container">
+                            <hr>
                             <button class="photo-btn add-new-photo" id="photo-add-btn">Add New Photo</button>
-                            <button class="photo-btn" id="photo-close-album-btn" onclick="CloseAlbum(@album.AlbumId);">Close Album</button>
-                        <hr>
+                            @* <button class="photo-btn" id="photo-close-album-btn" onclick="CloseAlbum(@album.AlbumId);">Close Album</button> *@
+                            @* <button class="photo-btn del-album-btn" onclick="DeleteAlbum(@album.AlbumId);" >Delete Album</button> *@
+                            <button class="photo-btn del-album-btn" onclick="OpenDeleteAlbumModal(@album.AlbumId);" >Delete Album</button>
+                            <hr>
                         </div>
 
                         <div class="photocard-holder">

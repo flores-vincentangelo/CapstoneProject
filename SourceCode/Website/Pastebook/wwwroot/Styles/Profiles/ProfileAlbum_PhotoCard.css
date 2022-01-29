@@ -1,20 +1,30 @@
 .photocard-main-container {
-    background: #ccc;
+    background: #f3f3f3;
     border: #fff solid 1px;
+    border-radius: 8px;
     width: 240px;
     height: 240px;
     padding: 5px;
-    margin: 10px;
+    /* margin: 0; */
+    margin-bottom: 5px;
     align-items: center;
+    flex: 1;
 }
 .photocard-image-container {
     border: #000 solid 1px;
-    border-radius: 5px;
+    border-radius: 8px;
     height: 210px;
 }
 .photocard-image {
     height: -webkit-fill-available;
     width: -webkit-fill-available;
+    border-radius: 8px;
+    object-fit: cover;
+    transition: transform .2s;
+}
+.photocard-image:hover {
+    transform: scale(1.2);  
+    cursor: pointer;
 }
 .photocard-details-container {
     color: #0000ff;
@@ -22,8 +32,64 @@
 .photocard-del-btn {
     margin: 5px auto;
     display: block;
+    font-size: 12px;
+    cursor: pointer;
+    border: none;
+    padding: 5px;
+    color: #1877f2;
+    background: #f3f3f300;
 }
 .photocard-del-btn:hover,
 .photocard-del-btn:focus {
     cursor: pointer;
+    background-color: #dfdfdf;
+    color: #f00;
+}
+
+/* DELETE PHOTO MODAL */
+.photo-delete-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+.modal-container {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 12px;
+    width: 40%;
+}
+.photo-delete-title-modal {
+    text-align: center;
+    color: #ff0000;
+}
+.photo-delete-close-modal {
+    color: #aaaaaa;
+    /* float: right; */
+    font-size: 36px;
+    font-weight: bold;
+    text-align: end;
+}
+.photo-delete-close-modal:hover,
+.photo-delete-close-modal:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+.photo-delete-btn {
+    width: 50%;
+    cursor: pointer;
+}
+.photo-delete-confirm-btn {
+    float: right;
+}
+.photo-delete-cancel-btn {
+    float: left;
 }

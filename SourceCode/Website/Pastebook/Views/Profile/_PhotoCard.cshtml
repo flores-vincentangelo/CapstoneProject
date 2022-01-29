@@ -8,15 +8,22 @@
     <div class="photocard-image-container">
         <img class="photocard-image" src="@Model.Photo">
     </div>
-    @* <div class="photocard-details-container">
-        <p>Photo Id: @Model.PhototId</p>
-        <p>User Email: @Model.UserEmail</p>
-        <p>Date Uploaded: @uploadDate</p>
-        <p>Album Id: @Model.AlbumId</p>
-        <p>Profile Link: @Model.ProfileLink</p>
-        <p>Likes: @Model.Likes</p>
-        <p>Comments: @Model.Comments</p>
-    </div> *@
-    <button class="photocard-del-btn" onclick="DeletePhoto(@Model.PhotoId);" >Delete Photo</button>
+
+    @* <button class="photocard-del-btn" onclick="DeletePhoto(@Model.PhotoId);" >Delete Photo</button> *@
+    <button class="photocard-del-btn" onclick="OpenDeletePhotoModal(@Model.PhotoId);" >Delete Photo</button>
+</div>
+
+<div>    
+    <div class="photo-delete-modal" id="photo-delete-modal-@Model.PhotoId" style="display: none;">
+        <div class="modal-container">
+            <p class="photo-delete-close-modal">&times;</p>
+            <h3 class="photo-delete-title-modal">
+                Delete Photo?
+            </h3>
+            <hr>
+            <button class="photo-delete-btn photo-delete-confirm-btn" onclick="DeletePhoto(@Model.PhotoId);" >Confirm</button>
+            <button class="photo-delete-btn photo-delete-cancel-btn" >Cancel</button>
+        </div>
+    </div>
 </div>
 

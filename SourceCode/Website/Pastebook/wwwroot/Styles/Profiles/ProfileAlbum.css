@@ -87,6 +87,48 @@
 #add-photo-cancel-btn {
     float: left;
 }
+.photo-btn {
+    float: left;
+    margin: auto 0px auto auto;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    padding: 5px;
+    color: #1877f2;
+    background-color: white;
+}
+.photo-btn:hover {
+    background-color: #dfdfdf;
+    color: #000;
+    /* font-weight: bold; */
+}
+
+.add-album-btn-container {
+    position: relative;
+    width: 150px;
+}
+.add-album-btn-container img {
+    width: 100%;
+    height: auto;
+}
+.add-album-btn-container button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+    font-size: 16px;
+    border: none;
+    padding: 20px;
+    color: #1877f2;
+    background: #f3f3f388;
+    width: 80%;
+    height: 70%;
+}
+.add-album-btn-container button:hover {
+    color: #000;
+}
+
 
 /* FORM INSIDE MODAL */
 .form-add-album,
@@ -94,13 +136,129 @@
     margin-bottom: 10px;
 }
 
-.album-card-container,
-.photos-card-container {
+.album-card-container {
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
 }
 .photocard-holder {
     display: flex;
     flex-wrap: wrap;
+}
+
+.photos-card-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.photos-card-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.photos-card-title-albumname {
+    text-align: center;
+}
+.photos-card-album-close {
+    color: #aaaaaa;
+    /* float: left; */
+    font-size: 36px;
+    font-weight: bold;
+    text-align: end;
+}
+.photos-card-album-close:hover,
+.photos-card-album-close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+.photos-card-title-edit-btn-holder {
+    margin-top: 10px;
+    width: 100%;
+}
+.photos-card-title-edit-btn {
+    width: 50%;
+    float: left;
+    margin: auto 0px auto auto;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    padding: 5px;
+    color: #1877f2;
+    background-color: white;
+}
+.photos-card-title-edit-btn:hover {
+    background-color: #dfdfdf;
+    color: #000;
+}
+.photos-card-form-input {
+    padding: 5px 5px;
+    font-size: inherit;
+    text-align: center;
+}
+
+.photos-card-edit-btn {
+    width: 50%;
+    margin: auto;
+    /* margin-bottom: 10px; */
+    border: none;
+    padding: 5px;
+    color: #1877f2;
+    background-color: white;
+}
+.photos-card-edit-btn:hover,
+.photos-card-edit-btn:focus {
+    cursor: pointer;
+    background-color: #dfdfdf;
+    color: #000;
+}
+
+/* DELETE ALBUM MODAL */
+.album-delete-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+.modal-container {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 12px;
+    width: 40%;
+}
+.album-delete-title-modal {
+    text-align: center;
+    color: #ff0000;
+}
+.album-delete-close-modal {
+    color: #aaaaaa;
+    /* float: right; */
+    text-align: end;
+    font-size: 36px;
+    font-weight: bold;
+}
+.album-delete-close-modal:hover,
+.album-delete-close-modal:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+.album-delete-btn {
+    width: 50%;
+    cursor: pointer;
+}
+.album-delete-confirm-btn {
+    float: right;
+}
+.album-delete-cancel-btn {
+    float: left;
+}
+.del-album-btn:hover {
+    color: #ff0000;
 }

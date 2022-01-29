@@ -1,16 +1,22 @@
 @model Models.AlbumModel
 @{
     var createdDate = new System.DateTime(1970, 1, 1).AddSeconds(Model.CreatedDate).ToString("yyyy-MM-dd");
+    var readOnlyId = "albumcard-title-readonly-" + Model.AlbumId;
+    var editId = "albumcard-title-edit-" + Model.AlbumId;
                         
 }
 
 <div class="albumcard-main-container">
-    @{ var readOnlyId = "albumcard-title-readonly-" + Model.AlbumId; }
-    <div class="albumcard-title-readonly" id=@readOnlyId >
-        <h3 class="albumcard-title-text">@Model.AlbumName</h3>
+    <div class="albumcard-folder-container">
+        <img class="albumcard-folder" src="./Images/folder.png" alt="folder icon">
+        <button class="albumcard-open-btn" onclick="OpenAlbum(@Model.AlbumId);" >@Model.AlbumName</button>
+    </div>
+    
+
+    @* <div class="albumcard-title-readonly" id=@readOnlyId >
+        <p class="albumcard-title-text">@Model.AlbumName</p>
         <button class="albumcard-edit-btn" onclick="EditAlbumName(@Model.AlbumId);" >Edit</button>
     </div>
-    @{ var editId = "albumcard-title-edit-" + Model.AlbumId; }
     <div class="albumcard-title-edit" id=@editId style="display: none;">
         @{ var formId = "albumcard-form-edit-" + Model.AlbumId; }
         <form class="albumcard-form-edit" id=@formId >
@@ -20,17 +26,8 @@
             <button class="albumcard-edit-btn" onclick="CancelEditAlbumName(@Model.AlbumId);" >Cancel</button>
             <button class="albumcard-edit-btn" onclick="SaveEditAlbumName(event, @Model.AlbumId);" >Save</button>
         </div>
-    </div>
+    </div> *@
     
-    <div class="albumcard-details-container">
-        <p>Album Id: @Model.AlbumId</p>
-        <p>Album Name: @Model.AlbumName</p>
-        <p>User Email: @Model.UserEmail</p>
-        <p>Date Created: @createdDate</p>
-        <p>Photo List: @Model.PhotosList</p>
-        <p>Profile Link: @Model.ProfileLink</p>
-        <button class="albumcard-open-btn" onclick="OpenAlbum(@Model.AlbumId);" >Open Album</button>
-        <button class="albumcard-del-btn" onclick="DeleteAlbum(@Model.AlbumId);" >Delete Album</button>
-    </div>
+    
 </div>
 
