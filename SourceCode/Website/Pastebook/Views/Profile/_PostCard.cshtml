@@ -1,11 +1,11 @@
 @model Models.PostModel
 @{
     var createdDate = new System.DateTime(1970, 1, 1).AddSeconds(Model.DatePosted).ToString("MMMM dd, yyyy");
-
 }
 
 <link rel="stylesheet" type="text/css" href="./Styles/Profiles/_PostCard.css">
 <script src="./Scripts/_PostCard.js"></script>
+
 
 <div class="profile-post-container-status-post">
     <div class="profile-post-container-status-post-profile">
@@ -13,8 +13,8 @@
         <span id="user-details"><span id="poster-fullname">@Model.Poster.FirstName
                 @Model.Poster.LastName</span><br><span id="date-created">@createdDate</span></span>
         <div class="profile-post-container-status-post-profile-buttons">
-            <button class="update-post" value=@Model.PostId id=@Model.PostId><img class="update-post" src="./Images/more.png"></button>
-            <button class="delete-post" value=@Model.PostId id=@Model.PostId><img class="delete-post" src="./Images/close.png"></button>
+            <button class="update-post" value=@Model.PostId id=@Model.PostId><img class="update-post" onclick="modifyPost(@Model.PostId, '@Model.ProfileLink')" src="./Images/more.png"></button>
+            <button class="delete-post" value=@Model.PostId id=@Model.PostId><img class="delete-post" onclick="deletePost(@Model.PostId, '@Model.ProfileLink')" src="./Images/close.png"></button>
         </div>
     </div>
     <div class="profile-post-container-status-post-caption">
@@ -66,8 +66,8 @@
                 <p id="user-details-update">@Model.Poster.FirstName @Model.Poster.LastName</p>
             </div>
             <div class="modal-container-caption-update">
-                <form class="caption-add-update">
-                    <input type="text" class="caption-update" name="caption" maxlength="1000">
+                <form class="caption-add-update"> 
+                    <input type="text" class="caption-update" value = "" name="caption" maxlength="1000">
                     <button class="user-button-update" type="submit">Update</button>
                 </form>
             </div>
