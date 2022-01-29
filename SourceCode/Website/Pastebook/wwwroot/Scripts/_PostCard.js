@@ -1,3 +1,16 @@
+function openCommentModal() {
+    $('.post-button-comment').click(() => {
+        // show edit form 
+        $('#post-modal-container-comment').css("display", "flex");
+    });
+
+    // When the user clicks on the "x",
+    $('#modal-container-close-comment').click(() => {
+        // Close modal
+        $('#post-modal-container-comment').css("display", "none");
+    });
+}
+
 function modifyPost (postId, profileLink) {
     //Show Update Modal
         $('#post-modal-container-update').css("display", "flex");
