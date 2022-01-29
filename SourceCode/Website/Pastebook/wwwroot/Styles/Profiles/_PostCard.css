@@ -167,7 +167,8 @@
 }
 
 #post-modal-container-update,
-#post-modal-container-delete {
+#post-modal-container-delete,
+#post-modal-container-comment {
    display: none;
    position: fixed;
    z-index: 1;
@@ -180,7 +181,8 @@
 }
 
 #modal-container-close-delete,
-#modal-container-close-update {
+#modal-container-close-update,
+#modal-container-close-comment {
     color: #aaaaaa;
     float: right;
     font-size: 20px;
@@ -193,14 +195,15 @@
 }
 
  #modal-container-close-delete:hover,
- #modal-container-close-update:hover {
+ #modal-container-close-update:hover,
+ #modal-container-close-comment:hover {
     background-color: rgb(218, 214, 214);
     color: black;
 }
 
 #post-modal-container-1-delete {
     background-color: #fefefe;
-    margin: 6% auto;
+    margin: 13% auto;
     padding: 15px;
     border: 1px solid #888;
     border-radius: 12px;
@@ -234,14 +237,15 @@
     font-size: 13px;
 }
 
-.post-modal-container-1-update {
+.post-modal-container-1-update,
+.post-modal-container-1-comment {
     background-color: #fefefe;
-    margin: 6% auto;
+    margin: 13% auto;
     padding: 15px;
     border: 1px solid #888;
     border-radius: 12px;
     width: 40%;
-    height: 21vh;
+    height: 22vh;
 }
 
 .modal-container-user-update {
@@ -283,13 +287,15 @@
     width: 30vw;
 }
 
-.caption-update {
+.caption-update,
+.friend-comment {
     width: 96.5%;
     padding: 5px;
     margin-bottom: 8px;
 }
 
-.user-button-update {
+.user-button-update,
+.friend-button-comment {
     float: right;
     margin-right: 2px;
     cursor: pointer;
@@ -302,10 +308,17 @@
     font-weight: bold;
 }
 
-.user-button-update:hover {
+.user-button-update:hover,
+.friend-button-comment:hover {
     background-color: rgb(24, 119, 242);
 }
 
-#caption-add-update {
+.caption-add-update,
+.friend-comment-form {
     margin-bottom: 5px;
+}
+
+.modal-container-comment {
+    margin-top: 50px;
+    height: 60px;
 }

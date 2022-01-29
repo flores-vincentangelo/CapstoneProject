@@ -1,6 +1,7 @@
 $(document).ready(() => {
     openDeleteModal();
     openUpdateModal();
+    openCommentModal()
 });
 
 function openDeleteModal() {
@@ -26,5 +27,18 @@ function openUpdateModal() {
     $('#modal-container-close-update').click(() => {
         // Close modal
         $('#post-modal-container-update').css("display", "none");
+    });
+}
+
+function openCommentModal() {
+    $('.post-container-right-comment').click(() => {
+        // show edit form 
+        $('#post-modal-container-comment').css("display", "flex");
+    });
+
+    // When the user clicks on the "x",
+    $('#modal-container-close-comment').click(() => {
+        // Close modal
+        $('#post-modal-container-comment').css("display", "none");
     });
 }
