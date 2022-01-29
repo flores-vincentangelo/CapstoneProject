@@ -42,8 +42,8 @@
             </div>
             <hr>
             <div class="post-container-right-buttons">
-                <button><img src="../Images/like.png"><span id="like-post">Like</span></button>
-                <button> <img src="../Images/comment.png"><span id="comment-post">Comment</span></button>
+                <button class="post-container-right-like"><img src="../Images/like.png"><span id="like-post">Like</span></button>
+                <button class="post-container-right-comment"><img src="../Images/comment.png"><span id="comment-post">Comment</span></button>
             </div>
             <hr>
             <div class="profile-post-container-status-post-comments">
@@ -89,6 +89,20 @@
                 </div>
                 <div class="modal-container-photo-update">
                     <img id="modal-container-photo-img-update" src=@Model.Photo>
+                </div>
+            </div>
+        </div>
+        <div id="post-modal-container-comment">
+            <div class="post-modal-container-1-comment">
+                <div class="modal-container-title-comment">
+                    <span id="modal-container-close-comment">&times;</span>
+                </div>
+                <div class="modal-container-comment">
+                    <form class="friend-comment-form">
+                        <input type="text" class="friend-comment" placeholder="Write a comment" name="comment"
+                            maxlength="1000">
+                        <button class="friend-button-comment" type="submit">Post</button>
+                    </form>
                 </div>
             </div>
         </div>

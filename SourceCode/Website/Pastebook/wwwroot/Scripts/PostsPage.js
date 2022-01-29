@@ -5,6 +5,7 @@ $(document).ready(function () {
     editPost();
     deletePost(modelObj);
     modifyPhoto();
+    openCommentModal();
 
     //When the user clicks on "Update" button,
     $('.user-button-update').click((event) => {
@@ -116,6 +117,19 @@ function deletePost(modelObj) {
         $('#post-modal-container-delete').css("display", "none");
     });
 
+}
+
+function openCommentModal() {
+    $('.post-container-right-comment').click(() => {
+        // show edit form 
+        $('#post-modal-container-comment').css("display", "flex");
+    });
+
+    // When the user clicks on the "x",
+    $('#modal-container-close-comment').click(() => {
+        // Close modal
+        $('#post-modal-container-comment').css("display", "none");
+    });
 }
 
 async function deletePostById(postId, profileLink) {
