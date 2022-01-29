@@ -20,8 +20,8 @@ public class DbPosts
             using (var command = db.CreateCommand())
             {
                 command.CommandText =
-                    @"INSERT INTO Posts (EmailAddress, DatePosted, Caption, PhotoId, Photo, Likes, Comment, ProfileLink) 
-                    VALUES (@EmailAddress, @DatePosted, @Caption, @PhotoId, @Photo, @Likes, @Comment, @ProfileLink);";
+                    @"INSERT INTO Posts (EmailAddress, DatePosted, Caption, PhotoId, Photo, Likes, Comment, ProfileLink, LikesList, CommentsList) 
+                    VALUES (@EmailAddress, @DatePosted, @Caption, @PhotoId, @Photo, @Likes, @Comment, @ProfileLink, @LikesList, @CommentsList);";
                 command.Parameters.AddWithValue("@EmailAddress", post.EmailAddress);
                 command.Parameters.AddWithValue("@DatePosted", post.DatePosted);
                 command.Parameters.AddWithValue("@Caption", post.Caption);
@@ -29,7 +29,9 @@ public class DbPosts
                 command.Parameters.AddWithValue("@Photo", post.Photo);
                 command.Parameters.AddWithValue("@Likes", post.Likes);
                 command.Parameters.AddWithValue("@Comment", post.Comment);
-                command.Parameters.AddWithValue("@ProfileLink", post.ProfileLink);               
+                command.Parameters.AddWithValue("@ProfileLink", post.ProfileLink);   
+                command.Parameters.AddWithValue("@LikesList", post.LikesList); 
+                command.Parameters.AddWithValue("@CommentsList", post.CommentsList);             
                 command.ExecuteNonQuery();
             }
         }
@@ -59,6 +61,8 @@ public class DbPosts
                     postDetail.Likes = reader.GetString(6);
                     postDetail.Comment = reader.GetString(7);
                     postDetail.ProfileLink = reader.GetString(8);
+                    postDetail.LikesList = reader.GetString(9);
+                    postDetail.CommentsList = reader.GetString(10);
                     postDetails.Add(postDetail);
                 }
             }
@@ -88,6 +92,8 @@ public class DbPosts
                     post.Likes = reader.GetString(6);
                     post.Comment = reader.GetString(7);
                     post.ProfileLink = reader.GetString(8); 
+                    post.LikesList = reader.GetString(9); 
+                    post.CommentsList = reader.GetString(10); 
                 }
             }
         }
@@ -116,13 +122,15 @@ public class DbPosts
                     post.Likes = reader.GetString(6);
                     post.Comment = reader.GetString(7); 
                     post.ProfileLink = reader.GetString(8); 
+                    post.LikesList = reader.GetString(9); 
+                    post.CommentsList = reader.GetString(10);
                 }
             }
         }
         return post;
     }    
 
-    public static void DeletePostById(int postId)
+    public static void DeletePostByPostId(int postId)
     {
         using(var db = new SqlConnection(DB_CONNECTION_STRING))
         {
@@ -135,7 +143,6 @@ public class DbPosts
             }
         }
     }
-
     public static void ModifyPost(int postId, PostModel post)
     {
         using(var db = new SqlConnection(DB_CONNECTION_STRING))
@@ -145,12 +152,61 @@ public class DbPosts
             {
                 if(!String.IsNullOrEmpty(post.Caption))
                 {
-                    command.CommandText = "UPDATE Posts SET Caption = @Caption WHERE PostId = @PostId;";
+                    command.CommandText = "UPDATE Posts SET Caption = @Caption WHERE PostId = @CaptionPostId;";
                     command.Parameters.AddWithValue("@Caption", post.Caption);
-                    command.Parameters.AddWithValue("PostId", postId);
+                    command.Parameters.AddWithValue("@CaptionPostId", postId);
+                    command.ExecuteNonQuery(); 
+                }
+                if(!String.IsNullOrEmpty(post.Photo))
+                {
+                    command.CommandText = "UPDATE Posts SET Photo = @Photo WHERE PostId = @PhotoPostId;";
+                    command.Parameters.AddWithValue("@Photo", post.Photo);
+                    command.Parameters.AddWithValue("@PhotoPostId", postId);
                     command.ExecuteNonQuery();
                 }
+                System.Console.WriteLine(postId);
             }
         }
     }
+    public static void UpdateLikesListOfUser(string emailAddress, string? likesList)
+    {
+        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var command = db.CreateCommand())
+            {
+                command.CommandText = 
+                    @"UPDATE Posts
+                    SET Likes = @likes
+                    WHERE EmailAddress = @email;";
+                if(String.IsNullOrEmpty(likesList))
+                {
+                    command.Parameters.AddWithValue("@likes", DBNull.Value);
+                }
+                else
+                {
+                    command.Parameters.AddWithValue("@likes", likesList);
+                }
+                command.Parameters.AddWithValue("@email", emailAddress);
+                command.ExecuteNonQuery();
+            }
+        }
+    }
+
+    public static string AddEmailtoLikesList(string emailToAdd, string? likesListStr)
+    {
+        if(!String.IsNullOrEmpty(likesListStr))
+        {
+            var _likesListArr = likesListStr.Split(",");
+            List<string> likesList = new List<string>(_likesListArr);
+            likesList.Add(emailToAdd);
+            return String.Join(",",likesList);
+        }
+        else
+        {
+            return emailToAdd;
+        }
+        
+    }
+
 }

@@ -172,6 +172,7 @@ function showProfileExt() {
         $('#profile-ext-posts').css("display", "flex");
         $('#profile-ext-friends').css("display", "none");
         $('#profile-ext-album').css("display", "none");
+        $('#post-modal-container-delete').css("display", "none");
     });
 
     $('#ext-friends-btn').click(() => {
