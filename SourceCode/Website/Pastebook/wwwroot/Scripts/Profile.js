@@ -1,6 +1,6 @@
 $(document).ready( () => {
     var modelObj = JSON.parse(model.replace(/&quot;/g,"\""));
-    console.log(modelObj.DoesUserOwnProfile);
+    // console.log(modelObj.DoesUserOwnProfile);
     
     if(!modelObj.DoesUserOwnProfile){
         $("#photo-edit-btn").css("display", "none");
