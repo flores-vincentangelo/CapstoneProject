@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+    GetNotifications();
     //search bar functionality
     $(".layout-header-left-searchform-input").focus(function (e) { 
         $(".layout-header-left-searchpanel").css("display", "block");
@@ -52,7 +53,10 @@ $(document).ready(function () {
 
     $(".layout-header-right-notifications").click(function (e) { 
         $(".layout-header-right-notificationscontainer").css("display", "flex");
-        GetNotifications();
+    });
+
+    $(".layout-header-right-notificationscontainer-clear").click(function (e) { 
+        DeleteNotifications();
     });
     
 });
@@ -106,41 +110,48 @@ async function GetNotifications(){
     });
     if(response.ok){
         var data = await response.json();
-        console.log(data);
-        data.friendReq.forEach((item,index) =>{
-            AddNotifCard(item.firstName, item.lastName, item.photo, "friend");
-        });
-        data.likers.forEach((item,index) =>{
-            AddNotifCard(item.firstName, item.lastName, item.photo, "likes");
-        });
-        data.commenters.forEach((item,index) =>{
-            AddNotifCard(item.firstName, item.lastName, item.photo, "comments");
-        });
+
+        if(data.friendReq != null){
+            $(".layout-header-right-notifications").css("background-color", "red");
+            data.friendReq.forEach((item,index) =>{
+                AddNotifCard(item.firstName, item.lastName, item.photo, "sent you a friend request");
+            });
+        }
+
+        if(data.likers != null){
+            $(".layout-header-right-notifications").css("background-color", "red");
+            data.likers.forEach((item,index) =>{
+                AddNotifCard(item.firstName, item.lastName, item.photo, "liked your post");
+            });
+        }
+
+        if(data.commenters != null){
+            $(".layout-header-right-notifications").css("background-color", "red");
+            data.commenters.forEach((item,index) =>{
+                AddNotifCard(item.firstName, item.lastName, item.photo, "commented on your post");
+            });
+        }
     }
 }
 
-function AddNotifCard(firstName, lastName, photo, category){
-    var notifText;
-    switch (category) {
-        case "friend":
-            notifText = "sent you a friend request";
-            break;
-        case "likes":
-            notifText = "liked you post";
-            break;
-        case "comments":
-            notifText = "commented on your post";
-            break;
-    }
-    
+function AddNotifCard(firstName, lastName, photo, text){
     var notifCard = 
     `<div class="layout-header-right-notificationscontainer-notifcard">
         <div class="layout-header-right-notificationscontainer-notifcard-picture">
             <img src="${photo}">
         </div>
         <div class="layout-header-right-notificationscontainer-notifcard-text">
-            ${firstName} ${lastName} ${notifText}
+            ${firstName} ${lastName} ${text}
         </div>
     </div>`;
     $(".layout-header-right-notificationscontainer").append(notifCard);
+}
+
+async function DeleteNotifications(){
+    const response = await fetch("/notifications",{
+        method:"DELETE"
+    });
+    if(response.ok){
+        location.reload();
+    }
 }
