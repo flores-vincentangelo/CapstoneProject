@@ -1,14 +1,21 @@
 @model Models.PostModel
+@using System.Text.Json
 @{
     var createdDate = new System.DateTime(1970, 1, 1).AddSeconds(Model.DatePosted).ToString("MMMM dd, yyyy");
+    string jsonString = JsonSerializer.Serialize(Model);
 }
+
+
 <!DOCTYPE html>
 <html>
 
 <head>
     <link rel="stylesheet" type="text/css" href="../../Styles/Posts/Post.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../../Scripts/PostPage.js"></script>
+    <script src="../../Scripts/PostsPage.js"></script>
+    <script type="text/javascript">
+        const model = '@jsonString';
+    </script>
 </head>
 
 <body>
@@ -19,15 +26,12 @@
         </div>
         <div class="post-container-right">
             <div class="post-container-right-action">
-                <button class="update-but"><img class="post-container-right-action-update"
-                        src="../Images/more.png"></button>
-                <button class="delete-but"><img class="post-container-right-action-delete"
-                        src="../Images/close.png"></button>
+                <button class="update-but"><img class="post-container-right-action-update" src="../Images/more.png"></button>
+                <button class="delete-but"><img class="post-container-right-action-delete" src="../Images/close.png"></button>
             </div>
             <div class="post-container-right-profile">
                 <img class="post-container-right-profile-logo" src="@Model.Poster.Photo">
-                <span class="poster-details"><span class="poster-fullname">@Model.Poster.FirstName
-                        @Model.Poster.LastName</span><br><span class="posted-date">@createdDate</span></span>
+                <span class="poster-details"><span class="poster-fullname">@Model.Poster.FirstName @Model.Poster.LastName</span><br><span class="posted-date">@createdDate</span></span>
             </div>
             <div class="post-container-right-caption">
                 <span>@Model.Caption</span>
@@ -38,8 +42,8 @@
             </div>
             <hr>
             <div class="post-container-right-buttons">
-                <button class="post-container-right-like"><img src="../Images/like.png"><span id="like-post">Like</span></button>
-                <button class="post-container-right-comment"> <img src="../Images/comment.png"><span id="comment-post">Comment</span></button>
+                <button><img src="../Images/like.png"><span id="like-post">Like</span></button>
+                <button> <img src="../Images/comment.png"><span id="comment-post">Comment</span></button>
             </div>
             <hr>
             <div class="profile-post-container-status-post-comments">
@@ -77,27 +81,14 @@
                 </div>
                 <div class="modal-container-caption-update">
                     <form class="caption-add-update" id="caption-add-update">
-                        <input type="text" id="caption-update" name="caption" value=@Model.Caption maxlength="1000">
+                        <input type="text" id="caption-update" name="caption" value='@Model.Caption'
+                            maxlength="1000">
                         <input type="file" id="myPhotoPost-update" name="Photo" accept="image/*" data-type='image'>
                         <button class="user-button-update" type="submit">Update</button>
                     </form>
                 </div>
                 <div class="modal-container-photo-update">
                     <img id="modal-container-photo-img-update" src=@Model.Photo>
-                </div>
-            </div>
-        </div>
-        <div id="post-modal-container-comment">
-            <div class="post-modal-container-1-comment">
-                <div class="modal-container-title-comment">
-                    <span id="modal-container-close-comment">&times;</span>
-                </div>
-                <div class="modal-container-comment">
-                    <form class="friend-comment-form">
-                        <input type="text" class="friend-comment" placeholder="Write a comment" name="comment"
-                            maxlength="1000">
-                        <button class="friend-button-comment" type="submit">Post</button>
-                    </form>
                 </div>
             </div>
         </div>
