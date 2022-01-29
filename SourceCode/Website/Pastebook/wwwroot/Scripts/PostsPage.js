@@ -61,8 +61,6 @@ function modifyPhoto() {
 }
 
 async function addPostModification(event, jsonData, postId) {
-    console.log(jsonData);
-    console.log(postId);
     event.preventDefault();
     const response = await fetch(`/posts/${postId}`, {
         method: 'PATCH',
