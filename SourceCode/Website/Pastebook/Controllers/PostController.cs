@@ -2,6 +2,7 @@ namespace Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Database;
 using Models;
+using System.Text.Json;
 public class PostController: Controller
 {
     [HttpGet]
@@ -43,6 +44,8 @@ public class PostController: Controller
 
         post.Likes = "";
         post.Comment = "";
+        post.LikesList ="";
+        post.CommentsList ="";
 
         DbPosts.InsertPost(post);
         return Ok("Post successfully added!");
@@ -51,17 +54,39 @@ public class PostController: Controller
     [HttpPatch]
     [Route("/posts/{postId}")]
     
-    public IActionResult ModifyPost(int postId, [FromBody] PostModel post) {
-        DbPosts.ModifyPost(postId, post);
-        return Ok("Caption successfully modified!");
+    public IActionResult ModifyPost(int postId, [FromBody] PostModel post) 
+    {
+        string? cookieEmail = HttpContext.Request.Cookies["email"];
+        string? cookieSessionId = HttpContext.Request.Cookies["sessionId"];
+        if(!String.IsNullOrEmpty(cookieSessionId) && !String.IsNullOrEmpty(cookieEmail))
+        {
+            SessionsModel? sessionModel = DbSessions.GetSessionById(cookieSessionId);
+            if(sessionModel != null && sessionModel.EmailAddress == cookieEmail)
+            {
+                DbPosts.ModifyPost(postId, post);
+                return Ok();
+            }
+        }
+        return RedirectToAction("doLoginAction", "Login");
     }
 
     [HttpDelete]
     [Route("/posts/{postId}")]
 
-    public IActionResult DeletePostById([FromBody] PostModel post) {
-        DbPosts.DeletePostById(post.PostId);
-        return Ok("Post successfully deleted!");
+    public IActionResult DeletePostByPostId(int postId) 
+    {
+        string? cookieEmail = HttpContext.Request.Cookies["email"];
+        string? cookieSessionId = HttpContext.Request.Cookies["sessionId"];
+        if(!String.IsNullOrEmpty(cookieSessionId) && !String.IsNullOrEmpty(cookieEmail))
+        {
+            SessionsModel? sessionModel = DbSessions.GetSessionById(cookieSessionId);
+            if(sessionModel != null && sessionModel.EmailAddress == cookieEmail)
+            {
+            DbPosts.DeletePostByPostId(postId);
+            return Ok();
+            }
+        }
+        return RedirectToAction("doLoginAction", "Login");
     }
 
 }

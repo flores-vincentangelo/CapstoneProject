@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+    GetNotifications();
     //search bar functionality
     $(".layout-header-left-searchform-input").focus(function (e) { 
         $(".layout-header-left-searchpanel").css("display", "block");
@@ -29,6 +30,9 @@ $(document).ready(function () {
             $(".layout-header-left-searchform-input").val('');
             $(".layout-header-left-searchpanel-searchresults").empty();
         }
+        if(!target.closest(".layout-header-right-notificationscontainer") && !target.closest(".layout-header-right-notifications")){
+            $(".layout-header-right-notificationscontainer").css("display", "none");
+        }
         
     });
 
@@ -46,8 +50,22 @@ $(document).ready(function () {
         document.cookie = "sessionId=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
         document.cookie = "profilelink=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     });
+
+    $(".layout-header-right-notifications").click(function (e) { 
+        $(".layout-header-right-notificationscontainer").css("display", "flex");
+    });
+
+    $(".layout-header-right-notificationscontainer-clear").click(function (e) { 
+        DeleteNotifications();
+    });
     
 });
+
+async function deleteSession() {  
+        fetch(`/login`, {
+        method: 'DELETE',
+    });
+}
 
 async function SearchUsers(searchTerm){
 
@@ -71,12 +89,6 @@ async function SearchUsers(searchTerm){
     
 }
 
-async function deleteSession() {  
-        fetch(`/login`, {
-        method: 'DELETE',
-    });
-}
-
 function AddSearchCard(firstName,lastName,profileLink,photo){
     var searchCard = 
     `<a class="layout-header-left-searchpanel-searchresults-link" href="/${profileLink}">
@@ -92,4 +104,54 @@ function AddSearchCard(firstName,lastName,profileLink,photo){
     $(".layout-header-left-searchpanel-searchresults").append(searchCard);
 }
 
+async function GetNotifications(){
+    const response = await fetch("/notifications",{
+        method: "GET"
+    });
+    if(response.ok){
+        var data = await response.json();
 
+        if(data.friendReq != null){
+            $(".layout-header-right-notifications").css("background-color", "red");
+            data.friendReq.forEach((item,index) =>{
+                AddNotifCard(item.firstName, item.lastName, item.photo, "sent you a friend request");
+            });
+        }
+
+        if(data.likers != null){
+            $(".layout-header-right-notifications").css("background-color", "red");
+            data.likers.forEach((item,index) =>{
+                AddNotifCard(item.firstName, item.lastName, item.photo, "liked your post");
+            });
+        }
+
+        if(data.commenters != null){
+            $(".layout-header-right-notifications").css("background-color", "red");
+            data.commenters.forEach((item,index) =>{
+                AddNotifCard(item.firstName, item.lastName, item.photo, "commented on your post");
+            });
+        }
+    }
+}
+
+function AddNotifCard(firstName, lastName, photo, text){
+    var notifCard = 
+    `<div class="layout-header-right-notificationscontainer-notifcard">
+        <div class="layout-header-right-notificationscontainer-notifcard-picture">
+            <img src="${photo}">
+        </div>
+        <div class="layout-header-right-notificationscontainer-notifcard-text">
+            ${firstName} ${lastName} ${text}
+        </div>
+    </div>`;
+    $(".layout-header-right-notificationscontainer").append(notifCard);
+}
+
+async function DeleteNotifications(){
+    const response = await fetch("/notifications",{
+        method:"DELETE"
+    });
+    if(response.ok){
+        location.reload();
+    }
+}

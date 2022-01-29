@@ -1,6 +1,5 @@
 namespace Database;
 using System.Data.SqlClient;
-using Database;
 using Models;
 
 public class DbFriends

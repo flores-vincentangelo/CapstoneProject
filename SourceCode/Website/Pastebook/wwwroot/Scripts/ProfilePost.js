@@ -59,6 +59,8 @@ function viewAddPostModal() {
     $('#modal-container-close').click(() => {
         //close Create Post Modal
         $('.post-modal-container').css("display", "none");
+        resetForm();
+        $('#modal-container-photo-img').attr('src', "");
     });
 }
 

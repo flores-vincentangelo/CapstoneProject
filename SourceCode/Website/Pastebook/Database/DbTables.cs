@@ -247,6 +247,8 @@ public class DbTables
                     Likes VARCHAR (MAX),
                     Comment VARCHAR (MAX),
                     ProfileLink VARCHAR (255),
+                    LikesList TEXT,
+                    CommentsList TEXT
                     );";
                 command.ExecuteNonQuery();
                 Console.WriteLine("Posts Table created successfully!");
@@ -264,6 +266,41 @@ public class DbTables
                 command.CommandText = "DROP TABLE IF EXISTS Posts";
                 command.ExecuteNonQuery();
                 Console.WriteLine("Posts Table deleted successfully!");
+            }
+        }
+    }
+
+    public static void CreateNotificationsTable()
+    {
+        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var command = db.CreateCommand())
+            {
+                command.CommandText = 
+                    @"IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Notifications' and xtype='U')
+                    CREATE TABLE Notifications(
+                        UserEmail VARCHAR(255),
+                        FriendRequest TEXT,
+                        LikesOnPost TEXT,
+                        CommentOnPost TEXT
+                    );";
+                    command.ExecuteNonQuery();
+                    Console.WriteLine("Notifications Table created successfully!");
+            }
+        }
+    }
+
+    public static void DropNotificationsTable()
+    {
+        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var command = db.CreateCommand())
+            {
+                command.CommandText = "DROP TABLE IF EXISTS Notifications;";
+                command.ExecuteNonQuery();
+                Console.WriteLine("Notifications Table deleted successfully!");
             }
         }
     }
