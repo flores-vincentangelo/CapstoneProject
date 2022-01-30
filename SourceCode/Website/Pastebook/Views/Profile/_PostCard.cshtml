@@ -34,11 +34,24 @@
     </div>
     <hr>
     <div class="profile-post-container-status-post-comments">
-        <img src="./Images/img_avatar.png">
+        @{
+            if(Model.CommentsListObj != null)
+            {
+                foreach (Models.CommentsModel commentWithDetails in Model.CommentsListObj)
+                {
+                    await Html.RenderPartialAsync("~/Views/Shared/_CommentCard.cshtml",commentWithDetails);
+                }
+            }
+            else
+            {
+                <p>Add a comment</p>
+            }
+        }
+        @* <img src="./Images/img_avatar.png">
         <div class="friend-details">
             <span id="friend-name">Friend Name</span><br>
             <span id="friend-comment">Comment goes here......</span>
-        </div>
+        </div> *@
     </div>
     <div id="post-modal-container-delete">
         <div id="post-modal-container-1-delete">

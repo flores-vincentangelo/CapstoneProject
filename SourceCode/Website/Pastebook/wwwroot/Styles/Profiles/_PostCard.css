@@ -128,19 +128,27 @@
 .profile-post-container-status-post-comments {
     font-size: 13px;
     margin-top: 2%;
-    align-items: center;
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: flex-start;
 }
 
-.profile-post-container-status-post-comments img {
+.commentcard{
+    margin: 10px 0 10px 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.commentcard-picture img{
     border-radius: 50%;
     width: 30px;
     height: 30px;
     margin-right: 2px;
 }
 
-.friend-details {
+.commentcard-contents{
     margin-left: 5px;
     background-color: rgb(241, 239, 239);
     height: auto;
@@ -150,9 +158,31 @@
     font-size: 10px;
 }
 
-#friend-name {
+.commentcard-contents-commenter{
     font-weight: bold;
 }
+
+/* 
+.profile-post-container-status-post-comments img {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin-right: 2px;
+} */
+
+/* .friend-details {
+    margin-left: 5px;
+    background-color: rgb(241, 239, 239);
+    height: auto;
+    width: auto;
+    padding: 8px 10px;
+    border-radius: 15px;
+    font-size: 10px;
+} */
+
+/* #friend-name {
+    font-weight: bold;
+} */
 
 #date-created {
     font-size: 9px;
