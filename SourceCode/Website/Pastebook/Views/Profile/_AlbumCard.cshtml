@@ -4,24 +4,10 @@
                         
 }
 
-<div class="albums-main-all-container-albumcard">
-    @* <div class="albums-main-all-container-albumcard-picture">
-        <img src="" alt="Folder">
-    </div> *@
-    <div class="albums-main-all-container-albumcard-title">@Model.AlbumName</div>
-    <div class="albums-main-all-container-albumcard-name">
-        <p>Album Id: @Model.AlbumId</p>
-        <p>Album Name: @Model.AlbumName</p>
-        <p>User Email: @Model.UserEmail</p>
-        <p>Date Created: @createdDate</p>
-        <p>Photo List: @Model.PhotosList</p>
-        <button class="album-btn" id=@Model.AlbumId value=@Model.AlbumId >Add Photo</button>
+<div class="albumcard-main-container">
+    <div class="albumcard-folder-container">
+        <img class="albumcard-folder" src="./Images/folder.png" alt="folder icon">
+        <button class="albumcard-open-btn" onclick="OpenAlbum(@Model.AlbumId);" >@Model.AlbumName</button>
     </div>
 </div>
 
-<script>
-    $('#@Model.AlbumId').click(() => {
-        var albumId = document.getElementById("@Model.AlbumId")
-        console.log(albumId.value);
-    });
-</script>
