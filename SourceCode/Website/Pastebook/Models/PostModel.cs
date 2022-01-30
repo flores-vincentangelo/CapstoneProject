@@ -15,4 +15,6 @@ public class PostModel
     public string? PosterFirstName {get;set;}
     public string? PosterLastName {get;set;}
     public UserModel? Poster {get;set;}
+    public string? LikesList {get;set;}
+    public string? CommentsList {get; set;}
 }

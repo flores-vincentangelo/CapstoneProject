@@ -41,6 +41,8 @@ public class FriendsController: Controller
         string newFriendReqList = DbFriends.AddEmailtoFriendRequestList(userEmail,userToBeAddedFriends.FriendRequests);
         //updates DB
         DbFriends.UpdateFriendReqsListOfUser(userToBeAdded,newFriendReqList);
+        //gives notif to Person B
+        DbNotifications.InsertUserIntoFriendReqNotifOfOtherUser(userEmail,userToBeAdded);
         return Ok();
     }
 

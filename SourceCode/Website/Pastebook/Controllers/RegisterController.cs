@@ -60,6 +60,7 @@ public class RegisterController : Controller
         model.Photo = "data:image/png;base64," + base64ImageRepresentation;
 
         DbFriends.InitializeFriends(model.EmailAddress); //make an entry to the friends table
+        DbNotifications.InitializeNotifications(model.EmailAddress);
         DbUsers.InsertUser(model);
         DbUsers.SendVerificationEmail(model);
         return View("Views/Register/RegisteredSuccess.cshtml");
