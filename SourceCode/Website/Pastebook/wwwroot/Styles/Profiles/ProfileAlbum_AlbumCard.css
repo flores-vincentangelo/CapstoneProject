@@ -1,15 +1,50 @@
-.albums-main-all-container-albumcard{
-    background: #ccc;
-    border: #fff solid 1px;
-    width: 200px;
+.albumcard-main-container {
+    margin: 0 10px;
+}
+
+.albumcard-folder-container {
+    position: relative;
+    width: 150px;
+}
+.albumcard-folder {
+    width: 100%;
+    height: auto;
+}
+.albumcard-open-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    padding: 10px;
+    color: #000;
+    background: #f3f3f300;
+    width: 80%;
+    height: 70%;
+    overflow-wrap: anywhere;
+    overflow: hidden;
+}
+.albumcard-open-btn:hover {
+    color: #1877f2;
+    cursor: pointer;
+    background: #f3f3f388;
+}
+
+.albumcard-del-btn {
+    margin: 5px auto;
+    display: block;
+    font-size: 11px;
+    cursor: pointer;
+    border: none;
     padding: 5px;
-    margin: 10px;
-    align-items: center;
+    color: #1877f2;
+    background: #f3f3f300;
 }
-.albums-main-all-container-albumcard-picture{
-    background: #fff;
-    border: #000 solid 1px;
+.albumcard-del-btn:hover {
+    cursor: pointer;
 }
-.albums-main-all-container-albumcard-name{
-    color: #0000ff;
-}
+
+
