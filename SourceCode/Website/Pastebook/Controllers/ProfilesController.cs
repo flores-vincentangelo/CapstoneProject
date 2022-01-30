@@ -9,7 +9,7 @@ public class ProfilesController: Controller
     [HttpGet]
     [Route("/{profileLink}")]
     public IActionResult GetUserByLink(string profileLink) {
-
+        
         bool doesProfileExist = DbUsers.DoesProfileExist(profileLink);
         if(doesProfileExist)
         {

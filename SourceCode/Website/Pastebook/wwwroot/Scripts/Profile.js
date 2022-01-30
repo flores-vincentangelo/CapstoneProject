@@ -14,6 +14,11 @@ $(document).ready( () => {
         $(".profile-edit-gender-btn").css("display", "none");
         $("#profile-password").css("display", "none");
         $(".profile-edit-password-btn").css("display", "none");
+
+        $(".add-album-btn-container").css("display", "none"); // Add new album button
+        $(".photos-card-edit-btn").css("display", "none"); // Edit album button
+        $(".photos-card-btn-container").css("display", "none"); // Add new photo / delete album button
+        $(".photocard-del-btn").css("display", "none"); // Photocard delete button
     }
     // Add to cookie
     // document.cookie = 'profilelink=' + user.ProfileLink;
