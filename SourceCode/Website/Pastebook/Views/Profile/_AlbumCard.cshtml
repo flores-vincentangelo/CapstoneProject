@@ -1,8 +1,6 @@
 @model Models.AlbumModel
 @{
     var createdDate = new System.DateTime(1970, 1, 1).AddSeconds(Model.CreatedDate).ToString("yyyy-MM-dd");
-    var readOnlyId = "albumcard-title-readonly-" + Model.AlbumId;
-    var editId = "albumcard-title-edit-" + Model.AlbumId;
                         
 }
 
@@ -11,23 +9,5 @@
         <img class="albumcard-folder" src="./Images/folder.png" alt="folder icon">
         <button class="albumcard-open-btn" onclick="OpenAlbum(@Model.AlbumId);" >@Model.AlbumName</button>
     </div>
-    
-
-    @* <div class="albumcard-title-readonly" id=@readOnlyId >
-        <p class="albumcard-title-text">@Model.AlbumName</p>
-        <button class="albumcard-edit-btn" onclick="EditAlbumName(@Model.AlbumId);" >Edit</button>
-    </div>
-    <div class="albumcard-title-edit" id=@editId style="display: none;">
-        @{ var formId = "albumcard-form-edit-" + Model.AlbumId; }
-        <form class="albumcard-form-edit" id=@formId >
-            <input type="text" class="album-card-form-input" name="AlbumName" value="@Model.AlbumName" maxlength="30"/>
-        </form>
-        <div class="albumcard-edit-btn-holder">
-            <button class="albumcard-edit-btn" onclick="CancelEditAlbumName(@Model.AlbumId);" >Cancel</button>
-            <button class="albumcard-edit-btn" onclick="SaveEditAlbumName(event, @Model.AlbumId);" >Save</button>
-        </div>
-    </div> *@
-    
-    
 </div>
 

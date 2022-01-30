@@ -52,10 +52,6 @@ function AddNewAlbum() {
     });
 }
 
-// const getCookieValue = (name) => (
-//     document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || ''
-// )
-
 async function AddAlbum(event, jsonData) {
     event.preventDefault();
     const url = "/albums";
@@ -68,6 +64,8 @@ async function AddAlbum(event, jsonData) {
     });
     if(response.status == 200) {
         alert("Album created successfully!");
+        // Reload page
+        location.reload();
     }
 }
 
@@ -76,18 +74,30 @@ function AddNewPhoto() {
     $('.add-new-photo').click(() => {
         // Open modal
         $('.photo-add-modal').css("display","flex");
+        // Reset input form
+        $("#myForm").val("");
+        $("#form-add-photo").val(null);
+        $('#album-photo-modal-img').attr('src', "./Images/img_avatar.png");
     });
 
     // When the user clicks on the "Cancel" button,
     $('#add-photo-cancel-btn').click(() => {
         // Close modal
         $('.photo-add-modal').css("display","none");
+        // Reset input form
+        $("#myForm").val("");
+        $("#form-add-photo").val(null);
+        $('#album-photo-modal-img').attr('src', "./Images/img_avatar.png");
     });
 
     // When the user clicks on the "x",
     $('#photo-add-close-modal').click(() => {
         // Close modal
         $('.photo-add-modal').css("display","none");
+        // Reset input form
+        $("#myForm").val("");
+        $("#form-add-photo").val(null);
+        $('#album-photo-modal-img').attr('src', "./Images/img_avatar.png");
     });
 
     // When the user clicks anywhere outside of the modal
@@ -95,6 +105,10 @@ function AddNewPhoto() {
         if (event.target == document.getElementById("photo-add-modal")) {
             // Close modal
             $('.photo-add-modal').css("display","none");
+            // Reset input form
+            $("#myForm").val("");
+            $("#form-add-photo").val(null);
+            $('#album-photo-modal-img').attr('src', "./Images/img_avatar.png");
         }
     }
 
@@ -144,6 +158,8 @@ async function addPhotoInAlbumId(event, jsonData) {
     });
     if(response.status == 200) {
         alert(await response.text());
+        // Reload page
+        location.reload();
     }
 }
 
@@ -170,22 +186,6 @@ function CloseAlbum(albumId) {
     $('.photos-container').css("display", "none");
     $(`#photos-card-container-${albumId}`).css("display", "none");
 }
-
-// function EditAlbumName(albumId) {
-//     var readOnlyId = "#albumcard-title-readonly-" + albumId;
-//     var editId = "#albumcard-title-edit-" + albumId;
-//     console.log("Album Id to be modified: " + albumId);
-//     document.cookie = 'currentAlbumId=' + albumId;
-//     $(readOnlyId).css("display", "none");
-//     $(editId).css("display", "block");
-// }
-
-// function CancelEditAlbumName(albumId) {
-//     console.log("Album Id to be modified: " + albumId);
-//     document.cookie = 'currentAlbumId=' + 0;
-//     $('.albumcard-title-readonly').css("display", "block");
-//     $('.albumcard-title-edit').css("display", "none");
-// }
 
 function EditAlbumName(albumId) {
     console.log("Album Id to be modified: " + albumId);
@@ -227,6 +227,8 @@ async function SaveEditAlbumName(event, albumId) {
         $(`#photos-card-title-readonly-${albumId}`).css("display", "flex");
         // Hide the read-only album title
         $(`#photos-card-title-edit-${albumId}`).css("display", "none");
+        // Reload page
+        location.reload();
     }
 }
 
@@ -266,6 +268,8 @@ async function DeleteAlbum(albumId) {
     });
     if(response.status == 200) {
         alert(await response.text());
+        // Reload page
+        location.reload();
     }
 }
 
@@ -305,6 +309,8 @@ async function DeletePhoto(photoId) {
         alert(await response.text());
         // Close modal
         $(`#photo-delete-modal-${photoId}`).css("display", "none");
+        // Reload page
+        location.reload();
     }
 }
 

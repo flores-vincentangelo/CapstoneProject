@@ -8,7 +8,7 @@
     /* margin: 0; */
     margin-bottom: 5px;
     align-items: center;
-    flex: 1;
+    /* flex: 1; */
 }
 .photocard-image-container {
     border: #000 solid 1px;

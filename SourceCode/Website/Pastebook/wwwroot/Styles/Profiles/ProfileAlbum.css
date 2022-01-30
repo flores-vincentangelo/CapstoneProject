@@ -74,6 +74,7 @@
     height: 300px;
     width: 300px;
     border-radius: 8px;
+    object-fit: contain;
 }
 .album-btn,
 .photo-btn {
