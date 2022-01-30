@@ -8,7 +8,7 @@ public class LoginController: Controller
     [HttpGet]
     [Route("/login")]
     public IActionResult doLoginAction() {
-        return View("/Views/Login.cshtml");
+        return View("./Views/Login.cshtml");
     }
 
     [HttpPost]
