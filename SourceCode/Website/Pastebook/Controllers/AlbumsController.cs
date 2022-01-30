@@ -83,6 +83,8 @@ public class AlbumsController: Controller
         
         if(photoList != null) {
             string photoListString = string.Join( ",", photoList);
+            Console.Write("Last photo id added: ");
+            Console.WriteLine(photoList[photoList.Count-1]);
             
             // Console.WriteLine("-------------------");
             // Console.WriteLine($"There are {photoList.Count} photos in Album Id {albumId}");
@@ -91,20 +93,22 @@ public class AlbumsController: Controller
             
             // Update Album PhotoList
             DbAlbums.UpdatePhotoList(albumId, photoListString);
-        }
 
-        // Add to Posts Table when saving a photo in album
-        var post = new PostModel();
-        post.PhotoId = photo.PhotoId;
-        post.EmailAddress = cookieEmail;
-        post.ProfileLink = cookieProfileLink;
-        post.DatePosted = (long)((System.DateTime.Now.Subtract(new System.DateTime(1970, 1, 1))).TotalSeconds);
-        post.Photo = photo.Photo;
-        post.PhotoId = photo.PhotoId;
-        post.Caption = "";
-        post.Likes = "";
-        post.Comment = "";
-        DbPosts.InsertPost(post);
+            // Add to Posts Table when saving a photo in album
+            var post = new PostModel();
+            post.PhotoId = photo.PhotoId;
+            post.EmailAddress = cookieEmail;
+            post.ProfileLink = cookieProfileLink;
+            post.DatePosted = (long)((System.DateTime.Now.Subtract(new System.DateTime(1970, 1, 1))).TotalSeconds);
+            post.Photo = photo.Photo;
+            post.PhotoId = photoList[photoList.Count-1];
+            post.Caption = "";
+            post.Likes = "";
+            post.Comment = "";
+            post.LikesList = "";
+            post.CommentsList = "";
+            DbPosts.InsertPost(post);
+        }
         
         return Ok("Photo added in album successfully!");
     }

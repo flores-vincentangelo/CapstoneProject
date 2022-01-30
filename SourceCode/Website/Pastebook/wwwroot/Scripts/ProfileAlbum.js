@@ -156,7 +156,7 @@ function OpenAlbum(albumId) {
     var albums = document.getElementsByClassName("photos-card-container");
     console.log("No. of Albums: " + albums.length);
 
-    $(`#${albumId}`).css("display", "flex");
+    $(`#photos-card-container-${albumId}`).css("display", "flex");
     
 }
 
@@ -168,7 +168,7 @@ function CloseAlbum(albumId) {
     $('.album-container').css("display", "block");
     // Hide photos container
     $('.photos-container').css("display", "none");
-    $(`#${albumId}`).css("display", "none");
+    $(`#photos-card-container-${albumId}`).css("display", "none");
 }
 
 // function EditAlbumName(albumId) {
