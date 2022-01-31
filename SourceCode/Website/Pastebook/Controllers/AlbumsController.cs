@@ -39,9 +39,9 @@ public class AlbumsController: Controller
     }
 
     [HttpGet]
-    [Route("/albums/{email}")]
-    public IActionResult GetAllAlbums(string email) {
-        var albums = DbAlbums.GetAllAlbumsByEmail(email);
+    [Route("/albums/{userId}")]
+    public IActionResult GetAllAlbums(int userId) {
+        var albums = DbAlbums.GetAllAlbumsByUserId(userId);
         if(albums == null) {
             return Ok("No Albums found");
         }
@@ -49,17 +49,17 @@ public class AlbumsController: Controller
     }
 
     [HttpPatch]
-    [Route("/albums/{id}")]
-    public IActionResult ModifyAlbumName(int id,  [FromBody] AlbumModel album) {
-        DbAlbums.ModifyAlbumName(id, album.AlbumName);
+    [Route("/albums/{albumId}")]
+    public IActionResult ModifyAlbumName(int albumId,  [FromBody] AlbumModel album) {
+        DbAlbums.ModifyAlbumName(albumId, album.AlbumName);
         return Ok("Album name updated successfully!");
     }
 
     [HttpDelete]
-    [Route("/albums/{id}")]
-    public IActionResult DeleteAlbumByAlbumId(int id) {
-        DbAlbums.DeleteAlbumByAlbumId(id);
-        DbPhotos.DeletePhotoByAlbumId(id);
+    [Route("/albums/{albumId}")]
+    public IActionResult DeleteAlbumByAlbumId(int albumId) {
+        DbAlbums.DeleteAlbumByAlbumId(albumId);
+        DbPhotos.DeletePhotoByAlbumId(albumId);
         return Ok("Album deleted successfully!");
     }
 
@@ -82,18 +82,12 @@ public class AlbumsController: Controller
         photo.Likes = "";
         photo.Comments = "";
         DbPhotos.AddPhotoInAlbumId(albumId, photo);
+
         // Get Photo List with AlbumId = albumId
         var photoList = DbPhotos.GetPhotoListByAlbumId(albumId);
         
         if(photoList != null) {
             string photoListString = string.Join( ",", photoList);
-            Console.Write("Last photo id added: ");
-            Console.WriteLine(photoList[photoList.Count-1]);
-            
-            // Console.WriteLine("-------------------");
-            // Console.WriteLine($"There are {photoList.Count} photos in Album Id {albumId}");
-            // Console.WriteLine(photoListString);
-            // Console.WriteLine("-------------------");
             
             // Update Album PhotoList
             DbAlbums.UpdatePhotoList(albumId, photoListString);
@@ -129,14 +123,14 @@ public class AlbumsController: Controller
     }
 
     [HttpGet]
-    [Route("/photos")]
-    public IActionResult GetPhotoById() {
-        var photoId = 1; // must take from html
-        var photo = DbPhotos.GetPhotoByPhotoId(photoId);
-        if(photo == null){
-            return Ok("No photo found");
+    [Route("/photos/posts/{photoId}")]
+    public IActionResult GetPostByPhotoById(int photoId) {
+        var post = DbPosts.GetPostByPhotoId(photoId);
+        if(post == null){
+            return Ok("No posts found");
         }
-        return Json(photo);
+        DbPhotos.UpdatePostIdByPhotoId(photoId, post.PostId);
+        return Ok(post.PostId);
     }
 
     [HttpDelete]
