@@ -158,24 +158,30 @@ async function DeleteNotifications(){
 }
 
 async function GetUserDetails(){
-    const link = getCookieValue('profilelink'); 
-    const response = await fetch(`/${link}`, {
-        method: "GET"
+    const response = await fetch(`/user`, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json'
+        },
     });
-    if(response.ok){
+    if(response.status == 200) {
         var data = await response.json();
-        console.log(data);
-        data.forEach((item,index) =>{
-            AddUserCard(item.firstName, item.lastName, item.photo, item.profileLink);
-        });
+        AddUserCardOnLogoutPanel(data.firstName, data.lastName, data.photo, data.profileLink);
+        AddUserCardonLayoutPanel(data.photo, data.profileLink);
     }
 }
 
-function AddUserCard(firstName, lastName, photo, profileLink){
+function AddUserCardOnLogoutPanel(firstName, lastName, photo, profileLink){
     var userCard = 
     `<div class="layout-accountpanel-user">
         <img class="layout-accountpanel-user-photo" src="${photo}">
         <span class="layout-accountpanel-user-details"><span class="layout-accountpanel-user-fullname">${firstName} ${lastName}</span><br><span class="layout-accountpanel-user-profile"><a href="${profileLink}")>See your profile</a></span></span>
     </div>`
     $(".layout-accountpanel-container").append(userCard);
+}
+
+function AddUserCardonLayoutPanel(photo, profileLink){
+    var userPhoto = 
+    `<a href="${profileLink}"><img class="layout-header-right-photo" id="layout-header-middle-home-photo" src="${photo}"></a>`
+    $(".layout-header-right-user").append(userPhoto);
 }

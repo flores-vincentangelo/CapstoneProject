@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Database;
 using Models;
 
-public class SearchController: Controller
+public class LayoutController: Controller
 {
     [HttpGet]
     [Route("/search/{searchTerm}")]
@@ -24,7 +24,14 @@ public class SearchController: Controller
             }
             return Json(userList);
         }
+    }
 
-        
+    [HttpGet]
+    [Route("/user")]
+    public IActionResult GetUserDetails()
+    {
+        string? cookieEmail = HttpContext.Request.Cookies["email"];
+        var user = DbUsers.GetUserByEmail(cookieEmail);
+        return (Json(user));
     }
 }

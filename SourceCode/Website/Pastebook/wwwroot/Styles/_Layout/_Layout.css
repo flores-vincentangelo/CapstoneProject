@@ -98,6 +98,9 @@
   justify-content: flex-end;
   padding-right: 20px;
 }
+.layout-header-right-user a img {
+  border-radius: 50%;
+}
 .layout-header-right a {
   margin-left: 10px;
 }
@@ -144,7 +147,7 @@
   position: fixed;
   top: 60px;
   right: 0;
-  height: 65px;
+  height: 160px;
   width: 300px;
   background-color: white;
   z-index: 1;
