@@ -2,6 +2,7 @@ $(document).ready(() => {
     viewAddPostModal();
     addPost();
     resetForm();
+    openCommentModal();
 
 
     //When the user clicks on "Post" button,
@@ -46,6 +47,8 @@ $(document).ready(() => {
         $('.post-modal-container').css("display", "none");
         resetForm();
     });
+
+
 
 });
 
@@ -105,4 +108,32 @@ async function addPostToProfile(event, jsonData) {
 
 function resetForm() {
     document.getElementById("caption-add").reset();
+}
+
+function openCommentModal() {
+    $('.post-button-comment').click(function() {
+        var postId = $(this).attr("id");
+        // show edit form 
+        $(`#post-modal-container-comment-${postId}`).css("display", "flex");
+    });
+
+    // When the user clicks on the "x",
+    $('.modal-container-close-comment').click(() => {
+        // Close modal
+        $('.post-modal-container-comment').css("display", "none");
+    });
+}
+
+function submitAddComment(e){
+    e.preventDefault();
+    var postId = $(e.target).attr("id");
+    const formData = new FormData(e.target);
+    const formDataObj = Object.fromEntries(formData.entries());
+    // console.log(e.target);
+    // console.log(postId);
+    // console.log(formDataObj);
+}
+
+async function SendCommentToController(){
+    
 }

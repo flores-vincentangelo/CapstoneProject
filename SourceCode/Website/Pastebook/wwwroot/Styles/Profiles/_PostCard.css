@@ -198,7 +198,7 @@
 
 #post-modal-container-update,
 #post-modal-container-delete,
-#post-modal-container-comment {
+.post-modal-container-comment {
    display: none;
    position: fixed;
    z-index: 1;
@@ -212,7 +212,7 @@
 
 #modal-container-close-delete,
 #modal-container-close-update,
-#modal-container-close-comment {
+.modal-container-close-comment {
     color: #aaaaaa;
     float: right;
     font-size: 20px;
@@ -226,7 +226,7 @@
 
  #modal-container-close-delete:hover,
  #modal-container-close-update:hover,
- #modal-container-close-comment:hover {
+ .modal-container-close-comment:hover {
     background-color: rgb(218, 214, 214);
     color: black;
 }
