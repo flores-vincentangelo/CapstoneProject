@@ -132,8 +132,25 @@ function submitAddComment(e){
     // console.log(e.target);
     // console.log(postId);
     // console.log(formDataObj);
+    const jsonObj = {
+        PostId: postId,
+        CommentText: formDataObj.comment
+    }
+
+    SendCommentToController(jsonObj)
+    
 }
 
-async function SendCommentToController(){
-    
+async function SendCommentToController(jsonObj){
+    const response = await fetch("/comments", {
+        method: "POST",
+        headers: {
+            "content-Type": "application/json"
+        },
+        body: JSON.stringify(jsonObj)
+    });
+    if(response.ok){
+        alert("Comment Added");
+        $('.post-modal-container-comment').css("display", "none");
+    }
 }
