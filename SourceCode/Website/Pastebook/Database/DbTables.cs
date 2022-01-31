@@ -313,7 +313,7 @@ public class DbTables
                 command.CommandText = 
                    @"IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Comments' and xtype='U')
                     CREATE TABLE Comments(
-                        UserEmail VARCHAR(255),
+                        UserId INTEGER,
                         PostId INTEGER,
                         CommentId INTEGER NOT NULL IDENTITY (1,1) PRIMARY KEY,
                         CommentText TEXT);";
