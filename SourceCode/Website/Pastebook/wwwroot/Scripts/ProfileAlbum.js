@@ -318,4 +318,19 @@ async function DeletePhoto(photoId) {
     }
 }
 
+async function showPhotoInPost(photoId) {
+    console.log("Photo Id: " + photoId);
+    // Get Post Id of Photo
+    const url1 = `/photos/posts/${photoId}`;
+    const response1 = await fetch(url1, {
+        method: 'GET'
+    });
+    if(response1.status == 200) {
+        const postId = await response1.text();
+        console.log("Post Id: " + postId);
+        const urlPost = `/posts/${postId}`;
+        window.location.assign(urlPost);
+    }
+}
+
 
