@@ -24,9 +24,15 @@ public class LoginController: Controller
         else {
             int userId = DbUsers.GetUserByEmail(session.EmailAddress).UserId;
             FriendsModel? isFriendsInitialized = DbFriends.GetFriendsData(userId);
+            var isNotificationsInitialized = DbNotifications.GetNotificationsByUserId(userId);
             if(isFriendsInitialized == null)
             {
                 DbFriends.InitializeFriends(userId);
+            }
+
+            if(isNotificationsInitialized == null)
+            {
+                DbNotifications.InitializeNotifications(userId);
             }
             return (Json(session));
         }

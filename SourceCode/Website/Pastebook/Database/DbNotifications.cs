@@ -12,7 +12,7 @@ public class DbNotifications
         DB_CONNECTION_STRING = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
     }
 
-    public static void InitializeNotifications(string email)
+    public static void InitializeNotifications(int userId)
     {
         using(var db = new SqlConnection(DB_CONNECTION_STRING))
         {
@@ -20,20 +20,20 @@ public class DbNotifications
             using(var cmd = db.CreateCommand())
             {
                 cmd.CommandText = 
-                    @"INSERT INTO Notifications (UserEmail) VALUES (@email);";
-                cmd.Parameters.AddWithValue("@email",email);
+                    @"INSERT INTO Notifications (UserId) VALUES (@userid);";
+                cmd.Parameters.AddWithValue("@userid",userId);
                 cmd.ExecuteNonQuery();
                 System.Console.WriteLine("Entry added to Notifications Table");
             }
         }
     }
-    public static void InsertUserIntoFriendReqNotifOfOtherUser(string sentFriendReqEmail, string recieveFriendReqEmail)
+    public static void InsertUserIntoFriendReqNotifOfOtherUser(int sentFriendReqEmail, int recieveFriendReqEmail)
     {
         string? friendNotif = GetFriendsColumn(recieveFriendReqEmail);
         string finalList = AddEmailToList(sentFriendReqEmail,friendNotif);
         UpdateFriendsColumn(recieveFriendReqEmail,finalList);
     }
-    public static string? GetFriendsColumn(string email)
+    public static string? GetFriendsColumn(int userId)
     {
         string? friendList = null;
         using(var db = new SqlConnection(DB_CONNECTION_STRING))
@@ -44,8 +44,8 @@ public class DbNotifications
                 cmd.CommandText = 
                     @"SELECT FriendRequest
                     FROM Notifications
-                    WHERE UserEmail = @email;";
-                cmd.Parameters.AddWithValue("@email",email);
+                    WHERE UserId = @userid;";
+                cmd.Parameters.AddWithValue("@userid",userId);
                 var reader = cmd.ExecuteReader();
                 while(reader.Read())
                 {
@@ -55,7 +55,7 @@ public class DbNotifications
         }
         return friendList;
     }
-    public static void UpdateFriendsColumn(string userEmail, string friendsData)
+    public static void UpdateFriendsColumn(int userId, string friendsData)
     {
         using(var db = new SqlConnection(DB_CONNECTION_STRING))
         {
@@ -65,15 +65,15 @@ public class DbNotifications
                 cmd.CommandText = 
                     @"UPDATE Notifications
                     SET FriendRequest = @friendrequest
-                    WHERE UserEmail = @email;";
+                    WHERE UserId = @userId;";
                 cmd.Parameters.AddWithValue("@friendrequest",friendsData);
-                cmd.Parameters.AddWithValue("@email",userEmail);
+                cmd.Parameters.AddWithValue("@userId",userId);
                 cmd.ExecuteNonQuery();
             }
         }
     }
 
-    public static Dictionary<string,string> GetNotificationsByEmail(string email)
+    public static Dictionary<string,string>? GetNotificationsByUserId(int userId)
     {
         Dictionary<string, string> notifObj = new Dictionary<string, string>();
         using(var db = new SqlConnection(DB_CONNECTION_STRING))
@@ -82,9 +82,10 @@ public class DbNotifications
             using(var cmd = db.CreateCommand())
             {
                 cmd.CommandText = 
-                    @"SELECT * FROM Notifications WHERE UserEmail = @email;";
-                cmd.Parameters.AddWithValue("@email",email);
+                    @"SELECT * FROM Notifications WHERE UserId = @userid;";
+                cmd.Parameters.AddWithValue("@userid",userId);
                 var reader = cmd.ExecuteReader();
+                if(!reader.HasRows) return null;
                 while(reader.Read())
                 {
                     string? friendReqList = reader.IsDBNull(1) ? null : reader.GetString(1);
@@ -100,19 +101,24 @@ public class DbNotifications
         return notifObj;
     }
     
-    public static List<UserModel>? GetUserListByEmail(string emailList)
+    public static List<UserModel>? GetUserListByUserId(string userIdListStr)
     {
-        if(String.IsNullOrEmpty(emailList)) return null;
-        string[] emailArr = emailList.Split(',');
-        List<UserModel> userList = new List<UserModel>();
-        foreach (string email in emailArr)
+        if(String.IsNullOrEmpty(userIdListStr)) return null;
+        else
         {
-            UserModel user = DbUsers.GetUserByEmail(email);
-            userList.Add(user);
+            string[] userIdArr = userIdListStr.Split(',');
+            List<UserModel> userList = new List<UserModel>();
+            foreach (string userIdStr in userIdArr)
+            {
+                int userId = Int32.Parse(userIdStr);
+                UserModel user = DbUsers.GetUserById(userId);
+                userList.Add(user);
+            }
+            return userList;
         }
-        return userList;
+       
     }
-    public static void DeleteNotificationsByEmail(string email)
+    public static void DeleteNotificationsByUserId(int userId)
     {
         using(var db = new SqlConnection(DB_CONNECTION_STRING))
         {
@@ -124,24 +130,24 @@ public class DbNotifications
                     SET FriendRequest = @null,
                     LikesOnPost = @null,
                     CommentOnPost = @null
-                    WHERE UserEmail = @email;";
+                    WHERE UserId = @userid;";
                 cmd.Parameters.AddWithValue("@null", DBNull.Value);
-                cmd.Parameters.AddWithValue("@email",email);
+                cmd.Parameters.AddWithValue("@userid",userId);
                 cmd.ExecuteNonQuery();
             }
         }
     }
-    public static string AddEmailToList(string email, string? emailList)
+    public static string AddEmailToList(int userId, string? idListStr)
     {
-        if(String.IsNullOrEmpty(emailList)){
-            return email;
+        if(String.IsNullOrEmpty(idListStr)){
+            return userId.ToString();
         }
         else
         {
-            var emailListArr = emailList.Split(',');
-            List<string> emailListList = new List<string>(emailListArr);
-            emailListList.Add(email);
-            return String.Join(",",emailListList);
+            var idListArr = idListStr.Split(',');
+            List<string> idList = new List<string>(idListArr);
+            idList.Add(userId.ToString());
+            return String.Join(",",idList);
         }
     }
 }

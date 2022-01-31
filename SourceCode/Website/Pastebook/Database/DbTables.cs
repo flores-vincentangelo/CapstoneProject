@@ -283,7 +283,7 @@ public class DbTables
                 command.CommandText = 
                     @"IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Notifications' and xtype='U')
                     CREATE TABLE Notifications(
-                        UserEmail VARCHAR(255),
+                        UserId INTEGER,
                         FriendRequest TEXT,
                         LikesOnPost TEXT,
                         CommentOnPost TEXT
