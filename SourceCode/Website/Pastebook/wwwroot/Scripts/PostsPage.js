@@ -6,6 +6,13 @@
     deletePost(modelObj);
     modifyPhoto();
     openCommentModal();
+    openLikeModal();
+
+    // $('.post-container-right-action-close').click(() => {
+    //     var link = modelObj.profileLink;
+    //     console.log(link);
+    //     location.replace(`/${link}`);
+    // });
 
     //When the user clicks on "Update" button,
     $('.user-button-update').click((event) => {
@@ -137,6 +144,19 @@ function openCommentModal() {
     $('#modal-container-close-comment').click(() => {
         // Close modal
         $('.post-modal-container-comment').css("display", "none");
+    });
+}
+
+function openLikeModal() {
+    $('#post-container-right-status-likers').click(() => {
+        // show edit form 
+        $('#post-modal-container-likers').css("display", "flex");
+    });
+
+    // When the user clicks on the "x",
+    $('#modal-container-close-likers').click(() => {
+        // Close modal
+        $('#post-modal-container-likers').css("display", "none");
     });
 }
 

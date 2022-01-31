@@ -127,6 +127,11 @@
             justify-content: flex-end;
             padding-right: 20px;
 
+            &-user{
+                & a img{
+                    border-radius: 50%;
+                }
+            }
             & a{
                 margin-left: 10px;
                 & img{
@@ -182,8 +187,7 @@
         position: fixed;
         top:$header-total-height;
         right: 0;
-        // height: 160px;
-        height: 65px;
+        height: 160px;
         width: 300px;
         background-color: white;
         z-index: 1;

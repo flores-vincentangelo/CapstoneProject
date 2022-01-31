@@ -128,7 +128,38 @@ public class DbPosts
             }
         }
         return post;
-    }    
+    }
+
+    public static PostModel? GetPostByPhotoId(int photoId)
+    {
+        PostModel post = new PostModel();
+        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var command = db.CreateCommand())
+            {
+                command.CommandText = "SELECT * FROM Posts WHERE PhotoId = @PhotoId";
+                command.Parameters.AddWithValue("@PhotoId", photoId);
+                var reader = command.ExecuteReader();
+                if(!reader.HasRows) return null;
+                while(reader.Read())
+                {
+                    post.EmailAddress = reader.GetString(0);
+                    post.PostId = reader.GetInt32(1);
+                    post.DatePosted = reader.GetInt64(2);
+                    post.Caption = reader.GetString(3);
+                    post.PhotoId = reader.GetInt32(4);
+                    post.Photo = reader.GetString(5);
+                    post.Likes = reader.GetString(6);
+                    post.Comment = reader.GetString(7); 
+                    post.ProfileLink = reader.GetString(8); 
+                    post.LikesList = reader.GetString(9); 
+                    post.CommentsList = reader.GetString(10);
+                }
+            }
+        }
+        return post;
+    }     
 
     public static void DeletePostByPostId(int postId)
     {

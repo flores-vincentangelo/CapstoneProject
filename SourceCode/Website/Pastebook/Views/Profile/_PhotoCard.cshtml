@@ -6,7 +6,7 @@
 
 <div class="photocard-main-container">
     <div class="photocard-image-container">
-        <img class="photocard-image" src="@Model.Photo">
+        <img class="photocard-image" src="@Model.Photo" onclick="showPhotoInPost(@Model.PhotoId);">
     </div>
 
     @* <button class="photocard-del-btn" onclick="DeletePhoto(@Model.PhotoId);" >Delete Photo</button> *@

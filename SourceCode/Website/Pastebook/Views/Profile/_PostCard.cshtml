@@ -12,8 +12,10 @@
         <span id="user-details"><span id="poster-fullname">@Model.Poster.FirstName
                 @Model.Poster.LastName</span><br><span id="date-created">@createdDate</span></span>
         <div class="profile-post-container-status-post-profile-buttons">
-            <button class="update-post" value=@Model.PostId id=@Model.PostId><img class="update-post" onclick="modifyPost(@Model.PostId, '@Model.ProfileLink')" src="./Images/more.png"></button>
-            <button class="delete-post" value=@Model.PostId id=@Model.PostId><img class="delete-post" onclick="deletePost(@Model.PostId, '@Model.ProfileLink')" src="./Images/close.png"></button>
+            <button class="update-post" value=@Model.PostId id=@Model.PostId><img class="update-post"
+                    onclick="modifyPost(@Model.PostId, '@Model.ProfileLink')" src="./Images/more.png"></button>
+            <button class="delete-post" value=@Model.PostId id=@Model.PostId><img class="delete-post"
+                    onclick="deletePost(@Model.PostId, '@Model.ProfileLink')" src="./Images/close.png"></button>
         </div>
     </div>
     <div class="profile-post-container-status-post-caption">
@@ -23,7 +25,7 @@
         <a href=@($"/posts/{Model.PostId}")><img src="@Model.Photo"></a>
     </div>
     <div class="profile-post-container-status-post-status">
-        <span id="like">@Model.Likes Likes</span>
+        <a id="post-container-status-likers" href="#"><span id="like">@Model.Likes Likes</span></a>
         <span id="comment">@Model.CommentsListObj.Count Comments</span>
     </div>
     <hr>
@@ -89,8 +91,8 @@
                 <p id="user-details-update">@Model.Poster.FirstName @Model.Poster.LastName</p>
             </div>
             <div class="modal-container-caption-update">
-                <form class="caption-add-update"> 
-                    <input type="text" class="caption-update" value = "" name="caption" maxlength="1000">
+                <form class="caption-add-update">
+                    <input type="text" class="caption-update" value="" name="caption" maxlength="1000">
                     <button class="user-button-update" type="submit">Update</button>
                 </form>
             </div>
@@ -106,6 +108,19 @@
                     <input type="text" class="friend-comment" placeholder="Write a comment" name="comment" maxlength="1000">
                     <button class="friend-button-comment" type="submit">Post</button>
                 </form>
+            </div>
+        </div>
+    </div>
+    <div id="post-modal-container-likers">
+        <div class="post-modal-container-1-likers">
+            <div class="modal-container-title-likers">
+                <span id="modal-container-close-likers">&times;</span>
+                <h3>People who liked</h3>
+            </div>
+            <hr>
+            <div class="modal-container-likers">
+                <img class="modal-container-likers-photo" src="../../Images/img_avatar.png">
+                <p id="modal-container-likers-name">Friend Name</p>
             </div>
         </div>
     </div>
