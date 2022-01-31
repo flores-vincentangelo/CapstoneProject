@@ -48,6 +48,13 @@ $(document).ready(() => {
         resetForm();
     });
 
+    //When a friend likes a post
+    $(".post-button-like").click(function (e) {
+        var postId = $(this).attr("id");
+        console.log(postId);
+        LikedPost(postId);
+    });
+
 
 
 });
@@ -151,5 +158,14 @@ async function SendCommentToController(jsonObj){
     if(response.ok){
         // alert("Comment Added");
         $('.post-modal-container-comment').css("display", "none");
+    }
+}
+
+async function LikedPost(postId) {
+    const response = await fetch(`/likes/${postId}`, {
+        method: "PATCH"
+    });
+    if(response.ok){
+        location.reload();
     }
 }

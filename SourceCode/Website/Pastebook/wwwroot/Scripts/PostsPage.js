@@ -1,4 +1,4 @@
-$(document).ready(function () {
+ $(document).ready(function () {
     var modelObj = JSON.parse(model.replace(/&quot;/g,"\""));
     console.log(modelObj)
 
@@ -35,6 +35,13 @@ $(document).ready(function () {
         //close modal
         $('#post-modal-container-update').css("display", "none");
         location.reload();
+    });
+
+    //When a friend likes a post
+    $(".post-container-right-like").click(function (e) {
+        var postId = $(this).attr("id");
+        console.log(postId);
+        LikedPost(postId);
     });
 
 });
@@ -172,3 +179,12 @@ async function SendCommentToController(jsonObj){
         location.reload();
     }
 }
+async function LikedPost(postId) {
+    const response = await fetch(`/likes/${postId}`, {
+        method: "PATCH"
+    });
+    if(response.ok){
+        location.reload();
+    }
+}
+

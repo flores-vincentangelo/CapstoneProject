@@ -168,45 +168,4 @@ public class DbPosts
             }
         }
     }
-    public static void UpdateLikesListOfUser(string emailAddress, string? likesList)
-    {
-        using(var db = new SqlConnection(DB_CONNECTION_STRING))
-        {
-            db.Open();
-            using(var command = db.CreateCommand())
-            {
-                command.CommandText = 
-                    @"UPDATE Posts
-                    SET Likes = @likes
-                    WHERE EmailAddress = @email;";
-                if(String.IsNullOrEmpty(likesList))
-                {
-                    command.Parameters.AddWithValue("@likes", DBNull.Value);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("@likes", likesList);
-                }
-                command.Parameters.AddWithValue("@email", emailAddress);
-                command.ExecuteNonQuery();
-            }
-        }
-    }
-
-    public static string AddEmailtoLikesList(string emailToAdd, string? likesListStr)
-    {
-        if(!String.IsNullOrEmpty(likesListStr))
-        {
-            var _likesListArr = likesListStr.Split(",");
-            List<string> likesList = new List<string>(_likesListArr);
-            likesList.Add(emailToAdd);
-            return String.Join(",",likesList);
-        }
-        else
-        {
-            return emailToAdd;
-        }
-        
-    }
-
 }

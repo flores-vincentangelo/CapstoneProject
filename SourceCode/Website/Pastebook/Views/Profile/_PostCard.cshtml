@@ -4,7 +4,6 @@
 }
 
 <link rel="stylesheet" type="text/css" href="./Styles/Profiles/_PostCard.css">
-<script src="./Scripts/_PostCard.js"></script>
 
 
 <div class="profile-post-container-status-post">
@@ -29,7 +28,18 @@
     </div>
     <hr>
     <div class="profile-post-container-status-post-buttons">
-        <button class="post-button-like"><img src="./Images/like.png"><span id="like-post">Like</span></button>
+
+        @{
+            if(Model.DoesUserLikesAPost == true)
+            {
+                <button class = "post-button-like liked" style = "background-color: #1877f2"><img src="./Images/like.png">Liked</button>
+            }
+            else {
+                <button id=@Model.PostId class="post-button-like"><img src="./Images/like.png"><span id="like-post">Like</span></button>
+            }
+        }
+
+        
         <button id=@Model.PostId class="post-button-comment"><img src="./Images/comment.png"><span id="comment-post">Comment</span></button>
     </div>
     <hr>
@@ -100,10 +110,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    $('#@Model.PostId').click(() => {
-        var postId = document.getElementById("@Model.PostId")
-        console.log(postId.value);
-    });
-</script>

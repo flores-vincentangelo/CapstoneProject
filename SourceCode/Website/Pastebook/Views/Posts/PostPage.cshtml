@@ -40,10 +40,18 @@
                 <span id="like">@Model.Likes Likes</span>
                 <span id="comment">@Model.CommentsListObj.Count Comments</span>
             </div>
-            <hr>
+            <hr>         
             <div class="post-container-right-buttons">
-                <button class="post-container-right-like"><img src="../Images/like.png"><span id="like-post">Like</span></button>
-                <button id=@Model.PostId class="post-container-right-comment"><img src="../Images/comment.png"><span id="comment-post">Comment</span></button>
+            @{
+                if(Model.DoesUserLikesAPost == true)
+                {
+                    <button class="post-container-right-like liked" style = "background-color: #1877f2" ><img src="../Images/like.png"><span id="like-post">Liked</span></button>
+                }
+                else {
+                    <button id=@Model.PostId class="post-container-right-like"><img src="../Images/like.png"><span id="like-post">Like</span></button>
+                }
+                <button class="post-container-right-comment"><img src="../Images/comment.png"><span id="comment-post">Comment</span></button>
+            }
             </div>
             <hr>
             <div class="profile-post-container-status-post-comments">
