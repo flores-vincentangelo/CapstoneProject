@@ -8,5 +8,6 @@ public class AlbumModel
     public long CreatedDate {get;set;}
     public string? PhotosList {get;set;}
     public string? ProfileLink {get;set;}
+    public int UserId {get;set;}
     
 }

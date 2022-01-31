@@ -20,13 +20,14 @@ public class DbAlbums
             using (var cmd = db.CreateCommand())
             {
                 cmd.CommandText =
-                    @"INSERT INTO Albums (UserEmail, AlbumName, CreatedDate, PhotosList, ProfileLink) 
-                    VALUES (@UserEmail, @AlbumName, @CreatedDate, @PhotosList, @ProfileLink);";
+                    @"INSERT INTO Albums (UserEmail, AlbumName, CreatedDate, PhotosList, ProfileLink, UserId) 
+                    VALUES (@UserEmail, @AlbumName, @CreatedDate, @PhotosList, @ProfileLink, @UserId);";
                 cmd.Parameters.AddWithValue("@UserEmail", album.UserEmail);
                 cmd.Parameters.AddWithValue("@AlbumName", album.AlbumName);
                 cmd.Parameters.AddWithValue("@CreatedDate", album.CreatedDate);
                 cmd.Parameters.AddWithValue("@PhotosList", album.PhotosList);
                 cmd.Parameters.AddWithValue("@ProfileLink", album.ProfileLink);
+                cmd.Parameters.AddWithValue("@UserId", album.UserId);
                 cmd.ExecuteNonQuery();
                 Console.WriteLine("Album successfully added to Albums Table!");
             }
@@ -53,6 +54,7 @@ public class DbAlbums
                     album.CreatedDate = reader.GetInt64(3);
                     album.PhotosList = reader.GetString(4);
                     album.ProfileLink = reader.GetString(5);
+                    album.UserId = reader.GetInt32(6);
                     albums.Add(album);
                 }
             }
@@ -80,6 +82,7 @@ public class DbAlbums
                     album.CreatedDate = reader.GetInt64(3);
                     album.PhotosList = reader.GetString(4);
                     album.ProfileLink = reader.GetString(5);
+                    album.UserId = reader.GetInt32(6);
                     albums.Add(album);
                 }
             }
@@ -87,7 +90,35 @@ public class DbAlbums
         return albums;
     }
 
-    public static AlbumModel? GetAlbumById(int id)
+    public static List<AlbumModel>? GetAllAlbumsByUserId(int userId)
+    {
+        List<AlbumModel> albums = new List<AlbumModel>();
+        using (var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using (var cmd = db.CreateCommand())
+            {
+                cmd.CommandText = "SELECT * FROM Albums WHERE UserId = @UserId;";
+                cmd.Parameters.AddWithValue("@UserId", userId);
+                var reader = cmd.ExecuteReader();
+                if(!reader.HasRows) return null;
+                while(reader.Read()) {
+                    AlbumModel album = new AlbumModel();
+                    album.AlbumId = reader.GetInt32(0);
+                    album.AlbumName = reader.GetString(1);
+                    album.UserEmail = reader.GetString(2);
+                    album.CreatedDate = reader.GetInt64(3);
+                    album.PhotosList = reader.GetString(4);
+                    album.ProfileLink = reader.GetString(5);
+                    album.UserId = reader.GetInt32(6);
+                    albums.Add(album);
+                }
+            }
+        }
+        return albums;
+    }
+
+    public static AlbumModel? GetAlbumByAlbumId(int albumId)
     {
         AlbumModel album = new AlbumModel();
         using (var db = new SqlConnection(DB_CONNECTION_STRING))
@@ -96,7 +127,7 @@ public class DbAlbums
             using (var cmd = db.CreateCommand())
             {
                 cmd.CommandText = "SELECT * FROM Albums WHERE AlbumId = @AlbumId;";
-                cmd.Parameters.AddWithValue("@AlbumId", id);
+                cmd.Parameters.AddWithValue("@AlbumId", albumId);
                 var reader = cmd.ExecuteReader();
                 if(!reader.HasRows) return null;
                 while(reader.Read()) {
@@ -106,6 +137,7 @@ public class DbAlbums
                     album.CreatedDate = reader.GetInt64(3);
                     album.PhotosList = reader.GetString(4);
                     album.ProfileLink = reader.GetString(5);
+                    album.UserId = reader.GetInt32(6);
                 }
             }
         }
@@ -147,6 +179,7 @@ public class DbAlbums
                     album.CreatedDate = reader.GetInt64(3);
                     album.UserEmail = reader.GetString(4);
                     album.ProfileLink = reader.GetString(5);
+                    album.UserId = reader.GetInt32(6);
                 }
             }
         }
