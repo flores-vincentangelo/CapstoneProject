@@ -138,7 +138,6 @@ function submitAddComment(e){
     }
 
     SendCommentToController(jsonObj)
-    
 }
 
 async function SendCommentToController(jsonObj){

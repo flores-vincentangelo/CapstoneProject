@@ -120,15 +120,16 @@ function deletePost(modelObj) {
 }
 
 function openCommentModal() {
-    $('.post-container-right-comment').click(() => {
+    $('.post-container-right-comment').click(function() {
+        var postId = $(this).attr("id");
         // show edit form 
-        $('#post-modal-container-comment').css("display", "flex");
+        $(`#post-modal-container-comment-${postId}`).css("display", "flex");
     });
 
     // When the user clicks on the "x",
     $('#modal-container-close-comment').click(() => {
         // Close modal
-        $('#post-modal-container-comment').css("display", "none");
+        $('.post-modal-container-comment').css("display", "none");
     });
 }
 
@@ -140,6 +141,34 @@ async function deletePostById(postId, profileLink) {
     if (response.status == 200) {
         location.replace(`/${profileLink}`)
     }
-
 }
 
+function submitAddComment(e){
+    e.preventDefault();
+    var postId = $(e.target).attr("id");
+    const formData = new FormData(e.target);
+    const formDataObj = Object.fromEntries(formData.entries());
+    // console.log(e.target);
+    // console.log(postId);
+    // console.log(formDataObj);
+    const jsonObj = {
+        PostId: postId,
+        CommentText: formDataObj.comment
+    }
+    SendCommentToController(jsonObj)
+}
+
+async function SendCommentToController(jsonObj){
+    const response = await fetch("/comments", {
+        method: "POST",
+        headers: {
+            "content-Type": "application/json"
+        },
+        body: JSON.stringify(jsonObj)
+    });
+    if(response.ok){
+        // alert("Comment Added");
+        $('.post-modal-container-comment').css("display", "none");
+        location.reload();
+    }
+}
