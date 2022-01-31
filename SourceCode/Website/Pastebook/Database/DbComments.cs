@@ -26,8 +26,8 @@ public class DbComments
                 while(reader.Read())
                 {
                     CommentsModel comment = new CommentsModel();
-                    string commenter = reader.GetString(0);
-                    comment.CommenterUserModel = DbUsers.GetUserByEmail(commenter);
+                    int commenterId = reader.GetInt32(0);
+                    comment.CommenterUserModel = DbUsers.GetUserById(commenterId);
                     comment.CommentId = reader.GetInt32(2);
                     comment.CommentText = reader.GetString(3);
                     commentsList.Add(comment);
@@ -46,10 +46,10 @@ public class DbComments
             {
                 cmd.CommandText =
                     @"INSERT INTO Comments
-                    (UserEmail, PostId, CommentText)
+                    (UserId, PostId, CommentText)
                     VALUES
                     (@email,@postid,@text);";
-                cmd.Parameters.AddWithValue("@email",model.CommenterEmail);
+                cmd.Parameters.AddWithValue("@email",model.CommenterId);
                 cmd.Parameters.AddWithValue("@postid",model.PostId);
                 cmd.Parameters.AddWithValue("@text",model.CommentText);
                 cmd.ExecuteNonQuery();

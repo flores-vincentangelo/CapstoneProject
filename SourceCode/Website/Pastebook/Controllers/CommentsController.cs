@@ -23,11 +23,10 @@ public class CommentsController: Controller
         [FromBody] CommentsModel model)
     {
         string? commenterEmail = HttpContext.Request.Cookies["email"];
-        model.CommenterEmail = commenterEmail;
+        model.CommenterId = DbUsers.GetUserByEmail(commenterEmail).UserId;
         var jsonarr = JsonSerializer.Serialize(model,new JsonSerializerOptions{WriteIndented = true});
         System.Console.WriteLine(jsonarr);
-        // model.CommenterEmail = "vincentflores88@gmail.com";
-        // DbComments.AddCommentToPost(model);
+        DbComments.AddCommentToPost(model);
         return Ok("Comment Added");
 
     }

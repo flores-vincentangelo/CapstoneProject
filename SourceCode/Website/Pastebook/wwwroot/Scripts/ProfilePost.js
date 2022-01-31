@@ -150,7 +150,7 @@ async function SendCommentToController(jsonObj){
         body: JSON.stringify(jsonObj)
     });
     if(response.ok){
-        alert("Comment Added");
+        // alert("Comment Added");
         $('.post-modal-container-comment').css("display", "none");
     }
 }
