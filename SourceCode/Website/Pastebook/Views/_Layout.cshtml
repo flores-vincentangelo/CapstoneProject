@@ -1,5 +1,3 @@
-@* @model Models.ProfileModel *@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +29,6 @@
         </div>
         <div class="layout-header-middle">
             <a href="/"><img class="layout-header-middle-home" src="Images/home.png"></a>
-            @* <a href="#"><img class="layout-header-middle-home" src="Images/messenger.png"></a> *@
         </div>
         <div class="layout-header-right">
             <a href="#"><img class="layout-header-right-notifications" id="layout-header-middle-home-notifs" src="Images/notification.png"></a>
@@ -42,10 +39,9 @@
         </div>
     </div>
     <div class="layout-accountpanel">
-        @* <div class="layout-accountpanel-user">
-            <img class="layout-accountpanel-user-photo" src="@Model.User.Photo">
-            <span class="layout-accountpanel-user-details"><span class="layout-accountpanel-user-fullname">@Model.User.FirstName @Model.User.LastName</span><br><span class="layout-accountpanel-user-profile"><a href=@($"/{Model.User.ProfileLink}")>See your profile</a></span></span>
-        </div> *@
+        <div class="layout-accountpanel-container">
+            
+        </div>
         <div class="layout-accountpanel-logout"><button class="layout-accountpanel-logout-button">Log Out</button></div>
     </div>
 

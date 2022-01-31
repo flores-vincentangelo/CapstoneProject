@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
     GetNotifications();
+    GetUserDetails();
     //search bar functionality
     $(".layout-header-left-searchform-input").focus(function (e) { 
         $(".layout-header-left-searchpanel").css("display", "block");
@@ -154,4 +155,27 @@ async function DeleteNotifications(){
     if(response.ok){
         location.reload();
     }
+}
+
+async function GetUserDetails(){
+    const link = getCookieValue('profilelink'); 
+    const response = await fetch(`/${link}`, {
+        method: "GET"
+    });
+    if(response.ok){
+        var data = await response.json();
+        console.log(data);
+        data.forEach((item,index) =>{
+            AddUserCard(item.firstName, item.lastName, item.photo, item.profileLink);
+        });
+    }
+}
+
+function AddUserCard(firstName, lastName, photo, profileLink){
+    var userCard = 
+    `<div class="layout-accountpanel-user">
+        <img class="layout-accountpanel-user-photo" src="${photo}">
+        <span class="layout-accountpanel-user-details"><span class="layout-accountpanel-user-fullname">${firstName} ${lastName}</span><br><span class="layout-accountpanel-user-profile"><a href="${profileLink}")>See your profile</a></span></span>
+    </div>`
+    $(".layout-accountpanel-container").append(userCard);
 }
