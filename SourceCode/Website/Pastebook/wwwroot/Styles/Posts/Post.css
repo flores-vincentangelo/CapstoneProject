@@ -41,7 +41,7 @@ body {
 
 .post-container-right-action {
     display: flex;
-    margin-left: 75%;
+    margin-left: 70%;
 }
 
 .post-container-right-action button {
@@ -117,6 +117,7 @@ body {
     text-align: right;
     width: 50%;
     margin-right: 15px;
+    margin-left: 50%;
 }
 
 #post-modal-container-1-delete {
@@ -227,7 +228,8 @@ body {
     color: white;
 }
 
-.post-container-right hr {
+.post-container-right hr,
+#post-modal-container-likers hr {
     margin: 0;
     border: solid .2px #d3d5da;
     background-color: #d3d5da;
@@ -275,19 +277,22 @@ body {
     color: black;
 }
 
-.modal-container-user-update {
+.modal-container-user-update,
+.modal-container-likers {
     display: flex;
     margin-top: 15px;
 }
 
-.modal-container-user-update #user-details-update {
+.modal-container-user-update #user-details-update,
+.modal-container-likers-name {
     margin-top: 2%;
     font-weight: bold;
     font-size: 13px;
     margin-left: 5px;
 }
 
-.modal-container-user-update img {
+.modal-container-user-update img,
+.modal-container-likers img {
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -410,4 +415,57 @@ body {
     width: 96.5%;
     padding: 5px;
     margin-bottom: 8px;
+}
+
+#post-modal-container-likers {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+#modal-container-close-likers {
+    color: #aaaaaa;
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #d9dbdd;
+    border-radius: 50%;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#modal-container-close-likers:hover {
+    background-color: rgb(218, 214, 214);
+    color: black;
+}
+
+.post-modal-container-1-likers {
+    background-color: #fefefe;
+    margin: 13% auto;
+    padding: 15px;
+    border: 1px solid #888;
+    border-radius: 12px;
+    width: 30%;
+    height: auto;
+}
+
+.modal-container-title-likers {
+    text-align: center;
+    font-size: 13px;
+}
+
+#modal-container-likers-name {
+    font-size: 13px;
+    margin: auto auto auto 5px;
+}
+
+#post-container-right-status-likers {
+    text-decoration: none;
 }
