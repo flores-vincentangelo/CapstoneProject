@@ -1,23 +1,34 @@
-@model List<Models.AlbumModel>
+@model Models.ProfileModel
 @{
-    var albumList = Model;
-    var count = 0;
+    var albumList = Model.AlbumList;
+    var albumCount = 0;
     if(albumList != null) {
-        count = albumList.Count;
+        albumCount = albumList.Count;
+    }
+
+    var photoList = Model.PhotoList;
+    var photoCount = 0;
+    if(photoList != null) {
+        photoCount = photoList.Count;
     }
 }
 
 <link rel="stylesheet" type="text/css" href="./Styles/Profiles/ProfileAlbum.css">
 <link rel="stylesheet" type="text/css" href="./Styles/Profiles/ProfileAlbum_AlbumCard.css">
+<link rel="stylesheet" type="text/css" href="./Styles/Profiles/ProfileAlbum_PhotoCard.css">
 
 <script src="./Scripts/ProfileAlbum.js"></script>
 
 <body>
-    <div class="profile-ext-container">
+    <div class="profile-ext-container ">
         <h3>Albums</h3>
-        <div class="ext-container">
-            <div>Number of Albums: @count</div>
-            <button class="album-btn" id="album-add-btn">Add New Album</button>
+        <div class="ext-container album-container">
+            <div class="add-album-btn-container">
+                <img class="album-btn" src="./Images/folder.png" alt="folder icon">
+                <button class="album-btn" id="album-add-btn" >Add New Album</button>
+            </div>
+            <hr>
+
             <div class="album-add-modal" id="album-add-modal">
                 <div class="modal-container">
                     <span id="album-add-close-modal">&times;</span>
@@ -31,18 +42,104 @@
                     <button class="album-btn" id="album-cancel-btn">Cancel</button>
                 </div>
             </div>
-        </div>
-        <div class="ext-container">
+
             <div class="album-card-container">
                 @{
-                    if(albumList != null) {
-                        foreach (Models.AlbumModel album in albumList)
+                    if(@albumList != null) {
+                        foreach (Models.AlbumModel album in albumList) 
                         {
                             await Html.RenderPartialAsync("_AlbumCard.cshtml", album);
                         }
                     }
                 }
+                
             </div>
+        </div>
+
+        <div class="ext-container photos-container" style="display: none;">
+
+            <div>    
+                <div class="photo-add-modal" id="photo-add-modal">
+                    <div class="modal-container">
+                        <span id="photo-add-close-modal">&times;</span>
+                        <h2 class="photo-add-title-modal">Add Photo</h2>
+                        <hr>
+                        <form class="form-add-photo" id="form-add-photo">
+                            <input type="file" id="myPhoto" name="Photo" accept="image/*" data-type='image' >
+                        </form>
+                        <div class="album-photo-modal">
+                            <img id="album-photo-modal-img" src="./Images/img_avatar.png" >
+                        </div>
+                        <button class="photo-btn" id="add-photo-save-btn">Save</button>
+                        <button class="photo-btn" id="add-photo-cancel-btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+            @{
+                if(albumList != null) 
+                {
+                    foreach(Models.AlbumModel album in albumList)
+                    {
+                        <div>    
+                            <div class="album-delete-modal" id="album-delete-modal-@album.AlbumId" style="display: none;">
+                                <div class="modal-container">
+                                    <p class="album-delete-close-modal">&times;</p>
+                                    <h3 class="album-delete-title-modal">
+                                        Delete @album.AlbumName?
+                                    </h3>
+                                    <hr>
+                                    <button class="album-delete-btn album-delete-confirm-btn" onclick="DeleteAlbum(@album.AlbumId);" >Confirm</button>
+                                    <button class="album-delete-btn album-delete-cancel-btn" >Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="photos-card-container" id="photos-card-container-@album.AlbumId" style="display: none;">
+                            <span class="photos-card-album-close" onclick="CloseAlbum(@album.AlbumId);" >&times;</span>
+                            <div class="photos-card-title-readonly photos-card-title" id="photos-card-title-readonly-@album.AlbumId">
+                                <h3 class="photos-card-title-albumname" id="photos-card-title-albumname-@album.AlbumId" >@album.AlbumName</h3>
+                                <button class="photos-card-edit-btn" onclick="EditAlbumName(@album.AlbumId);" >Edit</button>
+                            </div>
+                            <div class="photos-card-title-edit photos-card-title" id="photos-card-title-edit-@album.AlbumId" style="display: none;">
+                                <form class="photos-card-title-form-edit" id="photos-card-title-form-edit-@album.AlbumId" >
+                                    <input 
+                                        type="text" 
+                                        class="photos-card-form-input" 
+                                        id="photos-card-form-input-@album.AlbumId" 
+                                        name="AlbumName"
+                                        value="@album.AlbumName" 
+                                        maxlength="20"
+                                    />
+                                </form>
+                                <div class="photos-card-title-edit-btn-holder">
+                                    <button class="photos-card-title-edit-btn" onclick="CancelEditAlbumName(@album.AlbumId);" >Cancel</button>
+                                    <button class="photos-card-title-edit-btn" onclick="SaveEditAlbumName(event, @album.AlbumId);" >Save</button>
+                                </div>
+                            </div>
+
+                            <div class="photos-card-btn-container">
+                                <hr>
+                                <button class="photo-btn add-new-photo" id="photo-add-btn">Add New Photo</button>
+                                <button class="photo-btn del-album-btn" onclick="OpenDeleteAlbumModal(@album.AlbumId);" >Delete Album</button>
+                                <hr>
+                            </div>
+
+                            <div class="photocard-holder">
+                                @if(photoList != null) 
+                                {
+                                    foreach(Models.PhotoModel photo in photoList)
+                                    {
+                                        if(photo.AlbumId == album.AlbumId) {
+                                            await Html.RenderPartialAsync("_PhotoCard.cshtml", photo);
+                                        }
+                                    }
+                                }
+                            </div>
+                        </div>
+                    }
+                }
+            }
         </div>
         
     </div>
