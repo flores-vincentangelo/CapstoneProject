@@ -38,8 +38,10 @@
                         <label>Album Name:</label>
                         <input type="text" id="name" name="Name" /><br>
                     </form>
-                    <button class="album-btn" id="album-save-btn">Save</button>
-                    <button class="album-btn" id="album-cancel-btn">Cancel</button>
+                    <div id="album-btns">
+                        <button class="album-btn" id="album-save-btn">Save</button>
+                        <button class="album-btn" id="album-cancel-btn">Cancel</button>
+                    </div>
                 </div>
             </div>
 
@@ -70,8 +72,10 @@
                         <div class="album-photo-modal">
                             <img id="album-photo-modal-img" src="./Images/img_avatar.png" >
                         </div>
-                        <button class="photo-btn" id="add-photo-save-btn">Save</button>
-                        <button class="photo-btn" id="add-photo-cancel-btn">Cancel</button>
+                        <div id="photo-btns">
+                            <button id="add-photo-save-btn">Save</button>
+                            <button id="add-photo-cancel-btn">Cancel</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -84,13 +88,14 @@
                         <div>    
                             <div class="album-delete-modal" id="album-delete-modal-@album.AlbumId" style="display: none;">
                                 <div class="modal-container">
-                                    <p class="album-delete-close-modal">&times;</p>
+                                    <span class="album-delete-close-modal">&times;</span>
                                     <h3 class="album-delete-title-modal">
                                         Delete @album.AlbumName?
                                     </h3>
-                                    <hr>
-                                    <button class="album-delete-btn album-delete-confirm-btn" onclick="DeleteAlbum(@album.AlbumId);" >Confirm</button>
-                                    <button class="album-delete-btn album-delete-cancel-btn" >Cancel</button>
+                                    <div id="album-delete-btns">
+                                        <button class="album-delete-btn" id="album-delete-confirm-btn" onclick="DeleteAlbum(@album.AlbumId);" >Confirm</button>
+                                        <button class="album-delete-btn" id="album-delete-cancel-btn">Cancel</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -113,8 +118,8 @@
                                     />
                                 </form>
                                 <div class="photos-card-title-edit-btn-holder">
-                                    <button class="photos-card-title-edit-btn" onclick="CancelEditAlbumName(@album.AlbumId);" >Cancel</button>
-                                    <button class="photos-card-title-edit-btn" onclick="SaveEditAlbumName(event, @album.AlbumId);" >Save</button>
+                                    <button id="photos-card-title-edit-btn-cancel" class="photos-card-title-edit-btn" onclick="CancelEditAlbumName(@album.AlbumId);" >Cancel</button>
+                                    <button id="photos-card-title-edit-btn-save" class="photos-card-title-edit-btn" onclick="SaveEditAlbumName(event, @album.AlbumId);" >Save</button>
                                 </div>
                             </div>
 
