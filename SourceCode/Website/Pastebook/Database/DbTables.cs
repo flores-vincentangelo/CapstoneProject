@@ -241,6 +241,7 @@ public class DbTables
             {
                 command.CommandText = @"IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Posts' and xtype='U')
                 CREATE TABLE Posts (
+                    UserId INTEGER,
                     EmailAddress VARCHAR (255),
                     PostId INTEGER NOT NULL IDENTITY (1,1) PRIMARY KEY,
                     DatePosted BIGINT,
