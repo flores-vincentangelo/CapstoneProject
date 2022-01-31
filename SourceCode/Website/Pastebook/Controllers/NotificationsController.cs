@@ -14,11 +14,12 @@ public class NotificationsController: Controller
     public IActionResult GetNotifications()
     {
         string? cookieEmail = HttpContext.Request.Cookies["email"];
-        Dictionary<string, string> notifObj = DbNotifications.GetNotificationsByEmail(cookieEmail);
+        int loggedInUserId = DbUsers.GetUserByEmail(cookieEmail).UserId;
+        Dictionary<string, string> notifObj = DbNotifications.GetNotificationsByUserId(loggedInUserId);
         NotificationsModel notifModel = new NotificationsModel();
-        notifModel.FriendReq = DbNotifications.GetUserListByEmail(notifObj["FriendRequests"]);
-        notifModel.Likers = DbNotifications.GetUserListByEmail(notifObj["Likers"]);
-        notifModel.Commenters = DbNotifications.GetUserListByEmail(notifObj["Commenters"]);
+        notifModel.FriendReq = DbNotifications.GetUserListByUserId(notifObj["FriendRequests"]);
+        notifModel.Likers = DbNotifications.GetUserListByUserId(notifObj["Likers"]);
+        notifModel.Commenters = DbNotifications.GetUserListByUserId(notifObj["Commenters"]);
         return Json(notifModel);
     }
 
@@ -27,7 +28,8 @@ public class NotificationsController: Controller
     public IActionResult DeleteNotifications()
     {
         string? cookieEmail = HttpContext.Request.Cookies["email"];
-        DbNotifications.DeleteNotificationsByEmail(cookieEmail);
+        int loggedInUserId = DbUsers.GetUserByEmail(cookieEmail).UserId;
+        DbNotifications.DeleteNotificationsByUserId(loggedInUserId);
         return Ok();
     }
 }

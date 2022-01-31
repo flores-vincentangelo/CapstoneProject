@@ -131,7 +131,7 @@ public class DbTables
             {
                 command.CommandText = @"IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Friends' and xtype='U')
                 CREATE TABLE Friends (
-                    UserEmail VARCHAR(255) NOT NULL PRIMARY KEY,
+                    UserId INTEGER NOT NULL PRIMARY KEY,
                     FriendsList TEXT,
                     FriendRequests TEXT
                     );";
@@ -284,7 +284,7 @@ public class DbTables
                 command.CommandText = 
                     @"IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Notifications' and xtype='U')
                     CREATE TABLE Notifications(
-                        UserEmail VARCHAR(255),
+                        UserId INTEGER,
                         FriendRequest TEXT,
                         LikesOnPost TEXT,
                         CommentOnPost TEXT
