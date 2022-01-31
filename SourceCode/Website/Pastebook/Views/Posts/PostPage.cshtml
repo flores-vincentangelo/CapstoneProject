@@ -5,7 +5,6 @@
     string jsonString = JsonSerializer.Serialize(Model);
 }
 
-
 <!DOCTYPE html>
 <html>
 
@@ -26,8 +25,9 @@
         </div>
         <div class="post-container-right">
             <div class="post-container-right-action">
+                <button class="delete-but"><img class="post-container-right-action-delete" src="../Images/trash.png"></button>
                 <button class="update-but"><img class="post-container-right-action-update" src="../Images/more.png"></button>
-                <button class="delete-but"><img class="post-container-right-action-delete" src="../Images/close.png"></button>
+                <button class="close-but"><img class="post-container-right-action-close" src="../Images/close.png"></button>
             </div>
             <div class="post-container-right-profile">
                 <img class="post-container-right-profile-logo" src="@Model.Poster.Photo">
@@ -37,7 +37,7 @@
                 <span>@Model.Caption</span>
             </div>
             <div class="post-container-right-status">
-                <span id="like">@Model.Likes Likes</span>
+                <a id="post-container-right-status-likers" href="#"><span id="like">@Model.Likes Likes</span></a>
                 <span id="comment">@Model.Comment Comments</span>
             </div>
             <hr>
@@ -103,6 +103,19 @@
                             maxlength="1000">
                         <button class="friend-button-comment" type="submit">Post</button>
                     </form>
+                </div>
+            </div>
+        </div>
+        <div id="post-modal-container-likers">
+            <div class="post-modal-container-1-likers">
+                <div class="modal-container-title-likers">
+                    <span id="modal-container-close-likers">&times;</span>
+                    <h3>People who liked</h3>
+                </div>
+                <hr>
+                <div class="modal-container-likers">
+                    <img class="modal-container-likers-photo" src="../../Images/img_avatar.png">
+                    <p id="modal-container-likers-name">Friend Name</p>
                 </div>
             </div>
         </div>
