@@ -38,20 +38,33 @@
             </div>
             <div class="post-container-right-status">
                 <span id="like">@Model.Likes Likes</span>
-                <span id="comment">@Model.Comment Comments</span>
+                <span id="comment">@Model.CommentsListObj.Count Comments</span>
             </div>
             <hr>
             <div class="post-container-right-buttons">
                 <button class="post-container-right-like"><img src="../Images/like.png"><span id="like-post">Like</span></button>
-                <button class="post-container-right-comment"><img src="../Images/comment.png"><span id="comment-post">Comment</span></button>
+                <button id=@Model.PostId class="post-container-right-comment"><img src="../Images/comment.png"><span id="comment-post">Comment</span></button>
             </div>
             <hr>
             <div class="profile-post-container-status-post-comments">
-                <img src="../Images/img_avatar.png">
+                @{
+                    if(Model.CommentsListObj != null)
+                    {
+                        foreach (Models.CommentsModel commentWithDetails in Model.CommentsListObj)
+                        {
+                            await Html.RenderPartialAsync("~/Views/Shared/_CommentCard.cshtml",commentWithDetails);
+                        }
+                    }
+                    else
+                    {
+                        <p>Add a comment</p>
+                    }
+                }
+                @* <img src="../Images/img_avatar.png">
                 <div class="friend-details">
                     <span id="friend-name">Friend Name</span><br>
                     <span id="friend-comment">Comment goes here......</span>
-                </div>
+                </div> *@
             </div>
         </div>
         <div id="post-modal-container-delete">
@@ -92,15 +105,14 @@
                 </div>
             </div>
         </div>
-        <div id="post-modal-container-comment">
+        <div class="post-modal-container-comment" id=@("post-modal-container-comment-"+Model.PostId)>
             <div class="post-modal-container-1-comment">
                 <div class="modal-container-title-comment">
                     <span id="modal-container-close-comment">&times;</span>
                 </div>
                 <div class="modal-container-comment">
-                    <form class="friend-comment-form">
-                        <input type="text" class="friend-comment" placeholder="Write a comment" name="comment"
-                            maxlength="1000">
+                    <form id=@Model.PostId class="friend-comment-form" onsubmit="submitAddComment(event)">
+                        <input type="text" class="friend-comment" placeholder="Write a comment" name="comment" maxlength="1000">
                         <button class="friend-button-comment" type="submit">Post</button>
                     </form>
                 </div>

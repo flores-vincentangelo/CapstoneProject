@@ -168,7 +168,9 @@ public class DbTables
                     AlbumName VARCHAR (255),
                     UserEmail VARCHAR (255),
                     CreatedDate BIGINT,
-                    PhotosList VARCHAR(MAX)
+                    PhotosList VARCHAR(MAX),
+                    ProfileLink VARCHAR (255),
+                    UserId INTEGER
                     );";
                 command.ExecuteNonQuery();
                 Console.WriteLine("Albums Table created successfully!");
@@ -204,6 +206,9 @@ public class DbTables
                     Photo VARCHAR (MAX),
                     UploadDate BIGINT,
                     AlbumId INT,
+                    UserId INT,
+                    PostId INT,
+                    ProfileLink VARCHAR (255),
                     Likes VARCHAR (MAX),
                     Comments VARCHAR (MAX)
                     );";
@@ -313,7 +318,7 @@ public class DbTables
                 command.CommandText = 
                    @"IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Comments' and xtype='U')
                     CREATE TABLE Comments(
-                        UserEmail VARCHAR(255),
+                        UserId INTEGER,
                         PostId INTEGER,
                         CommentId INTEGER NOT NULL IDENTITY (1,1) PRIMARY KEY,
                         CommentText TEXT);";

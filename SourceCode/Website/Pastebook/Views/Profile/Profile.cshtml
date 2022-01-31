@@ -56,22 +56,17 @@
         //show the add a friend button
         if(Model.DoesUserOwnProfile == false)
         {
-            if(Model.IsProfileOwnerInFriendReqList){
-                
-                <button class="profile-friendbuttoncontainer-addfriend" onclick="{location.href = '/friends'}">Sent you a friend Request</button>
-                
+            if(Model.IsProfileOwnerInFriendReqList)
+            {
+                <button class="profile-friendbuttoncontainer-addfriend" onclick="{location.href = '/friends'}">Sent you a friend Request</button>   
             }
             else if(Model.IsUserInFriendsList == false && Model.IsUserInFriendReqList == false)
             {
-                
                 <button class="profile-friendbuttoncontainer-addfriend" onclick="Addfriend('@Model.User.ProfileLink')">Add Friend</button>
-                
             }
             else if (Model.IsUserInFriendsList == false && Model.IsUserInFriendReqList == true)
             {
-
                 <button class="profile-friendbuttoncontainer-requestsend" >Friend Request Sent</button>
-                
             }
         }
     }
@@ -101,12 +96,7 @@
             <button class="ext-btn" id="ext-posts-btn">Posts</button>
             <button class="ext-btn" id="ext-friends-btn">Friends</button>
             <button class="ext-btn" id="ext-album-btn">Album</button>
-            
-            @* <a class="ext-btn" id="ext-about-btn" href="/@Model.Id/about">About</a>
-            <a class="ext-btn" id="ext-posts-btn" href="/@Model.Id/posts">Posts</a>
-            <a class="ext-btn" id="ext-friends-btn" href="/@Model.Id/friends">Friends</a>
-            <a class="ext-btn" id="ext-album-btn" href="/@Model.Id/photos">Photos</a> *@
-
+        <hr>
         </div>
     </div>
 </div>
@@ -124,6 +114,6 @@
 </div>
 
 <div class="profile-ext" id="profile-ext-album">
-    @await Html.PartialAsync("ProfileAlbum.cshtml", @Model.AlbumList)
+    @await Html.PartialAsync("ProfileAlbum.cshtml", @Model)
 </div>
 

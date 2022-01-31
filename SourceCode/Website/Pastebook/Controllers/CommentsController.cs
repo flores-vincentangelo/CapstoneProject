@@ -2,6 +2,7 @@ namespace Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Database;
 using Models;
+using System.Text.Json;
 
 public class CommentsController: Controller
 {
@@ -21,9 +22,10 @@ public class CommentsController: Controller
         int postId,
         [FromBody] CommentsModel model)
     {
-        // string? commenterEmail = HttpContext.Request.Cookies["email"];
-        // model.CommenterEmail = commenterEmail;
-        model.CommenterEmail = "vincentflores88@gmail.com";
+        string? commenterEmail = HttpContext.Request.Cookies["email"];
+        model.CommenterId = DbUsers.GetUserByEmail(commenterEmail).UserId;
+        var jsonarr = JsonSerializer.Serialize(model,new JsonSerializerOptions{WriteIndented = true});
+        System.Console.WriteLine(jsonarr);
         DbComments.AddCommentToPost(model);
         return Ok("Comment Added");
 
