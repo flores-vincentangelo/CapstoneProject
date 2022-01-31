@@ -1,5 +1,6 @@
 @{Layout = "/Views/_Layout.cshtml";}
-@model Models.UserModel
+@* @model Models.UserModel *@
+@model Models.ProfileModel
 <link rel="stylesheet" href="./Styles/Home/Home.css">
 <script src="Scripts/Home.js"></script>
 
@@ -7,13 +8,13 @@
     <div class="home-body">
         <div class="home-body-leftsidepanel">
             @* <button>Profile</button> *@
-            <a href=@($"/{Model.ProfileLink}")>
+            <a href=@($"/{Model.User.ProfileLink}")>
                 <div class="home-body-leftsidepanel-profilelink">
                     <div class="home-body-leftsidepanel-profilelink-picture">
-                        <img src=@Model.Photo>
+                        <img src=@Model.User.Photo>
                     </div>
                     <div class="home-body-leftsidepanel-profilelink-name">
-                        <div>@Model.ProfileName</div>
+                        <div>@Model.User.ProfileName</div>
                     </div>
                 </div>
             </a>
