@@ -18,7 +18,7 @@ public class HomeController: Controller
             if(sessionModel != null)
             {
                 UserModel user = DbUsers.GetUserByEmail(cookieEmail);
-                return View("/Views/Home/Home.cshtml",user);
+                return View("~/Views/Home/Home.cshtml",user);
             }
         }
 
