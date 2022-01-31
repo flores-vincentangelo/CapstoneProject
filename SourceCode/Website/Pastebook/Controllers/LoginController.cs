@@ -22,6 +22,12 @@ public class LoginController: Controller
             return Unauthorized();
         }
         else {
+            int userId = DbUsers.GetUserByEmail(session.EmailAddress).UserId;
+            FriendsModel? isFriendsInitialized = DbFriends.GetFriendsData(userId);
+            if(isFriendsInitialized == null)
+            {
+                DbFriends.InitializeFriends(userId);
+            }
             return (Json(session));
         }
     }

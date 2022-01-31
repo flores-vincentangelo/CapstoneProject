@@ -28,7 +28,7 @@ public class ProfilesController: Controller
                     profileOwner.AlbumList = DbAlbums.GetAllAlbumsByProfileLink(profileLink);
                     profileOwner.PhotoList = DbPhotos.GetAllPhotosByProfileLink(profileLink);
                     
-                    FriendsModel profileOwnerFriends = DbFriends.GetFriendsData(profileOwner.User.EmailAddress);
+                    FriendsModel profileOwnerFriends = DbFriends.GetFriendsData(profileOwner.User.UserId);
                     profileOwner.IsUserInFriendsList = DbFriends.IsInFriendsList(cookieEmail,profileOwnerFriends.FriendsList);
                     profileOwner.IsUserInFriendReqList = DbFriends.IsInFriendReqList(cookieEmail, profileOwnerFriends.FriendRequests);
                     FriendsModel userFriendsData = DbFriends.GetFriendsData(cookieEmail);
