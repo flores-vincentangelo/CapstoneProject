@@ -21,6 +21,8 @@ public class ProfilesController: Controller
                 if(sessionModel != null)
                 {
 
+                    int loggedInUserId = DbUsers.GetUserByEmail(cookieEmail).UserId;
+
                     var profileOwnerDetails = DbUsers.GetInformationById(profileLink);
                     var profileOwner = new ProfileModel();
                     profileOwner.DoesUserOwnProfile = DbUsers.DoesUserOwnProfile(cookieEmail,profileLink);
@@ -29,10 +31,10 @@ public class ProfilesController: Controller
                     profileOwner.PhotoList = DbPhotos.GetAllPhotosByProfileLink(profileLink);
                     
                     FriendsModel profileOwnerFriends = DbFriends.GetFriendsData(profileOwner.User.UserId);
-                    profileOwner.IsUserInFriendsList = DbFriends.IsInFriendsList(cookieEmail,profileOwnerFriends.FriendsList);
-                    profileOwner.IsUserInFriendReqList = DbFriends.IsInFriendReqList(cookieEmail, profileOwnerFriends.FriendRequests);
-                    FriendsModel userFriendsData = DbFriends.GetFriendsData(cookieEmail);
-                    profileOwner.IsProfileOwnerInFriendReqList = DbFriends.IsInFriendReqList(profileOwner.User.EmailAddress,userFriendsData.FriendRequests);
+                    profileOwner.IsUserInFriendsList = DbFriends.IsInFriendsList(loggedInUserId,profileOwnerFriends.FriendsList);
+                    profileOwner.IsUserInFriendReqList = DbFriends.IsInFriendReqList(loggedInUserId, profileOwnerFriends.FriendRequests);
+                    FriendsModel loggedInUserFriendsData = DbFriends.GetFriendsData(loggedInUserId);
+                    profileOwner.IsProfileOwnerInFriendReqList = DbFriends.IsInFriendReqList(profileOwner.User.UserId,loggedInUserFriendsData.FriendRequests);
                     profileOwner.FriendsList = DbFriends.GetListAsUserObj(profileOwnerFriends.FriendsList);
 
                     profileOwner.PostsList = DbPosts.GetAllPostDetails(profileLink);

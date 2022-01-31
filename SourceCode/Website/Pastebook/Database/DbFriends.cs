@@ -139,7 +139,7 @@ public class DbFriends
 
     public static bool IsInFriendsList(int userIdToTest, string? friendsListStr)
     {
-        if(String.IsNullOrEmpty(friendsList))
+        if(String.IsNullOrEmpty(friendsListStr))
         {
             return false;
         }
@@ -151,15 +151,16 @@ public class DbFriends
         
     }
 
-    public static bool IsInFriendReqList(string emailToTest, string? userFriendReqList)
+    public static bool IsInFriendReqList(int userIdToTest, string? friendReqListStr)
     {
-        if(String.IsNullOrEmpty(userFriendReqList))
+        if(String.IsNullOrEmpty(friendReqListStr))
         {
             return false;
         }
         else
         {
-            return userFriendReqList.Contains(emailToTest);
+            List<string> friendReqList = new List<string>(friendReqListStr.Split(','));
+            return friendReqList.Contains(userIdToTest.ToString());
         }
         
     }
@@ -173,10 +174,11 @@ public class DbFriends
         }
         else
         {
-            var emailArr = list.Split(',');
-            foreach (string email in emailArr)
+            var userIdArr = list.Split(',');
+            foreach (string userIdStr in userIdArr)
             {
-                UserModel userModel = DbUsers.GetUserByEmail(email);
+                int userId = int.Parse(userIdStr);
+                UserModel userModel = DbUsers.GetUserById(userId);
                 userListObj.Add(userModel);
             }
             return userListObj;
