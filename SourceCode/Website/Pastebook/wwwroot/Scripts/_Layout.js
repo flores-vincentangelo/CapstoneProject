@@ -43,13 +43,8 @@ $(document).ready(function () {
 
     //logout button
     $(".layout-accountpanel-logout").click(() => {
-        window.location.replace("/login");
         //delete sessions
         deleteSession();
-        //delete cookies
-        document.cookie = "email=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-        document.cookie = "sessionId=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-        document.cookie = "profilelink=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     });
 
     $(".layout-header-right-notifications").click(function (e) { 
@@ -63,9 +58,16 @@ $(document).ready(function () {
 });
 
 async function deleteSession() {  
-        fetch(`/login`, {
+    const response = await fetch(`/login`, {
         method: 'DELETE',
     });
+    if(response.ok){
+        //delete cookies
+        document.cookie = "email=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+        document.cookie = "sessionId=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+        document.cookie = "profilelink=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+        window.location.replace("/login");
+    }
 }
 
 async function SearchUsers(searchTerm){
