@@ -5,6 +5,17 @@ using Models;
 
 public class LikesController: Controller
 {
+
+    [HttpGet]
+    [Route("/likes/{postId}")]
+    public IActionResult GetLikers(int postId)
+    { 
+        string? cookieEmail = HttpContext.Request.Cookies["email"];
+        var list = DbPosts.GetPostById(postId).LikesList;
+        List<UserModel> likersList = DbLikes.GetListAsUserObj(list);
+        return Json(likersList);
+    }
+
     [HttpPatch]
     [Route("/likes/{postId}")]
     public IActionResult LikesPost(int postId)

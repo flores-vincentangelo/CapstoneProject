@@ -18,5 +18,6 @@ public class PostModel
     public string? LikesList {get;set;}
     public string? CommentsList {get; set;}
     public List<CommentsModel>? CommentsListObj {get;set;}
+    public List<PostModel>? LikesListObj {get;set;}
     public bool DoesUserLikesAPost {get;set;}
 }

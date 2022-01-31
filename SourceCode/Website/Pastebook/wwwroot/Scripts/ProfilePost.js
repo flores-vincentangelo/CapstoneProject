@@ -1,8 +1,11 @@
 $(document).ready(() => {
+    // openLikeModal();
     viewAddPostModal();
     addPost();
     resetForm();
     openCommentModal();
+    // GetLikers(postId);
+    
 
 
     //When the user clicks on "Post" button,
@@ -169,3 +172,52 @@ async function LikedPost(postId) {
         location.reload();
     }
 }
+
+async function GetLikers(postId) {
+    const response = await fetch(`/likes/${postId}`, {
+        method: "GET"
+    });
+    if (response.ok) {
+        var data = await response.json();
+        $(".modal-container-title-likers").empty();
+        if (data !=null)
+        { 
+            data.forEach((item,index) =>{
+                AddLikersToPage(item.photo, item.firstName, item.lastName);
+            });
+        }
+        else {
+            var noData = "<div>No likers</div>"
+            $(".modal-container-title-likers").append(noData);
+        }
+    }
+}
+
+function AddLikersToPage(photo, firstName, lastName) {
+    var likersModal = 
+    `<div class="modal-container-likers">
+        <img class="modal-container-likers-photo" src="${photo}">
+        <p id="modal-container-likers-name">${firstName} ${lastName}</p>       
+    </div>`;
+    $(".modal-container-title-likers").append(likersModal);
+}
+
+function openLikeModal(postId) {
+    // $('#post-container-status-likers').click((e) => {
+    //     // show edit form 
+    //     $('#post-modal-container-likers').css("display", "flex");
+    // });
+    //show edit form 
+        $('#post-modal-container-likers').css("display", "flex");
+        console.log(postId);
+        GetLikers(postId);
+    // When the user clicks on the "x",
+    $('#modal-container-close-likers').click(() => {
+        // Close modal
+        $('#post-modal-container-likers').css("display", "none");
+    });
+}
+
+// function showLikeModal(postId) {
+//     console.log(postId)
+// }

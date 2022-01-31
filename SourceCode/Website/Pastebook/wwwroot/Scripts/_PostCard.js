@@ -1,19 +1,19 @@
-$(document).ready( () => {
-    openLikeModal();
-});
+// $(document).ready( () => {
+//     openLikeModal();
+// });
 
-function openLikeModal() {
-    $('#post-container-status-likers').click(() => {
-        // show edit form 
-        $('#post-modal-container-likers').css("display", "flex");
-    });
+// function openLikeModal() {
+//     $('#post-container-status-likers').click(() => {
+//         // show edit form 
+//         $('#post-modal-container-likers').css("display", "flex");
+//     });
 
-    // When the user clicks on the "x",
-    $('#modal-container-close-likers').click(() => {
-        // Close modal
-        $('#post-modal-container-likers').css("display", "none");
-    });
-}
+//     // When the user clicks on the "x",
+//     $('#modal-container-close-likers').click(() => {
+//         // Close modal
+//         $('#post-modal-container-likers').css("display", "none");
+//     });
+// }
 
 // function modifyPost (postId, profileLink) {
 //     //Show Update Modal

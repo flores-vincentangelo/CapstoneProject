@@ -25,8 +25,24 @@
         <a href=@($"/posts/{Model.PostId}")><img src="@Model.Photo"></a>
     </div>
     <div class="profile-post-container-status-post-status">
-        <a id="post-container-status-likers" href="#"><span id="like">@Model.Likes Likes</span></a>
-        <span id="comment">@Model.CommentsListObj.Count Comments</span>
+        @{
+            if(String.IsNullOrEmpty(Model.LikesList)) {
+                <a id="post-container-status-likers" onclick="openLikeModal(@Model.PostId)" href="#"><span id="like">0 Likes</span></a>
+            }
+            else {
+                var likersList = Model.LikesList.Split(',');
+                <a id="post-container-status-likers" onclick="openLikeModal(@Model.PostId)" href="#"><span id="like">@likersList.Length Likes</span></a>
+            } 
+        }
+        
+        @{
+            if(Model.CommentsListObj == null) {
+               <span id="comment">0 Comments</span>
+            }
+            else {
+                <span id="comment">@Model.CommentsListObj.Count Comments</span>
+            }
+        }        
     </div>
     <hr>
     <div class="profile-post-container-status-post-buttons">
@@ -113,15 +129,18 @@
     </div>
     <div id="post-modal-container-likers">
         <div class="post-modal-container-1-likers">
+            <span id="modal-container-close-likers">&times;</span>
+            <h3>People who liked</h3>
             <div class="modal-container-title-likers">
-                <span id="modal-container-close-likers">&times;</span>
-                <h3>People who liked</h3>
+                
             </div>
             <hr>
-            <div class="modal-container-likers">
+            @* <div class="modal-container-likers">
                 <img class="modal-container-likers-photo" src="../../Images/img_avatar.png">
-                <p id="modal-container-likers-name">Friend Name</p>
-            </div>
+               
+                <p id="modal-container-likers-name">Insert liker name here</p>       
+               
+            </div> *@
         </div>
     </div>
 </div>

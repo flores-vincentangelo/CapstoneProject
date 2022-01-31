@@ -81,6 +81,5 @@ public class DbLikes
         {
             return likesList.Contains(cookieEmail);
         }
-        
     }
 }
