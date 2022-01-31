@@ -21,10 +21,7 @@ public class HomeController: Controller
                 var profileOwner = new ProfileModel();
                 
                 UserModel user = DbUsers.GetUserByEmail(cookieEmail);
-                profileOwner.User = DbUsers.GetUserByEmail(cookieEmail);
-                profileOwner.PostsList = DbPosts.GetAllPostDetails(cookieProfileLink);
-
-                return View("/Views/Home/Home.cshtml",profileOwner);
+                return View("~/Views/Home/Home.cshtml",user);
             }
         }
 
