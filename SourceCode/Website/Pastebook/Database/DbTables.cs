@@ -169,7 +169,8 @@ public class DbTables
                     UserEmail VARCHAR (255),
                     CreatedDate BIGINT,
                     PhotosList VARCHAR(MAX),
-                    ProfileLink VARCHAR (255)
+                    ProfileLink VARCHAR (255),
+                    UserId INTEGER
                     );";
                 command.ExecuteNonQuery();
                 Console.WriteLine("Albums Table created successfully!");
@@ -205,6 +206,8 @@ public class DbTables
                     Photo VARCHAR (MAX),
                     UploadDate BIGINT,
                     AlbumId INT,
+                    UserId INT,
+                    PostId INT,
                     ProfileLink VARCHAR (255),
                     Likes VARCHAR (MAX),
                     Comments VARCHAR (MAX)

@@ -9,9 +9,11 @@ public class AlbumsController: Controller
     [Route("/albums")]
     public IActionResult AddAlbum([FromBody] AlbumModel album) {
         string? profileLink = HttpContext.Request.Cookies["profilelink"];
+        string? cookieEmail = HttpContext.Request.Cookies["email"];
         album.CreatedDate = (long)((System.DateTime.Now.Subtract(new System.DateTime(1970, 1, 1))).TotalSeconds);
         album.PhotosList = "";
         album.ProfileLink = profileLink;
+        album.UserId = DbUsers.GetUserByEmail(cookieEmail).UserId;
         DbAlbums.InsertAlbum(album);
         return Ok("Album created successfully");
     }
@@ -74,6 +76,8 @@ public class AlbumsController: Controller
         // photo.Photo = base64image from body
         photo.UploadDate = (long)((System.DateTime.Now.Subtract(new System.DateTime(1970, 1, 1))).TotalSeconds);
         photo.AlbumId = albumId;
+        photo.UserId = DbUsers.GetUserByEmail(cookieEmail).UserId;
+        photo.PostId = 0;
         photo.ProfileLink = cookieProfileLink;
         photo.Likes = "";
         photo.Comments = "";

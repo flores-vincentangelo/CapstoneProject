@@ -75,8 +75,12 @@ function AddNewPhoto() {
         // Open modal
         $('.photo-add-modal').css("display","flex");
         // Reset input form
-        $("#myForm").val("");
-        $("#form-add-photo").val(null);
+        // $('#form-add-photo').trigger("reset");
+        const file = document.getElementById("form-add-photo");
+        file.value = '';
+        $("#myPhoto").val(null);
+        console.log("revise 4");
+        // $("#form-add-photo").val(null);
         $('#album-photo-modal-img').attr('src', "./Images/img_avatar.png");
     });
 
@@ -85,9 +89,9 @@ function AddNewPhoto() {
         // Close modal
         $('.photo-add-modal').css("display","none");
         // Reset input form
-        $("#myForm").val("");
-        $("#form-add-photo").val(null);
-        $('#album-photo-modal-img').attr('src', "./Images/img_avatar.png");
+        // $("#myForm").val("");
+        // $("#form-add-photo").val(null);
+        // $('#album-photo-modal-img').attr('src', "./Images/img_avatar.png");
     });
 
     // When the user clicks on the "x",
@@ -95,9 +99,9 @@ function AddNewPhoto() {
         // Close modal
         $('.photo-add-modal').css("display","none");
         // Reset input form
-        $("#myForm").val("");
-        $("#form-add-photo").val(null);
-        $('#album-photo-modal-img').attr('src', "./Images/img_avatar.png");
+        // $("#myForm").val("");
+        // $("#form-add-photo").val(null);
+        // $('#album-photo-modal-img').attr('src', "./Images/img_avatar.png");
     });
 
     // When the user clicks anywhere outside of the modal
@@ -106,9 +110,9 @@ function AddNewPhoto() {
             // Close modal
             $('.photo-add-modal').css("display","none");
             // Reset input form
-            $("#myForm").val("");
-            $("#form-add-photo").val(null);
-            $('#album-photo-modal-img').attr('src', "./Images/img_avatar.png");
+            // $("#myForm").val("");
+            // $("#form-add-photo").val(null);
+            // $('#album-photo-modal-img').attr('src', "./Images/img_avatar.png");
         }
     }
 
