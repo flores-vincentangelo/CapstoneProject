@@ -1,6 +1,6 @@
  $(document).ready(function () {
     var modelObj = JSON.parse(model.replace(/&quot;/g,"\""));
-    console.log(modelObj)
+    // console.log(modelObj)
 
     editPost();
     deletePost(modelObj);
@@ -136,6 +136,7 @@ function deletePost(modelObj) {
 function openCommentModal() {
     $('.post-container-right-comment').click(function() {
         var postId = $(this).attr("id");
+        console.log(postId);
         // show edit form 
         $(`#post-modal-container-comment-${postId}`).css("display", "flex");
     });

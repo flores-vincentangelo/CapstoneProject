@@ -58,7 +58,7 @@ public class ProfilesController: Controller
             }
             return RedirectToAction("doLoginAction", "Login");
         }
-        return Ok();
+        return RedirectToAction("doLoginAction", "Login");
     }
     
     [HttpPatch]

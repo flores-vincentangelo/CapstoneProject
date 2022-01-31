@@ -38,7 +38,15 @@
             </div>
             <div class="post-container-right-status">
                 <a id="post-container-right-status-likers" href="#"><span id="like">@Model.Likes Likes</span></a>
-                <span id="comment">@Model.CommentsListObj.Count Comments</span>
+
+                @{
+                    if(Model.CommentsListObj == null) {
+                    <span id="comment">0 Comments</span>
+                    }
+                    else {
+                        <span id="comment">@Model.CommentsListObj.Count Comments</span>
+                    }
+                }
             </div>
             <hr>         
             <div class="post-container-right-buttons">
@@ -50,8 +58,8 @@
                 else {
                     <button id=@Model.PostId class="post-container-right-like"><img src="../Images/like.png"><span id="like-post">Like</span></button>
                 }
-                <button class="post-container-right-comment"><img src="../Images/comment.png"><span id="comment-post">Comment</span></button>
             }
+            <button class="post-container-right-comment" id=@Model.PostId><img src="../Images/comment.png"><span id="comment-post">Comment</span></button>
             </div>
             <hr>
             <div class="profile-post-container-status-post-comments">

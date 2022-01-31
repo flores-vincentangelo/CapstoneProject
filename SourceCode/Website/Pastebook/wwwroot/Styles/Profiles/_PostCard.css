@@ -201,7 +201,7 @@
 
 #post-modal-container-update,
 #post-modal-container-delete,
-#post-modal-container-comment,
+.post-modal-container-comment,
 #post-modal-container-likers {
    display: none;
    position: fixed;
