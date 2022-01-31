@@ -37,7 +37,8 @@ public class ProfilesController: Controller
                     profileOwner.IsProfileOwnerInFriendReqList = DbFriends.IsInFriendReqList(profileOwner.User.UserId,loggedInUserFriendsData.FriendRequests);
                     profileOwner.FriendsList = DbFriends.GetListAsUserObj(profileOwnerFriends.FriendsList);
 
-                    profileOwner.PostsList = DbPosts.GetAllPostDetails(profileLink);
+                    // profileOwner.PostsList = DbPosts.GetAllPostDetails(profileLink);
+                    profileOwner.PostsList = DbPosts.GetAllPostsByEmail(cookieEmail);
                     
                     return View("/Views/Profile/Profile.cshtml", profileOwner);
                 }
