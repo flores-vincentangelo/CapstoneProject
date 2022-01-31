@@ -11,7 +11,7 @@ public class DbFriends
         DB_CONNECTION_STRING = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
     }
 
-    public static void InitializeFriends(string email)
+    public static void InitializeFriends(int userId)
     {
         using(var db = new SqlConnection(DB_CONNECTION_STRING))
         {
@@ -19,14 +19,14 @@ public class DbFriends
             using(var cmd = db.CreateCommand())
             {
                 cmd.CommandText = 
-                    @"INSERT INTO Friends (UserEmail) VALUES (@email);";
-                    cmd.Parameters.AddWithValue("@email", email);
+                    @"INSERT INTO Friends (UserId) VALUES (@userid);";
+                    cmd.Parameters.AddWithValue("@userid", userId);
                     cmd.ExecuteNonQuery();
                     System.Console.WriteLine("Entry added to Friends Table");
             }
         }
     }
-    public static FriendsModel GetFriendsData(string email)
+    public static FriendsModel? GetFriendsData(int userId)
     {
         FriendsModel model = new FriendsModel();
         using(var db = new SqlConnection(DB_CONNECTION_STRING))
@@ -34,12 +34,13 @@ public class DbFriends
             db.Open();
             using(var cmd = db.CreateCommand())
             {
-                cmd.CommandText = "SELECT FriendsList, FriendRequests FROM Friends WHERE UserEmail = @email;";
-                cmd.Parameters.AddWithValue("@email",email);
+                cmd.CommandText = "SELECT FriendsList, FriendRequests FROM Friends WHERE UserId = @userid;";
+                cmd.Parameters.AddWithValue("@userid",userId);
                 var reader = cmd.ExecuteReader();
+                if(!reader.HasRows) return null;
                 while(reader.Read())
                 {
-                    model.UserEmail = email;
+                    model.UserId = userId;
                     model.FriendsList = reader.IsDBNull(0) ? null : reader.GetString(0);
                     model.FriendRequests = reader.IsDBNull(1) ? null : reader.GetString(1);
                 }
@@ -47,7 +48,7 @@ public class DbFriends
         }
         return model;
     }
-    public static void UpdateFriendsListOfUser(string userEmail, string friendsList)
+    public static void UpdateFriendsListOfUser(int userId, string friendsList)
     {
         using(var db = new SqlConnection(DB_CONNECTION_STRING))
         {
@@ -57,14 +58,14 @@ public class DbFriends
                 cmd.CommandText = 
                     @"UPDATE Friends
                     SET FriendsList = @friendslist
-                    WHERE UserEmail = @email;";
+                    WHERE UserId = @userid;";
                 cmd.Parameters.AddWithValue("@friendslist", friendsList);
-                cmd.Parameters.AddWithValue("@email",userEmail);
+                cmd.Parameters.AddWithValue("@userid",userId);
                 cmd.ExecuteNonQuery();
             }
         }
     }
-    public static void UpdateFriendReqsListOfUser(string userEmail, string? friendReqsList)
+    public static void UpdateFriendReqsListOfUser(int userId, string? friendReqsList)
     {
         using(var db = new SqlConnection(DB_CONNECTION_STRING))
         {
@@ -74,7 +75,7 @@ public class DbFriends
                 cmd.CommandText = 
                     @"UPDATE Friends 
                     SET FriendRequests = @friendrequests 
-                    WHERE UserEmail = @email;";
+                    WHERE UserId = @userid;";
                 if(String.IsNullOrEmpty(friendReqsList))
                 {
                     cmd.Parameters.AddWithValue("@friendrequests", DBNull.Value);
@@ -83,18 +84,17 @@ public class DbFriends
                 {
                     cmd.Parameters.AddWithValue("@friendrequests", friendReqsList);
                 }
-                cmd.Parameters.AddWithValue("@email",userEmail);
+                cmd.Parameters.AddWithValue("@userid",userId);
                 cmd.ExecuteNonQuery();
             }
         }
     }
 
-    public static string? RemoveEmailFromFriendReqs(string email, string friendReqs)
+    public static string? RemoveIdFromFriendReqs(int idToRemove, string friendReqs)
     {
-        
         var _friendReqsArr = friendReqs.Split(",");
         List<string> friendReqsList = new List<string>(_friendReqsArr);
-        friendReqsList.Remove(email);
+        friendReqsList.Remove(idToRemove.ToString());
         if(friendReqsList.Count == 0){
             return null;
         }
@@ -105,60 +105,62 @@ public class DbFriends
         
     }
 
-    public static string AddEmailtoFriendsList(string emailToAdd, string? friendsListStr)
+    public static string AddUserIdToFriendsList(int idToAdd, string? friendsListStr)
     {
         if(!String.IsNullOrEmpty(friendsListStr))
         {
             var _friendsListArr = friendsListStr.Split(",");
             List<string> friendsList = new List<string>(_friendsListArr);
-            friendsList.Add(emailToAdd);
+            friendsList.Add(idToAdd.ToString());
             return String.Join(",",friendsList);
         }
         else
         {
-            return emailToAdd;
+            return idToAdd.ToString();
         }
         
     }
 
-    public static string AddEmailtoFriendRequestList(string emailToAdd, string? friendReqListStr)
+    public static string AddUserIdToFriendReqList(int idToAdd, string? friendReqListStr)
     {
         if(!String.IsNullOrEmpty(friendReqListStr))
         {
             var _friendReqListArr = friendReqListStr.Split(",");
             List<string> friendReqList = new List<string>(_friendReqListArr);
-            friendReqList.Add(emailToAdd);
+            friendReqList.Add(idToAdd.ToString());
             return String.Join(",",friendReqList);
         }
         else
         {
-            return emailToAdd;
+            return idToAdd.ToString();
         }
         
     }
 
-    public static bool IsInFriendsList(string emailToTest, string? userFriendsList)
+    public static bool IsInFriendsList(int userIdToTest, string? friendsListStr)
     {
-        if(String.IsNullOrEmpty(userFriendsList))
+        if(String.IsNullOrEmpty(friendsListStr))
         {
             return false;
         }
         else
         {
-            return userFriendsList.Contains(emailToTest);
+            List<string> friendsList = new List<string>(friendsListStr.Split(','));
+            return friendsList.Contains(userIdToTest.ToString());
         }
         
     }
 
-    public static bool IsInFriendReqList(string emailToTest, string? userFriendReqList)
+    public static bool IsInFriendReqList(int userIdToTest, string? friendReqListStr)
     {
-        if(String.IsNullOrEmpty(userFriendReqList))
+        if(String.IsNullOrEmpty(friendReqListStr))
         {
             return false;
         }
         else
         {
-            return userFriendReqList.Contains(emailToTest);
+            List<string> friendReqList = new List<string>(friendReqListStr.Split(','));
+            return friendReqList.Contains(userIdToTest.ToString());
         }
         
     }
@@ -172,10 +174,11 @@ public class DbFriends
         }
         else
         {
-            var emailArr = list.Split(',');
-            foreach (string email in emailArr)
+            var userIdArr = list.Split(',');
+            foreach (string userIdStr in userIdArr)
             {
-                UserModel userModel = DbUsers.GetUserByEmail(email);
+                int userId = int.Parse(userIdStr);
+                UserModel userModel = DbUsers.GetUserById(userId);
                 userListObj.Add(userModel);
             }
             return userListObj;

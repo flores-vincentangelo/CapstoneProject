@@ -18,7 +18,8 @@ public class FriendsController: Controller
             SessionsModel? sessionModel = DbSessions.GetSessionById(cookieSessionId);
             if(sessionModel != null)
             {
-                FriendsModel friendsModel = DbFriends.GetFriendsData(cookieEmail);
+                int userId = DbUsers.GetUserByEmail(cookieEmail).UserId;
+                FriendsModel friendsModel = DbFriends.GetFriendsData(userId);
                 friendsModel.FriendRequestObjList = DbFriends.GetListAsUserObj(friendsModel.FriendRequests);
                 friendsModel.FriendsObjList = DbFriends.GetListAsUserObj(friendsModel.FriendsList);
                 return View("/Views/Friends/Friends.cshtml",friendsModel);
@@ -32,17 +33,18 @@ public class FriendsController: Controller
     public IActionResult SendFriendRequest(string profileLink)
     {   
         //Person A. The person who send the friend request
-        string userEmail = HttpContext.Request.Cookies["email"];
+        string sentFriendReq = HttpContext.Request.Cookies["email"];
+        int sentFriendReqId = DbUsers.GetUserByEmail(sentFriendReq).UserId;
         //Person B. the person who will receive the friend request
-        string userToBeAdded = DbUsers.GetInformationById(profileLink).EmailAddress;
+        int receiveFriendReqId = DbUsers.GetInformationById(profileLink).UserId;
         //Person B's friend details
-        FriendsModel userToBeAddedFriends = DbFriends.GetFriendsData(userToBeAdded);
+        FriendsModel receiveFriendReqFriendsData = DbFriends.GetFriendsData(receiveFriendReqId);
         //adds person A's email to Person B's friend request list
-        string newFriendReqList = DbFriends.AddEmailtoFriendRequestList(userEmail,userToBeAddedFriends.FriendRequests);
+        string newFriendReqList = DbFriends.AddUserIdToFriendReqList(sentFriendReqId,receiveFriendReqFriendsData.FriendRequests);
         //updates DB
-        DbFriends.UpdateFriendReqsListOfUser(userToBeAdded,newFriendReqList);
+        DbFriends.UpdateFriendReqsListOfUser(receiveFriendReqId,newFriendReqList);
         //gives notif to Person B
-        DbNotifications.InsertUserIntoFriendReqNotifOfOtherUser(userEmail,userToBeAdded);
+        DbNotifications.InsertUserIntoFriendReqNotifOfOtherUser(sentFriendReqId, receiveFriendReqId);
         return Ok();
     }
 
@@ -59,25 +61,22 @@ public class FriendsController: Controller
             SessionsModel? sessionModel = DbSessions.GetSessionById(cookieSessionId);
             if(sessionModel != null && sessionModel.EmailAddress == cookieEmail)
             {
-                FriendsModel User = DbFriends.GetFriendsData(cookieEmail);
-                FriendsModel UserToBeAdded = DbFriends.GetFriendsData(friendsModel.ConfirmFriendReqOf);
+                int loggedInUserId = DbUsers.GetUserByEmail(cookieEmail).UserId;
+                FriendsModel User = DbFriends.GetFriendsData(loggedInUserId);
+                int userToBeAddedId = DbUsers.GetUserByEmail(friendsModel.ConfirmFriendReqOf).UserId;
+                FriendsModel UserToBeAdded = DbFriends.GetFriendsData(userToBeAddedId);
                 
 
-                var newFriendsListOfUser = DbFriends.AddEmailtoFriendsList(friendsModel.ConfirmFriendReqOf, User.FriendsList);
-                var newFriendsReqsListOfUser = DbFriends.RemoveEmailFromFriendReqs(friendsModel.ConfirmFriendReqOf, User.FriendRequests);
+                var newFriendsListOfUser = DbFriends.AddUserIdToFriendsList(userToBeAddedId, User.FriendsList);
+                var newFriendsReqsListOfUser = DbFriends.RemoveIdFromFriendReqs(userToBeAddedId, User.FriendRequests);
 
-                var newFriendsListOfOtherPerson = DbFriends.AddEmailtoFriendsList(cookieEmail, UserToBeAdded.FriendsList);
+                var newFriendsListOfOtherPerson = DbFriends.AddUserIdToFriendsList(loggedInUserId, UserToBeAdded.FriendsList);
 
-                DbFriends.UpdateFriendsListOfUser(User.UserEmail, newFriendsListOfUser);
-                DbFriends.UpdateFriendReqsListOfUser(User.UserEmail, newFriendsReqsListOfUser);
+                DbFriends.UpdateFriendsListOfUser(loggedInUserId, newFriendsListOfUser);
+                DbFriends.UpdateFriendReqsListOfUser(loggedInUserId, newFriendsReqsListOfUser);
 
-                DbFriends.UpdateFriendsListOfUser(UserToBeAdded.UserEmail, newFriendsListOfOtherPerson);
+                DbFriends.UpdateFriendsListOfUser(userToBeAddedId, newFriendsListOfOtherPerson);
                 
-                // var jsonArray2 = JsonSerializer.Serialize(User,new JsonSerializerOptions{WriteIndented = true});
-                // System.Console.WriteLine(jsonArray2);
-                // System.Console.WriteLine($"{Environment.NewLine} Updated friends list of user {newFriendsListOfUser} {Environment.NewLine}");
-                // System.Console.WriteLine($"{Environment.NewLine} Updated friend reqs list of user {newFriendsReqsListOfUser} {Environment.NewLine}");
-                // System.Console.WriteLine($"{Environment.NewLine} Updated friend reqs list of other person {newFriendsListOfOtherPerson} {Environment.NewLine}");
                 return Ok();
             }
         }
@@ -98,12 +97,14 @@ public class FriendsController: Controller
             SessionsModel? sessionModel = DbSessions.GetSessionById(cookieSessionId);
             if(sessionModel != null && sessionModel.EmailAddress == cookieEmail)
             {
-                FriendsModel user = DbFriends.GetFriendsData(cookieEmail);
-                // System.Console.WriteLine($"{Environment.NewLine} {user.FriendRequests} {Environment.NewLine}");
-                var newFriendsReqsListOfUser = DbFriends.RemoveEmailFromFriendReqs(friendsModel.DeleteFriendReqOf, user.FriendRequests);
-                // System.Console.WriteLine($"{Environment.NewLine} {newFriendsReqsListOfUser} {Environment.NewLine}");
-                DbFriends.UpdateFriendReqsListOfUser(user.UserEmail, newFriendsReqsListOfUser);
-                // System.Console.WriteLine($"{Environment.NewLine} {newFriendsReqsListOfUser} {Environment.NewLine}");
+                int loggedInUserId = DbUsers.GetUserByEmail(cookieEmail).UserId;
+                FriendsModel user = DbFriends.GetFriendsData(loggedInUserId);
+                
+                int senderOfFriendReqId = DbUsers.GetUserByEmail(friendsModel.DeleteFriendReqOf).UserId;
+                var newFriendsReqsListOfUser = DbFriends.RemoveIdFromFriendReqs(senderOfFriendReqId, user.FriendRequests);
+                
+                DbFriends.UpdateFriendReqsListOfUser(loggedInUserId, newFriendsReqsListOfUser);
+        
                 return Ok();
             }
         }
