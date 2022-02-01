@@ -95,7 +95,7 @@ public class AlbumsController: Controller
             // Add to Posts Table when saving a photo in album
             var post = new PostModel();
             post.PhotoId = photo.PhotoId;
-            post.EmailAddress = cookieEmail;
+            post.UserId = DbUsers.GetUserByEmail(cookieEmail).UserId;
             post.ProfileLink = cookieProfileLink;
             post.DatePosted = (long)((System.DateTime.Now.Subtract(new System.DateTime(1970, 1, 1))).TotalSeconds);
             post.Photo = photo.Photo;
