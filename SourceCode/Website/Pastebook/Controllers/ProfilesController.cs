@@ -37,8 +37,9 @@ public class ProfilesController: Controller
                     profileOwner.IsProfileOwnerInFriendReqList = DbFriends.IsInFriendReqList(profileOwner.User.UserId,loggedInUserFriendsData.FriendRequests);
                     profileOwner.FriendsList = DbFriends.GetListAsUserObj(profileOwnerFriends.FriendsList);
 
-                    profileOwner.PostsList = DbPosts.GetAllPostDetails(profileLink);
-
+                    var postList = DbPosts.GetAllPostDetails(profileLink);
+                    profileOwner.PostsList = postList.OrderByDescending( item => item.DatePosted ).ToList();
+                    
                     //checks to see if the user has any posts
                     if(profileOwner.PostsList != null)
                     {
