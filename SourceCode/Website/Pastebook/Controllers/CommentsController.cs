@@ -24,9 +24,11 @@ public class CommentsController: Controller
     {
         string? commenterEmail = HttpContext.Request.Cookies["email"];
         model.CommenterId = DbUsers.GetUserByEmail(commenterEmail).UserId;
-        var jsonarr = JsonSerializer.Serialize(model,new JsonSerializerOptions{WriteIndented = true});
-        System.Console.WriteLine(jsonarr);
+        // var jsonarr = JsonSerializer.Serialize(model,new JsonSerializerOptions{WriteIndented = true});
+        // System.Console.WriteLine(jsonarr);
+        int? recieveCommentId = DbPosts.GetPostById(model.PostId).UserId;
         DbComments.AddCommentToPost(model);
+        DbNotifications.InsertUserIntoCommentsNotifOfOtherUser(model.CommenterId, recieveCommentId);
         return Ok("Comment Added");
 
     }
