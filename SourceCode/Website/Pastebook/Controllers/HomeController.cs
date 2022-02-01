@@ -23,19 +23,20 @@ public class HomeController: Controller
             {
                 var profileOwner = new ProfileModel();
                 
-                UserModel user = DbUsers.GetUserByEmail(cookieEmail);
+                // UserModel user = DbUsers.GetUserByEmail(cookieEmail);
 
                 profileOwner.User = DbUsers.GetUserByEmail(cookieEmail);
                 int loggedInUserId = DbUsers.GetUserByEmail(cookieEmail).UserId;
                 
                 // Get user's posts list  
                 var userPostsList = DbPosts.GetAllPostsByUserId(loggedInUserId);
+
                 var friendsPostsList = new List<PostModel>();
                 var finalPostsList = new List<PostModel>();
 
                 // Get user's friends list
                 var userFriendsListString = DbFriends.GetFriendsData(loggedInUserId).FriendsList;
-                // Split to get individual email list
+                // Split to get individual userId list
                 if(userFriendsListString != null) {
                     var userFriendsList = userFriendsListString.Split(',');
                     // Console.WriteLine($"Friends count of {cookieEmail}: {userFriendsList.Length}");
@@ -69,6 +70,20 @@ public class HomeController: Controller
                 }
                 else {
                     profileOwner.PostsList = userPostsList;
+                }
+
+                //checks to see if the there are any post
+                if(profileOwner.PostsList != null)
+                {
+                    //iterates through each post
+                    foreach (PostModel post in profileOwner.PostsList)
+                    {
+                        //gets all comments on post as a list<commentModel> (GetCommentsByPost)
+                        //and assigns them to the model
+                        post.CommentsListObj = DbComments.GetCommentsByPost(post.PostId);
+                        post.DoesUserLikesAPost = DbLikes.IsUserInLikersList(cookieEmail, post.LikesList);
+                        post.Poster = DbUsers.GetUserById(post.UserId);
+                    }
                 }
 
                 return View("~/Views/Home/Home.cshtml",profileOwner);
