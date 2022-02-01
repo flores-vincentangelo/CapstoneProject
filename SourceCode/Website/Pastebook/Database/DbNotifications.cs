@@ -73,6 +73,25 @@ public class DbNotifications
         }
     }
 
+    public static void UpdateLikesColumn(int userId, string likesData)
+    {
+        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var cmd = db.CreateCommand())
+            {
+                cmd.CommandText =
+                    @"UPDATE Notifications
+                    SET LikesOnPost = @likes
+                    WHERE UserId = @userid;";
+                cmd.Parameters.AddWithValue("@likes", likesData);
+                cmd.Parameters.AddWithValue("@userid",userId);
+                cmd.ExecuteNonQuery();
+            }
+
+        }
+    }
+
     public static Dictionary<string,string>? GetNotificationsByUserId(int userId)
     {
         Dictionary<string, string> notifObj = new Dictionary<string, string>();
