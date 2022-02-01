@@ -115,9 +115,10 @@ function EditEmailAddress() {
         var formData = new FormData(document.getElementById('form-profile-email'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
         modifyEmail(event, data);
-        window.location.replace("/login");
+        
         //delete sessions
         deleteSession();
+
         //delete cookies
         document.cookie = "email=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
         document.cookie = "sessionId=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
@@ -291,6 +292,7 @@ async function modifyDetails(event, jsonData) {
     });
     if (response.status == 200) {
         alert("Detail successfully modified!");
+        location.reload();
     }
 }
 
@@ -309,6 +311,7 @@ async function modifyPassword(event, jsonData) {
         });
         if (response.status == 200) {
             alert("Password successfully changed!");
+            location.reload();
         }
         else {
             alert("Wrong password. Try again.")
@@ -334,6 +337,8 @@ async function modifyEmail(event, jsonData) {
         });
         if (response.status == 200) {
             alert("Email Address successfully changed!");
+            window.location.replace("/login");
+            
         }
         else {
             alert("Wrong password. Try again.")
@@ -345,8 +350,8 @@ async function modifyEmail(event, jsonData) {
 }
 
 async function deleteSession() {  
-    fetch(`/login`, {
-    method: 'DELETE',
+    const response = await fetch(`/login`, {
+        method: 'DELETE',
     });
 }
 
