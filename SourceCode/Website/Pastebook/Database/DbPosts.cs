@@ -107,7 +107,7 @@ public class DbPosts
     }
 
     //converted to UserId
-    public static PostModel? GetPostById(int id)
+    public static PostModel? GetPostById(int? id)
     {
         PostModel post = new PostModel();
         using(var db = new SqlConnection(DB_CONNECTION_STRING))
