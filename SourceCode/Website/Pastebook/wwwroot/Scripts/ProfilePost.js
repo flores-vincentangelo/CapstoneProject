@@ -57,7 +57,22 @@ $(document).ready(() => {
         console.log(postId);
         LikedPost(postId);
     });
+
+    // Hide all posts
+    $('.profile-post-container-status-post').css("display", "none");
+    showPostsInTimeline();
 });
+
+function showPostsInTimeline() {
+    $('.profile-post-container-status-post').slice(0, 10).show();
+
+    // listen for scroll event and load more images if we reach the bottom of window
+    window.addEventListener('scroll', () => {
+        if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight) {
+            $('.profile-post-container-status-post:hidden').slice(0, 10).show().slideDown();
+        }
+    });
+}
 
 function viewAddPostModal() {
     //When the user clicks on the status form,
@@ -265,6 +280,10 @@ function deletePost(postId, profileLink) {
         // Close modal
         $('#post-modal-container-delete').css("display", "none");
     });
+}
+
+function loadPosts() {
+
 }
 
 async function deletePostById(postId, profileLink) {
