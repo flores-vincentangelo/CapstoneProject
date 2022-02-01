@@ -23,7 +23,6 @@ public class PostController: Controller
                 //gets comments for the post
                 postDetail.CommentsListObj = DbComments.GetCommentsByPost(postDetail.PostId);
                 
-                
                 postDetail.DoesUserLikesAPost = DbLikes.IsUserInLikersList(loggedInUserId, postDetail.LikesList);
                 return View("/Views/Posts/PostPage.cshtml", postDetail);
             }
