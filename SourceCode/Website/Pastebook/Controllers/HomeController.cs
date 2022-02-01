@@ -28,7 +28,7 @@ public class HomeController: Controller
                 profileOwner.User = DbUsers.GetUserByEmail(cookieEmail);
                 
                 // Get user's posts list  
-                var userPostsList = DbPosts.GetAllPostsByEmail(cookieEmail);
+                var userPostsList = DbPosts.GetAllPostsByUserId(user.UserId);
                 var friendsPostsList = new List<PostModel>();
                 var finalPostsList = new List<PostModel>();
 
@@ -39,10 +39,10 @@ public class HomeController: Controller
                 if(userFriendsListString != null) {
                     var userFriendsList = userFriendsListString.Split(',');
                     // Console.WriteLine($"Friends count of {cookieEmail}: {userFriendsList.Length}");
-                    foreach(var email in userFriendsList) {
+                    foreach(var userId in userFriendsList) {
                         // Console.WriteLine($"Friend's email: {email}"); 
-                        var friendPost = DbPosts.GetAllPostsByEmail(email);
-                        var count = friendPost.Count;
+                        var friendPost = DbPosts.GetAllPostsByUserId(Int32.Parse(userId));
+                        // var count = friendPost.Count;
                         if(friendPost != null) {
                             // friendsPostsList.Concat(friendPost).ToList();
                             friendsPostsList.AddRange(friendPost);
