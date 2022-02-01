@@ -41,7 +41,7 @@ public class DbNotifications
         UpdateLikesColumn(recieveLikeId, finalList);
     }
 
-    public static void InsertUserIntoCommentsNotifOfOtherUser(int commenterId, int commentedId)
+    public static void InsertUserIntoCommentsNotifOfOtherUser(int? commenterId, int? commentedId)
     {
         var notifData =GetNotificationsByUserId(commentedId);
         string finalList = AddIdToList(commenterId, notifData["Commenters"]);
@@ -84,7 +84,7 @@ public class DbNotifications
         }
     }
 
-    public static void UpdateCommentsColumns(int userId, string commentsData)
+    public static void UpdateCommentsColumns(int? userId, string commentsData)
     {
         using(var db = new SqlConnection(DB_CONNECTION_STRING))
         {
@@ -166,7 +166,7 @@ public class DbNotifications
             }
         }
     }
-    public static string AddIdToList(int userId, string? idListStr)
+    public static string AddIdToList(int? userId, string? idListStr)
     {
         if(String.IsNullOrEmpty(idListStr)){
             return userId.ToString();
