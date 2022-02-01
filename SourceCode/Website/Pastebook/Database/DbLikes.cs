@@ -37,18 +37,18 @@ public class DbLikes
         }
     }
 
-    public static string AddEmailtoLikesList(string emailToAdd, string? likesListStr)
+    public static string AddUserIdtoLikesList(int? userIdToAdd, string? likesListStr)
     {
         if(!String.IsNullOrEmpty(likesListStr))
         {
             var _likesListArr = likesListStr.Split(",");
             List<string> likesList = new List<string>(_likesListArr);
-            likesList.Add(emailToAdd);
+            likesList.Add(userIdToAdd.ToString());
             return String.Join(",",likesList);
         }
         else
         {
-            return emailToAdd;
+            return userIdToAdd.ToString();
         }
     }
 
@@ -61,25 +61,27 @@ public class DbLikes
         }
         else
         {
-            var emailArr = list.Split(',');
-            foreach (string email in emailArr)
+            var userIdArr = list.Split(',');
+            foreach (string userIdStr in userIdArr)
             {
-                UserModel userModel = DbUsers.GetUserByEmail(email);
+                int userId = int.Parse(userIdStr);
+                UserModel userModel = DbUsers.GetUserById(userId);
                 userListObj.Add(userModel);
             }
             return userListObj;
         }
     }
 
-    public static bool IsUserInLikersList(string cookieEmail, string? likesList)
+    public static bool IsUserInLikersList(int userIdToTest, string? likesListStr)
     {
-        if(String.IsNullOrEmpty(likesList))
+        if(String.IsNullOrEmpty(likesListStr))
         {
             return false;
         }
         else
-        {
-            return likesList.Contains(cookieEmail);
+        {   
+            List<string> likesList = new List<string>(likesListStr.Split(','));
+            return likesList.Contains(userIdToTest.ToString());
         }
     }
 }

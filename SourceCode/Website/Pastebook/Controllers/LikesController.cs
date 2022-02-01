@@ -10,7 +10,6 @@ public class LikesController: Controller
     [Route("/likes/{postId}")]
     public IActionResult GetLikers(int postId)
     { 
-        string? cookieEmail = HttpContext.Request.Cookies["email"];
         var list = DbPosts.GetPostById(postId).LikesList;
         List<UserModel> likersList = DbLikes.GetListAsUserObj(list);
         return Json(likersList);
@@ -20,12 +19,13 @@ public class LikesController: Controller
     [Route("/likes/{postId}")]
     public IActionResult LikesPost(int postId)
     {   
-        //Get the likers email Address
-        string emailAddress = HttpContext.Request.Cookies["email"];
+        //Liker
+        string likedAPost = HttpContext.Request.Cookies["email"];
+        int likedAPostId = DbUsers.GetUserByEmail(likedAPost).UserId;
         //
         string likersList = DbPosts.GetPostById(postId).LikesList;
-        //Adds liker's email to Person B 
-        string newLikersList = DbLikes.AddEmailtoLikesList(emailAddress, likersList);
+        //Adds liker's User Id to Person B 
+        string newLikersList = DbLikes.AddUserIdtoLikesList(likedAPostId, likersList);
         //Update the Database
         DbLikes.UpdateLikesListOfPost(postId, newLikersList);
         return Ok();
