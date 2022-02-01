@@ -33,15 +33,15 @@ public class HomeController: Controller
                 var finalPostsList = new List<PostModel>();
 
                 // Get user's friends list
-                var userFriendsListString = DbFriends.GetFriendsData(cookieEmail).FriendsList;
+                var userFriendsListString = DbFriends.GetFriendsData(user.UserId).FriendsList;
                 // Split to get individual email list
                 if(userFriendsListString != null) {
                     var userFriendsList = userFriendsListString.Split(',');
                     // Console.WriteLine($"Friends count of {cookieEmail}: {userFriendsList.Length}");
-                    foreach(var email in userFriendsList) {
+                    foreach(var userId in userFriendsList) {
                         // Console.WriteLine($"Friend's email: {email}"); 
-                        var friendPost = DbPosts.GetAllPostsByEmail(email);
-                        var count = friendPost.Count;
+                        var friendPost = DbPosts.GetAllPostsByEmail(DbUsers.GetUserById(int.Parse(userId)).EmailAddress);
+                        // var count = friendPost.Count;
                         if(friendPost != null) {
                             // friendsPostsList.Concat(friendPost).ToList();
                             friendsPostsList.AddRange(friendPost);
