@@ -10,7 +10,7 @@ public class DbComments
         DB_CONNECTION_STRING = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
     }
 
-    public static List<CommentsModel>? GetCommentsByPost(int postId)
+    public static List<CommentsModel>? GetCommentsByPost(int? postId)
     {
         List<CommentsModel> commentsList = new List<CommentsModel>();
         using(var db = new SqlConnection(DB_CONNECTION_STRING))

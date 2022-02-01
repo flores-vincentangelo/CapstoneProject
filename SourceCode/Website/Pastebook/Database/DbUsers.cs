@@ -111,7 +111,7 @@ public class DbUsers
         return user;
     }
 
-    public static UserModel? GetUserById(int id)
+    public static UserModel? GetUserById(int? id)
     {
         UserModel user = new UserModel();
         using(var db = new SqlConnection(DB_CONNECTION_STRING))
