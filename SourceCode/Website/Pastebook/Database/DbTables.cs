@@ -307,4 +307,38 @@ public class DbTables
             }
         }
     }
+
+    public static void CreateCommentsTable()
+    {
+        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var command = db.CreateCommand())
+            {
+                command.CommandText = 
+                   @"IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Comments' and xtype='U')
+                    CREATE TABLE Comments(
+                        UserId INTEGER,
+                        PostId INTEGER,
+                        CommentId INTEGER NOT NULL IDENTITY (1,1) PRIMARY KEY,
+                        CommentText TEXT);";
+                command.ExecuteNonQuery();
+                System.Console.WriteLine("Comments Table Created Successfully");
+            }
+        }
+    }
+
+    public static void DropCommentsTable()
+    {
+        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var command = db.CreateCommand())
+            {
+                command.CommandText = "DROP TABLE IF EXISTS Comments;";
+                command.ExecuteNonQuery();
+                System.Console.WriteLine("Comments Table deleted successfully!");
+            }
+        }
+    }
 }

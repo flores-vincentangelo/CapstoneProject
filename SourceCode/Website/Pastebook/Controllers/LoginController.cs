@@ -44,6 +44,6 @@ public class LoginController: Controller
     {
         string? cookieSessionId = HttpContext.Request.Cookies["sessionId"];
         DbSessions.DeleteSession(cookieSessionId);
-        return Ok("Session Deleted!");
+        return RedirectToAction("doLoginAction", "Login");
     }
 }

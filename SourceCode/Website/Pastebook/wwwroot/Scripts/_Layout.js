@@ -45,6 +45,7 @@ $(document).ready(function () {
     $(".layout-accountpanel-logout").click(() => {
         //delete sessions
         deleteSession();
+        window.location.replace("/login");
     });
 
     $(".layout-header-right-notifications").click(function (e) { 
@@ -61,14 +62,7 @@ async function deleteSession() {
     const response = await fetch(`/login`, {
         method: 'DELETE',
     });
-    if(response.ok){
-        //delete cookies
-        document.cookie = "email=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-        document.cookie = "sessionId=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-        document.cookie = "profilelink=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-        window.location.replace("/login");
-        location.reload();
-    }
+    location.reload();
 }
 
 async function SearchUsers(searchTerm){

@@ -17,6 +17,7 @@ public class ConfigureController: Controller
             DbTables.CreatePhotosTable(); //added by JP
             DbTables.CreatePostsTable(); //added by Jen
             DbTables.CreateNotificationsTable();
+            DbTables.CreateCommentsTable();
             return Ok("All Tables are Created!");
         }
         else if (config == "DropTables") {
@@ -27,6 +28,7 @@ public class ConfigureController: Controller
             DbTables.DropPhotosTable(); //added by JP
             DbTables.DropPostsTable(); //added by Jen
             DbTables.DropNotificationsTable();
+            DbTables.DropCommentsTable();
             return Ok("All Tables are Dropped");
         }
         else

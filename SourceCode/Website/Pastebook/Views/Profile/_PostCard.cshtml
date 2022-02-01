@@ -4,8 +4,6 @@
 }
 
 <link rel="stylesheet" type="text/css" href="./Styles/Profiles/_PostCard.css">
-<script src="./Scripts/_PostCard.js"></script>
-
 
 <div class="profile-post-container-status-post">
     <div class="profile-post-container-status-post-profile">
@@ -26,22 +24,61 @@
         <a href=@($"/posts/{Model.PostId}")><img src="@Model.Photo"></a>
     </div>
     <div class="profile-post-container-status-post-status">
-        <a id="post-container-status-likers" href="#"><span id="like">@Model.Likes Likes</span></a>
-        <span id="comment">@Model.Comment Comments</span>
+        @{
+            if(String.IsNullOrEmpty(Model.LikesList)) {
+                <a id="post-container-status-likers" onclick="openLikeModal(@Model.PostId)" href="#"><span id="like">Like</span></a>
+            }
+            else {
+                var likersList = Model.LikesList.Split(',');
+                <a id="post-container-status-likers" onclick="openLikeModal(@Model.PostId)" href="#"><span id="like">@likersList.Length Like/s</span></a>
+            } 
+        }
+        
+        @{
+            if(Model.CommentsListObj == null) {
+               <span id="comment">0 Comments</span>
+            }
+            else {
+                <span id="comment">@Model.CommentsListObj.Count Comments</span>
+            }
+        }        
     </div>
     <hr>
     <div class="profile-post-container-status-post-buttons">
-        <button class="post-button-like"><img src="./Images/like.png"><span id="like-post">Like</span></button>
-        <button class="post-button-comment"><img src="./Images/comment.png"><span
-                id="comment-post">Comment</span></button>
+
+        @{
+            if(Model.DoesUserLikesAPost == true)
+            {
+                <button class = "post-button-like liked" style = "background-color: #1877f2"><img src="./Images/like.png">Liked</button>
+            }
+            else {
+                <button id=@Model.PostId class="post-button-like"><img src="./Images/like.png"><span id="like-post">Like</span></button>
+            }
+        }
+  
+        
+        <button id=@Model.PostId class="post-button-comment"><img src="./Images/comment.png"><span id="comment-post">Comment</span></button>
     </div>
     <hr>
     <div class="profile-post-container-status-post-comments">
-        <img src="./Images/img_avatar.png">
+        @{
+            if(Model.CommentsListObj != null)
+            {
+                foreach (Models.CommentsModel commentWithDetails in Model.CommentsListObj)
+                {
+                    await Html.RenderPartialAsync("~/Views/Shared/_CommentCard.cshtml",commentWithDetails);
+                }
+            }
+            else
+            {
+                <p>Add a comment</p>
+            }
+        }
+        @* <img src="./Images/img_avatar.png">
         <div class="friend-details">
             <span id="friend-name">Friend Name</span><br>
             <span id="friend-comment">Comment goes here......</span>
-        </div>
+        </div> *@
     </div>
     <div id="post-modal-container-delete">
         <div id="post-modal-container-1-delete">
@@ -76,15 +113,14 @@
             </div>
         </div>
     </div>
-    <div id="post-modal-container-comment">
+    <div class="post-modal-container-comment" id=@("post-modal-container-comment-"+Model.PostId)>
         <div class="post-modal-container-1-comment">
             <div class="modal-container-title-comment">
-                <span id="modal-container-close-comment">&times;</span>
+                <span class="modal-container-close-comment">&times;</span>
             </div>
             <div class="modal-container-comment">
-                <form class="friend-comment-form">
-                    <input type="text" class="friend-comment" placeholder="Write a comment" name="comment"
-                        maxlength="1000">
+                <form id=@Model.PostId class="friend-comment-form" onsubmit="submitAddComment(event)">
+                    <input type="text" class="friend-comment" placeholder="Write a comment" name="comment" maxlength="1000">
                     <button class="friend-button-comment" type="submit">Post</button>
                 </form>
             </div>
@@ -92,22 +128,18 @@
     </div>
     <div id="post-modal-container-likers">
         <div class="post-modal-container-1-likers">
+            <span id="modal-container-close-likers">&times;</span>
+            <h3>People who liked</h3>
             <div class="modal-container-title-likers">
-                <span id="modal-container-close-likers">&times;</span>
-                <h3>People who liked</h3>
+                
             </div>
             <hr>
-            <div class="modal-container-likers">
+            @* <div class="modal-container-likers">
                 <img class="modal-container-likers-photo" src="../../Images/img_avatar.png">
-                <p id="modal-container-likers-name">Friend Name</p>
-            </div>
+               
+                <p id="modal-container-likers-name">Insert liker name here</p>       
+               
+            </div> *@
         </div>
     </div>
 </div>
-
-<script>
-    $('#@Model.PostId').click(() => {
-        var postId = document.getElementById("@Model.PostId")
-        console.log(postId.value);
-    });
-</script>
