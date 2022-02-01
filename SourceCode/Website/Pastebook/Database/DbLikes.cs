@@ -25,7 +25,7 @@ public class DbLikes
                     WHERE PostId = @postId;";
                 if(String.IsNullOrEmpty(likesList))
                 {
-                    command.Parameters.AddWithValue("@likesList", DBNull.Value);
+                    command.Parameters.AddWithValue("@likesList", "");
                 }
                 else
                 {
@@ -83,5 +83,20 @@ public class DbLikes
             List<string> likesList = new List<string>(likesListStr.Split(','));
             return likesList.Contains(userIdToTest.ToString());
         }
+    }
+
+    public static string? RemoveUserIdFromLikesList(int idToRemove, string likes)
+    {
+        var _likesArr = likes.Split(",");
+        List<string> likesList = new List<string>(_likesArr);
+        likesList.Remove(idToRemove.ToString());
+        if(likesList.Count == 0){
+            return null;
+        }
+        else
+        {
+            return String.Join(",",likesList);
+        }
+        
     }
 }
