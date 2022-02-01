@@ -20,6 +20,15 @@ $(document).ready(function () {
     // Hide all posts
     $('.profile-post-container-status-post').css("display", "none");
     showPostsInHome();
+
+    // Auto refresh
+    $.ajax({
+        type: 'GET',
+        url: '/',
+        success: function () {
+            setInterval('location.reload()', 60000); 
+        }
+    });
     
 });
 
@@ -28,9 +37,6 @@ function showPostsInHome() {
 
     // listen for scroll event and load more images if we reach the bottom of window
     window.addEventListener('scroll', () => {
-        console.log("window.scrollY: ", window.scrollY) //scrolled from top
-        console.log("window.innerHeight: ", window.innerHeight) //visible part of screen
-        console.log(document.documentElement.scrollHeight) //visible part of screen
         if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight) {
             console.log("bottom reached");
             $('.profile-post-container-status-post:hidden').slice(0, 10).show().slideDown();
