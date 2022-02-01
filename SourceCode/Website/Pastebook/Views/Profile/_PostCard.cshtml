@@ -26,11 +26,11 @@
     <div class="profile-post-container-status-post-status">
         @{
             if(String.IsNullOrEmpty(Model.LikesList)) {
-                <a id="post-container-status-likers" onclick="openLikeModal(@Model.PostId)" href="#"><span id="like">0 Likes</span></a>
+                <a id="post-container-status-likers" onclick="openLikeModal(@Model.PostId)" href="#"><span id="like">Like</span></a>
             }
             else {
                 var likersList = Model.LikesList.Split(',');
-                <a id="post-container-status-likers" onclick="openLikeModal(@Model.PostId)" href="#"><span id="like">@likersList.Length Likes</span></a>
+                <a id="post-container-status-likers" onclick="openLikeModal(@Model.PostId)" href="#"><span id="like">@likersList.Length Like/s</span></a>
             } 
         }
         
@@ -55,7 +55,7 @@
                 <button id=@Model.PostId class="post-button-like"><img src="./Images/like.png"><span id="like-post">Like</span></button>
             }
         }
-
+  
         
         <button id=@Model.PostId class="post-button-comment"><img src="./Images/comment.png"><span id="comment-post">Comment</span></button>
     </div>

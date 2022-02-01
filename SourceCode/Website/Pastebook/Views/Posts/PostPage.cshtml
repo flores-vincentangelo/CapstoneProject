@@ -37,8 +37,17 @@
                 <span>@Model.Caption</span>
             </div>
             <div class="post-container-right-status">
-                <a id="post-container-right-status-likers" href="#"><span id="like">@Model.Likes Likes</span></a>
-
+                @* <a id="post-container-right-status-likers" href="#"><span id="like">@Model.Likes Likes</span></a> *@
+                 @{
+                    if(String.IsNullOrEmpty(Model.LikesList)) {
+                        <a id="post-container-right-status-likers" onclick="openLikeModal(@Model.PostId)" href="#"><span id="like">Like</span></a>
+                    }
+                    else {
+                        var likersList = Model.LikesList.Split(',');
+                        <a id="post-container-right-status-likers" onclick="openLikeModal(@Model.PostId)" href="#"><span id="like">@likersList.Length Like/s</span></a>
+                    } 
+                }
+                
                 @{
                     if(Model.CommentsListObj == null) {
                     <span id="comment">0 Comments</span>
@@ -136,15 +145,15 @@
         </div>
         <div id="post-modal-container-likers">
             <div class="post-modal-container-1-likers">
-                <div class="modal-container-title-likers">
-                    <span id="modal-container-close-likers">&times;</span>
+                <span id="modal-container-close-likers">&times;</span>
                     <h3>People who liked</h3>
+                <div class="modal-container-title-likers">
                 </div>
                 <hr>
-                <div class="modal-container-likers">
+                @* <div class="modal-container-likers">
                     <img class="modal-container-likers-photo" src="../../Images/img_avatar.png">
                     <p id="modal-container-likers-name">Friend Name</p>
-                </div>
+                </div> *@
             </div>
         </div>
     </div>
