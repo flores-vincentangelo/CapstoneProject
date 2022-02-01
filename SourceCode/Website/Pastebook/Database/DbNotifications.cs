@@ -34,7 +34,7 @@ public class DbNotifications
         UpdateFriendsColumn(recieveFriendReqId,finalList);
     }
 
-    public static void InsertUserIntoLikesNotifOfOtherUser(int sentLikeId, int recieveLikeId)
+    public static void InsertUserIntoLikesNotifOfOtherUser(int sentLikeId, int? recieveLikeId)
     {
         var notifData = GetNotificationsByUserId(recieveLikeId);
         string finalList = AddIdToList(sentLikeId,notifData["Likers"]);
@@ -66,7 +66,7 @@ public class DbNotifications
         }
     }
 
-    public static void UpdateLikesColumn(int userId, string likesData)
+    public static void UpdateLikesColumn(int? userId, string likesData)
     {
         using(var db = new SqlConnection(DB_CONNECTION_STRING))
         {
@@ -102,7 +102,7 @@ public class DbNotifications
         }
     }
 
-    public static Dictionary<string,string>? GetNotificationsByUserId(int userId)
+    public static Dictionary<string,string>? GetNotificationsByUserId(int? userId)
     {
         Dictionary<string, string> notifObj = new Dictionary<string, string>();
         using(var db = new SqlConnection(DB_CONNECTION_STRING))
@@ -147,7 +147,7 @@ public class DbNotifications
         }
        
     }
-    public static void DeleteNotificationsByUserId(int userId)
+    public static void DeleteNotificationsByUserId(int? userId)
     {
         using(var db = new SqlConnection(DB_CONNECTION_STRING))
         {

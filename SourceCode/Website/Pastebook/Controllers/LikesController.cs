@@ -28,6 +28,11 @@ public class LikesController: Controller
         string newLikersList = DbLikes.AddUserIdtoLikesList(likedAPostId, likersList);
         //Update the Database
         DbLikes.UpdateLikesListOfPost(postId, newLikersList);
+
+        //user whose post has been liked. Person Liked
+        int? likeRecipientId = DbPosts.GetPostById(postId).UserId;
+        //gives notification to person Liked
+        DbNotifications.InsertUserIntoLikesNotifOfOtherUser(likedAPostId, likeRecipientId);
         return Ok();
     }
 
