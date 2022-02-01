@@ -38,11 +38,11 @@ public class ProfilesController: Controller
                     profileOwner.FriendsList = DbFriends.GetListAsUserObj(profileOwnerFriends.FriendsList);
 
                     var postList = DbPosts.GetAllPostDetails(profileLink);
-                    profileOwner.PostsList = postList.OrderByDescending( item => item.DatePosted ).ToList();
                     
                     //checks to see if the user has any posts
-                    if(profileOwner.PostsList != null)
+                    if(postList != null)
                     {
+                        profileOwner.PostsList = postList.OrderByDescending( item => item.DatePosted ).ToList();
                         //iterates through each post
                         foreach (PostModel post in profileOwner.PostsList)
                         {
