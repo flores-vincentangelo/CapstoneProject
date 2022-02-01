@@ -37,11 +37,12 @@ public class ProfilesController: Controller
                     profileOwner.IsProfileOwnerInFriendReqList = DbFriends.IsInFriendReqList(profileOwner.User.UserId,loggedInUserFriendsData.FriendRequests);
                     profileOwner.FriendsList = DbFriends.GetListAsUserObj(profileOwnerFriends.FriendsList);
 
-                    profileOwner.PostsList = DbPosts.GetAllPostDetails(profileLink);
-
+                    var postList = DbPosts.GetAllPostDetails(profileLink);
+                    
                     //checks to see if the user has any posts
-                    if(profileOwner.PostsList != null)
+                    if(postList != null)
                     {
+                        profileOwner.PostsList = postList.OrderByDescending( item => item.DatePosted ).ToList();
                         //iterates through each post
                         foreach (PostModel post in profileOwner.PostsList)
                         {
