@@ -27,34 +27,27 @@ public class DbNotifications
             }
         }
     }
-    public static void InsertUserIntoFriendReqNotifOfOtherUser(int sentFriendReqEmail, int recieveFriendReqEmail)
+    public static void InsertUserIntoFriendReqNotifOfOtherUser(int sentFriendReqId, int recieveFriendReqId)
     {
-        string? friendNotif = GetFriendsColumn(recieveFriendReqEmail);
-        string finalList = AddEmailToList(sentFriendReqEmail,friendNotif);
-        UpdateFriendsColumn(recieveFriendReqEmail,finalList);
+        var notifData = GetNotificationsByUserId(recieveFriendReqId);
+        string finalList = AddIdToList(sentFriendReqId,notifData["FriendRequests"]);
+        UpdateFriendsColumn(recieveFriendReqId,finalList);
     }
-    public static string? GetFriendsColumn(int userId)
+
+    public static void InsertUserIntoLikesNotifOfOtherUser(int sentLikeId, int recieveLikeId)
     {
-        string? friendList = null;
-        using(var db = new SqlConnection(DB_CONNECTION_STRING))
-        {
-            db.Open();
-            using(var cmd = db.CreateCommand())
-            {
-                cmd.CommandText = 
-                    @"SELECT FriendRequest
-                    FROM Notifications
-                    WHERE UserId = @userid;";
-                cmd.Parameters.AddWithValue("@userid",userId);
-                var reader = cmd.ExecuteReader();
-                while(reader.Read())
-                {
-                    friendList = reader.IsDBNull(0) ? null : reader.GetString(0);
-                }
-            }
-        }
-        return friendList;
+        var notifData = GetNotificationsByUserId(recieveLikeId);
+        string finalList = AddIdToList(sentLikeId,notifData["Likers"]);
+        UpdateLikesColumn(recieveLikeId, finalList);
     }
+
+    public static void InsertUserIntoCommentsNotifOfOtherUser(int commenterId, int commentedId)
+    {
+        var notifData =GetNotificationsByUserId(commentedId);
+        string finalList = AddIdToList(commenterId, notifData["Commenters"]);
+        UpdateCommentsColumns(commentedId, finalList);
+    }
+
     public static void UpdateFriendsColumn(int userId, string friendsData)
     {
         using(var db = new SqlConnection(DB_CONNECTION_STRING))
@@ -88,7 +81,24 @@ public class DbNotifications
                 cmd.Parameters.AddWithValue("@userid",userId);
                 cmd.ExecuteNonQuery();
             }
+        }
+    }
 
+    public static void UpdateCommentsColumns(int userId, string commentsData)
+    {
+        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var cmd = db.CreateCommand())
+            {
+                cmd.CommandText = 
+                    @"UPDATE Notifications
+                    SET CommentOnPost = @comment
+                    WHERE UserId = @userid;";
+                cmd.Parameters.AddWithValue("@comment",commentsData);
+                cmd.Parameters.AddWithValue("@userid", userId);
+                cmd.ExecuteNonQuery();
+            }
         }
     }
 
@@ -156,7 +166,7 @@ public class DbNotifications
             }
         }
     }
-    public static string AddEmailToList(int userId, string? idListStr)
+    public static string AddIdToList(int userId, string? idListStr)
     {
         if(String.IsNullOrEmpty(idListStr)){
             return userId.ToString();
