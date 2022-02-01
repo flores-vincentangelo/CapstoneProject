@@ -29,10 +29,10 @@
                     {
                         foreach (Models.PostModel post in postList)
                         {
-                            post.PosterPhoto = Model.User.Photo;
+                            @* post.PosterPhoto = Model.User.Photo;
                             post.PosterFirstName = Model.User.FirstName;
                             post.PosterLastName = Model.User.LastName;
-                            post.Poster = Model.User;
+                            post.Poster = Model.User; *@
                             await Html.RenderPartialAsync("_PostCard.cshtml", post);
                         }
                     }
