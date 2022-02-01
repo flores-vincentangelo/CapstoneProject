@@ -151,16 +151,34 @@ async function modifyProfile(event, jsonData) {
         },
         body: jsonData
     });
-    if(response.status == 200) {
-        alert("Profile modified successfully!");
-        // var userData = await response.json();
-        // localStorage.setItem('User', JSON.stringify(userData));
-    }
+    // if(response.status == 200) {
+    //     // alert("Profile modified successfully!");
+    //     // var userData = await response.json();
+    //     // localStorage.setItem('User', JSON.stringify(userData));
+    // }
 }
 
-const getCookieValue = (name) => (
-    document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || ''
-)
+// const getCookieValue = (name) => (
+//     document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || ''
+// )
+
+// From W3Schools
+function getCookieValue(cname) {
+    let name = cname + "="; // cookieName=
+    // Decode the cookie string, to handle cookies with special characters, e.g. '$'
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1); // cookieName=cookieValue
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length); // cookieValue name
+        }
+    }
+    return "";
+}
 
 function showProfileExt() {
     $('#ext-about-btn').click(() => {
