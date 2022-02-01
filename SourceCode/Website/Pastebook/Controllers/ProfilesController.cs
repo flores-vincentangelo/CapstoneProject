@@ -49,6 +49,7 @@ public class ProfilesController: Controller
                             //and assigns them to the model
                             post.CommentsListObj = DbComments.GetCommentsByPost(post.PostId);
                             post.DoesUserLikesAPost = DbLikes.IsUserInLikersList(cookieEmail, post.LikesList);
+                            post.Poster = DbUsers.GetUserByEmail(post.EmailAddress);
                         }
                     }
                     
