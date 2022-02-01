@@ -9,6 +9,7 @@ public class PostController: Controller
     [Route("/posts/{postId}")]
     public IActionResult GetPostById(int postId)
     {
+        string? cookieEmail = HttpContext.Request.Cookies["email"];
         string? cookieProfileLink = HttpContext.Request.Cookies["profilelink"];
         string? cookieSessionId = HttpContext.Request.Cookies["sessionId"];
         if(cookieSessionId != null)
@@ -16,10 +17,13 @@ public class PostController: Controller
             SessionsModel? sessionModel = DbSessions.GetSessionById(cookieSessionId);
             if(sessionModel != null)
             {
+                int loggedInUserId = DbUsers.GetUserByEmail(cookieEmail).UserId;
                 var postDetail = DbPosts.GetPostById(postId);
                 postDetail.Poster = DbUsers.GetUserById(postDetail.UserId);
                 //gets comments for the post
                 postDetail.CommentsListObj = DbComments.GetCommentsByPost(postDetail.PostId);
+                
+                postDetail.DoesUserLikesAPost = DbLikes.IsUserInLikersList(loggedInUserId, postDetail.LikesList);
                 return View("/Views/Posts/PostPage.cshtml", postDetail);
             }
         }

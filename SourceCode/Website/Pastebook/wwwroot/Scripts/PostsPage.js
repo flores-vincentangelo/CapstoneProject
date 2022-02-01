@@ -43,7 +43,7 @@
     });
 
     //When a friend likes a post
-    $("#post-container-right-like").click(function (e) {
+    $(".post-container-right-like").click(function (e) {
         var postId = $(this).attr("id");
         console.log(postId);
         LikedPost(postId);
