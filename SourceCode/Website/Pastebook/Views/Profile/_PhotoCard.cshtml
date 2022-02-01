@@ -10,19 +10,20 @@
     </div>
 
     @* <button class="photocard-del-btn" onclick="DeletePhoto(@Model.PhotoId);" >Delete Photo</button> *@
-    <button class="photocard-del-btn" onclick="OpenDeletePhotoModal(@Model.PhotoId);" >Delete Photo</button>
+    <button class="photocard-del-btn" onclick="OpenDeletePhotoModal(@Model.PhotoId);" ><img id="trash" src="./Images/trash.png"></button>
 </div>
 
 <div>    
     <div class="photo-delete-modal" id="photo-delete-modal-@Model.PhotoId" style="display: none;">
         <div class="modal-container">
-            <p class="photo-delete-close-modal">&times;</p>
+            <span class="photo-delete-close-modal">&times;</span>
             <h3 class="photo-delete-title-modal">
                 Delete Photo?
             </h3>
-            <hr>
-            <button class="photo-delete-btn photo-delete-confirm-btn" onclick="DeletePhoto(@Model.PhotoId);" >Confirm</button>
-            <button class="photo-delete-btn photo-delete-cancel-btn" >Cancel</button>
+            <div id="photo-delete-btns">
+                <button class="photo-delete-btn photo-delete-confirm-btn" id="photo-delete-confirm-btn" onclick="DeletePhoto(@Model.PhotoId);" >Confirm</button>
+                <button class="photo-delete-btn photo-delete-cancel-btn" id="photo-delete-cancel-btn" >Cancel</button>
+            </div>
         </div>
     </div>
 </div>

@@ -250,7 +250,7 @@ function OpenDeleteAlbumModal(albumId) {
     }
 
     // When the user clicks on the "Cancel" button,
-    $('.album-delete-cancel-btn').click(() => {
+    $('#album-delete-cancel-btn').click(() => {
         // Close modal
         $(`#album-delete-modal-${albumId}`).css("display", "none");
     });

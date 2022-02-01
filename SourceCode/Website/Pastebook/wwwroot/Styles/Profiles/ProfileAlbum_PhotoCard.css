@@ -4,14 +4,17 @@
     border-radius: 8px;
     width: 240px;
     height: 240px;
-    padding: 5px;
-    /* margin: 0; */
+    padding: 10px 10px 5px 10px;
+    margin: 10px 10px 5px 10px;
     margin-bottom: 5px;
     align-items: center;
     /* flex: 1; */
 }
+.photocard-main-container #trash {
+    width: 6%;
+    height: auto;
+}
 .photocard-image-container {
-    border: #000 solid 1px;
     border-radius: 8px;
     height: 210px;
 }
@@ -35,14 +38,14 @@
     font-size: 12px;
     cursor: pointer;
     border: none;
-    padding: 5px;
+    padding: 3px;
     color: #1877f2;
     background: #f3f3f300;
 }
 .photocard-del-btn:hover,
 .photocard-del-btn:focus {
     cursor: pointer;
-    background-color: #dfdfdf;
+    background-color: rgba(156, 154, 154,0.5);
     color: #f00;
 }
 
@@ -64,16 +67,19 @@
     padding: 20px;
     border: 1px solid #888;
     border-radius: 12px;
-    width: 40%;
+    width: 30%;
 }
 .photo-delete-title-modal {
     text-align: center;
     color: #ff0000;
+    margin-top: 7%;
+    font-size: 13px;
+    padding-left: 7.5%;
 }
 .photo-delete-close-modal {
     color: #aaaaaa;
-    /* float: right; */
-    font-size: 36px;
+    float: right;
+    font-size: 25px;
     font-weight: bold;
     text-align: end;
 }
@@ -82,6 +88,13 @@
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+
+#photo-delete-btns{
+    display: flex;
+    justify-content: center;
+    font-size: 13px;
+    margin-top: 10px;
 }
 .photo-delete-btn {
     width: 50%;
@@ -92,4 +105,32 @@
 }
 .photo-delete-cancel-btn {
     float: left;
+}
+#photo-delete-confirm-btn {
+    width: 20%;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 2px;
+    background-color: #5ea4ff;
+    color: white;
+}
+#photo-delete-confirm-btn:hover {
+    color: white;
+    background-color: #006af5;
+}
+#photo-delete-cancel-btn {
+    width: 20%;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 2px;
+    color: white;
+    background-color: rgb(255, 92, 92);
+}
+#photo-delete-cancel-btn:hover {
+    color: white;
+    background-color: red;
 }
