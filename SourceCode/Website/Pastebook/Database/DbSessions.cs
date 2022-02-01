@@ -122,7 +122,7 @@ public class DbSessions
         DateTime readableUnixDate = new System.DateTime(1970, 1, 1).AddSeconds(sessionCreationDateUnix);
         DateTime now = DateTime.Now;
         DateTime expiryDate = readableUnixDate.AddDays(3);
-        if(readableUnixDate >= expiryDate) return true; 
+        if(now >= expiryDate) return true; 
         else return false;
     }
 }
