@@ -49,6 +49,13 @@
         LikedPost(postId);
     });
 
+    //When a friend unlikes a post
+    $(".post-container-right-unlike").click(function (e) {
+        var postId = $(this).attr("id");
+        console.log(postId);
+        UnlikedPost(postId);
+    });
+
 });
 
 function modifyPhoto() { 
@@ -187,6 +194,15 @@ async function SendCommentToController(jsonObj){
 }
 async function LikedPost(postId) {
     const response = await fetch(`/likes/${postId}`, {
+        method: "PATCH"
+    });
+    if(response.ok){
+        location.reload();
+    }
+}
+
+async function UnlikedPost(postId) {
+    const response = await fetch(`/unlike/${postId}`, {
         method: "PATCH"
     });
     if(response.ok){

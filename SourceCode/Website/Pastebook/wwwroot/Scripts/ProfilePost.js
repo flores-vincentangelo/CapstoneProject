@@ -57,6 +57,13 @@ $(document).ready(() => {
         console.log(postId);
         LikedPost(postId);
     });
+
+    //When a friend unlikes a post
+    $(".post-button-unlike").click(function (e) {
+        var postId = $(this).attr("id");
+        console.log(postId);
+        UnlikedPost(postId);
+    });
 });
 
 function viewAddPostModal() {
@@ -108,7 +115,6 @@ async function addPostToProfile(event, jsonData) {
         body: jsonData
     });
     if(response.status == 200) {
-        alert("Post successfully added!");
         $('#modal-container-photo-img').attr('src', "");
     }
 }
@@ -167,6 +173,15 @@ async function LikedPost(postId) {
     });
     if(response.ok){
         location.reload(); 
+    }
+}
+
+async function UnlikedPost(postId) {
+    const response = await fetch(`/unlike/${postId}`, {
+        method: "PATCH"
+    });
+    if(response.ok){
+        location.reload();
     }
 }
 
