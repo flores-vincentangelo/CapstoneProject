@@ -92,7 +92,15 @@ public class DbSessions
                 
             }
         }
-        return session;
+        if(IsSessionExpired(session.LastLogin))
+        {
+            DeleteSession(session.Id);
+            return null;
+        }
+        else
+        {
+            return session;
+        }
     }
 
     public static void DeleteSession(string Id)
@@ -107,5 +115,14 @@ public class DbSessions
                 command.ExecuteNonQuery(); 
             }
         }
+    }
+
+    public static bool IsSessionExpired(long sessionCreationDateUnix)
+    {
+        DateTime readableUnixDate = new System.DateTime(1970, 1, 1).AddSeconds(sessionCreationDateUnix);
+        DateTime now = DateTime.Now;
+        DateTime expiryDate = readableUnixDate.AddDays(3);
+        if(readableUnixDate >= expiryDate) return true; 
+        else return false;
     }
 }
