@@ -14,19 +14,26 @@
   height: 100vh;
 }
 .friends-sidepanel-title {
-  font-size: 2em;
+  font-size: 20px;
   font-weight: bold;
+  margin: 10px 15px;
 }
 .friends-sidepanel-link {
   vertical-align: middle;
   height: 5%;
   display: flex;
   align-items: center;
+  margin: 5px 10px;
+  text-decoration: none;
+  color: #696868;
 }
 .friends-sidepanel-link-icon {
   height: 30px;
   width: auto;
   margin-right: 10px;
+}
+.friends-sidepanel-link:hover {
+  color: #1877f2;
 }
 .friends-main {
   background-color: #e9ebee;

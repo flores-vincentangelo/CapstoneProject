@@ -27,10 +27,37 @@
 
         & > a{
             margin-bottom: 10px;
+            text-decoration: none;
+            color: rgb(105, 104, 104);
 
             & > div{
                 display: flex;
                 align-items: center;
+            }
+
+            &:hover{
+                color: #1877f2;
+            }
+        }
+
+        &-friendslink{
+            display: flex;
+
+            &-icon{
+                width: 50px;
+                height: 50px;
+
+                & img{
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                    border-radius: 50%;
+                    background-color: rgb(202, 202, 211);
+                }
+            }
+
+            &-name{
+                padding: 10px;
             }
         }
 
