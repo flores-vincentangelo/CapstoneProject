@@ -26,13 +26,13 @@ public class HomeController: Controller
                 UserModel user = DbUsers.GetUserByEmail(cookieEmail);
 
                 profileOwner.User = DbUsers.GetUserByEmail(cookieEmail);
+                int loggedInUserId = DbUsers.GetUserByEmail(cookieEmail).UserId;
                 
                 // Get user's posts list  
-                var userPostsList = DbPosts.GetAllPostsByUserId(user.UserId);
+                var userPostsList = DbPosts.GetAllPostsByUserId(loggedInUserId);
                 var friendsPostsList = new List<PostModel>();
                 var finalPostsList = new List<PostModel>();
 
-                int loggedInUserId = DbUsers.GetUserByEmail(cookieEmail).UserId;
                 // Get user's friends list
                 var userFriendsListString = DbFriends.GetFriendsData(loggedInUserId).FriendsList;
                 // Split to get individual email list
