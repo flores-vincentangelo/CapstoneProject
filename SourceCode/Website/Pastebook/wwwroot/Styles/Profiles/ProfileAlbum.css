@@ -206,6 +206,9 @@
     flex-direction: column;
     flex-wrap: wrap;
 }
+.photos-card-container hr {
+    width: 45%;
+}
 .photos-card-title {
     display: flex;
     flex-direction: column;
@@ -268,6 +271,46 @@
 .photos-card-edit-btn:hover,
 .photos-card-edit-btn:focus {
     cursor: pointer;
+    color: white;
+    background-color: #006af5;
+}
+.photos-card-btn-container-btns{
+    display: flex;
+    justify-content: center;
+    font-size: 13px;
+    margin-top: 10px;
+    margin: auto 30%;
+}
+/* #photo-delete-btn{
+    width: 30%;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 2px;
+    color: white;
+    background-color: rgb(255, 92, 92);
+    border-radius: 5px;
+    margin-right: 10px;
+} */
+#photo-add-btn,
+#photo-delete-btn {
+    width: 40%;
+    border-radius: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 2px;
+    background-color: #5ea4ff;
+    color: white;
+}
+/* #photo-delete-btn:hover {
+    color: white;
+    background-color: red;
+} */
+#photo-add-btn:hover,
+#photo-delete-btn:hover {
     color: white;
     background-color: #006af5;
 }

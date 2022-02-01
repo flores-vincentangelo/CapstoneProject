@@ -125,8 +125,10 @@
 
                             <div class="photos-card-btn-container">
                                 <hr>
-                                <button class="photo-btn add-new-photo" id="photo-add-btn">Add New Photo</button>
-                                <button class="photo-btn del-album-btn" onclick="OpenDeleteAlbumModal(@album.AlbumId);" >Delete Album</button>
+                                <div class="photos-card-btn-container-btns">
+                                    <button class="photo-btn add-new-photo" id="photo-add-btn">Add New Photo</button>
+                                    <button class="photo-btn del-album-btn" id="photo-delete-btn" onclick="OpenDeleteAlbumModal(@album.AlbumId);" >Delete Album</button>
+                                </div>
                                 <hr>
                             </div>
 
