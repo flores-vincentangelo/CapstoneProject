@@ -61,6 +61,20 @@ public class RegisterController : Controller
 
         DbUsers.InsertUser(model);
         DbUsers.SendVerificationEmail(model);
+
+        int userId = DbUsers.GetUserByEmail(model.EmailAddress).UserId;
+
+        FriendsModel? isFriendsInitialized = DbFriends.GetFriendsData(userId);
+        var isNotificationsInitialized = DbNotifications.GetNotificationsByUserId(userId);
+        if(isFriendsInitialized == null)
+        {
+            DbFriends.InitializeFriends(userId);
+        }
+
+        if(isNotificationsInitialized == null)
+        {
+            DbNotifications.InitializeNotifications(userId);
+        }
         return View("Views/Register/RegisteredSuccess.cshtml");
     }
 }
