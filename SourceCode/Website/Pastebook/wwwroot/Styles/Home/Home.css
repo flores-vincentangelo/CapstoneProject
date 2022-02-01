@@ -16,10 +16,32 @@
 }
 .home-body-leftsidepanel > a {
   margin-bottom: 10px;
+  text-decoration: none;
+  color: #696868;
 }
 .home-body-leftsidepanel > a > div {
   display: flex;
   align-items: center;
+}
+.home-body-leftsidepanel > a:hover {
+  color: #1877f2;
+}
+.home-body-leftsidepanel-friendslink {
+  display: flex;
+}
+.home-body-leftsidepanel-friendslink-icon {
+  width: 50px;
+  height: 50px;
+}
+.home-body-leftsidepanel-friendslink-icon img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  background-color: #cacad3;
+}
+.home-body-leftsidepanel-friendslink-name {
+  padding: 10px;
 }
 .home-body-leftsidepanel-profilelink-picture {
   height: 50px;

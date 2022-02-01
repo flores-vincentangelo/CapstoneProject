@@ -32,8 +32,9 @@
         height: 100vh;
 
         &-title{
-            font-size: 2em;
+            font-size: 20px;
             font-weight: bold;
+            margin: 10px 15px;
         }
 
         &-link{
@@ -41,10 +42,16 @@
             height: 5%;
             display: flex;
             align-items: center;
+            margin: 5px 10px;
+            text-decoration: none;
+            color: rgb(105, 104, 104);
             &-icon{
                 height: 30px;
                 width: auto;
                 margin-right: 10px;
+            }
+            &:hover{
+                color: #1877f2;
             }
         }
     }
