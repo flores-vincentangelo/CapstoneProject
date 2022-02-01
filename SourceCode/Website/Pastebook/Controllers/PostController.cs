@@ -17,12 +17,9 @@ public class PostController: Controller
             if(sessionModel != null)
             {
                 var postDetail = DbPosts.GetPostById(postId);
-                var poster = DbUsers.GetUserByEmail(postDetail.EmailAddress);
-                
-                postDetail.Poster = poster;
+                postDetail.Poster = DbUsers.GetUserById(postDetail.UserId);
                 //gets comments for the post
                 postDetail.CommentsListObj = DbComments.GetCommentsByPost(postDetail.PostId);
-                
                 return View("/Views/Posts/PostPage.cshtml", postDetail);
             }
         }
@@ -35,7 +32,7 @@ public class PostController: Controller
     {   
         string? cookieEmail = HttpContext.Request.Cookies["email"];
         string? cookieProfileLink = HttpContext.Request.Cookies["profilelink"];
-        post.EmailAddress = cookieEmail;
+        post.UserId = DbUsers.GetUserByEmail(cookieEmail).UserId;
         post.ProfileLink = cookieProfileLink;
         post.DatePosted = (long)((System.DateTime.Now.Subtract(new System.DateTime(1970, 1, 1))).TotalSeconds);
 

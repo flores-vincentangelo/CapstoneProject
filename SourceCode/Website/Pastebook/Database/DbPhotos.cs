@@ -227,7 +227,7 @@ public class DbPhotos
         }
     }
 
-    public static void UpdatePostIdByPhotoId(int photoId, int postId)
+    public static void UpdatePostIdByPhotoId(int? photoId, int? postId)
     {
         PhotoModel photo = new PhotoModel();
         using (var db = new SqlConnection(DB_CONNECTION_STRING))
