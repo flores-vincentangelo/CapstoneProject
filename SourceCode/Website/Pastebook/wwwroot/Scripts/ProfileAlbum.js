@@ -75,11 +75,10 @@ function AddNewPhoto() {
         // Open modal
         $('.photo-add-modal').css("display","flex");
         // Reset input form
-        // $('#form-add-photo').trigger("reset");
+        $('#form-add-photo').trigger("reset");
         const file = document.getElementById("form-add-photo");
         file.value = '';
         $("#myPhoto").val(null);
-        // console.log("revise 4");
         // $("#form-add-photo").val(null);
         $('#album-photo-modal-img').attr('src', "./Images/img_avatar.png");
     });
@@ -88,20 +87,12 @@ function AddNewPhoto() {
     $('#add-photo-cancel-btn').click(() => {
         // Close modal
         $('.photo-add-modal').css("display","none");
-        // Reset input form
-        // $("#myForm").val("");
-        // $("#form-add-photo").val(null);
-        // $('#album-photo-modal-img').attr('src', "./Images/img_avatar.png");
     });
 
     // When the user clicks on the "x",
     $('#photo-add-close-modal').click(() => {
         // Close modal
         $('.photo-add-modal').css("display","none");
-        // Reset input form
-        // $("#myForm").val("");
-        // $("#form-add-photo").val(null);
-        // $('#album-photo-modal-img').attr('src', "./Images/img_avatar.png");
     });
 
     // When the user clicks anywhere outside of the modal
@@ -109,10 +100,6 @@ function AddNewPhoto() {
         if (event.target == document.getElementById("photo-add-modal")) {
             // Close modal
             $('.photo-add-modal').css("display","none");
-            // Reset input form
-            // $("#myForm").val("");
-            // $("#form-add-photo").val(null);
-            // $('#album-photo-modal-img').attr('src', "./Images/img_avatar.png");
         }
     }
 
