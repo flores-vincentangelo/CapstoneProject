@@ -146,19 +146,6 @@ function openCommentModal() {
     });
 }
 
-function openLikeModal() {
-    $('#post-container-right-status-likers').click(() => {
-        // show edit form 
-        $('#post-modal-container-likers').css("display", "flex");
-    });
-
-    // When the user clicks on the "x",
-    $('#modal-container-close-likers').click(() => {
-        // Close modal
-        $('#post-modal-container-likers').css("display", "none");
-    });
-}
-
 async function deletePostById(postId, profileLink) {
 
     const response = await fetch(`/posts/${postId}`, {

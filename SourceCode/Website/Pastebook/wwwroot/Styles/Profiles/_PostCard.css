@@ -123,8 +123,9 @@
 .profile-post-container-status-post-photo img {
     width: 39vw;
     height: auto;
-    margin-right: 10%;
+    /* margin-right: 10%; */
     margin-top: 2%;
+    object-fit: cover;
 }
 
 .profile-post-container-status-post-comments {
