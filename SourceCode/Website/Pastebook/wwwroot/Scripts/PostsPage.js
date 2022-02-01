@@ -1,12 +1,12 @@
-$(document).ready(function () {
+ $(document).ready(function () {
     var modelObj = JSON.parse(model.replace(/&quot;/g,"\""));
-    console.log(modelObj)
+    // console.log(modelObj)
 
     editPost();
     deletePost(modelObj);
     modifyPhoto();
     openCommentModal();
-    openLikeModal();
+    // openLikeModal();
 
     $('.post-container-right-action-close').click(() => {
         history.back();
@@ -40,6 +40,13 @@ $(document).ready(function () {
         //close modal
         $('#post-modal-container-update').css("display", "none");
         location.reload();
+    });
+
+    //When a friend likes a post
+    $(".post-container-right-like").click(function (e) {
+        var postId = $(this).attr("id");
+        console.log(postId);
+        LikedPost(postId);
     });
 
 });
@@ -125,15 +132,17 @@ function deletePost(modelObj) {
 }
 
 function openCommentModal() {
-    $('.post-container-right-comment').click(() => {
+    $('.post-container-right-comment').click(function() {
+        var postId = $(this).attr("id");
+        console.log(postId);
         // show edit form 
-        $('#post-modal-container-comment').css("display", "flex");
+        $(`#post-modal-container-comment-${postId}`).css("display", "flex");
     });
 
     // When the user clicks on the "x",
     $('#modal-container-close-comment').click(() => {
         // Close modal
-        $('#post-modal-container-comment').css("display", "none");
+        $('.post-modal-container-comment').css("display", "none");
     });
 }
 
@@ -160,3 +169,89 @@ async function deletePostById(postId, profileLink) {
     }
 }
 
+function submitAddComment(e){
+    e.preventDefault();
+    var postId = $(e.target).attr("id");
+    const formData = new FormData(e.target);
+    const formDataObj = Object.fromEntries(formData.entries());
+    // console.log(e.target);
+    // console.log(postId);
+    // console.log(formDataObj);
+    const jsonObj = {
+        PostId: postId,
+        CommentText: formDataObj.comment
+    }
+    SendCommentToController(jsonObj)
+}
+
+async function SendCommentToController(jsonObj){
+    const response = await fetch("/comments", {
+        method: "POST",
+        headers: {
+            "content-Type": "application/json"
+        },
+        body: JSON.stringify(jsonObj)
+    });
+    if(response.ok){
+        // alert("Comment Added");
+        $('.post-modal-container-comment').css("display", "none");
+        location.reload();
+    }
+}
+async function LikedPost(postId) {
+    const response = await fetch(`/likes/${postId}`, {
+        method: "PATCH"
+    });
+    if(response.ok){
+        location.reload();
+    }
+}
+
+async function GetLikers(postId) {
+    const response = await fetch(`/likes/${postId}`, {
+        method: "GET"
+    });
+    if (response.ok) {
+        var data = await response.json();
+        $(".modal-container-title-likers").empty();
+        if (data !=null)
+        { 
+            data.forEach((item,index) =>{
+                AddLikersToPage(item.photo, item.firstName, item.lastName);
+            });
+        }
+        else {
+            var noData = "<div>No likers</div>"
+            $(".modal-container-title-likers").append(noData);
+        }
+    }
+}
+
+function AddLikersToPage(photo, firstName, lastName) {
+    var likersModal = 
+    `<div class="modal-container-likers">
+        <img class="modal-container-likers-photo" src="${photo}">
+        <p id="modal-container-likers-name">${firstName} ${lastName}</p>       
+    </div>`;
+    $(".modal-container-title-likers").append(likersModal);
+}
+
+function openLikeModal(postId) {
+    // $('#post-container-status-likers').click((e) => {
+    //     // show edit form 
+    //     $('#post-modal-container-likers').css("display", "flex");
+    // });
+    //show edit form 
+        $('#post-modal-container-likers').css("display", "flex");
+        console.log(postId);
+        GetLikers(postId);
+    // When the user clicks on the "x",
+    $('#modal-container-close-likers').click(() => {
+        // Close modal
+        $('#post-modal-container-likers').css("display", "none");
+    });
+}
+
+// function showLikeModal(postId) {
+//     console.log(postId)
+// }

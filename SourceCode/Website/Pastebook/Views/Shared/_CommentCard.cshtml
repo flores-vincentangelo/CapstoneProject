@@ -1,0 +1,10 @@
+@model Models.CommentsModel
+<div class="commentcard">
+    <div class="commentcard-picture">
+        <img src=@Model.CommenterUserModel.Photo>
+    </div>
+    <div class="commentcard-contents">
+        <div class="commentcard-contents-commenter">@Model.CommenterUserModel.FirstName @Model.CommenterUserModel.LastName</div>
+        <div class="commentcard-contents-comment">@Model.CommentText</div>
+    </div>
+</div>

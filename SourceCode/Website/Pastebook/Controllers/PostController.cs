@@ -20,6 +20,8 @@ public class PostController: Controller
                 var poster = DbUsers.GetUserByEmail(postDetail.EmailAddress);
                 
                 postDetail.Poster = poster;
+                //gets comments for the post
+                postDetail.CommentsListObj = DbComments.GetCommentsByPost(postDetail.PostId);
                 
                 return View("/Views/Posts/PostPage.cshtml", postDetail);
             }
@@ -44,7 +46,7 @@ public class PostController: Controller
 
         post.Likes = "";
         post.Comment = "";
-        post.LikesList ="";
+        post.LikesList = "";
         post.CommentsList ="";
 
         DbPosts.InsertPost(post);
@@ -88,5 +90,5 @@ public class PostController: Controller
         }
         return RedirectToAction("doLoginAction", "Login");
     }
-
+    
 }

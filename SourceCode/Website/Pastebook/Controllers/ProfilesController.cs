@@ -37,15 +37,28 @@ public class ProfilesController: Controller
                     profileOwner.IsProfileOwnerInFriendReqList = DbFriends.IsInFriendReqList(profileOwner.User.UserId,loggedInUserFriendsData.FriendRequests);
                     profileOwner.FriendsList = DbFriends.GetListAsUserObj(profileOwnerFriends.FriendsList);
 
-                    // profileOwner.PostsList = DbPosts.GetAllPostDetails(profileLink);
-                    profileOwner.PostsList = DbPosts.GetAllPostsByEmail(cookieEmail);
+                    profileOwner.PostsList = DbPosts.GetAllPostDetails(profileLink);
+
+                    //checks to see if the user has any posts
+                    if(profileOwner.PostsList != null)
+                    {
+                        //iterates through each post
+                        foreach (PostModel post in profileOwner.PostsList)
+                        {
+                            //gets all comments on post as a list<commentModel> (GetCommentsByPost)
+                            //and assigns them to the model
+                            post.CommentsListObj = DbComments.GetCommentsByPost(post.PostId);
+                            post.DoesUserLikesAPost = DbLikes.IsUserInLikersList(cookieEmail, post.LikesList);
+                        }
+                    }
+                    
                     
                     return View("/Views/Profile/Profile.cshtml", profileOwner);
                 }
             }
             return RedirectToAction("doLoginAction", "Login");
         }
-        return Ok();
+        return RedirectToAction("doLoginAction", "Login");
     }
     
     [HttpPatch]

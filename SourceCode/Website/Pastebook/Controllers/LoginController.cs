@@ -18,22 +18,12 @@ public class LoginController: Controller
         var lastLogin = (long)((System.DateTime.Now.Subtract(new System.DateTime(1970, 1, 1))).TotalSeconds);
         var readableLastLogin = new System.DateTime(1970, 1, 1).AddSeconds(lastLogin);
         var session = DbSessions.AddSessionWithCredentials(userCredentials.EmailAddress, userCredentials.Password, lastLogin);
-        if (session == null) {
+        if (session == null) 
+        {
             return Unauthorized();
         }
-        else {
-            int userId = DbUsers.GetUserByEmail(session.EmailAddress).UserId;
-            FriendsModel? isFriendsInitialized = DbFriends.GetFriendsData(userId);
-            var isNotificationsInitialized = DbNotifications.GetNotificationsByUserId(userId);
-            if(isFriendsInitialized == null)
-            {
-                DbFriends.InitializeFriends(userId);
-            }
-
-            if(isNotificationsInitialized == null)
-            {
-                DbNotifications.InitializeNotifications(userId);
-            }
+        else 
+        {
             return (Json(session));
         }
     }
@@ -44,6 +34,6 @@ public class LoginController: Controller
     {
         string? cookieSessionId = HttpContext.Request.Cookies["sessionId"];
         DbSessions.DeleteSession(cookieSessionId);
-        return Ok("Session Deleted!");
+        return RedirectToAction("doLoginAction", "Login");
     }
 }
