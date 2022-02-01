@@ -43,7 +43,7 @@
     });
 
     //When a friend likes a post
-    $(".post-container-right-like").click(function (e) {
+    $("#post-container-right-like").click(function (e) {
         var postId = $(this).attr("id");
         console.log(postId);
         LikedPost(postId);
@@ -143,19 +143,6 @@ function openCommentModal() {
     $('#modal-container-close-comment').click(() => {
         // Close modal
         $('.post-modal-container-comment').css("display", "none");
-    });
-}
-
-function openLikeModal() {
-    $('#post-container-right-status-likers').click(() => {
-        // show edit form 
-        $('#post-modal-container-likers').css("display", "flex");
-    });
-
-    // When the user clicks on the "x",
-    $('#modal-container-close-likers').click(() => {
-        // Close modal
-        $('#post-modal-container-likers').css("display", "none");
     });
 }
 
