@@ -57,7 +57,28 @@ $(document).ready(() => {
         console.log(postId);
         LikedPost(postId);
     });
+
+    //When a friend unlikes a post
+    $(".post-button-unlike").click(function (e) {
+        var postId = $(this).attr("id");
+        console.log(postId);
+        UnlikedPost(postId);
+    });
+    // Hide all posts
+    $('.profile-post-container-status-post').css("display", "none");
+    showPostsInTimeline();
 });
+
+function showPostsInTimeline() {
+    $('.profile-post-container-status-post').slice(0, 10).show();
+
+    // listen for scroll event and load more images if we reach the bottom of window
+    window.addEventListener('scroll', () => {
+        if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight) {
+            $('.profile-post-container-status-post:hidden').slice(0, 10).show().slideDown();
+        }
+    });
+}
 
 function viewAddPostModal() {
     //When the user clicks on the status form,
@@ -108,7 +129,6 @@ async function addPostToProfile(event, jsonData) {
         body: jsonData
     });
     if(response.status == 200) {
-        alert("Post successfully added!");
         $('#modal-container-photo-img').attr('src', "");
     }
 }
@@ -167,6 +187,15 @@ async function LikedPost(postId) {
     });
     if(response.ok){
         location.reload(); 
+    }
+}
+
+async function UnlikedPost(postId) {
+    const response = await fetch(`/unlike/${postId}`, {
+        method: "PATCH"
+    });
+    if(response.ok){
+        location.reload();
     }
 }
 
@@ -265,6 +294,10 @@ function deletePost(postId, profileLink) {
         // Close modal
         $('#post-modal-container-delete').css("display", "none");
     });
+}
+
+function loadPosts() {
+
 }
 
 async function deletePostById(postId, profileLink) {
