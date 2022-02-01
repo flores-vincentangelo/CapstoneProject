@@ -24,8 +24,24 @@ public class LikesController: Controller
         int likedAPostId = DbUsers.GetUserByEmail(likedAPost).UserId;
         //
         string likersList = DbPosts.GetPostById(postId).LikesList;
-        //Adds liker's User Id to Person B 
+        //Adds liker's User Id
         string newLikersList = DbLikes.AddUserIdtoLikesList(likedAPostId, likersList);
+        //Update the Database
+        DbLikes.UpdateLikesListOfPost(postId, newLikersList);
+        return Ok();
+    }
+
+    [HttpPatch]
+    [Route("/unlike/{postId}")]
+    public IActionResult UnlikesPost(int postId)
+    { 
+        //Removed like
+        string unlikedAPost = HttpContext.Request.Cookies["email"];
+        int unlikedAPostId = DbUsers.GetUserByEmail(unlikedAPost).UserId;
+        //
+        string likersList = DbPosts.GetPostById(postId).LikesList;
+        //Delete liker's User Id
+        string newLikersList = DbLikes.RemoveUserIdFromLikesList(unlikedAPostId, likersList);
         //Update the Database
         DbLikes.UpdateLikesListOfPost(postId, newLikersList);
         return Ok();
