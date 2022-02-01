@@ -17,4 +17,6 @@ $(document).ready(function () {
         $(".home-header-left-searchpanel-recent").css("display", "none");
     });
 
+    
+
 });

@@ -70,6 +70,39 @@ public class DbPosts
         }
     }
 
+    public static List<PostModel>? GetAllPostsByEmail(string userEmail) 
+    {
+        List<PostModel> postDetails = new List<PostModel>();
+        using(var db = new SqlConnection(DB_CONNECTION_STRING))
+        {
+            db.Open();
+            using(var command = db.CreateCommand())
+            {       
+                command.CommandText = "SELECT * FROM Posts WHERE EmailAddress = @EmailAddress";
+                command.Parameters.AddWithValue("@EmailAddress", userEmail);
+                var reader = command.ExecuteReader();
+                if(!reader.HasRows) return null;
+                while(reader.Read())
+                {
+                    PostModel postDetail = new PostModel();
+                    postDetail.EmailAddress = reader.GetString(0);
+                    postDetail.PostId = reader.GetInt32(1);
+                    postDetail.DatePosted = reader.GetInt64(2);
+                    postDetail.Caption = reader.GetString(3);
+                    postDetail.PhotoId = reader.GetInt32(4);
+                    postDetail.Photo = reader.GetString(5);
+                    postDetail.Likes = reader.GetString(6);
+                    postDetail.Comment = reader.GetString(7);
+                    postDetail.ProfileLink = reader.GetString(8);
+                    postDetail.LikesList = reader.GetString(9);
+                    postDetail.CommentsList = reader.GetString(10);
+                    postDetails.Add(postDetail);
+                }
+            }
+            return postDetails;
+        }
+    }
+
     public static PostModel? GetPostById(int id)
     {
         PostModel post = new PostModel();

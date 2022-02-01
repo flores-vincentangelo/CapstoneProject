@@ -8,11 +8,9 @@
     openCommentModal();
     // openLikeModal();
 
-    // $('.post-container-right-action-close').click(() => {
-    //     var link = modelObj.profileLink;
-    //     console.log(link);
-    //     location.replace(`/${link}`);
-    // });
+    $('.post-container-right-action-close').click(() => {
+        history.back();
+    });
 
     //When the user clicks on "Update" button,
     $('.user-button-update').click((event) => {
