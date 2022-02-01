@@ -62,10 +62,10 @@
             @{
                 if(Model.DoesUserLikesAPost == true)
                 {
-                    <button class="post-container-right-like liked" style = "background-color: #1877f2; color:white" ><img src="../Images/like.png"><span id="like-post">Liked</span></button>
+                    <button id=@Model.PostId class="post-container-right-unlike" style = "background-color: #1877f2; color: white" ><img src="../Images/like.png"><span id="like-post">Unlike</span></button>
                 }
                 else {
-                    <button id=@Model.PostId class="post-container-right-like"><img src="../Images/like.png"><span id="like-post">Like</span></button>
+                    <button id=@Model.PostId class="post-container-right-like" style = "background-color: white" ><img src="../Images/like.png"><span id="like-post">Like</span></button>
                 }
             }
             <button class="post-container-right-comment" id=@Model.PostId><img src="../Images/comment.png"><span id="comment-post">Comment</span></button>
