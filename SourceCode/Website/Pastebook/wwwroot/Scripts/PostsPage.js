@@ -1,13 +1,11 @@
  $(document).ready(function () {
     var modelObj = JSON.parse(model.replace(/&quot;/g,"\""));
-    // console.log(modelObj)
-
     editPost();
     deletePost(modelObj);
     modifyPhoto();
     openCommentModal();
-    // openLikeModal();
 
+    //When the user clicks on the "X/Close" button,
     $('.post-container-right-action-close').click(() => {
         history.back();
     });
@@ -42,14 +40,14 @@
         location.reload();
     });
 
-    //When a friend likes a post
+    //When a user liked a post
     $(".post-container-right-like").click(function (e) {
         var postId = $(this).attr("id");
         console.log(postId);
         LikedPost(postId);
     });
 
-    //When a friend unlikes a post
+    //When a user unliked a post
     $(".post-container-right-unlike").click(function (e) {
         var postId = $(this).attr("id");
         console.log(postId);
@@ -240,11 +238,7 @@ function AddLikersToPage(photo, firstName, lastName) {
 }
 
 function openLikeModal(postId) {
-    // $('#post-container-status-likers').click((e) => {
-    //     // show edit form 
-    //     $('#post-modal-container-likers').css("display", "flex");
-    // });
-    //show edit form 
+    //Show list of liker/s on a post
         $('#post-modal-container-likers').css("display", "flex");
         console.log(postId);
         GetLikers(postId);
@@ -254,7 +248,3 @@ function openLikeModal(postId) {
         $('#post-modal-container-likers').css("display", "none");
     });
 }
-
-// function showLikeModal(postId) {
-//     console.log(postId)
-// }

@@ -12,7 +12,6 @@ public class DbPosts
         DB_CONNECTION_STRING = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
     }
 
-    //converted to UserId
     public static void InsertPost(PostModel post)
     {
         using (var db = new SqlConnection(DB_CONNECTION_STRING))
@@ -38,7 +37,6 @@ public class DbPosts
         }
     }
 
-    //converted to UserId
     public static List<PostModel>? GetAllPostDetails(string profileLink) 
     {
         List<PostModel> postDetails = new List<PostModel>();
@@ -72,7 +70,6 @@ public class DbPosts
         }
     }
 
-    //converted to UserId
     public static List<PostModel>? GetAllPostsByUserId(int userId) 
     {
         List<PostModel> postDetails = new List<PostModel>();
@@ -106,7 +103,6 @@ public class DbPosts
         }
     }
 
-    //converted to UserId
     public static PostModel? GetPostById(int? id)
     {
         PostModel post = new PostModel();
@@ -137,38 +133,6 @@ public class DbPosts
         return post;
     }    
 
-    //not used delete nalang
-    public static PostModel? GetPostByProfileLink(string profileLink)
-    {
-        PostModel post = new PostModel();
-        using(var db = new SqlConnection(DB_CONNECTION_STRING))
-        {
-            db.Open();
-            using(var command = db.CreateCommand())
-            {
-                command.CommandText = "SELECT * FROM Posts WHERE ProfileLink = @ProfileLink";
-                command.Parameters.AddWithValue("@ProfileLink", profileLink);
-                var reader = command.ExecuteReader();
-                while(reader.Read())
-                {
-                    post.UserId = reader.GetInt32(0);
-                    post.PostId = reader.GetInt32(1);
-                    post.DatePosted = reader.GetInt64(2);
-                    post.Caption = reader.GetString(3);
-                    post.PhotoId = reader.GetInt32(4);
-                    post.Photo = reader.GetString(5);
-                    post.Likes = reader.GetString(6);
-                    post.Comment = reader.GetString(7); 
-                    post.ProfileLink = reader.GetString(8); 
-                    post.LikesList = reader.GetString(9); 
-                    post.CommentsList = reader.GetString(10);
-                }
-            }
-        }
-        return post;
-    }
-
-    //converted to UserId
     public static PostModel? GetPostByPhotoId(int photoId)
     {
         PostModel post = new PostModel();
