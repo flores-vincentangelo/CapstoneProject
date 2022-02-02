@@ -6,21 +6,16 @@ $(document).ready(() => {
     EditBirthday();
     EditGender();
     EditPassword();
-    
-    // MobileNumLimit(element);
-    // PasswordLimit(element);
-    // LettersInput(input);
-    // NumbersInput(input);
 });
 
 function EditFirstName() {
     // When the user clicks on the "Edit" button,
     $('#profile-edit-firstname-btn').click(() => {
-        // show edit form 
+        // Show edit form 
         $('.profile-edit-firstname-modal').css("display", "flex");
     });
 
-    // When the user clicks on the "x",
+    // When the user clicks on the "x" button,
     $('#profile-close-firstname-modal').click(() => {
         // Close modal
         $('.profile-edit-firstname-modal').css("display", "none");
@@ -28,7 +23,7 @@ function EditFirstName() {
 
     // When the user clicks on the "Cancel" button,
     $('#firstname-cancel-btn').click(() => {
-        // hide edit form 
+        // Hide edit form 
         $('.profile-edit-firstname-modal').css("display", "none");
     });
 
@@ -41,23 +36,17 @@ function EditFirstName() {
         var formData = new FormData(document.getElementById('form-profile-firstname'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
         modifyDetails(event, data);
-        // show readonly profile
-        $('.profile-readonly').css("display", "block");
-        // hide edit form
-        $('.profile-edit-firstname').css("display", "none");
-        // hide modal
-        $('.profile-edit-firstname-modal').css("display", "none");
     });
 }
 
 function EditLastName() {
     // When the user clicks on the "Edit" button,
     $('#profile-edit-lastname-btn').click(() => {
-        // show edit form 
+        // Show edit form 
         $('.profile-edit-lastname-modal').css("display", "flex");
     });
 
-    // When the user clicks on the "x",
+    // When the user clicks on the "x" button,
     $('#profile-close-lastname-modal').click(() => {
         // Close modal
         $('.profile-edit-lastname-modal').css("display", "none");
@@ -65,7 +54,7 @@ function EditLastName() {
 
     // When the user clicks on the "Cancel" button,
     $('#lastname-cancel-btn').click(() => {
-        // hide edit form 
+        // Hide edit form 
         $('.profile-edit-lastname-modal').css("display", "none");
     });
 
@@ -78,23 +67,17 @@ function EditLastName() {
         var formData = new FormData(document.getElementById('form-profile-lastname'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
         modifyDetails(event, data);
-        // show readonly profile
-        $('.profile-readonly').css("display", "block");
-        // hide edit form
-        $('.profile-edit-lastname').css("display", "none");
-        // hide modal
-        $('.profile-edit-lastname-modal').css("display", "none");
     });
 }
 
 function EditEmailAddress() {
     // When the user clicks on the "Edit" button,
     $('#profile-edit-email-btn').click(() => {
-        // show edit form 
+        // Show edit form 
         $('.profile-edit-email-modal').css("display", "flex");
     });
 
-    // When the user clicks on the "x",
+    // When the user clicks on the "x" button,
     $('#profile-close-email-modal').click(() => {
         // Close modal
         $('.profile-edit-email-modal').css("display", "none");
@@ -102,7 +85,7 @@ function EditEmailAddress() {
 
     // When the user clicks on the "Cancel" button,
     $('#email-cancel-btn').click(() => {
-        // hide edit form 
+        // Hide edit form 
         $('.profile-edit-email-modal').css("display", "none");
     });
 
@@ -115,14 +98,8 @@ function EditEmailAddress() {
         var formData = new FormData(document.getElementById('form-profile-email'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
         modifyEmail(event, data);
-        
-        //delete sessions
+        // Delete session
         deleteSession();
-
-        //delete cookies
-        document.cookie = "email=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-        document.cookie = "sessionId=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-        document.cookie = "profilelink=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     });
 }
 
@@ -133,7 +110,7 @@ function EditMobileNumber() {
         $('.profile-edit-mobile-modal').css("display", "flex");
     });
 
-    // When the user clicks on the "x",
+    // When the user clicks on the "x" button,
     $('#profile-close-mobile-modal').click(() => {
         // Close modal
         $('.profile-edit-mobile-modal').css("display", "none");
@@ -154,16 +131,11 @@ function EditMobileNumber() {
         var formData = new FormData(document.getElementById('form-profile-mobile'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
         modifyDetails(event, data);
-        // show readonly profile
-        $('.profile-readonly').css("display", "block");
-        // hide edit form
-        $('.profile-edit-mobile').css("display", "none");
-        // hide modal
-        $('.profile-edit-mobile-modal').css("display", "none");
     });
 }
 
 function EditBirthday() {
+    // Disable future dates
     var date = new Date();
     var tdate = date.getDate(); 
     var month = date.getMonth() + 1;
@@ -175,7 +147,7 @@ function EditBirthday() {
     }
     var year = date.getUTCFullYear();
     var maxDate = year + "-" + month + "-" + tdate;
-    document.getElementById("birthday").setAttribute("max", maxDate);
+    $("#birthday").attr("max", maxDate);
 
     // When the user clicks on the "Edit" button,
     $('#profile-edit-birthday-btn').click(() => {
@@ -183,7 +155,7 @@ function EditBirthday() {
         $('.profile-edit-birthday-modal').css("display", "flex");
     });
 
-    // When the user clicks on the "x",
+    // When the user clicks on the "x" button,
     $('#profile-close-birthday-modal').click(() => {
         // Close modal
         $('.profile-edit-birthday-modal').css("display", "none");
@@ -204,12 +176,6 @@ function EditBirthday() {
         var formData = new FormData(document.getElementById('form-profile-birthday'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
         modifyDetails(event, data);
-        // show readonly profile
-        $('.profile-readonly').css("display", "block");
-        // hide edit form
-        $('.profile-edit-birthday').css("display", "none");
-        // hide modal
-        $('.profile-edit-birthday-modal').css("display", "none");
     });
 }
 
@@ -220,7 +186,7 @@ function EditGender() {
         $('.profile-edit-gender-modal').css("display", "flex");
     });
 
-    // When the user clicks on the "x",
+    // When the user clicks on the "x" button,
     $('#profile-close-gender-modal').click(() => {
         // Close modal
         $('.profile-edit-gender-modal').css("display", "none");
@@ -241,12 +207,6 @@ function EditGender() {
         var formData = new FormData(document.getElementById('form-profile-gender'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
         modifyDetails(event, data);
-        // show readonly profile
-        $('.profile-readonly').css("display", "block");
-        // hide edit form
-        $('.profile-edit-gender').css("display", "none");
-        // hide modal
-        $('.profile-edit-gender-modal').css("display", "none");
     });
 }
 
@@ -257,7 +217,7 @@ function EditPassword() {
         $('.profile-edit-password-modal').css("display", "flex");
     });
 
-    // When the user clicks on the "x",
+    // When the user clicks on the "x" button,
     $('#profile-close-password-modal').click(() => {
         // Close modal
         $('.profile-edit-password-modal').css("display", "none");
@@ -275,8 +235,6 @@ function EditPassword() {
         var formData = new FormData(document.getElementById('form-profile-password'));
         var data = JSON.stringify(Object.fromEntries(formData.entries()));
         modifyPassword(event, data);
-        // hide edit form
-        $('.profile-edit-password').css("display", "none");
     });
 }
 
@@ -338,7 +296,6 @@ async function modifyEmail(event, jsonData) {
         if (response.status == 200) {
             alert("Email Address successfully changed!");
             window.location.replace("/login");
-            
         }
         else {
             alert("Wrong password. Try again.")
@@ -350,7 +307,7 @@ async function modifyEmail(event, jsonData) {
 }
 
 async function deleteSession() {  
-    const response = await fetch(`/login`, {
+    await fetch(`/login`, {
         method: 'DELETE',
     });
 }
@@ -358,17 +315,14 @@ async function deleteSession() {
 // LENGTH OF USER'S INPUT RESTRICTION
 function MobileNumLimit(element) {
     var max_chars = 10;
-
     if(element.value.length > max_chars) {
         element.value = element.value.substr(0, max_chars);
-        alert("Input is restricted to 11 digits only!");
+        alert("Input is restricted to 11 digits only! Format is 09xxxxxxxxx");
     }
 }
 
-function PasswordLimit(element)
-{
+function PasswordLimit(element) {
     var max_chars = 11;
-
     if(element.value.length > max_chars) {
         element.value = element.value.substr(0, max_chars);
         alert("Password should have a maximum of 12 characters only!");

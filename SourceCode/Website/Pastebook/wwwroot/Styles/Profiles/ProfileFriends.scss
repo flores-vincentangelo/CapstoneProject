@@ -37,8 +37,14 @@
         }
 
         &-name{
-            padding-left: 10px;
+            padding-left: 20px;
+            &-link{
+                text-decoration: none;
+                color: black;
+                &:hover{
+                    color: #1877f2;
+                }
+            }
         }
-        
     }
 }

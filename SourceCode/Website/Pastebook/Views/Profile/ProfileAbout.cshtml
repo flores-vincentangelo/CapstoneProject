@@ -1,172 +1,177 @@
 @model Models.UserModel
-@{
+@if (Model != null)
+{
     var birthdate = new System.DateTime(1970, 1, 1).AddSeconds(Model.Birthday).ToString("yyyy-MM-dd");
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="./Styles/Profiles/ProfileAbout.css">
+        <script>
+            localStorage.setItem('profileLink', "@Model.ProfileLink");
+        </script>
+        <script src="./Scripts/ProfileAbout.js"></script>
+    </head>
+    <body>
+        <div class="profile-ext-container">
+            <h3>About</h3>
+            <div class="profile-readonly" id="profile-readonly">
+                <div class="field">
+                    <p id="profile-first-name"><span class="model-label">First Name: </span><span id="model-firstname-details">@Model.FirstName</span></p>
+                    <button class="profile-edit-firstname-btn" id="profile-edit-firstname-btn">Edit Info</button>
+                </div>
+                <hr>
+                <div class="field">
+                    <p id="profile-last-name"><span class="model-label">Last Name: </span><span id="model-lastname-details">@Model.LastName</span></p>
+                    <button class="profile-edit-lastname-btn" id="profile-edit-lastname-btn">Edit Info</button>
+                </div>
+                <hr>
+                <div class="field">
+                    <p id="profile-email"><span class="model-label">Email Address: </span><span id="model-email-details">@Model.EmailAddress</span></p>
+                    <button class="profile-edit-email-btn" id="profile-edit-email-btn">Edit Info</button>
+                </div>
+                <hr>
+                <div class="field">
+                    <p id="profile-mobile"><span class="model-label">Mobile Number: </span><span id="model-mobile-details">@Model.MobileNumber</span></p>
+                    <button class="profile-edit-mobile-btn" id="profile-edit-mobile-btn">Edit Info</button>
+                </div>
+                <hr>
+                <div class="field">
+                    <p id="profile-birthday"><span class="model-label">Birthday: </span><span id="model-birthday-details">@birthdate</span></p>
+                    <button class="profile-edit-birthday-btn" id="profile-edit-birthday-btn">Edit Info</button>
+                </div>
+                <hr>
+                <div class="field">
+                    <p id="profile-gender"><span class="model-label">Gender: </span><span id="model-gender-details">@Model.Gender</span></p>
+                    <button class="profile-edit-gender-btn" id="profile-edit-gender-btn">Edit Info</button>
+                </div>
+                <hr>
+                <div class="field">
+                    <p id="profile-password"><span class="model-label">Change Password</span></p>
+                    <button class="profile-edit-password-btn" id="profile-edit-password-btn">Edit Info</button>
+                </div>
+            </div>
+            <div class="profile-edit-firstname-modal" id="profile-edit-firstname-modal">
+                <div class="modal-about-container">
+                    <span id="profile-close-firstname-modal">&times;</span>
+                    <h2 class="profile-title-modal">Edit First Name</h2>
+                    <hr>
+                    <form class="form-edit-firstname" id="form-profile-firstname">
+                        <label>First Name:</label>
+                        <input class="input-about" type="text" id="first-name" name="FirstName" value="@Model.FirstName" onkeyup="LettersInput(this)" /><br><br>
+                    </form>
+                    <div class="buttons">
+                        <button class="profile-firstname-btn" id="firstname-save-btn">Save</button>
+                        <button class="profile-firstname-btn" id="firstname-cancel-btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-edit-lastname-modal" id="profile-edit-lastname-modal">
+                <div class="modal-about-container">
+                    <span id="profile-close-lastname-modal">&times;</span>
+                    <h2 class="profile-title-modal">Edit Last Name</h2>
+                    <hr>
+                    <form class="form-edit-lastname" id="form-profile-lastname">
+                        <label>Last Name:</label>
+                        <input class="input-about" type="text" id="last-name" name="LastName" value="@Model.LastName" onkeyup="LettersInput(this)" /><br><br>
+                    </form>
+                    <div class="buttons">
+                        <button class="profile-lastname-btn" id="lastname-save-btn">Save</button>
+                        <button class="profile-lastname-btn" id="lastname-cancel-btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-edit-email-modal" id="profile-edit-email-modal">
+                <div class="modal-about-container">
+                    <span id="profile-close-email-modal">&times;</span>
+                    <h2 class="profile-title-modal">Edit Email Address</h2>
+                    <hr>
+                    <form class="form-edit-email" id="form-profile-email">
+                        <label>Email Address:</label>
+                        <input class="input-about" type="text" id="email" name="EmailAddress" value="@Model.EmailAddress" /><br><br>
+                        <label>Password:</label>
+                        <input type="password" id="password" name="Password" /><br><br>
+                        <label>Confirm Password:</label>
+                        <input type="password" id="confirm-password" name="ConfirmPassword" /><br><br>
+                    </form>
+                    <div class="buttons">
+                        <button class="profile-email-btn" id="email-save-btn">Save</button>
+                        <button class="profile-email-btn" id="email-cancel-btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-edit-mobile-modal" id="profile-edit-mobile-modal">
+                <div class="modal-about-container">
+                    <span id="profile-close-mobile-modal">&times;</span>
+                    <h2 class="profile-title-modal">Edit Mobile Number</h2>
+                    <hr>
+                    <form class="form-edit-mobile" id="form-profile-mobile">
+                        <label>Mobile Number:</label>
+                        <input class="input-about" type="text" id="mobile" name="MobileNumber" value="@Model.MobileNumber" onkeyup="NumbersInput(this)" onkeydown="MobileNumLimit(this)" /><br><br>
+                    </form>
+                    <div class="buttons">
+                        <button class="profile-mobile-btn" id="mobile-save-btn">Save</button>
+                        <button class="profile-mobile-btn" id="mobile-cancel-btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-edit-birthday-modal" id="profile-edit-birthday-modal">
+                <div class="modal-about-container">
+                    <span id="profile-close-birthday-modal">&times;</span>
+                    <h2 class="profile-title-modal">Edit Birthday</h2>
+                    <hr>
+                    <form class="form-edit-birthday" id="form-profile-birthday">
+                        <label>Birthday:</label>
+                        <input type="date" id="birthday" name="ReadableBirthday" /><br><br>
+                    </form>
+                    <div class="buttons">
+                        <button class="profile-birthday-btn" id="birthday-save-btn">Save</button>
+                        <button class="profile-birthday-btn" id="birthday-cancel-btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-edit-gender-modal" id="profile-edit-gender-modal">
+                <div class="modal-about-container">
+                    <span id="profile-close-gender-modal">&times;</span>
+                    <h2 class="profile-title-modal">Edit Gender</h2>
+                    <hr>
+                    <form class="form-edit-gender" id="form-profile-gender">
+                        <label>Gender:</label>
+                        <select type="text" id="gender" name="Gender" value="@Model.Gender">
+                            <option>-----</option>
+                            <option>Female</option>
+                            <option>Male</option>
+                        </select><br><br>
+                    </form>
+                    <div class="buttons">
+                        <button class="profile-gender-btn" id="gender-save-btn">Save</button>
+                        <button class="profile-gender-btn" id="gender-cancel-btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-edit-password-modal" id="profile-edit-password-modal">
+                <div class="modal-about-container">
+                    <span id="profile-close-password-modal">&times;</span>
+                    <h2 class="profile-title-modal">Edit Password</h2>
+                    <hr>
+                    <form class="form-edit-password" id="form-profile-password">
+                        <label>Old Password</label>
+                        <input type="password" id="old-password" name="Password" /><br><br>
+                        <label>New Password:</label>
+                        <input type="password" id="new-password" name="NewPassword" /><br><br>
+                        <label>Confirm Password:</label>
+                        <input type="password" id="confirm-new-password" name="ConfirmPassword" /><br><br>
+                    </form>
+                    <div class="buttons">
+                        <button class="profile-password-btn" id="password-save-btn">Save</button>
+                        <button class="profile-password-btn" id="password-cancel-btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>
 }
-
-<!DOCTYPE html>
-<html>
-
-<head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="./Styles/Profiles/ProfileAbout.css">
-    <script>
-        localStorage.setItem('profileLink', "@Model.ProfileLink");
-    </script>
-    <script src="./Scripts/ProfileAbout.js"></script>
-</head>
-
-<body>
-    <div class="profile-ext-container">
-        <h3>About</h3>
-        <div class="profile-readonly" id="profile-readonly">
-            <div class="field">
-                <p id="profile-first-name"><span class="model-label">First Name: </span><span id="model-firstname-details">@Model.FirstName</span></p>
-                <button class="profile-edit-firstname-btn" id="profile-edit-firstname-btn">Edit Info</button>
-            </div><hr>
-            <div class="field">
-                <p id="profile-last-name"><span class="model-label">Last Name: </span><span id="model-lastname-details">@Model.LastName</span></p>
-                <button class="profile-edit-lastname-btn" id="profile-edit-lastname-btn">Edit Info</button>
-            </div><hr>
-            <div class="field">
-                <p id="profile-email"><span class="model-label">Email Address: </span><span id="model-email-details">@Model.EmailAddress</span></p>
-                <button class="profile-edit-email-btn" id="profile-edit-email-btn">Edit Info</button>
-            </div><hr>    
-            <div class="field">
-                <p id="profile-mobile"><span class="model-label">Mobile Number: </span><span id="model-mobile-details">@Model.MobileNumber</span></p>
-                <button class="profile-edit-mobile-btn" id="profile-edit-mobile-btn">Edit Info</button>
-            </div><hr>
-            <div class="field">
-                <p id="profile-birthday"><span class="model-label">Birthday: </span><span id="model-birthday-details">@birthdate</span></p>
-                <button class="profile-edit-birthday-btn" id="profile-edit-birthday-btn">Edit Info</button>
-            </div><hr> 
-            <div class="field">
-                <p id="profile-gender"><span class="model-label">Gender: </span><span id="model-gender-details">@Model.Gender</span></p>
-                <button class="profile-edit-gender-btn" id="profile-edit-gender-btn">Edit Info</button>
-            </div><hr>
-            <div class="field">
-                <p id="profile-password"><span class="model-label">Change Password</span></p>
-                <button class="profile-edit-password-btn" id="profile-edit-password-btn">Edit Info</button>
-            </div>
-        </div>
-        <div class="profile-edit-firstname-modal" id="profile-edit-firstname-modal">
-            <div class="modal-about-container">
-                <span id="profile-close-firstname-modal">&times;</span>
-                <h2 class="profile-title-modal">Edit First Name</h2>
-                <hr>
-                <form class="form-edit-firstname" id="form-profile-firstname">
-                    <label>First Name:</label>
-                    <input class="input-about" type="text" id="first-name" name="FirstName" value="@Model.FirstName" onkeyup="LettersInput(this)" /><br><br>
-                </form>
-                <div class="buttons">
-                    <button class="profile-firstname-btn" id="firstname-save-btn">Save</button>
-                    <button class="profile-firstname-btn" id="firstname-cancel-btn">Cancel</button>
-                </div>
-            </div>
-        </div>
-        <div class="profile-edit-lastname-modal" id="profile-edit-lastname-modal">
-            <div class="modal-about-container">
-                <span id="profile-close-lastname-modal">&times;</span>
-                <h2 class="profile-title-modal">Edit Last Name</h2>
-                <hr>
-                <form class="form-edit-lastname" id="form-profile-lastname">
-                    <label>Last Name:</label>
-                    <input class="input-about" type="text" id="last-name" name="LastName" value="@Model.LastName" onkeyup="LettersInput(this)" /><br><br>
-                </form>
-                <div class="buttons">
-                    <button class="profile-lastname-btn" id="lastname-save-btn">Save</button>
-                    <button class="profile-lastname-btn" id="lastname-cancel-btn">Cancel</button>
-                </div>
-            </div>
-        </div>
-        <div class="profile-edit-email-modal" id="profile-edit-email-modal">
-            <div class="modal-about-container">
-                <span id="profile-close-email-modal">&times;</span>
-                <h2 class="profile-title-modal">Edit Email Address</h2>
-                <hr>
-                <form class="form-edit-email" id="form-profile-email">
-                    <label>Email Address:</label>
-                    <input class="input-about" type="text" id="email" name="EmailAddress" value="@Model.EmailAddress" /><br><br>
-                    <label>Password:</label>
-                    <input type="password" id="password" name="Password" /><br><br>
-                    <label>Confirm Password:</label>
-                    <input type="password" id="confirm-password" name="ConfirmPassword" /><br><br>
-                </form>
-                <div class="buttons">
-                    <button class="profile-email-btn" id="email-save-btn">Save</button>
-                    <button class="profile-email-btn" id="email-cancel-btn">Cancel</button>
-                </div>
-            </div>
-        </div>
-        <div class="profile-edit-mobile-modal" id="profile-edit-mobile-modal">
-            <div class="modal-about-container">
-                <span id="profile-close-mobile-modal">&times;</span>
-                <h2 class="profile-title-modal">Edit Mobile Number</h2>
-                <hr>
-                <form class="form-edit-mobile" id="form-profile-mobile">
-                    <label>Mobile Number:</label>
-                    <input class="input-about" type="text" id="mobile" name="MobileNumber" value="@Model.MobileNumber" onkeyup="NumbersInput(this)" onkeydown="MobileNumLimit(this)" /><br><br>
-                </form>
-                <div class="buttons">
-                    <button class="profile-mobile-btn" id="mobile-save-btn">Save</button>
-                    <button class="profile-mobile-btn" id="mobile-cancel-btn">Cancel</button>
-                </div>
-            </div>
-        </div>
-        <div class="profile-edit-birthday-modal" id="profile-edit-birthday-modal">
-            <div class="modal-about-container">
-                <span id="profile-close-birthday-modal">&times;</span>
-                <h2 class="profile-title-modal">Edit Birthday</h2>
-                <hr>
-                <form class="form-edit-birthday" id="form-profile-birthday">
-                    <label>Birthday:</label>
-                    <input type="date" id="birthday" name="ReadableBirthday" /><br><br>
-                </form>
-                <div class="buttons">
-                    <button class="profile-birthday-btn" id="birthday-save-btn">Save</button>
-                    <button class="profile-birthday-btn" id="birthday-cancel-btn">Cancel</button>
-                </div>
-            </div>
-        </div>
-        <div class="profile-edit-gender-modal" id="profile-edit-gender-modal">
-            <div class="modal-about-container">
-                <span id="profile-close-gender-modal">&times;</span>
-                <h2 class="profile-title-modal">Edit Gender</h2>
-                <hr>
-                <form class="form-edit-gender" id="form-profile-gender">
-                    <label>Gender:</label>
-                    <select type="text" id="gender" name="Gender" value="@Model.Gender">
-                        <option></option>
-                        <option>Female</option>
-                        <option>Male</option>
-                    </select><br><br>
-                </form>
-                <div class="buttons">
-                    <button class="profile-gender-btn" id="gender-save-btn">Save</button>
-                    <button class="profile-gender-btn" id="gender-cancel-btn">Cancel</button>
-                </div>
-            </div>
-        </div>
-        <div class="profile-edit-password-modal" id="profile-edit-password-modal">
-            <div class="modal-about-container">
-                <span id="profile-close-password-modal">&times;</span>
-                <h2 class="profile-title-modal">Edit Password</h2>
-                <hr>
-                <form class="form-edit-password" id="form-profile-password">
-                    <label>Old Password</label>
-                    <input type="password" id="old-password" name="Password" /><br><br>
-                    <label>New Password:</label>
-                    <input type="password" id="new-password" name="NewPassword" /><br><br>
-                    <label>Confirm Password:</label>
-                    <input type="password" id="confirm-new-password" name="ConfirmPassword" /><br><br>
-                </form>
-                <div class="buttons">
-                    <button class="profile-password-btn" id="password-save-btn">Save</button>
-                    <button class="profile-password-btn" id="password-cancel-btn">Cancel</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
-</html>

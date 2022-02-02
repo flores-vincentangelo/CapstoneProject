@@ -177,7 +177,7 @@
 
                     &-picture{
                         $picture-dimensions:70px; 
-                        height: $picture-dimensions;
+                        height: auto;
                         width: $picture-dimensions;
         
                         & img{
@@ -189,7 +189,19 @@
                     }
 
                     &-text{
-                        margin-left: 10px;
+                        margin: auto auto auto 10px;
+                        font-size: 12px;
+                        width: 100%;
+                    }
+                }
+                &-clear{
+                    border: none;
+                    color: #1877f2;
+                    margin: 4% 0 3% 79%;
+                    background: none;
+                    cursor: pointer;
+                    &:hover{
+                        color: red;
                     }
                 }
             }
