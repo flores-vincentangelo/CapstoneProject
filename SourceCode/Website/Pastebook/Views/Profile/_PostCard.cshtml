@@ -8,14 +8,29 @@
 <div class="profile-post-container-status-post">
     <div class="profile-post-container-status-post-profile">
         <img class="user-photo" src=@Model.Poster.Photo>
-        <span id="user-details"><span id="poster-fullname">@Model.Poster.FirstName
-                @Model.Poster.LastName</span><br><span id="date-created">@createdDate</span></span>
-        <div class="profile-post-container-status-post-profile-buttons">
-            <button class="update-post" value=@Model.PostId id=@Model.PostId><img class="update-post"
-                    onclick="modifyPost(@Model.PostId, '@Model.ProfileLink')" src="./Images/more.png"></button>
-            <button class="delete-post" value=@Model.PostId id=@Model.PostId><img class="delete-post"
-                    onclick="deletePost(@Model.PostId, '@Model.ProfileLink')" src="./Images/trash.png"></button>
-        </div>
+        <a href=@($"/{Model.Poster.ProfileLink}")><span id="user-details"><span id="poster-fullname">@Model.Poster.FirstName
+                @Model.Poster.LastName</span></a><br><span id="date-created">@createdDate</span></span>
+        
+        @{
+            if (Model.DoesUserOwnsThePost == true)
+            {
+                <div class="profile-post-container-status-post-profile-buttons">
+                    <button class="update-post" value=@Model.PostId id=@Model.PostId><img class="update-post"
+                            onclick="modifyPost(@Model.PostId, '@Model.ProfileLink')" src="./Images/more.png"></button>
+                    <button class="delete-post" value=@Model.PostId id=@Model.PostId><img class="delete-post"
+                            onclick="deletePost(@Model.PostId, '@Model.ProfileLink')" src="./Images/trash.png"></button>
+                </div>                
+            }
+            else if (Model.DoesUserOwnProfile == true && Model.DoesUserOwnsThePost == false)
+            {
+                <div class="profile-post-container-status-post-profile-buttons">
+                    <button class="delete-post" value=@Model.PostId id=@Model.PostId><img class="delete-post"
+                            onclick="deletePost(@Model.PostId, '@Model.ProfileLink')" src="./Images/trash.png"></button>
+                </div> 
+            }
+        }
+        
+        
     </div>
     <div class="profile-post-container-status-post-caption">
         <span>@Model.Caption</span>
@@ -74,11 +89,6 @@
                 <p>Add a comment</p>
             }
         }
-        @* <img src="./Images/img_avatar.png">
-        <div class="friend-details">
-            <span id="friend-name">Friend Name</span><br>
-            <span id="friend-comment">Comment goes here......</span>
-        </div> *@
     </div>
     <div id="post-modal-container-delete">
         <div id="post-modal-container-1-delete">
@@ -130,16 +140,10 @@
         <div class="post-modal-container-1-likers">
             <span id="modal-container-close-likers">&times;</span>
             <h3>People who liked</h3>
+            <hr>
             <div class="modal-container-title-likers">
                 
             </div>
-            <hr>
-            @* <div class="modal-container-likers">
-                <img class="modal-container-likers-photo" src="../../Images/img_avatar.png">
-               
-                <p id="modal-container-likers-name">Insert liker name here</p>       
-               
-            </div> *@
         </div>
     </div>
 </div>
