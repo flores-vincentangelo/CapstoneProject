@@ -9,6 +9,7 @@ public class PostController: Controller
     [Route("/posts/{postId}")]
     public IActionResult GetPostById(int postId)
     {
+        ViewData["Title"] = "Post | ";
         string? cookieEmail = HttpContext.Request.Cookies["email"];
         string? cookieProfileLink = HttpContext.Request.Cookies["profilelink"];
         string? cookieSessionId = HttpContext.Request.Cookies["sessionId"];
@@ -24,6 +25,8 @@ public class PostController: Controller
                 postDetail.CommentsListObj = DbComments.GetCommentsByPost(postDetail.PostId);
                 
                 postDetail.DoesUserLikesAPost = DbLikes.IsUserInLikersList(loggedInUserId, postDetail.LikesList);
+                postDetail.DoesUserOwnsThePost = postDetail.UserId == loggedInUserId ? true : false;
+                postDetail.DoesUserOwnProfile = DbUsers.DoesUserOwnProfile(cookieEmail,cookieProfileLink);
                 return View("/Views/Posts/PostPage.cshtml", postDetail);
             }
         }

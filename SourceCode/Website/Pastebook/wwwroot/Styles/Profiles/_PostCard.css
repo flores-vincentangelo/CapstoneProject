@@ -22,7 +22,11 @@
     display: flex;   
     font-size: 13px;
 }
-
+.profile-post-container-status-post-profile a {
+    text-decoration: none;
+    color: black;
+    padding-top: 7px;
+}
 .profile-post-container-status-post-profile img {
     width: 1vw;
     height: 1vw;
@@ -152,6 +156,7 @@
     width: 30px;
     height: 30px;
     margin-right: 2px;
+    object-fit: cover;
 }
 
 .commentcard-contents{

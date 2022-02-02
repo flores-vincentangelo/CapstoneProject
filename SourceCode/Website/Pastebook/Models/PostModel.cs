@@ -20,4 +20,6 @@ public class PostModel
     public List<CommentsModel>? CommentsListObj {get;set;}
     public List<PostModel>? LikesListObj {get;set;}
     public bool DoesUserLikesAPost {get;set;}
+    public bool DoesUserOwnsThePost {get;set;}
+    public bool DoesUserOwnProfile {get;set;}
 }

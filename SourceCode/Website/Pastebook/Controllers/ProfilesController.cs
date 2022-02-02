@@ -51,9 +51,10 @@ public class ProfilesController: Controller
                             post.CommentsListObj = DbComments.GetCommentsByPost(post.PostId);
                             post.DoesUserLikesAPost = DbLikes.IsUserInLikersList(loggedInUserId, post.LikesList);
                             post.Poster = DbUsers.GetUserById(post.UserId);
+                            post.DoesUserOwnsThePost = post.UserId == loggedInUserId ? true : false;
+                            post.DoesUserOwnProfile = DbUsers.DoesUserOwnProfile(cookieEmail,profileLink);  
                         }
                     }
-                    
                     
                     return View("/Views/Profile/Profile.cshtml", profileOwner);
                 }

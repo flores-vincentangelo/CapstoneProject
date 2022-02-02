@@ -4,9 +4,6 @@ $(document).ready(() => {
     resetForm();
     openCommentModal();   
     
-    
-    
-
     //When the user clicks on "Post" button,
     $('.user-post-button').click((event) => {
         event.preventDefault();           
@@ -129,6 +126,7 @@ async function addPostToProfile(event, jsonData) {
     });
     if(response.status == 200) {
         $('#modal-container-photo-img').attr('src', "");
+        location.reload();
     }
 }
 
@@ -163,7 +161,8 @@ function submitAddComment(e){
         CommentText: formDataObj.comment
     }
 
-    SendCommentToController(jsonObj)
+    SendCommentToController(jsonObj);
+    location.reload();
 }
 
 async function SendCommentToController(jsonObj){
@@ -308,10 +307,6 @@ async function deletePhoto(photoId) {
     if(response.status == 200) {
         console.log("Deleted Photo Id", photoId);
     }
-}
-
-function loadPosts() {
-
 }
 
 async function deletePostById(postId, profileLink) {
