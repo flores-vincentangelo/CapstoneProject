@@ -93,9 +93,15 @@
         <hr>
         <div class="profile-btn-container">
             <button class="ext-btn" id="ext-about-btn">About</button>
-            <button class="ext-btn" id="ext-posts-btn">Posts</button>
-            <button class="ext-btn" id="ext-friends-btn">Friends</button>
-            <button class="ext-btn" id="ext-album-btn">Album</button>
+            @{
+                if(Model.IsUserInFriendsList || Model.DoesUserOwnProfile) 
+                {
+                    <button class="ext-btn" id="ext-posts-btn">Posts</button>
+                    <button class="ext-btn" id="ext-friends-btn">Friends</button>
+                    <button class="ext-btn" id="ext-album-btn">Album</button>
+                }
+            }
+            
         <hr>
         </div>
     </div>
