@@ -28,7 +28,14 @@
   border-radius: 50%;
 }
 .profile-ext-container-friendcontainer .friends-main-all-container-friendcard-name {
-  padding-left: 10px;
+  padding-left: 20px;
+}
+.profile-ext-container-friendcontainer .friends-main-all-container-friendcard-name-link {
+  text-decoration: none;
+  color: black;
+}
+.profile-ext-container-friendcontainer .friends-main-all-container-friendcard-name-link:hover {
+  color: #1877f2;
 }
 
 /*# sourceMappingURL=ProfileFriends.css.map */

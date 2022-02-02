@@ -127,9 +127,12 @@
   margin-bottom: 20px;
 }
 .friends-main-all-container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  /* flex-direction: column; */
   align-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-row-gap: 10px;
+  grid-column-gap: 10px;
 }
 .friends-main-all-container-friendcard {
   background-color: white;
@@ -154,6 +157,13 @@
 }
 .friends-main-all-container-friendcard-name {
   padding-left: 10px;
+}
+.friends-main-all-container-friendcard-name-link {
+  text-decoration: none;
+  color: black;
+}
+.friends-main-all-container-friendcard-name-link:hover {
+  color: #1877f2;
 }
 
 /*# sourceMappingURL=Friends.css.map */

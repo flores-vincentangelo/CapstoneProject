@@ -134,7 +134,7 @@
   align-items: flex-start;
 }
 .layout-header-right-notificationscontainer-notifcard-picture {
-  height: 70px;
+  height: auto;
   width: 70px;
 }
 .layout-header-right-notificationscontainer-notifcard-picture img {
@@ -144,7 +144,19 @@
   border-radius: 50%;
 }
 .layout-header-right-notificationscontainer-notifcard-text {
-  margin-left: 10px;
+  margin: auto auto auto 10px;
+  font-size: 12px;
+  width: 100%;
+}
+.layout-header-right-notificationscontainer-clear {
+  border: none;
+  color: #1877f2;
+  margin: 4% 0 3% 79%;
+  background: none;
+  cursor: pointer;
+}
+.layout-header-right-notificationscontainer-clear:hover {
+  color: red;
 }
 .layout-accountpanel {
   display: none;
