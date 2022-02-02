@@ -90,6 +90,7 @@
     height: 168px;
     width: 168px;
     border-radius: 50%;
+    object-fit: cover;
 }
 
 .profile-photo-btn{
@@ -120,6 +121,7 @@
     width: 168px;
     border-radius: 50%;
     border: 5px solid #ffffff;
+    object-fit: cover;
 }
 
 #form-profile-picture {
