@@ -17,34 +17,23 @@ $(document).ready(function () {
         $(".home-header-left-searchpanel-recent").css("display", "none");
     });
 
-    // Hide all posts
-    $('.profile-post-container-status-post').css("display", "none");
-    showPostsInHome();
 
     // Auto refresh
     setInterval(function() {
-        $.ajax({
-            type: 'GET',
-            url: '/',
-            success: function () {
-                location.reload();
-                // console.log("refresh");
-            }
-        })
+        // $('.home-timeline').load('.home-timeline');
+        location.reload();
+        console.log("refresh");
     }, 60000);
 
-    // $.ajax({
-    //     type: 'GET',
-    //     url: '/',
-    //     success: function () {
-    //         setInterval('location.reload()', 60000); 
-    //     }
-    // });
+    // Hide all posts
+    $('.profile-post-container-status-post').css("display", "none");
+    // Show every 10 posts on scroll down
+    showPostsInHome();
    
 });
 
 function showPostsInHome() {
-    $('.profile-post-container-status-post').slice(0, 10).show();
+    $('.profile-post-container-status-post').slice(0, 10).show().slideDown();
 
     // listen for scroll event and load more images if we reach the bottom of window
     window.addEventListener('scroll', () => {
