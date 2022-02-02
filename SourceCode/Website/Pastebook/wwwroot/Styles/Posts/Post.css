@@ -32,6 +32,7 @@ body {
     height: 80%;
     margin-top: 3%;
     margin-bottom: auto;
+    object-fit: contain;
 }
 
 .post-container-right {
