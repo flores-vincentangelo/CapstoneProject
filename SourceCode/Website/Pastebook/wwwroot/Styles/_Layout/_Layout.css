@@ -96,30 +96,31 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  align-items: center;
   padding-right: 20px;
 }
+.layout-header-right-user, .layout-header-right a {
+  margin-left: 10px;
+}
 .layout-header-right-user {
+  height: 40px;
   width: 40px;
   border-radius: 50%;
 }
-.layout-header-right-user a img {
+.layout-header-right-user a {
+  margin-left: 0;
+}
+.layout-header-right-user a .layout-header-right-photo {
   height: 100%;
   width: 100%;
   object-fit: cover;
   border-radius: 50%;
 }
-.layout-header-right a {
-  margin-left: 10px;
-  margin-top: 10px;
-}
-.layout-header-right a img {
+.layout-header-right a .layout-header-right-notifications, .layout-header-right a .layout-header-right-settings {
   height: 25px;
 }
 .layout-header-right a img:hover {
   transform: scale(120%, 120%);
-}
-.layout-header-right a #layout-header-middle-home-photo {
-  height: 40px;
 }
 .layout-header-right-notificationscontainer {
   background-color: white;
