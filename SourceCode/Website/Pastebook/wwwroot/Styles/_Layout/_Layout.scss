@@ -73,6 +73,11 @@
 
                     &-link{
                         width: 100%;
+                        text-decoration: none;
+                        color: black;
+                        &:hover{
+                            color: #1877f2;
+                        }
                         &-searchcard{
                             display: flex;
                             flex-direction: row;
@@ -98,8 +103,6 @@
                             }
                         }
                     }
-
-                    
                 }
             }
         }

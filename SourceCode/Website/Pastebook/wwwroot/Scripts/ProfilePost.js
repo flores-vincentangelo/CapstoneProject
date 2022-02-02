@@ -126,6 +126,7 @@ async function addPostToProfile(event, jsonData) {
     });
     if(response.status == 200) {
         $('#modal-container-photo-img').attr('src', "");
+        location.reload();
     }
 }
 
@@ -160,7 +161,8 @@ function submitAddComment(e){
         CommentText: formDataObj.comment
     }
 
-    SendCommentToController(jsonObj)
+    SendCommentToController(jsonObj);
+    location.reload();
 }
 
 async function SendCommentToController(jsonObj){
