@@ -18,39 +18,36 @@ $(document).ready(function () {
     });
 
     // Auto refresh
-    setInterval(function() {
-        console.log("refresh");
-        
-        $.ajax({
-            type: 'GET',
-            url: '/',
-            success: function () {
-                $('.home-timeline-body').load('/ .home-timeline-body');
-                // Hide all posts
-                $('.profile-post-container-status-post').css("display", "none");
-            }
-        });
-    }, 15000);
-
-    // Hide all posts
-    $('.profile-post-container-status-post').css("display", "none");
-    showPostsInHome();
-
-    // Auto refresh
     // setInterval(function() {
+    //     console.log("refreshing");
     //     $.ajax({
     //         type: 'GET',
     //         url: '/',
     //         success: function () {
-    //             location.reload();
-    //             // console.log("refresh");
+    //             $('.home-body-timeline').load('/ .home-body-timeline');
+    //             // Hide all posts
+    //             $('.profile-post-container-status-post').css("display", "none");
     //         }
-    //     })
-    // }, 60000);
+    //     });
+        
+    // }, 15000);
 
+    // Auto refresh
+    setInterval(function() {
+        $.ajax({
+            type: 'GET',
+            url: '/',
+            success: function () {
+                location.reload();
+                // console.log("refresh");
+            }
+        })
+    }, 60000);
 
-
- 
+    // Hide all posts
+    $('.profile-post-container-status-post').css("display", "none");
+    // Show every 10 posts on scroll down
+    showPostsInHome();
    
 });
 
