@@ -3,7 +3,9 @@ $(document).ready(() => {
     addPost();
     resetForm();
     openCommentModal();   
-
+    
+    
+    
 
     //When the user clicks on "Post" button,
     $('.user-post-button').click((event) => {
@@ -264,10 +266,23 @@ function modifyPost (postId, profileLink) {
 
 
 function deletePost(postId, profileLink) {
+    var modelObj = JSON.parse(model.replace(/&quot;/g,"\""));
+
+    console.log("Post Id: " , postId);
+    console.log("PostsList Length" , modelObj.PostsList.length);
+    console.log(modelObj.PostsList);
+
    //show Delete Modal 
     $('#post-modal-container-delete').css("display", "flex");
     //When the user clicks on the "Yes" button,
     $('#yes-btn').click(() => {
+        // check if Post has photoId
+        for(var i = 0; i < modelObj.PostsList.length; i++) {
+            var post = modelObj.PostsList[i]
+            if(post.PostId == postId && post.PhotoId != 0) {
+                deletePhoto(post.PhotoId);
+            }
+        }
         //Deletes the entire post
         deletePostById(postId, profileLink);
     });
@@ -283,6 +298,16 @@ function deletePost(postId, profileLink) {
         // Close modal
         $('#post-modal-container-delete').css("display", "none");
     });
+}
+
+async function deletePhoto(photoId) {
+    const url = `/photos/${photoId}`;
+    const response = await fetch(url, {
+        method: 'DELETE'
+    });
+    if(response.status == 200) {
+        console.log("Deleted Photo Id", photoId);
+    }
 }
 
 function loadPosts() {
