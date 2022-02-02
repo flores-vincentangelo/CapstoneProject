@@ -8,8 +8,8 @@
 <div class="profile-post-container-status-post">
     <div class="profile-post-container-status-post-profile">
         <img class="user-photo" src=@Model.Poster.Photo>
-        <span id="user-details"><span id="poster-fullname">@Model.Poster.FirstName
-                @Model.Poster.LastName</span><br><span id="date-created">@createdDate</span></span>
+        <a href=@($"/{Model.Poster.ProfileLink}")><span id="user-details"><span id="poster-fullname">@Model.Poster.FirstName
+                @Model.Poster.LastName</span></a><br><span id="date-created">@createdDate</span></span>
         
         @{
             if (Model.DoesUserOwnsThePost == true)
