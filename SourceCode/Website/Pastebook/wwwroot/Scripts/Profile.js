@@ -20,12 +20,13 @@ $(document).ready( () => {
         $(".photos-card-btn-container").css("display", "none"); // Add new photo / delete album button
         $(".photocard-del-btn").css("display", "none"); // Photocard delete button
     }
-    // Add to cookie
-    // document.cookie = 'profilelink=' + user.ProfileLink;
+
     // Profile picture
     EditProfilePicture();
+
     // About Me
     EditAboutMe();
+
     showProfileExt();
 });
 
@@ -157,10 +158,6 @@ async function modifyProfile(event, jsonData) {
     //     // localStorage.setItem('User', JSON.stringify(userData));
     // }
 }
-
-// const getCookieValue = (name) => (
-//     document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || ''
-// )
 
 // From W3Schools
 function getCookieValue(cname) {

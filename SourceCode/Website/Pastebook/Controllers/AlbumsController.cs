@@ -140,8 +140,4 @@ public class AlbumsController: Controller
         return Ok("Photo deleted successfully");
     }
 
-    
-
-    
-
 }

@@ -9,7 +9,6 @@
         <img class="photocard-image" src="@Model.Photo" onclick="showPhotoInPost(@Model.PhotoId);">
     </div>
 
-    @* <button class="photocard-del-btn" onclick="DeletePhoto(@Model.PhotoId);" >Delete Photo</button> *@
     <button class="photocard-del-btn" onclick="OpenDeletePhotoModal(@Model.PhotoId);" ><img id="trash" src="./Images/trash.png"></button>
 </div>
 
