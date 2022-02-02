@@ -128,10 +128,10 @@
             padding-right: 20px;
 
             &-user{
-                // $picture-dimensions:20px; 
+                $picture-dimensions:40px; 
                 // height: $picture-dimensions;
-                // width: $picture-dimensions;
-                // border-radius: 50%;
+                width: $picture-dimensions;
+                border-radius: 50%;
                 & a{
 
                     img{
