@@ -98,7 +98,14 @@
   justify-content: flex-end;
   padding-right: 20px;
 }
+.layout-header-right-user {
+  width: 40px;
+  border-radius: 50%;
+}
 .layout-header-right-user a img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
   border-radius: 50%;
 }
 .layout-header-right a {
@@ -182,6 +189,7 @@
   margin-left: 1px;
   border-radius: 50%;
   margin-right: 10px;
+  object-fit: cover;
 }
 .layout-accountpanel-user-details {
   padding-top: 10px;
