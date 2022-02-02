@@ -1,12 +1,13 @@
 @{Layout = "/Views/_Layout.cshtml";}
-
-@* Replace USerModel with ProfileModel *@
-@* @model Models.UserModel *@  
-
 @model Models.ProfileModel
+@using System.Text.Json;
+@{
+    string jsonString = JsonSerializer.Serialize(Model);
+}
 <link rel="stylesheet" href="./Styles/Home/Home.css">
 <script src="Scripts/Home.js"></script>
 <script>
+    const model = '@jsonString';
     document.cookie = 'profilelink=' + "@Model.User.ProfileLink";
 </script>
 
@@ -37,7 +38,7 @@
         </div>
 
         <div class="home-body-timeline">
-            <div>
+            <div class="home-timeline">
                 @{
                     await Html.RenderPartialAsync("~/Views/Profile/ProfilePosts.cshtml", Model);
                 }
