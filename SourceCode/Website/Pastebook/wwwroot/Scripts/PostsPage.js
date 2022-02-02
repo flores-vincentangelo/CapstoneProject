@@ -110,6 +110,8 @@ function editPost() {
 
 function deletePost(modelObj) {
 
+    console.log(modelObj);
+
     //When the user clicks on the "X" button,
     $('.delete-but').click(() => {
         //show Delete Post Modal
@@ -118,6 +120,11 @@ function deletePost(modelObj) {
     
     //When the user clicks on the "Yes" button,
     $('#yes-btn').click(() => {
+        //Delete photo if it exists in album
+        if(modelObj.PhotoId != 0) {
+            deletePhoto(modelObj.PhotoId);
+        }
+
         //Deletes the entire post
         deletePostById(modelObj.PostId, modelObj.ProfileLink);
     });
@@ -134,6 +141,16 @@ function deletePost(modelObj) {
         $('#post-modal-container-delete').css("display", "none");
     });
 
+}
+
+async function deletePhoto(photoId) {
+    const url = `/photos/${photoId}`;
+    const response = await fetch(url, {
+        method: 'DELETE'
+    });
+    if(response.status == 200) {
+        console.log("Deleted Photo Id", photoId);
+    }
 }
 
 function openCommentModal() {
