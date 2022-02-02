@@ -17,31 +17,12 @@ $(document).ready(function () {
         $(".home-header-left-searchpanel-recent").css("display", "none");
     });
 
-    // Auto refresh
-    // setInterval(function() {
-    //     console.log("refreshing");
-    //     $.ajax({
-    //         type: 'GET',
-    //         url: '/',
-    //         success: function () {
-    //             $('.home-body-timeline').load('/ .home-body-timeline');
-    //             // Hide all posts
-    //             $('.profile-post-container-status-post').css("display", "none");
-    //         }
-    //     });
-        
-    // }, 15000);
 
     // Auto refresh
     setInterval(function() {
-        $.ajax({
-            type: 'GET',
-            url: '/',
-            success: function () {
-                location.reload();
-                // console.log("refresh");
-            }
-        })
+        // $('.home-timeline').load('.home-timeline');
+        location.reload();
+        console.log("refresh");
     }, 60000);
 
     // Hide all posts
