@@ -257,7 +257,6 @@ async function modifyDetails(event, jsonData) {
         body: jsonData
     });
     if (response.status == 200) {
-        alert("Detail successfully modified!");
         location.reload();
     }
 }
@@ -325,7 +324,6 @@ function MobileNumLimit(element) {
     var max_chars = 10;
     if(element.value.length > max_chars) {
         element.value = element.value.substr(0, max_chars);
-        alert("Input is restricted to 11 digits only! Format is 09xxxxxxxxx");
     }
 }
 
