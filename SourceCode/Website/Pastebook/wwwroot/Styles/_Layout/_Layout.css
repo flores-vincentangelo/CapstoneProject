@@ -60,6 +60,11 @@
 }
 .layout-header-left-searchpanel-searchresults-link {
   width: 100%;
+  text-decoration: none;
+  color: black;
+}
+.layout-header-left-searchpanel-searchresults-link:hover {
+  color: #1877f2;
 }
 .layout-header-left-searchpanel-searchresults-link-searchcard {
   display: flex;
