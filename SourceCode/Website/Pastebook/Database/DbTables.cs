@@ -247,11 +247,8 @@ public class DbTables
                     Caption VARCHAR (255),
                     PhotoId INTEGER,
                     Photo VARCHAR (MAX),
-                    Likes VARCHAR (MAX),
-                    Comment VARCHAR (MAX),
                     ProfileLink VARCHAR (255),
                     LikesList TEXT,
-                    CommentsList TEXT
                     );";
                 command.ExecuteNonQuery();
                 Console.WriteLine("Posts Table created successfully!");

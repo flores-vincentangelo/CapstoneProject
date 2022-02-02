@@ -52,7 +52,6 @@ public class ProfilesController: Controller
                             post.DoesUserLikesAPost = DbLikes.IsUserInLikersList(loggedInUserId, post.LikesList);
                             post.Poster = DbUsers.GetUserById(post.UserId);
                             post.DoesUserOwnsThePost = post.UserId == loggedInUserId ? true : false;
-                            post.DoesUserOwnProfile = DbUsers.DoesUserOwnProfile(cookieEmail,profileLink);  
                         }
                     }
                     
