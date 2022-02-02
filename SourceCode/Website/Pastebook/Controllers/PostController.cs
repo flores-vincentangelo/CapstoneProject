@@ -26,7 +26,6 @@ public class PostController: Controller
                 
                 postDetail.DoesUserLikesAPost = DbLikes.IsUserInLikersList(loggedInUserId, postDetail.LikesList);
                 postDetail.DoesUserOwnsThePost = postDetail.UserId == loggedInUserId ? true : false;
-                postDetail.DoesUserOwnProfile = DbUsers.DoesUserOwnProfile(cookieEmail,cookieProfileLink);
                 return View("/Views/Posts/PostPage.cshtml", postDetail);
             }
         }
@@ -48,10 +47,7 @@ public class PostController: Controller
             post.PhotoId = 0;
         }
 
-        post.Likes = "";
-        post.Comment = "";
         post.LikesList = "";
-        post.CommentsList ="";
 
         DbPosts.InsertPost(post);
         return Ok("Post successfully added!");
