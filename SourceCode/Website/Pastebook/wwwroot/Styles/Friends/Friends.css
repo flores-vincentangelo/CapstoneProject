@@ -56,7 +56,7 @@
 }
 .friends-main-requests-friendcardcontainer {
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 10px 10px;
 }
 .friends-main-requests-friendcardcontainer-friendreqcard {
@@ -86,6 +86,10 @@
 }
 .friends-main-requests-friendcardcontainer-friendreqcard-content-name {
   font-weight: bold;
+}
+.friends-main-requests-friendcardcontainer-friendreqcard-content-name a {
+  text-decoration: none;
+  color: black;
 }
 .friends-main-requests-friendcardcontainer-friendreqcard-content-confirm, .friends-main-requests-friendcardcontainer-friendreqcard-content-delete {
   display: flex;
