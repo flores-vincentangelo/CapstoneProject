@@ -4,9 +4,6 @@ $(document).ready(() => {
     resetForm();
     openCommentModal();   
     
-    
-    
-
     //When the user clicks on "Post" button,
     $('.user-post-button').click((event) => {
         event.preventDefault();           
@@ -310,10 +307,6 @@ async function deletePhoto(photoId) {
     if(response.status == 200) {
         console.log("Deleted Photo Id", photoId);
     }
-}
-
-function loadPosts() {
-
 }
 
 async function deletePostById(postId, profileLink) {

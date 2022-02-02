@@ -25,13 +25,22 @@
         </div>
         <div class="post-container-right">
             <div class="post-container-right-action">
-                <button class="delete-but"><img class="post-container-right-action-delete" src="../Images/trash.png"></button>
-                <button class="update-but"><img class="post-container-right-action-update" src="../Images/more.png"></button>
+                @{
+                    if (Model.DoesUserOwnsThePost == true)
+                    {
+                        <button class="update-but"><img class="post-container-right-action-update" src="../Images/more.png"></button>
+                        <button class="delete-but"><img class="post-container-right-action-delete" src="../Images/trash.png"></button>
+                    }
+                    else if (Model.DoesUserOwnProfile == true && Model.DoesUserOwnsThePost == false)
+                    {
+                        <button class="delete-but"><img class="post-container-right-action-delete" src="../Images/trash.png"></button>
+                    }
+                }
                 <button class="close-but"><img class="post-container-right-action-close" src="../Images/close.png"></button>
             </div>
             <div class="post-container-right-profile">
                 <img class="post-container-right-profile-logo" src="@Model.Poster.Photo">
-                <span class="poster-details"><span class="poster-fullname">@Model.Poster.FirstName @Model.Poster.LastName</span><br><span class="posted-date">@createdDate</span></span>
+                <a href=@($"/{Model.Poster.ProfileLink}")><span class="poster-details"><span class="poster-fullname">@Model.Poster.FirstName @Model.Poster.LastName</span></a><br><span class="posted-date">@createdDate</span></span>
             </div>
             <div class="post-container-right-caption">
                 <span>@Model.Caption</span>
