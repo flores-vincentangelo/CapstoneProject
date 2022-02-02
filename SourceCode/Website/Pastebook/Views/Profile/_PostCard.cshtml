@@ -41,7 +41,7 @@
     <div class="profile-post-container-status-post-status">
         @{
             if(String.IsNullOrEmpty(Model.LikesList)) {
-                <a id="post-container-status-likers" onclick="openLikeModal(@Model.PostId)" href="#"><span id="like">Like</span></a>
+                <a id="post-container-status-likers" onclick="openLikeModal(@Model.PostId)" href="#"><span id="like"></span></a>
             }
             else {
                 var likersList = Model.LikesList.Split(',');
@@ -51,10 +51,10 @@
         
         @{
             if(Model.CommentsListObj == null) {
-               <span id="comment">0 Comments</span>
+               <span id="comment"></span>
             }
             else {
-                <span id="comment">@Model.CommentsListObj.Count Comments</span>
+                <span id="comment">@Model.CommentsListObj.Count Comment/s</span>
             }
         }        
     </div>
