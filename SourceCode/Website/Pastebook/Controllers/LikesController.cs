@@ -19,12 +19,12 @@ public class LikesController: Controller
     [Route("/likes/{postId}")]
     public IActionResult LikesPost(int postId)
     {   
-        //Liker
+        //Liker's Information
         string likedAPost = HttpContext.Request.Cookies["email"];
         int likedAPostId = DbUsers.GetUserByEmail(likedAPost).UserId;
         //
         string likersList = DbPosts.GetPostById(postId).LikesList;
-        //Adds liker's User Id
+        //Adds liker's User Id to Likers List
         string newLikersList = DbLikes.AddUserIdtoLikesList(likedAPostId, likersList);
         //Update the Database
         DbLikes.UpdateLikesListOfPost(postId, newLikersList);
