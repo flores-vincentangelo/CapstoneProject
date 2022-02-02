@@ -108,8 +108,6 @@ public class FriendsController: Controller
                 return Ok();
             }
         }
-
-
         return RedirectToAction("doLoginAction", "Login");
     }
 }

@@ -9,12 +9,6 @@
         <div class="friends-sidepanel-title">Friends</div>
         <a class="friends-sidepanel-link" href="/friends" id="friends-sidepanel-link-reqs"><img class="friends-sidepanel-link-icon" src="Images/request.png">Friend Requests</a>
         <a class="friends-sidepanel-link" href="/friends" id="friends-sidepanel-link-all"><img class="friends-sidepanel-link-icon" src="Images/friends.png">All Friends</a>
-
-
-        @* <a class="friends-sidepanel-link" href="/friends"><img class="friends-sidepanel-link-icon" src="Images/Friends/icon.png">Home</a>
-        <a class="friends-sidepanel-link" href="/friends"><img class="friends-sidepanel-link-icon" src="Images/Friends/icon.png">Suggestions</a>
-        <a class="friends-sidepanel-link" href="/friends"><img class="friends-sidepanel-link-icon" src="Images/Friends/icon.png">Birthdays</a>
-        <a class="friends-sidepanel-link" href="/friends"><img class="friends-sidepanel-link-icon" src="Images/Friends/icon.png">Custom Lists</a> *@
     </div>
     <div class="friends-main">
         <div class="friends-main-requests">
@@ -31,13 +25,8 @@
                         {
                             await Html.RenderPartialAsync("_FriendReqCard.cshtml",item);
                         }
-                        @* for(var i = 1; i <= 40; i++)
-                        {
-                            await Html.RenderPartialAsync("_FriendCard.cshtml");
-                        } *@
                     }
                 }
-                @* @await Html.PartialAsync("_FriendCard.cshtml") *@
             </div>
         </div>
         <div class="friends-main-all">

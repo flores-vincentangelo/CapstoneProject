@@ -5,9 +5,6 @@ using Models;
 
 public class NotificationsController: Controller
 {
-    // [HttpPatch]
-    // [Route("/notifications")]
-    // public IActionResult
 
     [HttpGet]
     [Route("/notifications")]
