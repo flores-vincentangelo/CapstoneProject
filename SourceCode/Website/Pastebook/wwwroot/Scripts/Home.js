@@ -22,14 +22,25 @@ $(document).ready(function () {
     showPostsInHome();
 
     // Auto refresh
-    $.ajax({
-        type: 'GET',
-        url: '/',
-        success: function () {
-            setInterval('location.reload()', 60000); 
-        }
-    });
-    
+    setInterval(function() {
+        $.ajax({
+            type: 'GET',
+            url: '/',
+            success: function () {
+                location.reload();
+                // console.log("refresh");
+            }
+        })
+    }, 60000);
+
+    // $.ajax({
+    //     type: 'GET',
+    //     url: '/',
+    //     success: function () {
+    //         setInterval('location.reload()', 60000); 
+    //     }
+    // });
+   
 });
 
 function showPostsInHome() {
@@ -38,7 +49,7 @@ function showPostsInHome() {
     // listen for scroll event and load more images if we reach the bottom of window
     window.addEventListener('scroll', () => {
         if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight) {
-            console.log("bottom reached");
+            // console.log("bottom reached");
             $('.profile-post-container-status-post:hidden').slice(0, 10).show().slideDown();
         }
     });
