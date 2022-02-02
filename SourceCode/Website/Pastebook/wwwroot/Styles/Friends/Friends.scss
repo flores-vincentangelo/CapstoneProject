@@ -80,7 +80,7 @@
             &-friendcardcontainer{
                 display:grid;
                 $grid-column-width: auto;
-                grid-template-columns: $grid-column-width $grid-column-width $grid-column-width $grid-column-width;
+                grid-template-columns: 1fr 1fr 1fr;
                 $grid-gap:10px;
                 grid-gap: $grid-gap $grid-gap;
                 // justify-content: space-around;
@@ -119,6 +119,10 @@
     
                         &-name{
                             font-weight: bold;
+                            & a{
+                                text-decoration: none;
+                                color: black;
+                            }
                         }
         
                         $button-height:50px;
