@@ -24,6 +24,8 @@ public class PostController: Controller
                 postDetail.CommentsListObj = DbComments.GetCommentsByPost(postDetail.PostId);
                 
                 postDetail.DoesUserLikesAPost = DbLikes.IsUserInLikersList(loggedInUserId, postDetail.LikesList);
+                postDetail.DoesUserOwnsThePost = postDetail.UserId == loggedInUserId ? true : false;
+                postDetail.DoesUserOwnProfile = DbUsers.DoesUserOwnProfile(cookieEmail,cookieProfileLink);
                 return View("/Views/Posts/PostPage.cshtml", postDetail);
             }
         }

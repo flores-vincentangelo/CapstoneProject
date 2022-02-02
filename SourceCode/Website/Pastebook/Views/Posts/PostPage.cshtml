@@ -25,8 +25,17 @@
         </div>
         <div class="post-container-right">
             <div class="post-container-right-action">
-                <button class="delete-but"><img class="post-container-right-action-delete" src="../Images/trash.png"></button>
-                <button class="update-but"><img class="post-container-right-action-update" src="../Images/more.png"></button>
+                @{
+                    if (Model.DoesUserOwnsThePost == true)
+                    {
+                        <button class="delete-but"><img class="post-container-right-action-delete" src="../Images/trash.png"></button>
+                        <button class="update-but"><img class="post-container-right-action-update" src="../Images/more.png"></button>
+                    }
+                    else if (Model.DoesUserOwnProfile == true && Model.DoesUserOwnsThePost == false)
+                    {
+                        <button class="delete-but"><img class="post-container-right-action-delete" src="../Images/trash.png"></button>
+                    }
+                }
                 <button class="close-but"><img class="post-container-right-action-close" src="../Images/close.png"></button>
             </div>
             <div class="post-container-right-profile">
