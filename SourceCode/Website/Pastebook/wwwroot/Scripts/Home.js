@@ -38,7 +38,6 @@ function showPostsInHome() {
     // listen for scroll event and load more images if we reach the bottom of window
     window.addEventListener('scroll', () => {
         if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight) {
-            // console.log("bottom reached");
             $('.profile-post-container-status-post:hidden').slice(0, 10).show().slideDown();
         }
     });

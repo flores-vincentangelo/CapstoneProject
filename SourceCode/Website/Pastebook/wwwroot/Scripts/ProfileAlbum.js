@@ -1,7 +1,6 @@
 $(document).ready( () => {
     AddNewAlbum();
     AddNewPhoto();
-    // CloseAlbum();
 });
 
 function AddNewAlbum() {
@@ -39,15 +38,14 @@ function AddNewAlbum() {
 
         var albumName = document.getElementById("name");
         var userEmail = getCookieValue('email');
-        // console.log("Album Name: " + albumName.value);
-        // console.log(getCookieValue('email'));
+    
         // Save to database
         const formData = {
             "UserEmail": userEmail,
             "AlbumName": albumName.value
         }
         var data = JSON.stringify(formData);
-        // console.log(data);
+    
         AddAlbum(event, data);
     });
 }
@@ -63,7 +61,6 @@ async function AddAlbum(event, jsonData) {
         body: jsonData
     });
     if(response.status == 200) {
-        // alert("Album created successfully!");
         // Reload page
         location.reload();
     }
@@ -148,27 +145,21 @@ async function addPhotoInAlbumId(event, jsonData) {
         body: jsonData
     });
     if(response.status == 200) {
-        // alert(await response.text());
         // Reload page
         location.reload();
     }
 }
 
 function OpenAlbum(albumId) {
-    // console.log("Current Album Id: " + albumId);
     document.cookie = 'currentAlbumId=' + albumId;
     $('.album-container').css("display", "none");
     $('.photos-container').css("display", "block");
-    
-    var albums = document.getElementsByClassName("photos-card-container");
-    // console.log("No. of Albums: " + albums.length);
 
     $(`#photos-card-container-${albumId}`).css("display", "flex");
     
 }
 
 function CloseAlbum(albumId) {
-    // console.log("Current Album Id to close: " + albumId)
     document.cookie = 'currentAlbumId=' + 0;
     CancelEditAlbumName(albumId);
     // Show album container
@@ -179,7 +170,6 @@ function CloseAlbum(albumId) {
 }
 
 function EditAlbumName(albumId) {
-    // console.log("Album Id to be modified: " + albumId);
     document.cookie = 'currentAlbumId=' + albumId;
     // Hide the read-only album title
     $(`#photos-card-title-readonly-${albumId}`).css("display", "none");
@@ -198,7 +188,6 @@ function CancelEditAlbumName(albumId) {
 async function SaveEditAlbumName(event, albumId) {
     event.preventDefault();
     var formData = new FormData(document.getElementById(`photos-card-title-form-edit-${albumId}`));
-    // console.log($(`#photos-card-form-input-${albumId}`).val());
     var data = JSON.stringify(Object.fromEntries(formData.entries()));
 
     const url = `albums/${albumId}`;
@@ -210,8 +199,6 @@ async function SaveEditAlbumName(event, albumId) {
         body: data
     });
     if(response.status == 200) {
-        // console.log("Album Id successfully modified: " + albumId);
-        // alert(await response.text());
         const newAlbumName = $(`#photos-card-form-input-${albumId}`).val();
         $(`#photos-card-title-albumname-${albumId}`).text(newAlbumName);
         // Show the read-only album title
@@ -224,7 +211,6 @@ async function SaveEditAlbumName(event, albumId) {
 }
 
 function OpenDeleteAlbumModal(albumId) {
-    // console.log("Album Id to be deleted: " + albumId);
     // Show modal
     $(`#album-delete-modal-${albumId}`).css("display", "flex");
 
@@ -258,14 +244,12 @@ async function DeleteAlbum(albumId) {
         method: 'DELETE'
     });
     if(response.status == 200) {
-        // alert(await response.text());
         // Reload page
         location.reload();
     }
 }
 
 function OpenDeletePhotoModal(photoId) {
-    // console.log("Photo Id to be deleted: " + photoId);
     // Show modal
     $(`#photo-delete-modal-${photoId}`).css("display", "flex");
 
@@ -297,7 +281,6 @@ async function DeletePhoto(photoId) {
         method: 'DELETE'
     });
     if(response.status == 200) {
-        // alert(await response.text());
         // Close modal
         $(`#photo-delete-modal-${photoId}`).css("display", "none");
         // Reload page
