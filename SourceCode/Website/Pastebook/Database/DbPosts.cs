@@ -20,18 +20,15 @@ public class DbPosts
             using (var command = db.CreateCommand())
             {
                 command.CommandText =
-                    @"INSERT INTO Posts (UserId, DatePosted, Caption, PhotoId, Photo, Likes, Comment, ProfileLink, LikesList, CommentsList) 
-                    VALUES (@userid, @DatePosted, @Caption, @PhotoId, @Photo, @Likes, @Comment, @ProfileLink, @LikesList, @CommentsList);";
+                    @"INSERT INTO Posts (UserId, DatePosted, Caption, PhotoId, Photo, ProfileLink, LikesList) 
+                    VALUES (@userid, @DatePosted, @Caption, @PhotoId, @Photo, @ProfileLink, @LikesList);";
                 command.Parameters.AddWithValue("@userid", post.UserId);
                 command.Parameters.AddWithValue("@DatePosted", post.DatePosted);
                 command.Parameters.AddWithValue("@Caption", post.Caption);
                 command.Parameters.AddWithValue("@PhotoId", post.PhotoId);
                 command.Parameters.AddWithValue("@Photo", post.Photo);
-                command.Parameters.AddWithValue("@Likes", post.Likes);
-                command.Parameters.AddWithValue("@Comment", post.Comment);
                 command.Parameters.AddWithValue("@ProfileLink", post.ProfileLink);   
-                command.Parameters.AddWithValue("@LikesList", post.LikesList); 
-                command.Parameters.AddWithValue("@CommentsList", post.CommentsList);             
+                command.Parameters.AddWithValue("@LikesList", post.LikesList);          
                 command.ExecuteNonQuery();
             }
         }
@@ -58,11 +55,8 @@ public class DbPosts
                     postDetail.Caption = reader.GetString(3);
                     postDetail.PhotoId = reader.GetInt32(4);
                     postDetail.Photo = reader.GetString(5);
-                    postDetail.Likes = reader.GetString(6);
-                    postDetail.Comment = reader.GetString(7);
-                    postDetail.ProfileLink = reader.GetString(8);
-                    postDetail.LikesList = reader.GetString(9);
-                    postDetail.CommentsList = reader.GetString(10);
+                    postDetail.ProfileLink = reader.GetString(6);
+                    postDetail.LikesList = reader.GetString(7);
                     postDetails.Add(postDetail);
                 }
             }
@@ -91,11 +85,8 @@ public class DbPosts
                     postDetail.Caption = reader.GetString(3);
                     postDetail.PhotoId = reader.GetInt32(4);
                     postDetail.Photo = reader.GetString(5);
-                    postDetail.Likes = reader.GetString(6);
-                    postDetail.Comment = reader.GetString(7);
-                    postDetail.ProfileLink = reader.GetString(8);
-                    postDetail.LikesList = reader.GetString(9);
-                    postDetail.CommentsList = reader.GetString(10);
+                    postDetail.ProfileLink = reader.GetString(6);
+                    postDetail.LikesList = reader.GetString(7);
                     postDetails.Add(postDetail);
                 }
             }
@@ -122,11 +113,8 @@ public class DbPosts
                     post.Caption = reader.GetString(3);
                     post.PhotoId = reader.GetInt32(4);
                     post.Photo = reader.GetString(5);
-                    post.Likes = reader.GetString(6);
-                    post.Comment = reader.GetString(7);
-                    post.ProfileLink = reader.GetString(8); 
-                    post.LikesList = reader.GetString(9); 
-                    post.CommentsList = reader.GetString(10); 
+                    post.ProfileLink = reader.GetString(6); 
+                    post.LikesList = reader.GetString(7); 
                 }
             }
         }
@@ -153,11 +141,8 @@ public class DbPosts
                     post.Caption = reader.GetString(3);
                     post.PhotoId = reader.GetInt32(4);
                     post.Photo = reader.GetString(5);
-                    post.Likes = reader.GetString(6);
-                    post.Comment = reader.GetString(7);
-                    post.ProfileLink = reader.GetString(8); 
-                    post.LikesList = reader.GetString(9); 
-                    post.CommentsList = reader.GetString(10); 
+                    post.ProfileLink = reader.GetString(6); 
+                    post.LikesList = reader.GetString(7);
                 }
             }
         }
