@@ -37,7 +37,6 @@
                 <span>@Model.Caption</span>
             </div>
             <div class="post-container-right-status">
-                @* <a id="post-container-right-status-likers" href="#"><span id="like">@Model.Likes Likes</span></a> *@
                  @{
                     if(String.IsNullOrEmpty(Model.LikesList)) {
                         <a id="post-container-right-status-likers" onclick="openLikeModal(@Model.PostId)" href="#"><span id="like">Like</span></a>
@@ -65,7 +64,7 @@
                     <button id=@Model.PostId class="post-container-right-unlike" style = "background-color: #1877f2; color: white" ><img src="../Images/like.png"><span id="like-post">Unlike</span></button>
                 }
                 else {
-                    <button id=@Model.PostId class="post-container-right-like" style = "background-color: white" ><img src="../Images/like.png"><span id="like-post">Like</span></button>
+                    <button id=@Model.PostId class="post-container-right-like" ><img src="../Images/like.png"><span id="like-post">Like</span></button>
                 }
             }
             <button class="post-container-right-comment" id=@Model.PostId><img src="../Images/comment.png"><span id="comment-post">Comment</span></button>
@@ -85,11 +84,6 @@
                         <p>Add a comment</p>
                     }
                 }
-                @* <img src="../Images/img_avatar.png">
-                <div class="friend-details">
-                    <span id="friend-name">Friend Name</span><br>
-                    <span id="friend-comment">Comment goes here......</span>
-                </div> *@
             </div>
         </div>
         <div id="post-modal-container-delete">
@@ -149,11 +143,6 @@
                     <h3>People who liked</h3>
                 <div class="modal-container-title-likers">
                 </div>
-                <hr>
-                @* <div class="modal-container-likers">
-                    <img class="modal-container-likers-photo" src="../../Images/img_avatar.png">
-                    <p id="modal-container-likers-name">Friend Name</p>
-                </div> *@
             </div>
         </div>
     </div>

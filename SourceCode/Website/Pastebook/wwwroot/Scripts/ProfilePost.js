@@ -1,11 +1,8 @@
 $(document).ready(() => {
-    // openLikeModal();
     viewAddPostModal();
     addPost();
     resetForm();
-    openCommentModal();
-    // GetLikers(postId);
-    
+    openCommentModal();   
 
 
     //When the user clicks on "Post" button,
@@ -51,14 +48,14 @@ $(document).ready(() => {
         resetForm();
     });
 
-    //When a friend likes a post
+    //When a user liked a post
     $(".post-button-like").click(function (e) {
         var postId = $(this).attr("id");
         console.log(postId);
         LikedPost(postId);
     });
 
-    //When a friend unlikes a post
+    //When a user unliked a post
     $(".post-button-unlike").click(function (e) {
         var postId = $(this).attr("id");
         console.log(postId);
@@ -229,11 +226,7 @@ function AddLikersToPage(photo, firstName, lastName) {
 }
 
 function openLikeModal(postId) {
-    // $('#post-container-status-likers').click((e) => {
-    //     // show edit form 
-    //     $('#post-modal-container-likers').css("display", "flex");
-    // });
-    //show edit form 
+    //Show list of liker/s on a post
         $('#post-modal-container-likers').css("display", "flex");
         console.log(postId);
         GetLikers(postId);
@@ -243,10 +236,6 @@ function openLikeModal(postId) {
         $('#post-modal-container-likers').css("display", "none");
     });
 }
-
-// function showLikeModal(postId) {
-//     console.log(postId)
-// }
 
 function modifyPost (postId, profileLink) {
     //Show Update Modal
