@@ -9,6 +9,7 @@ public class PostController: Controller
     [Route("/posts/{postId}")]
     public IActionResult GetPostById(int postId)
     {
+        ViewData["Title"] = "Post | ";
         string? cookieEmail = HttpContext.Request.Cookies["email"];
         string? cookieProfileLink = HttpContext.Request.Cookies["profilelink"];
         string? cookieSessionId = HttpContext.Request.Cookies["sessionId"];

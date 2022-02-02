@@ -179,6 +179,6 @@ function AddUserCardOnLogoutPanel(firstName, lastName, photo, profileLink){
 
 function AddUserCardonLayoutPanel(photo, profileLink){
     var userPhoto = 
-    `<a href="${profileLink}"><img class="layout-header-right-photo" id="layout-header-middle-home-photo" src="${photo}"></a>`
+    `<a href="${profileLink}"><img class="layout-header-right-photo" src="${photo}"></a>`
     $(".layout-header-right-user").append(userPhoto);
 }
